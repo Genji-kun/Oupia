@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+
+    .text-gradient-primary {
+        @apply text-transparent bg-clip-text bg-gradient-to-br from-primary-300 to-primary-600
+    }
+
+    .avatar {
+        @apply w-9 h-9 rounded-full object-cover
+    }
+
+    .menu-item {
+        @apply pr-4 pl-3 transition-all duration-150 overflow-hidden relative after:transition-all after:duration-150 after:content-[''] after:w-1 after:h-full after:absolute after:-top-full hover:after:top-0 after:right-0 after:bg-primary-500
+    }
+
+    .menu-item-child {
+        @apply flex text-lg items-center p-2 text-gray-600 hover:text-primary-500 hover:bg-primary-500/10 rounded
+    }
+
+    .menu-item.active {
+        @apply font-bold after:content-[''] after:w-1 after:h-full after:absolute after:top-0 after:right-0 after:bg-primary-500 after:rounded-l
+    }
+
+    .menu-item.active>.menu-item-child {
+        @apply text-primary-500 bg-primary-500/10
+    }
+
+    .menu-item.active .menu-item-child-icon {
+        @apply text-gradient-primary
+    }
+
+    .menu-item-child-icon {
+        @apply w-5 h-fit text-gray-500 group-hover:text-gradient-primary
+    }
+
+    .menu-item-child-text {
+        @apply ml-3 group-hover:font-bold
+    }
+
+    .btn {
+        @apply transition-all duration-300 w-full flex items-center justify-center gap-2 font-medium rounded-lg px-5 py-2 shadow-lg hover:shadow-sm text-base
+    }
+
+    .btn-primary {
+        @apply btn text-white bg-primary-500 hover:bg-primary-700 focus:ring-4 focus:ring-primary-100
+    }
+}

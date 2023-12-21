@@ -1,0 +1,41 @@
+spring:
+  servlet:
+        multipart:
+          max-file-size: 200MB
+          max-request-size: 200MB
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/rental-db
+    username: root
+    password: Admin@123
+  # data:
+  #   elasticsearch:
+  #     cluster-name: elasticsearch
+  #     cluster-nodes: localhost:9200
+  #     repositories:
+  #       enabled: true
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQLDialect
+  
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: oupia.system@gmail.com
+    password: sbxuyjinlbdcktug
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+        debug: true
+        
+  # security:
+  #   jwt:
+  #     secret: "eqwen1ki3248b3283yrbf823ubb328grbug2ug8hfgh84rfubru81r3i2ubg4h9"
+  #     expiration: 604800 
