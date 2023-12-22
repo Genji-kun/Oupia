@@ -1,0 +1,15 @@
+.navbar {
+    @apply p-4 border-b h-[80px] w-full shadow-sm fixed inset-x-0 top-0;
+}
+
+.logo {
+    @apply flex gap-x-2 items-center text-2xl font-bold w-fit;
+}
+
+.routes {
+    @apply hidden md:flex gap-x-2;
+}
+
+.nav-routes {
+    @apply flex items-center ml-auto;
+}
