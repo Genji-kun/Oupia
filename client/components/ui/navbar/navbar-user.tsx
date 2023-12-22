@@ -2,13 +2,11 @@ import { User } from '@/interfaces/User';
 import Image from 'next/image';
 import React from 'react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '../dropdown-menu';
-import { ChevronDown, ChevronRight, Key, LogOut, Moon, Settings } from 'lucide-react';
+import { Bell, ChevronDown, ChevronRight, Key, LogOut, MessagesSquare, Moon, Settings } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '../button';
 import { Switch } from '../switch';
 import { useTheme } from 'next-themes';
-
-
 
 const NavbarUser = ({ user }: { user: User }) => {
     const { theme, setTheme } = useTheme();
@@ -17,7 +15,13 @@ const NavbarUser = ({ user }: { user: User }) => {
         setTheme(theme === 'dark' ? 'light' : 'dark');
     }
     return (
-        <div className="">
+        <div className="flex items-center gap-x-0.5 md:gap-x-1">
+            <Button variant="ghost" className="p-2 rounded-full ">
+                <MessagesSquare size={24}></MessagesSquare>
+            </Button>
+            <Button variant="ghost" className="p-2 rounded-full ">
+                <Bell size={24}></Bell>
+            </Button>
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <div className="relative">
@@ -27,7 +31,7 @@ const NavbarUser = ({ user }: { user: User }) => {
                             height={45}
                             src={user.avatar}
                             alt="User avatar" />
-                        <Button className="w-fit p-0 h-fit absolute bottom-0 right-0 rounded-full flex items-center justify-center"><ChevronDown size={15} /></Button>
+                        <Button className="absolute-button"><ChevronDown className="dark:text-white" size={15} /></Button>
                     </div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="mt-1 p-2 w-80">

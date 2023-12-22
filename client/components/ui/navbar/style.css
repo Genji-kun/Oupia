@@ -13,3 +13,7 @@
 .nav-routes {
     @apply flex items-center ml-auto;
 }
+
+.absolute-button {
+    @apply w-fit p-0 h-fit absolute -bottom-0.5 -right-0.5 rounded-full flex items-center justify-center border-2 border-background;
+}
