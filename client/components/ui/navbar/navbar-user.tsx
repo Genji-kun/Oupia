@@ -1,8 +1,10 @@
+"use client";
+
 import { User } from '@/interfaces/User';
 import Image from 'next/image';
 import React from 'react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '../dropdown-menu';
-import { Bell, ChevronDown, ChevronRight, Key, LogOut, MessagesSquare, Moon, Settings } from 'lucide-react';
+import { Bell, ChevronDown, ChevronRight, Key, LogOut, MessagesSquare, Moon, Search, Settings } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '../button';
 import { Switch } from '../switch';
@@ -15,12 +17,15 @@ const NavbarUser = ({ user }: { user: User }) => {
         setTheme(theme === 'dark' ? 'light' : 'dark');
     }
     return (
-        <div className="flex items-center gap-x-0.5 md:gap-x-1">
-            <Button variant="ghost" className="p-2 rounded-full ">
-                <MessagesSquare size={24}></MessagesSquare>
+        <div className="flex items-center gap-x-1">
+            <Button variant="ghost" className="p-2.5 rounded-full ">
+                <Search size={20}></Search>
             </Button>
-            <Button variant="ghost" className="p-2 rounded-full ">
-                <Bell size={24}></Bell>
+            <Button variant="ghost" className="p-2.5 rounded-full ">
+                <MessagesSquare size={20}></MessagesSquare>
+            </Button>
+            <Button variant="ghost" className="p-2.5 rounded-full ">
+                <Bell size={20}></Bell>
             </Button>
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -51,9 +56,11 @@ const NavbarUser = ({ user }: { user: User }) => {
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
                         <DropdownMenuItem>
-                            <Settings className="mr-2 h-4 w-4" />
-                            <span>Cài đặt</span>
-                            <ChevronRight className="ml-auto h-4 w-4" />
+                            <Link href="settings" className="w-full flex items-center">
+                                <Settings className="mr-2 h-4 w-4" />
+                                <span>Cài đặt</span>
+                                <ChevronRight className="ml-auto h-4 w-4" />
+                            </Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem>
                             <Key className="mr-2 h-4 w-4" />

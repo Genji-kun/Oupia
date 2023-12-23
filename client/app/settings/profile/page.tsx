@@ -1,11 +1,11 @@
 import React from 'react';
 
-const SettingsPage = () => {
+const ProfileSettingsPage = () => {
     return (
         <div>
-            0123456789
+
         </div>
     );
 };
 
-export default SettingsPage;
+export default ProfileSettingsPage;

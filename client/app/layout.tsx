@@ -1,20 +1,15 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import { gilroy } from '../utils/fontGenerates'
 import { ThemeProvider } from '@/components/providers/theme-provider'
 import { Toaster } from 'react-hot-toast'
 import Navbar from '@/components/ui/navbar/navbar'
-import { Inter } from 'next/font/google'
 import Head from 'next/head'
-
-const inter = Inter({ subsets: ['latin'] })
+import { BeauSans } from '@/utils/fontGenerates'
 
 export const metadata: Metadata = {
   title: 'Oupia',
   description: '',
 }
-
-
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 
@@ -23,11 +18,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <Head>
         <link rel="icon" href="./favicon.ico" />
       </Head>
-      <body className={inter.className}>
+      <body className={`${BeauSans.variable}`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Navbar></Navbar>
           <Toaster />
-          <main className="mt-[80px]">
+          <main className="mt-[80px] px-5 md:px-0">
             {children}
           </main>
         </ThemeProvider>

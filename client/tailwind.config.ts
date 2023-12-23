@@ -12,10 +12,14 @@ module.exports = {
       center: true,
       padding: "2rem",
       screens: {
-        "2xl": "1400px",
+        "2xl": "1600px",
       },
     },
     extend: {
+      container: {
+        padding: "0rem",
+
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -71,7 +75,7 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       fontFamily: {
-        gilroy: ['var(--font-gilroy)'],
+        beauSans: ['var(--font-beau-sans)']
       },
     },
   },

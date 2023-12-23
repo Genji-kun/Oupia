@@ -1,9 +1,9 @@
 .navbar {
-    @apply p-4 border-b h-[80px] w-full shadow-sm fixed inset-x-0 top-0;
+    @apply p-4 border-b h-[80px] w-full fixed inset-x-0 top-0 shadow;
 }
 
 .logo {
-    @apply flex gap-x-2 items-center text-2xl font-bold w-fit;
+    @apply flex gap-x-3 items-center text-2xl font-bold w-fit;
 }
 
 .routes {
@@ -11,9 +11,9 @@
 }
 
 .nav-routes {
-    @apply flex items-center ml-auto;
+    @apply flex items-center gap-x-2;
 }
 
 .absolute-button {
-    @apply w-fit p-0 h-fit absolute -bottom-0.5 -right-0.5 rounded-full flex items-center justify-center border-2 border-background;
+    @apply w-fit p-0 h-fit absolute -bottom-0.5 -right-0.5 rounded-full flex items-center justify-center border-2 border-background text-gray-800 dark:text-gray-50;
 }

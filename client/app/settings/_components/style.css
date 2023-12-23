@@ -1,0 +1,7 @@
+.route-name {
+    @apply px-3 py-2  rounded hover:underline hover:underline-offset-2 w-fit;
+}
+
+.active-route > .route-name {
+    @apply text-primary bg-gray-100 dark:bg-gray-700 hover:no-underline;
+}

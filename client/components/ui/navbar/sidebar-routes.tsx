@@ -1,6 +1,6 @@
 "use client";
 
-import { routes } from '@/utils/routes';
+import { navRoutes } from '@/utils/routes';
 import React from 'react';
 import toast from 'react-hot-toast';
 import Link from 'next/link';
@@ -10,11 +10,11 @@ const SidebarRoutes = () => {
         <div className="w-full">
             <ul className="flex flex-col">
                 <>
-                    {routes.map((route, index) => {
+                    {navRoutes.map((route, index) => {
                         return (
                             <Link key={index} href={route.href}>
-                                <li className="px-5 py-4 text-base hover:bg-gray-100 dark:hover:bg-gray-900">
-                                    <span onClick={() => { toast.success("Okay") }}>{route.name}</span>
+                                <li className="px-5 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    <span>{route.name}</span>
                                 </li>
                             </Link>
                         );
