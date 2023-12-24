@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { ThemeProvider } from '@/components/providers/theme-provider'
-import { Toaster } from 'react-hot-toast'
 import Navbar from '@/components/ui/navbar/navbar'
 import Head from 'next/head'
 import { BeauSans } from '@/utils/fontGenerates'
+import { Toaster } from '@/components/ui/sonner'
 
 export const metadata: Metadata = {
   title: 'Oupia',
@@ -21,10 +21,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${BeauSans.variable}`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Navbar></Navbar>
-          <Toaster />
-          <main className="mt-[80px] px-5 md:px-0">
+          <main className="mt-[80px]">
             {children}
           </main>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

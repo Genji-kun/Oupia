@@ -56,16 +56,18 @@ const NavbarUser = ({ user }: { user: User }) => {
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
                         <DropdownMenuItem>
-                            <Link href="settings" className="w-full flex items-center">
+                            <Link href="/settings" className="w-full flex items-center">
                                 <Settings className="mr-2 h-4 w-4" />
                                 <span>Cài đặt</span>
                                 <ChevronRight className="ml-auto h-4 w-4" />
                             </Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem>
-                            <Key className="mr-2 h-4 w-4" />
-                            <span>Đổi mật khẩu</span>
-                            <ChevronRight className="ml-auto h-4 w-4" />
+                            <Link href="/settings/password" className="w-full flex items-center">
+                                <Key className="mr-2 h-4 w-4" />
+                                <span>Đổi mật khẩu</span>
+                                <ChevronRight className="ml-auto h-4 w-4" />
+                            </Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem>
                             <div className="flex items-center w-full" onClick={(e) => {

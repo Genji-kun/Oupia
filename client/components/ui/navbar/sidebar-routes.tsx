@@ -2,7 +2,6 @@
 
 import { navRoutes } from '@/utils/routes';
 import React from 'react';
-import toast from 'react-hot-toast';
 import Link from 'next/link';
 
 const SidebarRoutes = () => {

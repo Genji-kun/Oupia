@@ -6,6 +6,10 @@
   @apply font-beauSans;
 }
 
+.styled-button {
+  @apply bg-gray-700 enabled:hover:bg-gray-800  text-white;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

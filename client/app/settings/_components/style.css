@@ -1,7 +1,15 @@
 .route-name {
-    @apply px-3 py-2  rounded hover:underline hover:underline-offset-2 w-fit;
+    @apply px-3 py-2 w-full rounded hover:underline hover:underline-offset-2;
 }
 
 .active-route > .route-name {
-    @apply text-primary bg-gray-100 dark:bg-gray-700 hover:no-underline;
+    @apply text-primary bg-gray-100 dark:bg-gray-800 hover:no-underline;
+}
+
+.styled-form {
+    @apply w-full space-y-4 flex flex-wrap items-end;
+}
+
+.styled-form > div {
+    @apply w-full;
 }
