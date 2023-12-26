@@ -7,10 +7,36 @@ import * as z from "zod"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import { Loader2 } from 'lucide-react';
+
+const passwordSchema = z.string()
+    .min(8, { message: "Mật khẩu phải có ít nhất 8 ký tự" })
+    .max(50, { message: "Mật khẩu không được quá 50 ký tự" })
+    .refine(value => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(value), {
+        message: "Mật khẩu phải chứa ít nhất một chữ hoa, chữ thường, số và ký tự đặc biệt"
+    });
 
 const formSchema = z.object({
-    oldPassword: z.string().min(5, { message: "Họ tên không được nhỏ hơn 5 ký tự" }).max(50, { message: "Họ tên không quá 50 ký tự" }),
-},)
+    password: passwordSchema,
+    newPassword: passwordSchema,
+    confirmPassword: z.string()
+}).superRefine((data, ctx) => {
+    if (data.newPassword === data.password) {
+        ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            path: ['newPassword'],
+            message: 'Mật khẩu mới không được trùng với mật khẩu cũ',
+        });
+    }
+
+    if (data.confirmPassword !== data.newPassword) {
+        ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            path: ['confirmPassword'],
+            message: 'Mật khẩu xác nhận phải trùng với mật khẩu mới',
+        });
+    }
+});
 
 
 const PasswordForm = () => {
@@ -20,11 +46,14 @@ const PasswordForm = () => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            oldPassword: "",
+            password: "",
+            newPassword: "",
+            confirmPassword: ""
         },
     })
 
     const onSubmit = (values: z.infer<typeof formSchema>) => {
+        setIsSubmitting(true);
         console.log(values);
     }
 
@@ -34,7 +63,7 @@ const PasswordForm = () => {
             <form onSubmit={form.handleSubmit(onSubmit)} className="styled-form ">
                 <FormField
                     control={form.control}
-                    name="oldPassword"
+                    name="password"
                     render={({ field }) => (
                         <FormItem className={`${!isEditting && "hidden"}`}>
                             <FormLabel className="text-base">Mật khẩu hiện tại</FormLabel>
@@ -42,7 +71,7 @@ const PasswordForm = () => {
                                 <Input
                                     {...field}
                                     disabled={!isEditting || isSubmitting}
-                                    className="" />
+                                    type="password" />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -50,7 +79,7 @@ const PasswordForm = () => {
                 />
                 <FormField
                     control={form.control}
-                    name="oldPassword"
+                    name="newPassword"
                     render={({ field }) => (
                         <FormItem className={`${!isEditting && "hidden"}`}>
                             <FormLabel className="text-base">Mật khẩu mới</FormLabel>
@@ -58,7 +87,7 @@ const PasswordForm = () => {
                                 <Input
                                     {...field}
                                     disabled={!isEditting || isSubmitting}
-                                    className="" />
+                                    type="password" />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -66,27 +95,32 @@ const PasswordForm = () => {
                 />
                 <FormField
                     control={form.control}
-                    name="oldPassword"
+                    name="confirmPassword"
                     render={({ field }) => (
                         <FormItem className={`${!isEditting && "hidden"}`}>
-                            <FormLabel className="text-base">Xác nhận mật khẩu</FormLabel>
+                            <FormLabel className="text-base">Mật khẩu xác nhận</FormLabel>
                             <FormControl>
                                 <Input
                                     {...field}
                                     disabled={!isEditting || isSubmitting}
-                                    className="" />
+                                    type="password" />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
                     )}
                 />
                 {
-                    isEditting ? <div className="flex gap-x-2">
-                        <Button className="styled-button" type="submit">Hoàn tất</Button>
+                    isEditting ? <div className="flex gap-x-2">{
+                        !isSubmitting ? <Button className="styled-button" type="submit">Cập nhật</Button> :
+                            <Button className="styled-button" disabled>
+                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                Đang cập nhật
+                            </Button>
+                    }
                         <Button onClick={() => setIsEditting(false)} variant="ghost" type="button">Hủy</Button>
                     </div> : <>
-                        <div className="flex flex-col gap-y-5 mt-0">
-                            <p>Lần cuối mật khẩu được thay đổi là 10 phút trước</p>
+                        <div className="flex flex-col gap-y-5 -translate-y-5">
+                            <p className="text-gray-700 dark:text-gray-400">Lần cuối mật khẩu được thay đổi là 10 phút trước</p>
                             <Button onClick={() => setIsEditting(true)} type="button" className="styled-button w-fit">
                                 Đổi mật khẩu mới
                             </Button>

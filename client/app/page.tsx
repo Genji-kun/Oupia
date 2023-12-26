@@ -1,9 +1,16 @@
-import { ModeToggle } from "@/components/ui/mode-toggle";
+import HomeTitle from "./_components/home-title";
 
 export default function Home() {
   return (
-    <main className="font-bold text-xl">
-      <ModeToggle></ModeToggle>
+    <main className="container min-h-screen">
+      <div className="w-full grid grid-cols-2 h-[36rem] items-center">
+        <div>
+          <HomeTitle />
+        </div>
+        <div>
+
+        </div>
+      </div>
     </main>
   )
 }

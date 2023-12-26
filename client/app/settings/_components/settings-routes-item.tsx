@@ -18,7 +18,7 @@ const SettingsRouteItem = ({ route }: {
 
     return (
         <Link href={route.href} className={cn(isActive ? "active-route" : "")}>
-            <div className="route-name">{route.name}</div>
+            <div className="px-3 py-2 w-full rounded hover:underline hover:underline-offset-2">{route.name}</div>
         </Link>
     );
 };

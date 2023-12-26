@@ -9,7 +9,7 @@ const NavbarLogo = () => {
         <Link href="/">
             <div className="logo">
                 <Image src={oupia} width={30} alt="Oupia" />
-                <h1>Oupia</h1>
+                <h1 className="font-[Montserrat]">Oupia</h1>
             </div>
         </Link>
 

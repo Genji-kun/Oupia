@@ -5,7 +5,7 @@ import SettingsRouteItem from './settings-routes-item';
 const SettingsRoutes = () => {
     return (
         <div className="w-full overflow-x-auto">
-            <ul className="flex flex-col sm:flex-row md:flex-col ">
+            <ul className="flex flex-col sm:flex-row lg:flex-col ">
                 <>
                     {settingsRoutes.map((route, index) => {
                         return (<li key={index}>
