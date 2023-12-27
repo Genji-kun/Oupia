@@ -3,16 +3,23 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
+import { setCookie } from 'cookies-next';
+
 
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Button } from "@/components/ui/button"
 import { useTheme } from "next-themes"
 import { toast } from "sonner"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 const appearanceFormSchema = z.object({
     theme: z.enum(["light", "dark"], {
         required_error: "Hãy chọn một chủ đề.",
+    }),
+    font: z.enum(["inter", "openSans", "beauSans"], {
+        invalid_type_error: "Chọn một phông chữ",
+        required_error: "Hãy chọn một phông chữ.",
     }),
 })
 
@@ -23,8 +30,10 @@ export function AppearanceForm() {
 
     const { theme, setTheme } = useTheme();
 
+
     const defaultValues: Partial<AppearanceFormValues> = {
         theme: theme === "dark" ? "dark" : "light",
+        font: "beauSans"
     }
 
     const form = useForm<AppearanceFormValues>({
@@ -34,6 +43,7 @@ export function AppearanceForm() {
 
     function onSubmit(data: AppearanceFormValues) {
         setTheme(data.theme);
+        setCookie('font', data.font, { path: '/' });
         toast.success(`Đã thay đổi thành chủ đề thành "${data.theme === "dark" ? "Tối" : "Sáng"}".`)
     }
 
@@ -42,9 +52,36 @@ export function AppearanceForm() {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <FormField
                     control={form.control}
+                    name="font"
+                    render={({ field }) => (
+                        <FormItem >
+                            <FormLabel className="text-base">Phông chữ</FormLabel>
+                            <Select
+                                onValueChange={field.onChange}
+                                defaultValue={field.value}>
+                                <FormControl className="w-full md:w-96">
+                                    <SelectTrigger>
+                                        <SelectValue />
+                                    </SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                    <SelectItem value="beauSans">Mặc định</SelectItem>
+                                    <SelectItem value="inter">Inter</SelectItem>
+                                    <SelectItem value="openSans">Open Sans</SelectItem>
+                                </SelectContent>
+                            </Select>
+                            <FormDescription>
+                                Chọn phông chữ hiển thị trong thông tin bài viết, nội dung đoạn chat, v.v...
+                            </FormDescription>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
                     name="theme"
                     render={({ field }) => (
-                        <FormItem className="space-y-1">
+                        <FormItem>
                             <FormLabel className="text-base">Chủ đề</FormLabel>
                             <FormDescription>
                                 Chọn chủ đề khi thao tác trên ứng dụng.
@@ -53,7 +90,7 @@ export function AppearanceForm() {
                             <RadioGroup
                                 onValueChange={field.onChange}
                                 defaultValue={field.value}
-                                className="grid max-w-md grid-cols-1 md:grid-cols-2 gap-8 pt-2"
+                                className="grid lg:max-w-md grid-cols-1 md:grid-cols-2 gap-8 pt-2"
                             >
                                 <FormItem>
                                     <FormLabel className="[&:has([data-state=checked])>div]:border-primary">

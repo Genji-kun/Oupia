@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import FullNameForm from './fullname-form';
+import FullNameForm from './_components/fullname-form';
 import { motion } from "framer-motion";
 
 const ProfileSettingsPage = () => {

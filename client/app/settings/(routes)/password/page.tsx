@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { AnimatePresence, motion } from "framer-motion";
-import PasswordForm from './password-form';
+import PasswordForm from './_components/password-form';
 
 const PasswordSettingsPage = () => {
     return (

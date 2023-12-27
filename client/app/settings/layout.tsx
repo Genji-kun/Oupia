@@ -5,7 +5,7 @@ import SettingsTitle from "./_components/settings-title";
 export default function SettingsLayout({ children }: { children: React.ReactNode }) {
 
     return (
-        <div className="container flex flex-col gap-y-5 px-5 lg:px-0">
+        <div className="container flex flex-col gap-y-5 px-5 xl:px-0">
             <SettingsTitle />
             <div className="grid grid-cols-10 gap-5">
                 <div className="hidden md:block col-span-10 lg:col-span-2">

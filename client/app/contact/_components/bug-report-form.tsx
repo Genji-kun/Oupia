@@ -17,7 +17,7 @@ const formSchema = z.object({
     subject: z.string()
 },)
 
-const ContactForm = () => {
+const BugReportForm = () => {
 
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -26,7 +26,7 @@ const ContactForm = () => {
         defaultValues: {
             email: "",
             content: "",
-            subject: "[Liên hệ] - Người dùng có nhu cầu liên hệ Oupia."
+            subject: "[Báo lỗi] - Có lỗi phát sinh trong hệ thống Oupia."
         },
     })
 
@@ -57,12 +57,13 @@ const ContactForm = () => {
                         </FormItem>
                     )}
                 />
+
                 <FormField
                     control={form.control}
                     name="content"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Bạn cần hỗ trợ điều gì?</FormLabel>
+                            <FormLabel>Đã có lỗi gì trong quá trình sử dụng Oupia?</FormLabel>
                             <FormControl>
                                 <Textarea
                                     rows={5}
@@ -89,4 +90,4 @@ const ContactForm = () => {
     );
 };
 
-export default ContactForm;
+export default BugReportForm;

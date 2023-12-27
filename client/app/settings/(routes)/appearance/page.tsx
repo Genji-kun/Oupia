@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react';
-import { AppearanceForm } from './appearance-form';
+import { AppearanceForm } from './_components/appearance-form';
 import { AnimatePresence, motion } from "framer-motion";
 
 
@@ -15,7 +15,7 @@ const AppearanceSettingsPage = () => {
                 transition={{ duration: 0.2, ease: "easeOut" }}
                 className="space-y-6">
                 <div className="border-b-2 w-full pb-5">
-                    <h2 className="text-xl font-bold mb-2">Màn hình</h2>
+                    <h2 className="text-xl font-bold mb-2">Màn hình và trợ năng</h2>
                     <p className="text-gray-700 dark:text-gray-400">Chỉnh sửa giao diện khi sử dụng ứng dụng.</p>
                 </div>
                 <AppearanceForm />

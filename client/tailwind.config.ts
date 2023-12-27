@@ -75,7 +75,10 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       fontFamily: {
-        beauSans: ['var(--font-beau-sans)']
+        beauSans: ['var(--font-beau-sans)', 'sans-serif'],
+        inter: ['Inter', 'sans-serif'],
+        montserrat: ['Montserrat', 'sans-serif'],
+        openSans: ['Open Sans', 'sans-serif'],
       },
     },
   },

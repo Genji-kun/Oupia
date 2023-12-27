@@ -1,11 +1,23 @@
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import React from 'react';
+import { cn } from '@/lib/utils';
 
-const SidebarItem = () => {
+const SidebarItem = ({ route }: {
+    route: {
+        href: string,
+        name: string
+    }
+}) => {
+    const pathname = usePathname();
+    const isActive = (pathname === "/" && route.href === "/") || pathname === route.href || (pathname !== "/" && pathname?.startsWith(`${route.href}/`));
+
     return (
-        <div>
-
-        </div>
+        <Link href={route.href}>
+            <div className={cn("px-5 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 ", isActive && "text-primary border-r-2 border-primary")}>{route.name}</div>
+        </Link>
     );
 };
+
 
 export default SidebarItem;

@@ -6,10 +6,6 @@
     @apply flex gap-x-3 items-center text-2xl font-bold w-fit;
 }
 
-.routes {
-    @apply hidden md:flex gap-x-2;
-}
-
 .nav-routes {
     @apply flex items-center gap-x-2;
 }

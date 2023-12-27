@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from '../button';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
@@ -15,8 +14,8 @@ const NavbarItem = ({ route }: {
 
     return (
         <div>
-            <Link href={route.href} className={cn(isActive && "font-bold text-primary")}>
-                <Button variant="ghost" className="md:text-base hover:text-primary">{route.name}</Button>
+            <Link href={route.href} className={cn("md:text-base hover:text-primary text-xl", isActive && "text-primary")}>
+                {route.name}
             </Link>
         </div>
     );
