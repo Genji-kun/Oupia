@@ -29,7 +29,7 @@ const Navbar = () => {
                 {user ?
                     <NavbarUser user={user} /> :
                     <Link href="/sign-in">
-                        <Button className="bg-gray-800 text-gray-50">Đăng nhập</Button>
+                        <Button className="styled-button bg-primary-500 hover:bg-gradient-to-r from-primary-500 to-primary-700">Đăng nhập</Button>
                     </Link>
                 }
             </div>

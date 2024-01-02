@@ -82,7 +82,7 @@
 }
 
 .styled-button {
-  @apply bg-gray-700 enabled:hover:bg-gray-800 text-white;
+  @apply text-white font-semibold text-base bg-primary-500 hover:bg-primary-700;
 }
 
 .styled-form {

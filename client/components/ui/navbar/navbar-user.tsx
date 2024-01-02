@@ -42,7 +42,7 @@ const NavbarUser = ({ user }: { user: User }) => {
                 <DropdownMenuContent align="end" className="mt-1 p-2 w-80">
                     <DropdownMenuGroup>
                         <DropdownMenuItem>
-                            <Link href={`/${user.username}`} className="w-full flex gap-x-4 items-center ">
+                            <Link href={`/profile/${user.username}`} className="w-full flex gap-x-4 items-center ">
                                 <Image
                                     className="rounded-full"
                                     width={45}

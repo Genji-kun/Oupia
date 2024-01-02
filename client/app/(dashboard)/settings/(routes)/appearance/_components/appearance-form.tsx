@@ -149,7 +149,7 @@ export function AppearanceForm() {
                     )}
                 />
                 <div className="flex sm:block justify-center pb-5 sm:pb-0">
-                    <Button type="submit" className="styled-button">Cập nhật giao diện</Button>
+                    <Button type="submit" className="styled-button bg-primary-500 hover:bg-gradient-to-r from-primary-500 to-primary-700">Cập nhật giao diện</Button>
                 </div>
             </form>
         </Form>
