@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ForumPage = () => {
+const ChangePasswordTab = () => {
     return (
         <div>
 
@@ -8,4 +8,4 @@ const ForumPage = () => {
     );
 };
 
-export default ForumPage;
+export default ChangePasswordTab;

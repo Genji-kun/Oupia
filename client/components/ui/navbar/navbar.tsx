@@ -6,7 +6,6 @@ import "./style.css";
 import NavbarUser from './navbar-user';
 import { Button } from '../button';
 import { User } from '@/interfaces/User';
-import avatar from "@/public/avatar.jpg";
 import Link from 'next/link';
 
 
@@ -14,13 +13,13 @@ const Navbar = () => {
 
     const user: User = {
         name: "Võ Phú Phát",
-        avatar: avatar,
+        avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1696484302/z8ch1cp7vfkdrcxgfbai.jpg",
         username: "phatvo",
     };
 
     return (
         <div className="navbar">
-            <div className="flex h-full items-center justify-between container">
+            <div className="flex h-full items-center justify-between container ">
                 <div className="hidden md:block">
                     <NavbarLogo />
                 </div>

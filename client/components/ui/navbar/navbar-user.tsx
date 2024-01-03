@@ -31,9 +31,9 @@ const NavbarUser = ({ user }: { user: User }) => {
                 <DropdownMenuTrigger asChild>
                     <div className="relative">
                         <Image
-                            className="rounded-full"
-                            width={45}
-                            height={45}
+                            className="rounded-full h-12 w-12 "
+                            width={160}
+                            height={160}
                             src={user.avatar}
                             alt="User avatar" />
                         <Button className="absolute-button"><ChevronDown className="dark:text-white" size={15} /></Button>
@@ -44,9 +44,9 @@ const NavbarUser = ({ user }: { user: User }) => {
                         <DropdownMenuItem>
                             <Link href={`/profile/${user.username}`} className="w-full flex gap-x-4 items-center ">
                                 <Image
-                                    className="rounded-full"
-                                    width={45}
-                                    height={45}
+                                    className="rounded-full h-12 w-12"
+                                    width={160}
+                                    height={160}
                                     src={user.avatar}
                                     alt="User avatar" />
                                 <h2 className="font-bold text-base">{user.name}</h2>

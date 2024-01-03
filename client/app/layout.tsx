@@ -20,7 +20,7 @@ export default function RootLayout(
       <Head>
         <link rel="icon" href="./favicon.ico" />
       </Head>
-      <body className={`${BeauSans.variable}`}>
+      <body className={`${BeauSans.variable} scrollbar-track-background scrollbar-thumb-primary-500 scrollbar-thin`}>
         <GoogleProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
             <main>

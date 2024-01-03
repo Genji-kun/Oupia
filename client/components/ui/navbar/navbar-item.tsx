@@ -14,8 +14,8 @@ const NavbarItem = ({ route }: {
 
     return (
         <div>
-            <Link href={route.href} className={cn("md:text-base hover:text-primary text-xl", isActive && "text-primary")}>
-                {route.name}
+            <Link href={route.href} className={cn(" hover:text-primary-600", isActive && "text-primary-600")}>
+                <span className="md:text-lg font-semibold">{route.name}</span>
             </Link>
         </div>
     );

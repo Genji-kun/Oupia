@@ -1,6 +1,3 @@
-"use client"
-
-import { useAuthTabContext } from '@/contexts/auth-tab-context';
 import React from 'react';
 import { Separator } from '@/components/ui/separator';
 import ForgetPasswordForm from './forget-password-form';
