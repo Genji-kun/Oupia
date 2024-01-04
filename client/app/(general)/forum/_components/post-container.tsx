@@ -3,7 +3,9 @@ import PostList from './post-list';
 
 const PostContainer = () => {
     return (
-        <PostList />
+        <div>
+            <PostList />
+        </div>
     );
 };
 

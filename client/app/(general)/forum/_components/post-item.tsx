@@ -1,3 +1,5 @@
+"use client";
+
 import { Post } from '@/interfaces/Post';
 
 import React from 'react';

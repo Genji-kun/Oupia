@@ -16,20 +16,26 @@ const PostItemHeader = ({ post }: { post: Post }) => {
         <div className="flex gap-x-5 p-4 pb-0">
             <div>
                 <HoverCard>
-                    <HoverCardTrigger>
-                        <Link href={`/${post.user.username}`}>
-                            <Image src={post.user.avatar} width={160} height={160} alt="User Avatar" className="rounded-full w-12 h-12 object-cover" />
-                        </Link>
+                    <HoverCardTrigger asChild>
+                        <div>
+                            <Link href={`/${post.user.username}`}>
+                                <Image src={post.user.avatar} width={160} height={160} alt="User Avatar" className="rounded-full w-12 h-12 object-cover" />
+                            </Link>
+                        </div>
                     </HoverCardTrigger>
                     <HoverCardContent className="w-96">
                         <div className="grid grid-cols-8 gap-x-5 w-full">
-                            <Link href={`/${post.user.username}`} className="col-span-2">
-                                <Image src={post.user.avatar} width={160} height={160} alt="User Avatar" className="rounded-full w-16 h-16 object-cover mx-auto" />
-                            </Link>
-                            <div className="col-span-6 flex flex-col gap-y-2">
+                            <div className="col-span-2">
                                 <Link href={`/${post.user.username}`}>
-                                    <h2 className="font-semibold text-2xl">{post.user.name}</h2>
+                                    <Image src={post.user.avatar} width={160} height={160} alt="User Avatar" className="rounded-full w-16 h-16 object-cover mx-auto" />
                                 </Link>
+                            </div>
+                            <div className="col-span-6 flex flex-col gap-y-2">
+                                <div>
+                                    <Link href={`/${post.user.username}`}>
+                                        <h2 className="font-semibold text-2xl">{post.user.name}</h2>
+                                    </Link>
+                                </div>
                                 <Separator />
                                 <div className="flex gap-2 items-center ">
                                     <Info size={16} />
@@ -62,20 +68,26 @@ const PostItemHeader = ({ post }: { post: Post }) => {
 
             <div className="flex flex-col">
                 <HoverCard>
-                    <HoverCardTrigger>
-                        <Link href={`/${post.user.username}`}>
-                            <h2 className="font-semibold text-base hover:underline">{post.user.name}</h2>
-                        </Link>
+                    <HoverCardTrigger asChild>
+                        <div>
+                            <Link href={`/${post.user.username}`}>
+                                <h2 className="font-semibold text-base hover:underline">{post.user.name}</h2>
+                            </Link>
+                        </div>
                     </HoverCardTrigger>
                     <HoverCardContent className="w-96">
                         <div className="grid grid-cols-8 gap-x-5 w-full">
-                            <Link href={`/${post.user.username}`} className="col-span-2">
-                                <Image src={post.user.avatar} width={160} height={160} alt="User Avatar" className="rounded-full w-16 h-16 object-cover mx-auto" />
-                            </Link>
-                            <div className="col-span-6 flex flex-col gap-y-2">
-                                <Link href={`/${post.user.username}`}>
-                                    <h2 className="font-semibold text-2xl">{post.user.name}</h2>
+                            <div className="col-span-2">
+                                <Link href={`/${post.user.username}`} >
+                                    <Image src={post.user.avatar} width={160} height={160} alt="User Avatar" className="rounded-full w-16 h-16 object-cover mx-auto" />
                                 </Link>
+                            </div>
+                            <div className="col-span-6 flex flex-col gap-y-2">
+                                <div>
+                                    <Link href={`/${post.user.username}`}>
+                                        <h2 className="font-semibold text-2xl">{post.user.name}</h2>
+                                    </Link>
+                                </div>
                                 <Separator />
                                 <div className="flex gap-2 items-center ">
                                     <Info size={16} />
@@ -104,12 +116,12 @@ const PostItemHeader = ({ post }: { post: Post }) => {
                         </div>
                     </HoverCardContent>
                 </HoverCard>
-                <h4 className="text-gray-500 dark:text-gray-700 text-sm">1 giờ trước</h4>
+                <h4 className="text-gray-500 dark:text-gray-600 text-sm">1 giờ trước</h4>
             </div>
             <div className="ml-auto">
                 <TooltipProvider>
                     <Tooltip>
-                        <TooltipTrigger>
+                        <TooltipTrigger asChild>
                             <Button variant={"ghost"} className="px-3 rounded-full">
                                 <X size="16" />
                             </Button>
