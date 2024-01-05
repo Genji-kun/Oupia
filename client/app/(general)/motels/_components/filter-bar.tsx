@@ -17,7 +17,7 @@ const FilterBar = () => {
                 <h1 className="font-bold text-2xl">Bộ lọc tìm kiếm</h1>
                 <div className="flex gap-x ml-auto items-center">
                     <TooltipProvider>
-                        <Tooltip >
+                        <Tooltip>
                             <TooltipTrigger asChild>
                                 <Button variant={"ghost"} className="ml-auto px-2 text-gray-600 dark:text-gray-400 rounded-full">
                                     <Map className=" w-6 h-6" />
@@ -30,7 +30,7 @@ const FilterBar = () => {
                     <TooltipProvider>
                         <Tooltip >
                             <TooltipTrigger asChild>
-                                <Button onClick={() => { setIsOpen(!isOpen) }} variant={"ghost"} className="ml-auto px-2 text-gray-600 dark:text-gray-400 rounded-full">
+                                <Button onClick={() => { }} variant={"ghost"} className="ml-auto px-2 text-gray-600 dark:text-gray-400 rounded-full">
                                     <Search className=" w-6 h-6" />
                                 </Button></TooltipTrigger>
                             <TooltipContent>
