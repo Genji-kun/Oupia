@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { Button } from '../button';
 import { Switch } from '../switch';
 import { useTheme } from 'next-themes';
+import SearchButton from './search-button';
 
 const NavbarUser = ({ user }: { user: User }) => {
     const { theme, setTheme } = useTheme();
@@ -18,9 +19,7 @@ const NavbarUser = ({ user }: { user: User }) => {
     }
     return (
         <div className="flex items-center gap-x-1">
-            <Button variant="ghost" className="p-2.5 rounded-full ">
-                <Search size={20}></Search>
-            </Button>
+            <SearchButton />
             <Button variant="ghost" className="p-2.5 rounded-full ">
                 <MessagesSquare size={20}></MessagesSquare>
             </Button>

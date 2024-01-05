@@ -18,8 +18,7 @@ const NavbarItem = ({ route }: {
     return (
         <motion.div
             whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className="relative py-1">
+            whileTap={{ scale: 0.9 }}>
             <Link href={route.href} className={cn(" hover:text-primary-500", isActive && "text-primary-500")}>
                 <span className="md:text-lg font-semibold">{route.name}</span>
             </Link>

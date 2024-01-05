@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import { ThemeProvider } from '@/components/providers/theme-provider'
 import Head from 'next/head'
 import { BeauSans } from '@/utils/fontGenerates'
 import { Toaster } from '@/components/ui/sonner'
-import GoogleProvider from '@/components/providers/google-provider'
+import Providers from './providers'
+
 
 export const metadata: Metadata = {
   title: 'Oupia',
@@ -21,14 +21,12 @@ export default function RootLayout(
         <link rel="icon" href="./favicon.ico" />
       </Head>
       <body className={`${BeauSans.variable} scrollbar-track-background scrollbar-thumb-gray-300  dark:scrollbar-thumb-gray-700 scrollbar-thin`}>
-        <GoogleProvider>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-            <main>
-              {children}
-            </main>
-            <Toaster />
-          </ThemeProvider>
-        </GoogleProvider>
+        <Providers>
+          <main>
+            {children}
+          </main>
+          <Toaster />
+        </Providers>
       </body>
     </html>
   )

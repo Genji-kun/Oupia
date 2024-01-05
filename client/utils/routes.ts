@@ -3,7 +3,7 @@ export const navRoutes = [
         name: "Trang chủ",
         href: "/"
     }, {
-        name: "Nhà trọ",
+        name: "Tìm thuê",
         href: "/motels"
     }, {
         name: "Diễn đàn",

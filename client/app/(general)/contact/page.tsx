@@ -1,12 +1,20 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import ContactTitle from './_components/contact-title';
 import { motion } from "framer-motion";
 import ContactInfo from './_components/contact-info';
 import ContactReportForms from './_components/contact-report-forms';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
 
 const ContactPage = () => {
+    const price = useSelector((state: RootState) => state.motelFilter.price);
+
+    useEffect(() => {
+        console.log(price);
+    }, [price])
+
     return (
         <div className="container w-full h-full flex flex-col gap-y-8 min-h-screen py-6 lg:py-8 px-5 lg:px-0">
             <ContactTitle />
