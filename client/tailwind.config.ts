@@ -91,6 +91,9 @@ module.exports = {
         montserrat: ['Montserrat', 'sans-serif'],
         openSans: ['Open Sans', 'sans-serif'],
       },
+      aspectRatio: {
+        '16/15': '16 / 15',
+      },
     },
   },
   plugins: [require("tailwindcss-animate"), require('tailwind-scrollbar'),

@@ -4,7 +4,7 @@ export const navRoutes = [
         href: "/"
     }, {
         name: "Tìm thuê",
-        href: "/motels"
+        href: "/find"
     }, {
         name: "Diễn đàn",
         href: "/forum"

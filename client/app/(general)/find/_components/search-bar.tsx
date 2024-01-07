@@ -12,11 +12,11 @@ const SearchBar = () => {
 
     return (
         <div className="flex flex-col gap-y-4">
-            <div className="grid grid-cols-2 gap-x-4 w-full p-8 pb-0">
+            <div className="grid grid-cols-2 gap-x-4 w-full p-4 pb-0">
                 <div className="relative">
                     <Input
                         placeholder='Tìm kiếm từ khoá, dự án cụ thể bạn muốn thuê...'
-                        className="py-6 pl-12 max-w-2xl"
+                        className="py-6 pl-12 max-w-3xl"
                         onChange={(evt) => { setKeyword(evt.target.value) }}
                         value={keyword} />
                     <div className="absolute top-1/4 left-3">
@@ -30,7 +30,7 @@ const SearchBar = () => {
                 <div className="relative">
                     <Input
                         placeholder='Địa điểm muốn thuê...'
-                        className="py-6 pl-12 max-w-2xl"
+                        className="py-6 pl-12 max-w-3xl"
                         onChange={(evt) => { setKeyword(evt.target.value) }}
                         value={keyword} />
                     <div className="absolute top-1/4 left-3">
@@ -42,7 +42,7 @@ const SearchBar = () => {
                         </Button>}
                 </div>
             </div>
-            <SearchResult />
+            {/* <SearchResult /> */}
             <Separator />
         </div>
     );

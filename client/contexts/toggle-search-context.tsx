@@ -2,28 +2,32 @@
 
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 
-interface IToggleSearchContext {
-    tab: string;
-    setTab: React.Dispatch<React.SetStateAction<string>>;
+interface IToggleContext {
+    openSearch: boolean;
+    setOpenSearch: React.Dispatch<React.SetStateAction<boolean>>;
+    openMap: boolean,
+    setOpenMap: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ToggleSearchContext = createContext<IToggleSearchContext | undefined>(undefined);
+const ToggleContext = createContext<IToggleContext | undefined>(undefined);
 
-export const ToggleSearchProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [tab, setTab] = useState<string>("sign-in");
+export const ToggleProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+    const [openSearch, setOpenSearch] = useState<boolean>(true);
+    const [openMap, setOpenMap] = useState<boolean>(false);
+
 
     return (
-        <ToggleSearchContext.Provider value={{ tab, setTab }}>
+        <ToggleContext.Provider value={{ openSearch, setOpenSearch, openMap, setOpenMap }}>
             {children}
-        </ToggleSearchContext.Provider>
+        </ToggleContext.Provider>
     );
 };
 
 
-export const useToggleSearchContext = (): IToggleSearchContext => {
-    const context = useContext(ToggleSearchContext);
+export const useToggleContext = (): IToggleContext => {
+    const context = useContext(ToggleContext);
     if (!context) {
-        throw new Error('useToggleSearchContext phải được dùng trong ToggleSearchProvider');
+        throw new Error('useToggleContext phải được dùng trong ToggleProvider');
     }
     return context;
 };

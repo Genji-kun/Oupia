@@ -2,8 +2,7 @@ import React from 'react';
 
 const SearchResult = () => {
     return (
-        <div className="px-8">
-            Bạn đã tìm:
+        <div className="px-4">
         </div>
     );
 };
