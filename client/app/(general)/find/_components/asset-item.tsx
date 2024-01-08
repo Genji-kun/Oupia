@@ -2,13 +2,13 @@
 
 import { Asset } from '@/interfaces/Asset';
 import React, { useEffect, useState } from 'react';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from '@/components/ui/carousel';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 
 const AssetItem = ({ asset }: { asset: Asset }) => {
-    const [api, setApi] = React.useState<CarouselApi>()
+    const [api, setApi] = React.useState<any>()
     const [isHover, setIsHover] = useState<boolean>(false);
     const [current, setCurrent] = useState<number>(0);
     const [_, setCount] = useState<number>(0);
