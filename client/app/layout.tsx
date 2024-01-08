@@ -19,6 +19,7 @@ export default function RootLayout(
     <html lang="en" suppressHydrationWarning>
       <Head>
         <link rel="icon" href="./favicon.ico" />
+        <link href='https://cdn.jsdelivr.net/npm/@goongmaps/goong-js@1.0.9/dist/goong-js.css' rel='stylesheet' />
       </Head>
       <body className={`${BeauSans.variable} scrollbar-track-background scrollbar-thumb-gray-300  dark:scrollbar-thumb-gray-700 scrollbar-thin`}>
         <Providers>

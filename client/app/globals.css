@@ -92,3 +92,11 @@
 .styled-form > div {
   @apply w-full;
 }
+
+.map-container {
+  height: calc(100vh - 80px);
+}
+
+.map-container > div {
+  width: 100%;
+}
