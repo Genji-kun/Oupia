@@ -58,7 +58,7 @@ const FilterBar = () => {
                         </>}
                 </div>
             </div>
-            <span className="text-gray-600 dark:text-gray-500">126 kết quả</span>
+            <span className="text-gray-600 dark:text-gray-400">126 kết quả</span>
             <Separator className="h-[2px]" />
             <AssetTypeSelector />
             <Separator className="h-[2px]" />

@@ -5,6 +5,7 @@ export interface Asset {
     name: string,
     description: string,
     slug: string,
+    location: string,
     createAt?: Date,
     isDeleted?: boolean,
     user: User,

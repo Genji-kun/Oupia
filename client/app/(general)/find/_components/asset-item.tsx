@@ -5,12 +5,13 @@ import React, { useEffect, useState } from 'react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from '@/components/ui/carousel';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
 const AssetItem = ({ asset }: { asset: Asset }) => {
     const [api, setApi] = React.useState<CarouselApi>()
     const [isHover, setIsHover] = useState<boolean>(false);
     const [current, setCurrent] = useState<number>(0);
-    const [count, setCount] = useState<number>(0);
+    const [_, setCount] = useState<number>(0);
 
     useEffect(() => {
         if (!api) {
@@ -25,8 +26,8 @@ const AssetItem = ({ asset }: { asset: Asset }) => {
     }, [api])
 
     return (
-        <div className="w-full rounded border-border flex flex-col gap-2 aspect-square">
-            <Carousel setApi={setApi} onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)} className="w-full relative">
+        <div onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)} className="w-full rounded border-border flex flex-col gap-2 aspect-square">
+            <Carousel setApi={setApi} className="w-full relative">
                 <CarouselContent>
                     {asset.imageList.map((image, index) => (
                         <CarouselItem key={index}>
@@ -42,8 +43,11 @@ const AssetItem = ({ asset }: { asset: Asset }) => {
                     ))}
                 </div>
             </Carousel>
-            {asset.name}
-        </div >
+            <div>
+                <h2 className="text-sm text-gray-600 dark:text-gray-400 uppercase truncate">{asset.location}</h2>
+                <h1 className="text-lg font-normal">{asset.name}</h1>
+            </div>
+        </div>
 
     );
 };
