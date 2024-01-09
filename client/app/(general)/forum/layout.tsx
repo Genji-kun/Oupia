@@ -1,6 +1,12 @@
 import React, { ReactNode } from 'react';
 import UserViewer from './_components/user-viewer';
 import UtilitiesBar from './_components/utilities-bar';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Oupia | Diễn đàn trao đổi',
+    description: '',
+}
 
 const ForumLayout = ({ children }: { children: ReactNode }) => {
     return (
@@ -10,7 +16,7 @@ const ForumLayout = ({ children }: { children: ReactNode }) => {
                 <div className="h-screen bg-background col-span-2 hidden xl:block fixed left-0">
                     <UtilitiesBar />
                 </div>
-                <div className="col-span-7 xl:col-span-3 px-2 xl:px-0">
+                <div className="col-span-7 xl:col-span-3 px-4 xl:px-0">
                     {children}
                 </div>
                 <div className=" col-span-2 invisible"></div>

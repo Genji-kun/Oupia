@@ -51,9 +51,9 @@ const FullNameForm = () => {
                 />
                 {
                     isEditting ? <div className="flex gap-x-2">
-                        <Button className="styled-button bg-primary-500 hover:bg-gradient-to-r from-primary-500 to-primary-700" type="submit">Hoàn tất</Button>
+                        <Button className="styled-button" type="submit">Hoàn tất</Button>
                         <Button onClick={() => setIsEditting(false)} variant="ghost" type="button">Hủy</Button>
-                    </div> : <Button onClick={() => setIsEditting(true)} type="button" className="styled-button bg-primary-500 hover:bg-gradient-to-r from-primary-500 to-primary-700z">
+                    </div> : <Button onClick={() => setIsEditting(true)} type="button" className="styled-button ">
                         Chỉnh sửa
                     </Button>
                 }

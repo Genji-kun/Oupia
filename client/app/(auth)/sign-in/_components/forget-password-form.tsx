@@ -59,7 +59,7 @@ const ForgetPasswordForm = () => {
                             <ChevronLeft size="20" />
                             <span className="font-semibold text-base">Quay lại</span>
                         </Button>
-                        <Button type="submit" className=" w-fit styled-button border-gray-200 border flex gap-2 bg-primary-500 hover:bg-gradient-to-r from-primary-500 to-primary-700">
+                        <Button type="submit" className=" w-fit styled-button border-gray-200 border flex gap-2 ">
                             <span className="text-base">Gửi mã xác nhận</span>
                         </Button>
                     </div>

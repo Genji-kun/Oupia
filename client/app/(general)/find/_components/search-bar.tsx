@@ -12,7 +12,7 @@ const SearchBar = () => {
 
     return (
         <div className="flex flex-col gap-y-4">
-            <div className="grid grid-cols-2 gap-x-4 w-full p-4 pb-0">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full p-4 pb-0">
                 <div className="relative">
                     <Input
                         placeholder='Tìm kiếm từ khoá, dự án cụ thể bạn muốn thuê...'

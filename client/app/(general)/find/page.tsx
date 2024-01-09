@@ -2,7 +2,12 @@ import React from 'react';
 import FilterBar from './_components/filter-bar';
 import { ToggleProvider } from '@/contexts/toggle-search-context';
 import AssetContainer from './_components/asset-container';
+import { Metadata } from 'next';
 
+export const metadata: Metadata = {
+    title: 'Oupia | Tìm thuê nơi ở',
+    description: '',
+}
 
 const MotelsPage = () => {
     return (

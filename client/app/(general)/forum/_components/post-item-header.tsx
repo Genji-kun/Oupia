@@ -18,7 +18,7 @@ const PostItemHeader = ({ post }: { post: Post }) => {
                 <HoverCard>
                     <HoverCardTrigger asChild>
                         <div>
-                            <Link href={`/${post.user.username}`}>
+                            <Link href={`/profile/${post.user.username}`}>
                                 <Image src={post.user.avatar} width={160} height={160} alt="User Avatar" className="rounded-full w-12 h-12 object-cover" />
                             </Link>
                         </div>
@@ -26,13 +26,13 @@ const PostItemHeader = ({ post }: { post: Post }) => {
                     <HoverCardContent className="w-96">
                         <div className="grid grid-cols-8 gap-x-5 w-full">
                             <div className="col-span-2">
-                                <Link href={`/${post.user.username}`}>
+                                <Link href={`/profile/${post.user.username}`}>
                                     <Image src={post.user.avatar} width={160} height={160} alt="User Avatar" className="rounded-full w-16 h-16 object-cover mx-auto" />
                                 </Link>
                             </div>
                             <div className="col-span-6 flex flex-col gap-y-2">
                                 <div>
-                                    <Link href={`/${post.user.username}`}>
+                                    <Link href={`/profile/${post.user.username}`}>
                                         <h2 className="font-semibold text-2xl">{post.user.name}</h2>
                                     </Link>
                                 </div>
@@ -70,7 +70,7 @@ const PostItemHeader = ({ post }: { post: Post }) => {
                 <HoverCard>
                     <HoverCardTrigger asChild>
                         <div>
-                            <Link href={`/${post.user.username}`}>
+                            <Link href={`/profile/${post.user.username}`}>
                                 <h2 className="font-semibold text-base hover:underline">{post.user.name}</h2>
                             </Link>
                         </div>
@@ -78,13 +78,13 @@ const PostItemHeader = ({ post }: { post: Post }) => {
                     <HoverCardContent className="w-96">
                         <div className="grid grid-cols-8 gap-x-5 w-full">
                             <div className="col-span-2">
-                                <Link href={`/${post.user.username}`} >
+                                <Link href={`/profile/${post.user.username}`} >
                                     <Image src={post.user.avatar} width={160} height={160} alt="User Avatar" className="rounded-full w-16 h-16 object-cover mx-auto" />
                                 </Link>
                             </div>
                             <div className="col-span-6 flex flex-col gap-y-2">
                                 <div>
-                                    <Link href={`/${post.user.username}`}>
+                                    <Link href={`/profile/${post.user.username}`}>
                                         <h2 className="font-semibold text-2xl">{post.user.name}</h2>
                                     </Link>
                                 </div>

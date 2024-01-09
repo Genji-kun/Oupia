@@ -82,7 +82,7 @@
 }
 
 .styled-button {
-  @apply text-white font-semibold text-base;
+  @apply text-white font-semibold text-base bg-primary-500 hover:bg-gradient-to-r from-primary-500 to-primary-700;
 }
 
 .styled-form {
@@ -101,7 +101,17 @@
   width: 100%;
 }
 
+.map-route > div {
+  width: 100%;
+  aspect-ratio: 3/1;
+}
+
 .images-view {
   @apply max-w-full bg-background border-0;
   border-radius: 0% !important;
+}
+
+.asset-owner {
+  height: calc(100vh - 80px);
+  top: calc(80px + 1.5rem);
 }

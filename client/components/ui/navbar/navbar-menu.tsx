@@ -7,7 +7,7 @@ import { Sheet, SheetContent, SheetTrigger } from '../sheet';
 const NavbarMenu = () => {
     return (
         <Sheet>
-            <SheetTrigger className="md:hidden p-1.5 flex items-center justify-center">
+            <SheetTrigger className="lg:hidden p-1.5 flex items-center justify-center">
                 <Menu size={26} />
             </SheetTrigger>
             <SheetContent side="left" className="p-0">

@@ -111,7 +111,7 @@ const PasswordForm = () => {
                 />
                 {
                     isEditting ? <div className="flex gap-x-2">{
-                        !isSubmitting ? <Button className="styled-button bg-primary-500 hover:bg-gradient-to-r from-primary-500 to-primary-700" type="submit">Cập nhật</Button> :
+                        !isSubmitting ? <Button className="styled-button" type="submit">Cập nhật</Button> :
                             <Button className="styled-button" disabled>
                                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                                 Đang cập nhật
@@ -121,7 +121,7 @@ const PasswordForm = () => {
                     </div> : <>
                         <div className="flex flex-col gap-y-5 -translate-y-5">
                             <p className="text-gray-700 dark:text-gray-400">Lần cuối mật khẩu được thay đổi là 10 phút trước</p>
-                            <Button onClick={() => setIsEditting(true)} type="button" className="styled-button w-fit bg-primary-500 hover:bg-gradient-to-r from-primary-500 to-primary-700">
+                            <Button onClick={() => setIsEditting(true)} type="button" className="styled-button w-fit">
                                 Đổi mật khẩu mới
                             </Button>
                         </div>

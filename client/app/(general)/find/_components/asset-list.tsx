@@ -21,7 +21,8 @@ const AssetList = () => {
             user: {
                 name: "Võ Phú Phát",
                 username: "phatvo",
-                avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg"
+                avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg",
+                phoneNumber: "09012345152"
             },
             imageList: [{
                 url: "https://i.pinimg.com/564x/2c/21/21/2c2121126c2da654a4a174398bff6763.jpg"
@@ -43,7 +44,8 @@ const AssetList = () => {
             user: {
                 name: "Võ Phú Phát",
                 username: "phatvo",
-                avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg"
+                avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg",
+                phoneNumber: "09012345152"
             },
             imageList: [{
                 url: "https://i.pinimg.com/564x/2c/21/21/2c2121126c2da654a4a174398bff6763.jpg"
@@ -65,7 +67,8 @@ const AssetList = () => {
             user: {
                 name: "Võ Phú Phát",
                 username: "phatvo",
-                avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg"
+                avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg",
+                phoneNumber: "09012345152"
             },
             imageList: [{
                 url: "https://i.pinimg.com/564x/2c/21/21/2c2121126c2da654a4a174398bff6763.jpg"
@@ -87,7 +90,8 @@ const AssetList = () => {
             user: {
                 name: "Võ Phú Phát",
                 username: "phatvo",
-                avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg"
+                avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg",
+                phoneNumber: "09012345152"
             },
             imageList: [{
                 url: "https://i.pinimg.com/564x/2c/21/21/2c2121126c2da654a4a174398bff6763.jpg"
@@ -109,7 +113,8 @@ const AssetList = () => {
             user: {
                 name: "Võ Phú Phát",
                 username: "phatvo",
-                avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg"
+                avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg",
+                phoneNumber: "09012345152"
             },
             imageList: [{
                 url: "https://i.pinimg.com/564x/2c/21/21/2c2121126c2da654a4a174398bff6763.jpg"
@@ -131,7 +136,8 @@ const AssetList = () => {
             user: {
                 name: "Võ Phú Phát",
                 username: "phatvo",
-                avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg"
+                avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg",
+                phoneNumber: "09012345152"
             },
             imageList: [{
                 url: "https://i.pinimg.com/564x/2c/21/21/2c2121126c2da654a4a174398bff6763.jpg"
@@ -153,7 +159,8 @@ const AssetList = () => {
             user: {
                 name: "Võ Phú Phát",
                 username: "phatvo",
-                avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg"
+                avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg",
+                phoneNumber: "09012345152"
             },
             imageList: [{
                 url: "https://i.pinimg.com/564x/2c/21/21/2c2121126c2da654a4a174398bff6763.jpg"
@@ -175,7 +182,8 @@ const AssetList = () => {
             user: {
                 name: "Võ Phú Phát",
                 username: "phatvo",
-                avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg"
+                avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg",
+                phoneNumber: "09012345152"
             },
             imageList: [{
                 url: "https://i.pinimg.com/564x/2c/21/21/2c2121126c2da654a4a174398bff6763.jpg"
@@ -193,7 +201,7 @@ const AssetList = () => {
 
     return (
         <>
-            <div className={cn("flex flex-col gap-4 ")}>
+            <div className={cn("flex flex-col gap-4 w-full ")}>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                     <>
                         {assets.map((asset, index) => {
@@ -226,7 +234,7 @@ const AssetList = () => {
                             </PaginationItem>
                         </PaginationContent>
                     </Pagination>
-                    <div className="flex items-center gap-x-2 flex-shrink-0">
+                    <div className="flex items-center gap-x-2 flex-shrink-0 text-sm">
                         <span>Hiện</span>
                         <Select>
                             <SelectTrigger className="w-fit">

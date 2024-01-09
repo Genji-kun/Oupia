@@ -78,7 +78,7 @@ const SignInForm = () => {
                         <Loader2 size="24" className="mr-2 h-4 w-4 animate-spin" />
                     </Button>
                 </> : <>
-                    <Button type="submit" className=" mt-6 w-full styled-button border-gray-200 border flex gap-2 bg-primary-500 hover:bg-gradient-to-r from-primary-500 to-primary-700">
+                    <Button type="submit" className=" mt-6 w-full styled-button border-gray-200 border flex gap-2 ">
                         <span className="text-base">Đăng nhập</span>
                         <LogIn size="24" />
                     </Button>

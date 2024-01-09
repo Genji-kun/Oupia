@@ -15,12 +15,13 @@ const Navbar = () => {
         name: "Võ Phú Phát",
         avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1696484302/z8ch1cp7vfkdrcxgfbai.jpg",
         username: "phatvo",
+        phoneNumber: "0987654321"
     };
 
     return (
         <div className="navbar">
             <div className="flex h-full items-center justify-between container ">
-                <div className="hidden md:block">
+                <div className="hidden lg:block">
                     <NavbarLogo />
                 </div>
                 <NavbarMenu />
@@ -28,7 +29,7 @@ const Navbar = () => {
                 {user ?
                     <NavbarUser user={user} /> :
                     <Link href="/sign-in">
-                        <Button className="styled-button bg-primary-500 hover:bg-gradient-to-r from-primary-500 to-primary-700">Đăng nhập</Button>
+                        <Button className="styled-button">Đăng nhập</Button>
                     </Link>
                 }
             </div>
