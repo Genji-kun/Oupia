@@ -10,7 +10,8 @@ export interface Asset {
     isDeleted?: boolean,
     user: User,
     assetType: AssetType,
-    imageList: Image[]
+    imageList: Image[],
+    price?: number
 }
 
 export interface AssetType {

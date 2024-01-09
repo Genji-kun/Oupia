@@ -43,8 +43,6 @@ const FilterBar = () => {
                                         <p>Tìm trên bản đồ</p>
                                     </TooltipContent>
                                 </Tooltip>
-                            </TooltipProvider>
-                            <TooltipProvider>
                                 <Tooltip >
                                     <TooltipTrigger asChild>
                                         <Button onClick={() => { setOpenSearch(!openSearch) }} variant={"ghost"} className="ml-auto px-2 text-gray-600 dark:text-gray-400 rounded-full">

@@ -100,3 +100,8 @@
 .map-container > div {
   width: 100%;
 }
+
+.images-view {
+  @apply max-w-full bg-background border-0;
+  border-radius: 0% !important;
+}

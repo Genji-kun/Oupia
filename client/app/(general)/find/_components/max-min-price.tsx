@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Slider } from '@/components/ui/slider';
 import { changeFilter } from '@/redux/filter/motelFilterSlice';
 import { RootState } from '@/redux/store';
-import formatCurrency from '@/utils/priceConvert';
+import { formatCurrency } from '@/utils/priceConvert';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 

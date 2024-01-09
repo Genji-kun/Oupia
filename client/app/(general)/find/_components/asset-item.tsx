@@ -6,6 +6,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
+import { numberToCurrency } from '@/utils/priceConvert';
 
 const AssetItem = ({ asset }: { asset: Asset }) => {
     const [api, setApi] = React.useState<any>()
@@ -31,7 +32,9 @@ const AssetItem = ({ asset }: { asset: Asset }) => {
                 <CarouselContent>
                     {asset.imageList.map((image, index) => (
                         <CarouselItem key={index}>
-                            <Image src={image.url} width={320} height={320} alt='AssetImage' className="w-full rounded aspect-16/15" />
+                            <Link href={`/find/${asset.slug}`} >
+                                <Image src={image.url} width={320} height={320} alt='AssetImage' className="w-full rounded aspect-16/15" />
+                            </Link>
                         </CarouselItem>
                     ))}
                 </CarouselContent>
@@ -43,10 +46,11 @@ const AssetItem = ({ asset }: { asset: Asset }) => {
                     ))}
                 </div>
             </Carousel>
-            <div>
+            <Link href={`/find/${asset.slug}`}>
                 <h2 className="text-sm text-gray-600 dark:text-gray-400 uppercase truncate">{asset.location}</h2>
-                <h1 className="text-lg font-normal">{asset.name}</h1>
-            </div>
+                <h1 className="text-lg font-bold font-montserrat">{asset.name}</h1>
+                <h3 className="text-sm text-primary-500 font-semibold">{asset.price && numberToCurrency(asset.price)}</h3>
+            </Link>
         </div>
 
     );

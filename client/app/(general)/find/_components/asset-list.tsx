@@ -32,7 +32,8 @@ const AssetList = () => {
             }, {
                 url: "https://i.pinimg.com/564x/d0/e9/a5/d0e9a59259d43a23c9d7770d04efc945.jpg"
             }],
-            assetType: { name: "Nhà trọ" }
+            assetType: { name: "Nhà trọ" },
+            price: 3400000
         },
         {
             name: "Nhà trọ Trường Chinh",
@@ -53,7 +54,8 @@ const AssetList = () => {
             }, {
                 url: "https://i.pinimg.com/564x/d0/e9/a5/d0e9a59259d43a23c9d7770d04efc945.jpg"
             }],
-            assetType: { name: "Nhà trọ" }
+            assetType: { name: "Nhà trọ" },
+            price: 2300000
         },
         {
             name: "Nhà trọ Trường Chinh",
@@ -74,7 +76,8 @@ const AssetList = () => {
             }, {
                 url: "https://i.pinimg.com/564x/d0/e9/a5/d0e9a59259d43a23c9d7770d04efc945.jpg"
             }],
-            assetType: { name: "Nhà trọ" }
+            assetType: { name: "Nhà trọ" },
+            price: 2300000
         },
         {
             name: "Nhà trọ Trường Chinh",
@@ -95,7 +98,8 @@ const AssetList = () => {
             }, {
                 url: "https://i.pinimg.com/564x/d0/e9/a5/d0e9a59259d43a23c9d7770d04efc945.jpg"
             }],
-            assetType: { name: "Nhà trọ" }
+            assetType: { name: "Nhà trọ" },
+            price: 3000000
         },
         {
             name: "Nhà trọ Trường Chinh",
@@ -116,7 +120,8 @@ const AssetList = () => {
             }, {
                 url: "https://i.pinimg.com/564x/d0/e9/a5/d0e9a59259d43a23c9d7770d04efc945.jpg"
             }],
-            assetType: { name: "Nhà trọ" }
+            assetType: { name: "Nhà trọ" },
+            price: 1500000
         },
         {
             name: "Nhà trọ Trường Chinh",
@@ -137,7 +142,8 @@ const AssetList = () => {
             }, {
                 url: "https://i.pinimg.com/564x/d0/e9/a5/d0e9a59259d43a23c9d7770d04efc945.jpg"
             }],
-            assetType: { name: "Nhà trọ" }
+            assetType: { name: "Nhà trọ" },
+            price: 13500000
         },
         {
             name: "Nhà trọ Trường Chinh",
@@ -158,7 +164,8 @@ const AssetList = () => {
             }, {
                 url: "https://i.pinimg.com/564x/d0/e9/a5/d0e9a59259d43a23c9d7770d04efc945.jpg"
             }],
-            assetType: { name: "Nhà trọ" }
+            assetType: { name: "Nhà trọ" },
+            price: 2300000
         },
         {
             name: "Nhà trọ Trường Chinh",
@@ -179,7 +186,8 @@ const AssetList = () => {
             }, {
                 url: "https://i.pinimg.com/564x/d0/e9/a5/d0e9a59259d43a23c9d7770d04efc945.jpg"
             }],
-            assetType: { name: "Nhà trọ" }
+            assetType: { name: "Nhà trọ" },
+            price: 1700000
         },
     ]);
 
