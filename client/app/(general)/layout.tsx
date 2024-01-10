@@ -1,3 +1,4 @@
+import Footer from "@/components/ui/footer";
 import Navbar from "@/components/ui/navbar/navbar";
 
 export default function DashboardLayout(
@@ -10,6 +11,7 @@ export default function DashboardLayout(
             <main className="mt-[80px]">
                 {children}
             </main>
+            <Footer />
         </>
     )
 }

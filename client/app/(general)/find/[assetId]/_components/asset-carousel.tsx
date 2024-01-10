@@ -4,12 +4,12 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 import Image from 'next/image'
-import { Thumb } from './embla-carousel-thumbs-button'
 import { Image as image } from '@/interfaces/Image'
-import "./embla.css";
-import { Button } from '../button'
-import { cn } from '@/lib/utils'
+import "./style.css";
 import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Thumb } from './asset-carousel-thumbs-button'
+import { useAssetImageContext } from '@/contexts/view-asset-image'
 
 type PropType = {
     slides: number[]
@@ -17,9 +17,12 @@ type PropType = {
     images: image[]
 }
 
-const EmblaCarousel: React.FC<PropType> = (props) => {
+const AssetCarousel: React.FC<PropType> = (props) => {
+
+    const { imageIndex } = useAssetImageContext();
+
     const { options, images } = props
-    const [selectedIndex, setSelectedIndex] = useState(0)
+    const [selectedIndex, setSelectedIndex] = useState(0);
     const [emblaMainRef, emblaMainApi] = useEmblaCarousel(options)
     const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
         containScroll: 'keepSnaps',
@@ -39,6 +42,14 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         setSelectedIndex(emblaMainApi.selectedScrollSnap())
         emblaThumbsApi.scrollTo(emblaMainApi.selectedScrollSnap())
     }, [emblaMainApi, emblaThumbsApi, setSelectedIndex])
+
+
+    useEffect(() => {
+        setSelectedIndex(imageIndex);
+        if (emblaMainApi) {
+            emblaMainApi.scrollTo(imageIndex);
+        }
+    }, [imageIndex, emblaMainApi])
 
     useEffect(() => {
         if (!emblaMainApi) return
@@ -108,4 +119,4 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     )
 }
 
-export default EmblaCarousel
+export default AssetCarousel
