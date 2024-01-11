@@ -39,7 +39,7 @@ const NavbarUser = ({ user }: { user: User }) => {
                     </div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="mt-1 p-2 w-80">
-                    <DropdownMenuGroup>
+                    <DropdownMenuGroup className="mb-2">
                         <DropdownMenuItem>
                             <Link href={`/profile/${user.username}`} className="w-full flex gap-x-4 items-center ">
                                 <Image

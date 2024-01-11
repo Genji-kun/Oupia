@@ -1,6 +1,6 @@
 import { ReactNode, useState } from 'react';
 
-export type Tab = { label: ReactNode; id: string };
+export type Tab = { label: ReactNode; id: string, link: string };
 
 export function useTabs({
     tabs,

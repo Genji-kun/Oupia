@@ -8,7 +8,7 @@ export default function DashboardLayout(
     return (
         <>
             <Navbar />
-            <main className="mt-[80px]">
+            <main className="mt-[80px] min-h-screen">
                 {children}
             </main>
             <Footer />

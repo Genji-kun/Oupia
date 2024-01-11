@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { Tab } from '@/hooks/use-tabs';
 import { AnimatePresence, motion } from 'framer-motion';
+import Link from 'next/link';
 
 const transition = {
     type: 'tween',
@@ -41,26 +42,27 @@ const Tabs = ({
         <nav
             ref={navRef}
             className="flex flex-shrink-0 justify-center items-center relative z-0 py-2"
-            onPointerLeave={(e) => setHoveredTabIndex(null)}
+            onPointerLeave={() => setHoveredTabIndex(null)}
         >
             {tabs.map((item, i) => {
                 return (
-                    <motion.button
-                        key={i}
-                        className={' relative rounded-md flex items-center h-10 px-4 z-20 bg-transparent  cursor-pointer select-none transition-colors mb-0.5'}
-                        ref={(el) => (buttonRefs[i] = el)}
-                        onPointerEnter={() => {
-                            setHoveredTabIndex(i);
-                        }}
-                        onFocus={() => {
-                            setHoveredTabIndex(i);
-                        }}
-                        onClick={() => {
-                            setSelectedTab([i, i > selectedTabIndex ? 1 : -1]);
-                        }}
-                    >
-                        {item.label}
-                    </motion.button>
+                    <Link key={i} href={`${item.link}`}>
+                        <motion.button
+                            className={' relative rounded-md flex items-center h-10 px-4 z-20 bg-transparent cursor-pointer select-none transition-colors mb-0.5'}
+                            ref={(el) => (buttonRefs[i] = el)}
+                            onPointerEnter={() => {
+                                setHoveredTabIndex(i);
+                            }}
+                            onFocus={() => {
+                                setHoveredTabIndex(i);
+                            }}
+                            onClick={() => {
+                                setSelectedTab([i, i > selectedTabIndex ? 1 : -1]);
+                            }}
+                        >
+                            {item.label}
+                        </motion.button>
+                    </Link>
                 );
             })}
 

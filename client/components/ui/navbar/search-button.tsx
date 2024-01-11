@@ -12,14 +12,15 @@ const SearchButton = () => {
                         <Search size={20}></Search>
                     </Button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-1/2 p-0">
+                <DialogContent className="sm:max-w-[40%] p-0 top-1/4 h-fit">
                     <DialogHeader className="border-b border-border">
-                        <div className="w-full grid grid-cols-10">
-                            <div className="col-span-1 flex items-center justify-center">
+                        <div className="w-full grid grid-cols-12">
+                            <div className="absolute top-4 left-4 flex items-center justify-center">
                                 <Search className="h-4 w-4" />
                             </div>
+                            <div />
                             <input
-                                className="enabled:focus:ring-0 enabled:focus:outline-none border-0 col-span-8 px-0 py-3 bg-background"
+                                className="enabled:focus:ring-0 enabled:focus:outline-none border-0 col-span-10 px-0 py-3 bg-background"
                                 placeholder='Tìm kiếm địa điểm, dự án cụ thể bạn muốn thuê...'
                             />
                         </div>

@@ -28,7 +28,7 @@ export const settingsRoutes = [
         name: "Mật khẩu",
         href: "/settings/password"
     }, {
-        name: "Màn hình",
+        name: "Màn hình và ngôn ngữ",
         href: "/settings/appearance"
     }
 ];

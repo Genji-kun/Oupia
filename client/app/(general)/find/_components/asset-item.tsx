@@ -27,13 +27,13 @@ const AssetItem = ({ asset }: { asset: Asset }) => {
     }, [api])
 
     return (
-        <div onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)} className="w-full rounded border-border flex flex-col gap-2 aspect-square">
+        <div onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)} className="w-full rounded-lg border-border flex flex-col gap-2 aspect-square">
             <Carousel setApi={setApi} className="w-full relative">
                 <CarouselContent>
                     {asset.imageList.map((image, index) => (
                         <CarouselItem key={index}>
                             <Link href={`/find/${asset.slug}`} >
-                                <Image src={image.url} width={320} height={320} alt='AssetImage' className="w-full rounded aspect-16/15" />
+                                <Image src={image.url} width={320} height={320} alt='AssetImage' className="w-full rounded-lg aspect-16/15" />
                             </Link>
                         </CarouselItem>
                     ))}

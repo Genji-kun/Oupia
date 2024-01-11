@@ -15,7 +15,7 @@ const AssetOwner = ({ user }: { user: User }) => {
                         <Image src={user.avatar} width={160} height={160} alt="User Avatar" className="rounded-full w-16 h-16 object-cover" />
                     </Link>
                     <div className="flex gap-2">
-                        <Button variant={"ghost"} className="text-base flex gap-x-2">
+                        <Button variant={"ghost"} className="text-base bg-border/80 hover:bg-border flex gap-x-2">
                             <UserRoundCheck size={16} />
                             <span>Theo dõi</span>
                         </Button>

@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
-import { setCookie } from 'cookies-next';
+import { useTranslation } from 'next-i18next';
 
 
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
@@ -15,11 +15,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 
 const appearanceFormSchema = z.object({
     theme: z.enum(["light", "dark"], {
-        required_error: "Hãy chọn một chủ đề.",
+        required_error: "Hãy chọn một chế độ.",
     }),
-    font: z.enum(["inter", "openSans", "beauSans"], {
-        invalid_type_error: "Chọn một phông chữ",
-        required_error: "Hãy chọn một phông chữ.",
+    language: z.enum(["vi", "en"], {
+        invalid_type_error: "Chọn một ngôn ngữ",
+        required_error: "Hãy chọn một ngôn ngữ.",
     }),
 })
 
@@ -29,11 +29,11 @@ type AppearanceFormValues = z.infer<typeof appearanceFormSchema>
 export function AppearanceForm() {
 
     const { theme, setTheme } = useTheme();
-
+    const { i18n } = useTranslation();
 
     const defaultValues: Partial<AppearanceFormValues> = {
         theme: theme === "dark" ? "dark" : "light",
-        font: "beauSans"
+        language: "vi"
     }
 
     const form = useForm<AppearanceFormValues>({
@@ -43,7 +43,7 @@ export function AppearanceForm() {
 
     function onSubmit(data: AppearanceFormValues) {
         setTheme(data.theme);
-        setCookie('font', data.font, { path: '/' });
+        i18n.changeLanguage(data.language);
         toast.success(`Đã thay đổi thành chủ đề thành "${data.theme === "dark" ? "Tối" : "Sáng"}".`)
     }
 
@@ -52,10 +52,10 @@ export function AppearanceForm() {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <FormField
                     control={form.control}
-                    name="font"
+                    name="language"
                     render={({ field }) => (
                         <FormItem >
-                            <FormLabel className="text-base">Phông chữ</FormLabel>
+                            <FormLabel className="text-base">Ngôn ngữ</FormLabel>
                             <Select
                                 onValueChange={field.onChange}
                                 defaultValue={field.value}>
@@ -65,13 +65,12 @@ export function AppearanceForm() {
                                     </SelectTrigger>
                                 </FormControl>
                                 <SelectContent>
-                                    <SelectItem value="beauSans">Mặc định</SelectItem>
-                                    <SelectItem value="inter">Inter</SelectItem>
-                                    <SelectItem value="openSans">Open Sans</SelectItem>
+                                    <SelectItem value="vi">Tiếng Việt</SelectItem>
+                                    <SelectItem value="en">Tiếng Anh</SelectItem>
                                 </SelectContent>
                             </Select>
                             <FormDescription>
-                                Chọn phông chữ hiển thị trong thông tin bài viết, nội dung đoạn chat, v.v...
+                                Chọn ngôn ngữ để hiển thị khi sử dụng trừ thông tin bài viết, nội dung đoạn chat, v.v...
                             </FormDescription>
                             <FormMessage />
                         </FormItem>
@@ -82,9 +81,9 @@ export function AppearanceForm() {
                     name="theme"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel className="text-base">Chủ đề</FormLabel>
+                            <FormLabel className="text-base">Màn hình</FormLabel>
                             <FormDescription>
-                                Chọn chủ đề khi thao tác trên ứng dụng.
+                                Chọn chế độ màn hình khi thao tác trên ứng dụng.
                             </FormDescription>
                             <FormMessage />
                             <RadioGroup

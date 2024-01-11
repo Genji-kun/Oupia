@@ -55,7 +55,7 @@ const PostList = () => {
     ]);
 
     return (
-        <div className="flex flex-col gap-y-4 xl:gap-y-6 py-4 lg:py-6">
+        <div className="flex flex-col gap-y-4 xl:gap-y-6 ">
             {posts.map((post, index) => {
                 return <PostItem key={index} post={post} />
             })}

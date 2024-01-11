@@ -11,7 +11,6 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
         <GoogleProvider>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
                 <Provider store={store}>
-
                     <main>
                         {children}
                     </main>

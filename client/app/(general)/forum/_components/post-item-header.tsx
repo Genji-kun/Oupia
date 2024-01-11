@@ -55,7 +55,7 @@ const PostItemHeader = ({ post }: { post: Post }) => {
                                         <MessagesSquare size={16} />
                                         <span>Nhắn tin</span>
                                     </Button>
-                                    <Button variant={"ghost"} className="text-base flex gap-x-2">
+                                    <Button variant={"ghost"} className="text-base bg-border/80 hover:bg-border flex gap-x-2">
                                         <UserRoundCheck size={16} />
                                         <span>Theo dõi</span>
                                     </Button>
@@ -107,7 +107,7 @@ const PostItemHeader = ({ post }: { post: Post }) => {
                                         <MessagesSquare size={16} />
                                         <span>Nhắn tin</span>
                                     </Button>
-                                    <Button variant={"ghost"} className="text-base flex gap-x-2">
+                                    <Button variant={"ghost"} className="text-base bg-border/80 hover:bg-border flex gap-x-2">
                                         <UserRoundCheck size={16} />
                                         <span>Theo dõi</span>
                                     </Button>
