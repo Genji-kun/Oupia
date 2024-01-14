@@ -53,7 +53,7 @@ const SignInForm = () => {
                         <FormItem >
                             <FormLabel className="text-base font-semibold text-foreground">Tên nguời dùng</FormLabel>
                             <FormControl>
-                                <Input {...field} disabled={isSubmiting} />
+                                <Input {...field} disabled={isSubmiting} className="text-base py-6" />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -66,7 +66,7 @@ const SignInForm = () => {
                         <FormItem >
                             <FormLabel className="text-base font-semibold text-foreground">Mật khẩu</FormLabel>
                             <FormControl>
-                                <Input type="password" {...field} disabled={isSubmiting} />
+                                <Input type="password" {...field} disabled={isSubmiting} className="text-base py-6" />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -74,12 +74,12 @@ const SignInForm = () => {
                 />
                 <ForgetPasswordButton />
                 {isSubmiting ? <>
-                    <Button disabled type="submit" className=" mt-6 w-full styled-button border-gray-200 border flex gap-2 ">
+                    <Button disabled type="submit" className=" mt-6 w-full styled-button border flex gap-2 ">
                         <Loader2 size="24" className="mr-2 h-4 w-4 animate-spin" />
                     </Button>
                 </> : <>
-                    <Button type="submit" className=" mt-6 w-full styled-button border-gray-200 border flex gap-2 ">
-                        <span className="text-base">Đăng nhập</span>
+                    <Button type="submit" className=" mt-6 w-full xl:w-1/2 mx-auto styled-button p-6 flex gap-2 ">
+                        <span className="text-normal xl:text-base">Đăng nhập</span>
                         <LogIn size="24" />
                     </Button>
                 </>}

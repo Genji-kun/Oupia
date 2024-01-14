@@ -10,7 +10,7 @@ const Tabs = () => {
 
     return (
         <>
-            <div className="relative w-full h-full">
+            <div className="w-full h-full flex justify-center items-center relative ">
                 <AnimatePresence>
                     {(() => {
                         switch (tab) {

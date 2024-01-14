@@ -64,7 +64,7 @@ const UserTab = () => {
     const framer = useTabs(hookProps);
 
     return (
-        <div className="w-full flex flex-col">
+        <div className="w-full flex flex-col shadow">
             <div className="border-b w-full items-center flex border-border">
                 <Framer.Tabs {...framer.tabProps} />
             </div>

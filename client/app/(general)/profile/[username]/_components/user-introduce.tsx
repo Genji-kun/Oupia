@@ -5,7 +5,7 @@ import React from 'react';
 
 const UserIntroduce = () => {
     return (
-        <Card>
+        <Card className="shadow-lg">
             <CardHeader>
                 <h2 className="font-semibold text-xl">Giới thiệu</h2>
             </CardHeader>

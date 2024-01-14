@@ -11,7 +11,6 @@ export default function DashboardLayout(
             <main className="mt-[80px] min-h-screen">
                 {children}
             </main>
-            <Footer />
         </>
     )
 }

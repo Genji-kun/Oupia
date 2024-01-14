@@ -27,7 +27,7 @@ const SuggestUserList = () => {
 
     ]);
     return (
-        <Card>
+        <Card className="shadow-lg">
             <CardHeader>
                 <h2 className="font-semibold text-xl">Danh sách người dùng liên quan</h2>
             </CardHeader>
