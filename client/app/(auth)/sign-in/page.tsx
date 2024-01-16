@@ -6,15 +6,15 @@ import TabContainer from './_components/tab-container';
 const SignInPage = () => {
 
     return (
-        <div className="h-screen flex items-center lg:container lg:py-24">
-            <div className="w-full h-full grid grid-cols-1 lg:grid-cols-10 justify-center rounded-xl overflow-hidden shadow-lg border border-border">
-                <div className="h-full bg-primary-100 relative hidden lg:block lg:col-span-6">
+        <div className="h-screen flex items-center lg:container xl:py-24">
+            <div className="w-full h-full grid grid-cols-1 xl:grid-cols-10 justify-center rounded-xl overflow-hidden shadow-lg border border-border">
+                <div className="h-full bg-primary-100 relative hidden xl:block lg:col-span-6">
                     <LoginCarousel />
                     <div className="absolute left-5 bottom-5">
                         <NavbarLogo />
                     </div>
                 </div>
-                <div className="h-full w-full p-4 xl:p-20 xl:py-16 lg:col-span-4">
+                <div className="h-full w-full p-4 md:p-10 xl:p-20 xl:py-16 xl:col-span-4">
                     <TabContainer />
                 </div>
             </div>

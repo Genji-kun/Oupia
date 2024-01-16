@@ -65,13 +65,14 @@ const AssetCarousel: React.FC<PropType> = (props) => {
             </div>
             <div className="row-span-3 h-full relative">
                 <Button variant={"ghost"}
-                    className="hidden lg:block absolute left-8 top-1/2 -translate-y-1/2 rounded-full border-border border px-3 z-20"
+                    className="hidden lg:flex justify-center items-center absolute left-8 top-1/2 -translate-y-1/2 rounded-full border-border border w-10 h-10 p-0 z-20"
                     disabled={selectedIndex === 0}
                     onClick={() => {
                         if (emblaMainApi) {
                             emblaMainApi.scrollTo(selectedIndex - 1);
                         }
-                    }}>                    <ArrowLeft className="h-4 w-4" />
+                    }}>
+                    <ArrowLeft className="h-4 w-4" />
                     <span className="sr-only">Previous slide</span>
                 </Button>
                 <div className="embla__viewport h-full" ref={emblaMainRef}>
@@ -90,7 +91,7 @@ const AssetCarousel: React.FC<PropType> = (props) => {
                     </div>
                 </div>
                 <Button variant={"ghost"}
-                    className="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2 rounded-full border-border border px-3 z-20"
+                    className="lg:flex justify-center items-center absolute right-8 top-1/2 -translate-y-1/2 rounded-full border-border border w-10 h-10 p-0 z-20"
                     disabled={selectedIndex + 1 === images.length}
                     onClick={() => {
                         if (emblaMainApi) {

@@ -9,7 +9,7 @@ const SignInTab = () => {
     return (
         <>
             <div>
-                <h1 className="font-montserrat font-bold text-3xl lg:text-4xl mb-2  text-center lg:text-left">Đăng nhập</h1>
+                <h1 className="font-montserrat font-bold text-4xl mb-2 text-center lg:text-left">Đăng nhập</h1>
                 <p className="text-gray-600 dark:text-gray-700 text-center  lg:text-left ">Truy cập để đăng tin tìm mái nhà ưng ý dành cho bạn</p>
             </div>
             <Separator className="lg:w-1/2" />
