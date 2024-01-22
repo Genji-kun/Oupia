@@ -8,8 +8,8 @@ import React, { useState } from 'react'
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import Loader from "@/components/ui/loader";
 
 const formSchema = z.object({
     email: z.string().email({ message: "Chưa đúng định dạng tài khoản email" }),
@@ -76,9 +76,9 @@ const ContactForm = () => {
                 <div className="pt-2">
                     <>
                         {isSubmitting ?
-                            <Button className="styled-button" disabled>
-                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                Đang xử lý
+                            <Button className="styled-button gap-3" disabled>
+                                <Loader size={4} />
+                                <span>Đang xử lý</span>
                             </Button> :
                             <Button className="styled-button" type="submit">Gửi thông tin</Button>
                         }

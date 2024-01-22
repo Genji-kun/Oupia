@@ -5,14 +5,17 @@ import { useForm } from 'react-hook-form';
 import * as z from "zod"
 
 import { Button } from '@/components/ui/button';
-import { ChevronLeft, Loader2 } from 'lucide-react';
+import { ChevronLeft } from 'lucide-react';
 import React, { useState } from 'react';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useAuthTabContext } from "@/contexts/auth-tab-context";
+import Loader from "@/components/ui/loader";
 
 const formSchema = z.object({
-    email: z.string().email({
+    email: z.string().min(1, {
+        message: "Vui lòng điền email người dùng"
+    }).email({
         message: "Không đúng định dạng email",
     }),
 })
@@ -49,9 +52,9 @@ const ForgetPasswordForm = () => {
                     )}
                 />
                 {isSubmiting ? <>
-                    <Button disabled type="submit" className=" ml-auto w-fit styled-button border-gray-200 border flex gap-2 ">
-                        <Loader2 size="24" className="h-4 w-4 animate-spin" />
+                    <Button disabled type="submit" className=" ml-auto w-fit styled-button border-gray-200 border flex gap-3 ">
                         <span className="text-base">Đang xử lý</span>
+                        <Loader size={4} />
                     </Button>
                 </> : <>
                     <div className="w-fit flex gap-x-2 items-center ml-auto">

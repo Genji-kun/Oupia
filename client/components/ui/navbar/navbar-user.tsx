@@ -76,7 +76,7 @@ const NavbarUser = ({ user }: { user: User }) => {
                                 <span>Chế độ tối</span>
                                 <div className="ml-auto">
                                     <Switch
-                                        checked={theme === "dark"}
+                                        checked={theme !== "system" && theme === "dark"}
                                         onClick={(e) => {
                                             e.stopPropagation(); changeTheme();
                                         }}

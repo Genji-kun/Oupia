@@ -19,7 +19,7 @@ const MapContainer = () => {
 
 
     return (
-        <div className="map-container w-full">
+        <div className="map-container w-full overflow-hidden">
             <ReactMapGL
                 {...viewport}
                 goongApiAccessToken={process.env.NEXT_PUBLIC_GOONG_MAPS_MAPTILES_KEY}

@@ -115,3 +115,8 @@
   height: calc(100vh - 80px);
   top: calc(80px + 1.5rem);
 }
+
+.video-background {
+  width: 100%;
+  height: clac(100vh - 80px);
+}

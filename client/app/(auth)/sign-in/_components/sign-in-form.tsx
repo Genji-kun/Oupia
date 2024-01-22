@@ -14,9 +14,10 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { Loader2, LogIn } from "lucide-react"
+import { LogIn } from "lucide-react"
 import { useState } from "react"
 import ForgetPasswordButton from "./forget-password-button"
+import Loader from "@/components/ui/loader"
 
 const formSchema = z.object({
     username: z.string().min(2, {
@@ -74,8 +75,9 @@ const SignInForm = () => {
                 />
                 <ForgetPasswordButton />
                 {isSubmiting ? <>
-                    <Button disabled type="submit" className=" mt-6 w-full styled-button border flex gap-2 ">
-                        <Loader2 size="24" className="mr-2 h-4 w-4 animate-spin" />
+                    <Button disabled type="submit" className=" mt-6 w-full xl:w-1/2 mx-auto styled-button border p-6 flex gap-3">
+                        <span className="text-base">Đang xử lý</span>
+                        <Loader size={5} />
                     </Button>
                 </> : <>
                     <Button type="submit" className=" mt-6 w-full xl:w-1/2 mx-auto styled-button p-6 flex gap-2 ">

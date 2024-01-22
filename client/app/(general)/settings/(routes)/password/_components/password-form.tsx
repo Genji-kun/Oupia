@@ -4,10 +4,10 @@ import React, { useState } from 'react'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { Loader2 } from 'lucide-react';
+import Loader from '@/components/ui/loader';
 
 const passwordSchema = z.string()
     .min(8, { message: "Mật khẩu phải có ít nhất 8 ký tự" })
@@ -112,9 +112,11 @@ const PasswordForm = () => {
                 {
                     isEditting ? <div className="flex gap-x-2">{
                         !isSubmitting ? <Button className="styled-button" type="submit">Cập nhật</Button> :
-                            <Button className="styled-button" disabled>
-                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                Đang cập nhật
+                            <Button className="styled-button gap-3" disabled>
+                                <span>
+                                    Đang cập nhật
+                                </span>
+                                <Loader size={4} />
                             </Button>
                     }
                         <Button onClick={() => setIsEditting(false)} variant="ghost" type="button">Hủy</Button>
