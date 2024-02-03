@@ -1,19 +1,18 @@
-import Footer from "@/components/ui/footer";
 import HomeTitle from "./_components/home-title";
 
 export default function Home() {
   return (<>
-    <main className="container min-h-screen scrollbar-none">
-      <div className="absolute top-0 left-0 flex items-center justify-center aspect-video w-full">
+    <main className="min-h-screen ">
+      <div className="relative flex items-center justify-center aspect-4/3 w-full">
         <div className="absolute bg-zinc-900/50 inset-0 w-full h-full z-5" />
-        <video playsInline autoPlay muted loop className="">
+        <video playsInline autoPlay muted loop className="h-full w-full">
           <source src="https://res.cloudinary.com/dzba4fewa/video/upload/v1705906668/background-video.mp4" type="video/mp4" />
         </video>
         <div className="w-full z-10 absolute inset-0 flex items-center justify-center">
           <HomeTitle />
         </div>
       </div>
-
+      <div className="bg-background w-full" />
     </main>
   </>
 

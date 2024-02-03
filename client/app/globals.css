@@ -81,6 +81,10 @@
   @apply font-beauSans;
 }
 
+::-webkit-scrollbar-thumb {
+  border-radius: 0.5rem !important;
+}
+
 .styled-button {
   @apply text-white font-semibold text-base bg-primary-500 hover:bg-gradient-to-r from-primary-500 to-primary-700;
 }
@@ -116,7 +120,7 @@
   top: calc(80px + 1.5rem);
 }
 
-.video-background {
+.page-content {
   width: 100%;
   height: clac(100vh - 80px);
 }

@@ -14,7 +14,7 @@ const PostItem = (
         <div className="border border-border shadow rounded-lg flex flex-col gap-y-2">
             <PostItemHeader post={post} />
             <div className="px-4">
-                {post.postContent} + 1
+                {post.postContent}
             </div>
             <PostStatus />
             <PostButtons />

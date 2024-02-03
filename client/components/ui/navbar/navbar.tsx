@@ -19,7 +19,7 @@ const Navbar = () => {
     };
 
     return (
-        <div className="navbar">
+        <nav className="navbar">
             <div className="flex h-full items-center justify-between container ">
                 <div className="hidden lg:block">
                     <NavbarLogo />
@@ -33,7 +33,7 @@ const Navbar = () => {
                     </Link>
                 }
             </div>
-        </div>
+        </nav>
     );
 };
 
