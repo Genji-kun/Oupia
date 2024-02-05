@@ -25,10 +25,10 @@ const Tabs = () => {
                                         <SignUpTab />
                                     </motion.div>
                                 );
-                            case "email-tab":
+                            case "email":
                                 return (
                                     <motion.div
-                                        key="email-tab"
+                                        key="email"
                                         initial={{ opacity: 0, x: 50 }}
                                         animate={{ x: 0, opacity: 1 }}
                                         exit={{ opacity: 0, x: 50 }}

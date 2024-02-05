@@ -1,6 +1,8 @@
 "use client"
 
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import { usePathname } from 'next/navigation';
+import path from 'path';
+import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 
 interface IAuthTabContext {
     tab: string;
@@ -10,7 +12,10 @@ interface IAuthTabContext {
 const AuthTabContext = createContext<IAuthTabContext | undefined>(undefined);
 
 export const AuthTabProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [tab, setTab] = useState<string>("sign-in");
+
+    const pathname = usePathname();
+
+    const [tab, setTab] = useState<string>(pathname === "/sign-in" ? "sign-in" : "sign-up");
 
     return (
         <AuthTabContext.Provider value={{ tab, setTab }}>

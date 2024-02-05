@@ -124,3 +124,7 @@
   width: 100%;
   height: clac(100vh - 80px);
 }
+
+.rdp-vhidden {
+  @apply hidden;
+}
