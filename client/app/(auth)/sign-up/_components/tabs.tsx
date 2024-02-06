@@ -2,14 +2,15 @@ import React from 'react';
 import { useAuthTabContext } from '@/contexts/auth-tab-context';
 import { AnimatePresence, motion } from 'framer-motion';
 import SignUpTab from './sign-up-tab';
-import EmailTab from './email-tab';
+import InfoTab from './info-tab';
+import UserTab from './user-tab';
 
 const Tabs = () => {
     const { tab } = useAuthTabContext();
 
     return (
         <>
-            <div className="w-full h-full flex justify-center items-center relative ">
+            <div className="w-full xl:w-[75%] mx-auto h-full flex justify-center items-center relative ">
                 <AnimatePresence>
                     {(() => {
                         switch (tab) {
@@ -25,16 +26,29 @@ const Tabs = () => {
                                         <SignUpTab />
                                     </motion.div>
                                 );
-                            case "email":
+                            case "info":
                                 return (
                                     <motion.div
-                                        key="email"
+                                        key="info"
                                         initial={{ opacity: 0, x: 50 }}
                                         animate={{ x: 0, opacity: 1 }}
                                         exit={{ opacity: 0, x: 50 }}
                                         transition={{ duration: 0.5, ease: "easeInOut" }}
-                                        className="flex flex-col justify-center gap-y-8 absolute w-full">
-                                        <EmailTab />
+                                        className="flex flex-col justify-center gap-y-5 absolute w-full">
+                                        <InfoTab />
+                                    </motion.div>
+                                );
+
+                            case "user":
+                                return (
+                                    <motion.div
+                                        key="user"
+                                        initial={{ opacity: 0, x: 50 }}
+                                        animate={{ x: 0, opacity: 1 }}
+                                        exit={{ opacity: 0, x: 50 }}
+                                        transition={{ duration: 0.5, ease: "easeInOut" }}
+                                        className="flex flex-col justify-center gap-y-5 absolute w-full">
+                                        <UserTab />
                                     </motion.div>
                                 );
                             default:

@@ -7,7 +7,7 @@ import React from 'react';
 const EmailSignUpButton = () => {
     const { setTab } = useAuthTabContext();
     return (
-        <Button onClick={() => setTab("email")} className="styled-button w-full mx-auto shadow border-border border flex gap-2 py-6">
+        <Button onClick={() => setTab("info")} className="styled-button w-full mx-auto shadow border-border border flex gap-2 py-6">
             <span className="text-base">Đăng ký thông thường</span>
         </Button>
     );

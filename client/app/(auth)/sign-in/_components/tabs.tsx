@@ -8,11 +8,10 @@ import ChangePasswordTab from './change-password-tab';
 const Tabs = () => {
     const { tab } = useAuthTabContext();
 
-    console.log(tab)
-
     return (
         <>
-            <div className="w-full h-full flex justify-center items-center relative ">
+
+            <div className="w-full xl:w-[75%] mx-auto h-full flex justify-center items-center relative ">
                 <AnimatePresence>
                     {(() => {
                         switch (tab) {

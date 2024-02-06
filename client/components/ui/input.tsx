@@ -1,13 +1,15 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 import { Eye, EyeOff } from "lucide-react"
+import { Button } from "./button"
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   togglePassword?: boolean
+  disableToggle?: boolean
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ togglePassword, className, type, ...props }, ref) => {
+  ({ disableToggle, togglePassword, className, type, ...props }, ref) => {
     const [showPassword, setShowPassword] = React.useState(false)
 
     return (
@@ -24,17 +26,19 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {(togglePassword) && (
           <div className="absolute top-1/2 -translate-y-1/2 right-4 ">
             {!showPassword ? (
-              <Eye
-                className="cursor-pointer"
-                size={20}
-                onClick={() => setShowPassword(true)}
-              />
+              <Button disabled={disableToggle} type="button" variant={"ghost"} className="hover:bg-background p-0 focus-visible:ring-0 " onClick={() => setShowPassword(true)}>
+                <Eye
+                  className="cursor-pointer"
+                  size={20}
+                />
+              </Button>
             ) : (
-              <EyeOff
-                className="cursor-pointer"
-                size={20}
-                onClick={() => setShowPassword(false)}
-              />
+              <Button disabled={disableToggle} type="button" variant={"ghost"} className="hover:bg-background p-0 focus-visible:ring-0" onClick={() => setShowPassword(false)}>
+                <EyeOff
+                  className="cursor-pointer"
+                  size={20}
+                />
+              </Button>
             )}
           </div>
         )}

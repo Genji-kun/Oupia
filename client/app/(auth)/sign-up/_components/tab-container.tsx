@@ -3,11 +3,14 @@
 import { AuthTabProvider } from '@/contexts/auth-tab-context';
 import React from 'react';
 import Tabs from './tabs';
+import { UserProvider } from '@/contexts/user-context';
 
 const TabContainer = () => {
     return (
         <AuthTabProvider>
-            <Tabs />
+            <UserProvider>
+                <Tabs />
+            </UserProvider>
         </AuthTabProvider>
     );
 };

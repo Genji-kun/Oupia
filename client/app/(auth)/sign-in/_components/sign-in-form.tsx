@@ -67,7 +67,7 @@ const SignInForm = () => {
                         <FormItem >
                             <FormLabel className="text-base font-semibold text-foreground">Mật khẩu</FormLabel>
                             <FormControl>
-                                <Input type="password" {...field} disabled={isSubmiting} className="text-base py-6 dark:bg-border/50" togglePassword={true} />
+                                <Input type="password" {...field} disabled={isSubmiting} className="text-base py-6 dark:bg-border/50" togglePassword={true} disableToggle={isSubmiting} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

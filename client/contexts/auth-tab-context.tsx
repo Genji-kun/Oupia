@@ -1,8 +1,7 @@
 "use client"
 
 import { usePathname } from 'next/navigation';
-import path from 'path';
-import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
+import React, { createContext, useState, useContext, ReactNode } from 'react';
 
 interface IAuthTabContext {
     tab: string;

@@ -40,7 +40,7 @@ const formSchema = z.object({
     }),
 })
 
-const SignUpForm = () => {
+const InfoForm = () => {
     const { setTab } = useAuthTabContext();
     const [isSubmiting, setIsSubmitting] = useState(false);
 
@@ -76,7 +76,7 @@ const SignUpForm = () => {
         setIsSubmitting(true);
         console.log(values);
         // Kiểm tra email đã tồn tại chưa
-        setTab("username")
+        setTab("user")
 
     }
     return (
@@ -185,7 +185,7 @@ const SignUpForm = () => {
                     control={form.control}
                     name="phoneNumber"
                     render={({ field }) => (
-                        <FormItem >
+                        <FormItem>
                             <FormLabel className="text-base font-semibold text-foreground">Số điện thoại</FormLabel>
                             <FormControl>
                                 <Input {...field} type="phone" disabled={isSubmiting} className="text-base  dark:bg-border/50" />
@@ -201,7 +201,7 @@ const SignUpForm = () => {
                         <Loader size={4} />
                     </Button>
                 </> : <>
-                    <div className="w-fit flex gap-x-2 items-center ml-auto">
+                    <div className="w-fit flex gap-x-2 items-center ml-auto pt-2">
                         <Button type="button" variant="ghost" className="flex items-center gap-x-1 w-fit p-4" onClick={() => setTab("sign-up")}>
                             <ChevronLeft size="20" />
                             <span className="font-semibold text-base">Quay lại</span>
@@ -217,4 +217,4 @@ const SignUpForm = () => {
     )
 }
 
-export default SignUpForm;
+export default InfoForm;

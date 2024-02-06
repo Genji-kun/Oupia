@@ -2,10 +2,6 @@
     @apply p-4 border-b h-[80px] w-full fixed inset-x-0 top-0 shadow bg-background z-50;
 }
 
-.logo {
-    @apply flex gap-x-3 items-center text-2xl font-bold w-fit;
-}
-
 .nav-routes {
     @apply flex items-center gap-x-2;
 }
