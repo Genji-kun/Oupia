@@ -3,8 +3,6 @@ import TabContainer from './_components/tab-container';
 import AuthContent from '@/components/ui/auth-content';
 
 const SignInPage = () => {
-
-
     return (
         <>
             <div className="w-full h-full grid grid-cols-1 xl:grid-cols-10 justify-center rounded-xl overflow-hidden shadow-lg border border-border">

@@ -8,7 +8,8 @@ const SearchButton = () => {
         <div>
             <Dialog>
                 <DialogTrigger asChild>
-                    <Button variant="ghost" className="p-2.5 rounded-full ">
+                    <Button variant={"outline"} className="dark:bg-slate-800 px-2.5 border-0 justify-between items-center xl:text-muted-foreground xl:w-80 xl:border xl:px-4">
+                        <span className="hidden xl:block">Tìm kiếm nơi thuê...</span>
                         <Search size={20}></Search>
                     </Button>
                 </DialogTrigger>
@@ -21,8 +22,7 @@ const SearchButton = () => {
                             <div />
                             <input
                                 className="enabled:focus:ring-0 enabled:focus:outline-none border-0 col-span-10 px-0 py-3 bg-background"
-                                placeholder='Tìm kiếm địa điểm, dự án cụ thể bạn muốn thuê...'
-                            />
+                                placeholder='Tìm kiếm địa điểm, dự án cụ thể bạn muốn thuê...' />
                         </div>
                     </DialogHeader>
                     <div className="p-5 pt-0 flex flex-col justify-center">

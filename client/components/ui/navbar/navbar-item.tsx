@@ -19,13 +19,9 @@ const NavbarItem = ({ route }: {
 
 
     return (
-        <motion.div
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}>
-            <Link href={route.href} className={cn(" hover:text-primary-500", isActive && "text-primary-500")}>
-                <span className="md:text-lg font-semibold">{t(route.name)}</span>
-            </Link>
-        </motion.div>
+        <Link href={route.href} className={cn(" relative after:content-[''] after:absolute after:h-[3px] after:bg-primary-500 after:-bottom-[1.85rem] after:left-0 after:w-0 hover:after:w-full after:transition-all", isActive && "after:w-full")}>
+            <span className={cn("md:text-lg text-muted-foreground p-4 font-semibold", isActive && "text-foreground")}>{t(route.name)}</span>
+        </Link>
     );
 };
 

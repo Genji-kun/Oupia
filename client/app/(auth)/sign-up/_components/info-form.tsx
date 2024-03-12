@@ -18,6 +18,8 @@ import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import { vi } from "date-fns/locale";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useSignUpContext } from "@/contexts/sign-up-context";
+import { User } from "@/interfaces/User";
 
 
 const formSchema = z.object({
@@ -42,16 +44,18 @@ const formSchema = z.object({
 
 const InfoForm = () => {
     const { setTab } = useAuthTabContext();
+    const { user, setUser } = useSignUpContext();
     const [isSubmiting, setIsSubmitting] = useState(false);
+
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            fullName: localStorage.getItem('fullName') || "",
-            phoneNumber: localStorage.getItem('phoneNumber') || "",
-            email: localStorage.getItem('email') || "",
-            gender: localStorage.getItem('gender') as "MALE" | "FEMALE" | "ORTHER" || undefined,
-            dob: localStorage.getItem('dob') ? new Date(localStorage.getItem('dob')!) : undefined,
+            fullName: user ? user.fullName : "",
+            phoneNumber: user ? user.phoneNumber : "",
+            email: user ? user.email : "",
+            gender: user ? user.gender : undefined,
+            dob: user ? (typeof user.dob === 'string' ? new Date(user.dob) : user.dob) : undefined,
         },
     })
 
@@ -59,26 +63,29 @@ const InfoForm = () => {
         const subscription = form.watch((values: any) => {
             for (const key in values) {
                 if (values[key]) {
-                    localStorage.setItem(key, values[key]);
+                    setUser((current: User) => {
+                        const newUser = { ...current, [key]: values[key] };
+                        localStorage.setItem('user', JSON.stringify(newUser));
+                        return newUser;
+                    });
                 }
             }
         });
 
         return () => {
             subscription.unsubscribe();
-            for (const key in form.getValues()) {
-                localStorage.removeItem(key);
-            }
         };
-    }, [form]);
+    }, [form, setUser]);
+
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         setIsSubmitting(true);
         console.log(values);
         // Kiểm tra email đã tồn tại chưa
-        setTab("user")
-
+        setTab("user");
     }
+
+
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -206,7 +213,7 @@ const InfoForm = () => {
                             <ChevronLeft size="20" />
                             <span className="font-semibold text-base">Quay lại</span>
                         </Button>
-                        <Button type="submit" className=" w-fit styled-button border-gray-200 border flex gap-2 px-6 py-4">
+                        <Button type="submit" className=" w-fit styled-button flex gap-2 px-6 py-4">
                             <span className="text-base">Tỉếp tục</span>
                         </Button>
                     </div>

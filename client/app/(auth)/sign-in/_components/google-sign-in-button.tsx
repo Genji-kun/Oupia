@@ -16,7 +16,7 @@ const GoogleSignInButton = () => {
 
 
     return (
-        <Button onClick={() => { signIn('google') }} variant="ghost" className="w-full mx-auto shadow border-border border flex gap-2 py-6">
+        <Button onClick={() => { signIn('google') }} variant="ghost" className="w-full mx-auto shadow border-border border flex gap-2 py-6 dark:bg-background dark:hover:bg-border">
             <FcGoogle size="24" />
             <span className="text-base">Đăng nhập với Google</span>
         </Button>

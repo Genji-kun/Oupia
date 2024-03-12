@@ -24,16 +24,16 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           {...props}
         />
         {(togglePassword) && (
-          <div className="absolute top-1/2 -translate-y-1/2 right-4 ">
+          <div className="absolute top-1/2 -translate-y-1/2 right-4 flex items-center">
             {!showPassword ? (
-              <Button disabled={disableToggle} type="button" variant={"ghost"} className="hover:bg-background p-0 focus-visible:ring-0 " onClick={() => setShowPassword(true)}>
+              <Button disabled={disableToggle} type="button" variant={"ghost"} className=" h-[80%] hover:bg-background p-0 focus-visible:ring-0 " onClick={() => setShowPassword(true)}>
                 <Eye
                   className="cursor-pointer"
                   size={20}
                 />
               </Button>
             ) : (
-              <Button disabled={disableToggle} type="button" variant={"ghost"} className="hover:bg-background p-0 focus-visible:ring-0" onClick={() => setShowPassword(false)}>
+              <Button disabled={disableToggle} type="button" variant={"ghost"} className=" h-[80%] hover:bg-background p-0 focus-visible:ring-0" onClick={() => setShowPassword(false)}>
                 <EyeOff
                   className="cursor-pointer"
                   size={20}

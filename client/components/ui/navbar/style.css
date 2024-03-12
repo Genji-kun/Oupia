@@ -1,7 +1,3 @@
-.navbar {
-    @apply p-4 border-b h-[80px] w-full fixed inset-x-0 top-0 shadow bg-background z-50;
-}
-
 .nav-routes {
     @apply flex items-center gap-x-2;
 }

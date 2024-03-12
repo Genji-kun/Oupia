@@ -8,7 +8,7 @@ import NavbarItem from './navbar-item';
 const NavbarRoutes = () => {
     return (
         <div className="nav-routes">
-            <ul className="hidden lg:flex gap-x-6 lg:gap-x-12">
+            <ul className="hidden lg:flex gap-x-2 items-center">
                 <>
                     {navRoutes.map((route, index) => {
                         return (<li key={index}>
