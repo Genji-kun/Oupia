@@ -13,7 +13,7 @@ const SignUpContext = createContext<ISignUpContext | undefined>(undefined);
 export const SignUpProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
 
-    const [user, setUser] = useState<User>(JSON.parse(localStorage.getItem('user')!));
+    const [user, setUser] = useState<User>({});
 
     return (
         <SignUpContext.Provider value={{ user, setUser }}>
