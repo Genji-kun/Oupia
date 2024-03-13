@@ -57,9 +57,7 @@ const UserForm = () => {
             const fileURL = URL.createObjectURL(file);
             setAvatar(fileURL);
             setUser((current: any) => {
-                const newUser = { ...current, avatar: fileURL };
-                localStorage.setItem('user', JSON.stringify(newUser));
-                return newUser;
+                return { ...current, avatar: fileURL };
             });
         }
     };
@@ -88,9 +86,7 @@ const UserForm = () => {
 
     useEffect(() => {
         setUser((current: any) => {
-            const newUser = { ...current, account: account };
-            localStorage.setItem('user', JSON.stringify(newUser));
-            return newUser;
+            return { ...current, account: account };
         });
     }, [account, setUser]);
 

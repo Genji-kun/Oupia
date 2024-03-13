@@ -64,9 +64,7 @@ const InfoForm = () => {
             for (const key in values) {
                 if (values[key]) {
                     setUser((current: User) => {
-                        const newUser = { ...current, [key]: values[key] };
-                        localStorage.setItem('user', JSON.stringify(newUser));
-                        return newUser;
+                        return { ...current, [key]: values[key] };
                     });
                 }
             }
