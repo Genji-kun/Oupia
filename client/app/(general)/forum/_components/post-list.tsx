@@ -10,8 +10,10 @@ const PostList = () => {
         {
             postContent: "Em là sinh viên năm nhất cần kiếm nhà trọ khu vực ba đình hà nội có máy lạnh, chổ giữ xe an toàn",
             user: {
-                name: "Võ Phú Phát",
-                username: "phatvo",
+                fullName: "Võ Phú Phát",
+                account: {
+                    username: "phatvo",
+                },
                 avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg",
                 phoneNumber: "09012345152"
             },
@@ -19,8 +21,10 @@ const PostList = () => {
         {
             postContent: "Tìm nhà trọ ở thành phố Hà Nội Quận Ba Đình có máy lạnh, chổ giữ xe",
             user: {
-                name: "Võ Phú Phát",
-                username: "phatvo",
+                fullName: "Võ Phú Phát",
+                account: {
+                    username: "phatvo",
+                },
                 avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg",
                 phoneNumber: "09012345152"
             },
@@ -28,8 +32,10 @@ const PostList = () => {
         {
             postContent: "Em cần tìm nhà trọ giá sinh viên gần trong khu vực quận 12 ngay gần Tân Thới Nhất 8 để tiện đường đi học ạ.",
             user: {
-                name: "Võ Phú Phát",
-                username: "phatvo",
+                fullName: "Võ Phú Phát",
+                account: {
+                    username: "phatvo",
+                },
                 avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg",
                 phoneNumber: "09012345152"
             },
@@ -37,8 +43,10 @@ const PostList = () => {
         {
             postContent: "Tìm nhà trọ ở thành phố Hà Nội Quận Ba Đình có máy lạnh, chổ giữ xe",
             user: {
-                name: "Võ Phú Phát",
-                username: "phatvo",
+                fullName: "Võ Phú Phát",
+                account: {
+                    username: "phatvo",
+                },
                 avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg",
                 phoneNumber: "09012345152"
             },
@@ -46,8 +54,10 @@ const PostList = () => {
         {
             postContent: "Em là sinh viên năm nhất cần kiếm nhà trọ khu vực ba đình hà nội có máy lạnh, chổ giữ xe an toàn",
             user: {
-                name: "Võ Phú Phát",
-                username: "phatvo",
+                fullName: "Võ Phú Phát",
+                account: {
+                    username: "phatvo",
+                },
                 avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg",
                 phoneNumber: "09012345152"
             },
