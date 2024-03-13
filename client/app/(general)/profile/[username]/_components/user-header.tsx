@@ -13,8 +13,10 @@ const UserHeader = () => {
     const { username } = params;
 
     const [user, setUser] = useState<User>({
-        name: "Võ Phú Phát",
-        username: "phatvo",
+        fullName: "Võ Phú Phát",
+        account: {
+            username: "phatvo",
+        },
         avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg",
         phoneNumber: "09012345152"
     });
@@ -28,7 +30,7 @@ const UserHeader = () => {
             </div>
             <div className="flex items-center pl-80 py-10">
                 <div className="w-full flex flex-col justify-between gap-1">
-                    <h1 className="font-bold font-montserrat text-3xl">{user.name}</h1>
+                    <h1 className="font-bold font-montserrat text-3xl">{user.fullName}</h1>
                     <Link href={`/profile/${username}/follows`} className="w-fit">
                         <h3 className="text-sm text-gray-600 dark:text-gray-400 hover:underline">126 người theo dõi</h3>
                     </Link>
