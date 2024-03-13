@@ -9,18 +9,24 @@ import SuggestUserItem from './suggest-user-item';
 const SuggestUserList = () => {
     const [users, setUsers] = useState<User[]>([
         {
-            name: "Võ Phú Phát",
-            username: "phatvo",
+            fullName: "Võ Phú Phát",
+            account: {
+                username: "phatvo",
+            },
             avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg",
             phoneNumber: "09012345152"
         }, {
-            name: "Nguyễn Kim Bảo Ngân",
-            username: "ngannguyen",
+            fullName: "Nguyễn Kim Bảo Ngân",
+            account: {
+                username: "ngannguyen",
+            },
             avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg",
             phoneNumber: "09012345152"
         }, {
-            name: "Phan Thanh Hải",
-            username: "haiphan",
+            fullName: "Phan Thanh Hải",
+            account: {
+                username: "haiphan",
+            },
             avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg",
             phoneNumber: "09012345152"
         }
