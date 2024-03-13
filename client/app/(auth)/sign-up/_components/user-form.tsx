@@ -14,7 +14,7 @@ import { useAuthTabContext } from '@/contexts/auth-tab-context';
 import { useSignUpContext } from '@/contexts/sign-up-context';
 
 const formSchema = z.object({
-    avatar: z.instanceof(File).optional(),
+    avatar: typeof File !== 'undefined' ? z.instanceof(File).optional() : z.any().optional(),
     username: z.string({
     }).min(6, {
         message: "Tên tài khoản ít nhất 6 ký tự"
@@ -92,7 +92,7 @@ const UserForm = () => {
             localStorage.setItem('user', JSON.stringify(newUser));
             return newUser;
         });
-    }, [account]);
+    }, [account, setUser]);
 
 
     function onSubmit(values: z.infer<typeof formSchema>) {
