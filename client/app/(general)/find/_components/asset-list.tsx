@@ -19,8 +19,10 @@ const AssetList = () => {
             slug: "nha-tro-truong-chinh",
             location: "123 Trường Chinh, quận Tân Phú, thành phố Hồ Chí Minh",
             user: {
-                name: "Võ Phú Phát",
-                username: "phatvo",
+                fullName: "Võ Phú Phát",
+                account: {
+                    username: "phatvo",
+                },
                 avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg",
                 phoneNumber: "09012345152"
             },
@@ -42,8 +44,10 @@ const AssetList = () => {
             slug: "nha-tro-truong-chinh",
             location: "123 Trường Chinh, quận Tân Phú, thành phố Hồ Chí Minh",
             user: {
-                name: "Võ Phú Phát",
-                username: "phatvo",
+                fullName: "Võ Phú Phát",
+                account: {
+                    username: "phatvo",
+                },
                 avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg",
                 phoneNumber: "09012345152"
             },
@@ -65,8 +69,10 @@ const AssetList = () => {
             slug: "nha-tro-truong-chinh",
             location: "123 Trường Chinh, quận Tân Phú, thành phố Hồ Chí Minh",
             user: {
-                name: "Võ Phú Phát",
-                username: "phatvo",
+                fullName: "Võ Phú Phát",
+                account: {
+                    username: "phatvo",
+                },
                 avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg",
                 phoneNumber: "09012345152"
             },
@@ -88,8 +94,10 @@ const AssetList = () => {
             slug: "nha-tro-truong-chinh",
             location: "123 Trường Chinh, quận Tân Phú, thành phố Hồ Chí Minh",
             user: {
-                name: "Võ Phú Phát",
-                username: "phatvo",
+                fullName: "Võ Phú Phát",
+                account: {
+                    username: "phatvo",
+                },
                 avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg",
                 phoneNumber: "09012345152"
             },
@@ -111,8 +119,10 @@ const AssetList = () => {
             slug: "nha-tro-truong-chinh",
             location: "123 Trường Chinh, quận Tân Phú, thành phố Hồ Chí Minh",
             user: {
-                name: "Võ Phú Phát",
-                username: "phatvo",
+                fullName: "Võ Phú Phát",
+                account: {
+                    username: "phatvo",
+                },
                 avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg",
                 phoneNumber: "09012345152"
             },
@@ -134,8 +144,10 @@ const AssetList = () => {
             slug: "nha-tro-truong-chinh",
             location: "123 Trường Chinh, quận Tân Phú, thành phố Hồ Chí Minh",
             user: {
-                name: "Võ Phú Phát",
-                username: "phatvo",
+                fullName: "Võ Phú Phát",
+                account: {
+                    username: "phatvo",
+                },
                 avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg",
                 phoneNumber: "09012345152"
             },
@@ -157,8 +169,10 @@ const AssetList = () => {
             slug: "nha-tro-truong-chinh",
             location: "123 Trường Chinh, quận Tân Phú, thành phố Hồ Chí Minh",
             user: {
-                name: "Võ Phú Phát",
-                username: "phatvo",
+                fullName: "Võ Phú Phát",
+                account: {
+                    username: "phatvo",
+                },
                 avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg",
                 phoneNumber: "09012345152"
             },
@@ -180,8 +194,10 @@ const AssetList = () => {
             slug: "nha-tro-truong-chinh",
             location: "123 Trường Chinh, quận Tân Phú, thành phố Hồ Chí Minh",
             user: {
-                name: "Võ Phú Phát",
-                username: "phatvo",
+                fullName: "Võ Phú Phát",
+                account: {
+                    username: "phatvo",
+                },
                 avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg",
                 phoneNumber: "09012345152"
             },
