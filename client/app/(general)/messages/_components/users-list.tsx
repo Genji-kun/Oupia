@@ -18,35 +18,44 @@ const UsersList = () => {
         phoneNumber: "0987654321"
     };
 
+    const user2: User = {
+        fullName: "Võ Phú Phát",
+        avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1696484302/z8ch1cp7vfkdrcxgfbai.jpg",
+        account: {
+            username: "phatvo123"
+        },
+        phoneNumber: "0987654321"
+    };
+
     return (
-        <div className="flex flex-col h-full w-1/4 bg-background">
+        <div className="flex flex-col w-full h-full bg-background dark:bg-slate-900 rounded-xl shadow-lg">
             <UserFilterBar />
             {/* <div className="flex items-center space-x-4">
                 <Skeleton className="bg-muted-foreground/25 object-cover w-14 rounded-full" />
-                <div className="space-y-2">
+                <div className="space-y-1">
                     <Skeleton className="bg-muted-foreground/25 h-4 w-[250px]" />
                     <Skeleton className="bg-muted-foreground/25 h-4 w-[200px]" />
                 </div>
             </div>
             <div className="flex items-center space-x-4">
                 <Skeleton className="bg-muted-foreground/25 object-cover w-14 rounded-full" />
-                <div className="space-y-2">
+                <div className="space-y-1">
                     <Skeleton className="bg-muted-foreground/25 h-4 w-[150px]" />
                     <Skeleton className="bg-muted-foreground/25 h-4 w-[100px]" />
                 </div>
             </div>
             <div className="flex items-center space-x-4">
                 <Skeleton className="bg-muted-foreground/25 object-cover w-14 rounded-full" />
-                <div className="space-y-2">
+                <div className="space-y-1">
                     <Skeleton className="bg-muted-foreground/25 h-4 w-[250px]" />
                     <Skeleton className="bg-muted-foreground/25 h-4 w-[150px]" />
                 </div>
             </div> */}
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-2">
                 <UserItem user={user} />
-                <UserItem user={user} />
-                <UserItem user={user} />
-                <UserItem user={user} />
+                <UserItem user={user2} />
+                <UserItem user={user2} />
+                <UserItem user={user2} />
             </div>
 
         </div>

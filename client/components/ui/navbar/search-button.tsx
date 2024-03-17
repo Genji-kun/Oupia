@@ -8,7 +8,7 @@ const SearchButton = () => {
         <div>
             <Dialog>
                 <DialogTrigger asChild>
-                    <Button variant={"outline"} className="dark:bg-slate-800 px-2.5 border-0 justify-between items-center xl:text-muted-foreground xl:w-80 xl:border xl:px-4">
+                    <Button variant={"outline"} className="dark:bg-slate-800 px-2.5 border-0 justify-between items-center xl:text-muted-foreground xl:w-80 xl:border xl:px-4 hover:shadow">
                         <span className="hidden xl:block">Tìm kiếm nơi thuê...</span>
                         <Search size={20}></Search>
                     </Button>

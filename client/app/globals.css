@@ -86,7 +86,7 @@
 }
 
 .styled-button {
-  @apply text-white font-semibold text-base bg-primary-500 hover:bg-gradient-to-r from-primary-500 to-primary-700;
+  @apply text-white font-semibold text-base bg-primary-500 hover:bg-gradient-to-r from-primary-500 to-primary-700 hover:shadow;
 }
 
 .styled-form {
