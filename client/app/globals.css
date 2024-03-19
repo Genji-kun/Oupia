@@ -9,14 +9,18 @@
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
+    --component-background: 214.3 31.8% 91.4%;
+
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
 
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 197 100% 50%; /* Màu chính mới */
-    --primary-foreground: 197 100% 30%; /* Độ đậm nhạt của màu chính */
+    --primary: 197 100% 50%;
+    /* Màu chính mới */
+    --primary-foreground: 197 100% 30%;
+    /* Độ đậm nhạt của màu chính */
 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -32,23 +36,27 @@
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 197 100% 50%; /* Màu chính mới */
+    --ring: 197 100% 50%;
+    /* Màu chính mới */
 
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 247 18% 10%;
     --foreground: 210 40% 98%;
+
+    --component-background: 249 20% 13%;
+    --component-foreground: 251 16% 19%;
 
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222.2 84% 4.9%;
+    --popover: 249 20% 13%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 197 100% 50%; /* Màu chính mới */
-    --primary-foreground: 197 100% 30%; /* Độ đậm nhạt của màu chính */
+    --primary: 197 100% 50%;
+    --primary-foreground: 197 100% 20%;
 
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
@@ -56,7 +64,7 @@
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 217.2 32.6% 17.5%;
+    --accent: 251 16% 19%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 62.8% 30.6%;
@@ -64,7 +72,7 @@
 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 197 100% 50%; /* Màu chính mới */
+    --ring: 197 100% 50%;
   }
 }
 
@@ -72,6 +80,7 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -86,14 +95,14 @@
 }
 
 .styled-button {
-  @apply text-white font-semibold text-base bg-primary-500 hover:bg-gradient-to-r from-primary-500 to-primary-700 hover:shadow;
+  @apply text-white text-base bg-primary-500 hover:bg-gradient-to-r from-primary-500 to-primary-700 hover:shadow;
 }
 
 .styled-form {
   @apply w-full space-y-4 flex flex-wrap items-end;
 }
 
-.styled-form > div {
+.styled-form>div {
   @apply w-full;
 }
 
@@ -101,11 +110,11 @@
   height: calc(100vh - 80px);
 }
 
-.map-container > div {
+.map-container>div {
   width: 100%;
 }
 
-.map-route > div {
+.map-route>div {
   width: 100%;
   aspect-ratio: 3/1;
 }
@@ -129,7 +138,7 @@
   @apply hidden;
 }
 
-.text-full > div {
+.text-full>div {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   text-align: center;
 }

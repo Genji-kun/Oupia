@@ -14,7 +14,7 @@ const FilterBar = () => {
     const { openSearch, setOpenSearch, openMap, setOpenMap } = useToggleContext();
 
     return (
-        <div className="flex flex-col gap-y-4 p-8 border-r border-border w-96 h-screen shadow overflow-y-auto scrollbar-thin">
+        <div className="flex flex-col gap-y-4 p-8 border-r border-border w-96 h-screen overflow-y-auto scrollbar-thin dark:bg-componentBackground">
             <div className="flex items-center">
                 <h1 className="font-bold text-2xl">Bộ lọc tìm kiếm</h1>
                 <div className="flex gap-x ml-auto items-center">

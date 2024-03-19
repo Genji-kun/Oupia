@@ -2,10 +2,10 @@ import HomeTitle from "./_components/home-title";
 
 export default function Home() {
   return (<>
-    <main className="min-h-screen ">
-      <div className="relative flex items-center justify-center aspect-4/3 w-full">
+    <div className="min-h-screen ">
+      <div className="relative flex items-center justify-center h-96 xl:h-fit xl:aspect-4/3 w-full">
         <div className="absolute bg-zinc-900/50 inset-0 w-full h-full z-5" />
-        <video playsInline autoPlay muted loop className="h-full w-full">
+        <video playsInline autoPlay muted loop className="h-full w-full object-cover">
           <source src="https://res.cloudinary.com/dzba4fewa/video/upload/v1705906668/background-video.mp4" type="video/mp4" />
         </video>
         <div className="w-full z-10 absolute inset-0 flex items-center justify-center">
@@ -13,7 +13,7 @@ export default function Home() {
         </div>
       </div>
       <div className="bg-background w-full" />
-    </main>
+    </div>
   </>
 
   )

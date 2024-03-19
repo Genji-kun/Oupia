@@ -23,9 +23,7 @@ export default function RootLayout(
       </Head>
       <body className={`${BeauSans.variable} scrollbar-track-background scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-700 scrollbar-thin`}>
         <Providers>
-          <main>
-            {children}
-          </main>
+          {children}
           <Toaster />
         </Providers>
       </body>

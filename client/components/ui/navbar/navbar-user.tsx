@@ -30,16 +30,16 @@ const NavbarUser = ({ user }: { user: User }) => {
                 </Button>
             </Link>
             <Link href="/messages" className="ml-1">
-                <Button variant="ghost" className="p-2.5">
+                <Button variant="ghost" className="p-2.5 dark:hover:bg-componentBackground dark:hover:shadow dark:hover:shadow-black hover:text-">
                     <MessagesSquare size={20}></MessagesSquare>
                 </Button>
             </Link>
-            <Button variant="ghost" className="p-2.5">
+            <Button variant="ghost" className="p-2.5 dark:hover:bg-componentBackground dark:hover:shadow dark:hover:shadow-black">
                 <Bell size={20}></Bell>
             </Button>
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <div className="relative">
+                    <div className="relative ml-1">
                         <Image
                             className="rounded-full h-12 w-12"
                             width={160}
@@ -49,7 +49,7 @@ const NavbarUser = ({ user }: { user: User }) => {
                         <Button className="absolute-button"><ChevronDown className="dark:text-white" size={15} /></Button>
                     </div>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="mt-[0.63rem] p-2 w-80 dark:bg-slate-900">
+                <DropdownMenuContent align="end" className="mt-[0.63rem] p-2 w-80 dark:bg-componentBackground">
                     <DropdownMenuGroup className="mb-2">
                         <DropdownMenuItem>
                             <Link href={`/profile/${user.account?.username}`} className="w-full flex gap-x-4 items-center ">

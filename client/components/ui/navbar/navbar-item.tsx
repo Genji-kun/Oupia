@@ -19,7 +19,7 @@ const NavbarItem = ({ route }: {
 
 
     return (
-        <Link href={route.href} className={cn(" relative after:content-[''] after:absolute after:h-[3px] after:bg-primary-500 after:-bottom-[1.85rem] after:left-0 after:w-0 hover:after:w-full after:transition-all", isActive && "after:w-full")}>
+        <Link href={route.href} className={cn(" relative after:content-[''] after:absolute after:h-[3px] after:bg-primary-500 after:-bottom-[1.85rem] dark:after:-bottom-[1.8rem] after:left-0 after:w-0 hover:after:w-full after:transition-all", isActive && "after:w-full")}>
             <span className={cn("md:text-lg text-muted-foreground p-4 font-semibold", isActive && "text-foreground")}>{t(route.name)}</span>
         </Link>
     );

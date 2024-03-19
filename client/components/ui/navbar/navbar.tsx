@@ -27,7 +27,7 @@ const Navbar = () => {
     const { theme, setTheme } = useTheme();
 
     return (
-        <nav className="bg-background dark:bg-slate-900 p-4 border-b h-[80px] w-full fixed inset-x-0 top-0 shadow z-50" >
+        <nav className="bg-background dark:bg-componentForeground p-4 border-b dark:border-none h-[80px] w-full fixed inset-x-0 top-0 shadow z-50" >
             <div className="flex h-full items-center justify-between container">
                 <div className="hidden lg:flex gap-20 items-center">
                     <NavbarLogo />
@@ -43,11 +43,11 @@ const Navbar = () => {
                         </Link>
                         <>
                             {theme === "light" &&
-                                <Button variant={"ghost"} onClick={() => { setTheme("dark") }} className="p-2.5">
+                                <Button variant={"ghost"} onClick={() => { setTheme("dark") }} className="p-2.5 dark:hover:bg-componentBackground">
                                     <Sun size={20} />
                                 </Button>}
                             {theme === "dark" &&
-                                <Button variant={"ghost"} onClick={() => { setTheme("light") }} className="p-2.5">
+                                <Button variant={"ghost"} onClick={() => { setTheme("light") }} className="p-2.5 dark:hover:bg-componentBackground">
                                     <Moon size={20} />
                                 </Button>
                             }

@@ -5,6 +5,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { useMessageContext } from '@/contexts/message-context';
 import { DivideCircleIcon, Dot, PanelRightClose, PanelRightOpen, Radio, Rss, UserRoundSearch } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 
@@ -13,17 +14,21 @@ const UserHeaderBar = () => {
     const { user, expanded, setExpanded } = useMessageContext();
 
     return (
-        <div className="p-5 w-full flex gap-x-4 items-center">
-            <Image
-                src={user.avatar}
-                height={500}
-                width={500}
-                alt={"User Avatar"}
-                className="object-cover rounded-full w-14 aspect-square"></Image>
-            <div>
-                <h2 className="font-semibold text-lg leading-none">{user.fullName}</h2>
-                <span className="text-lime-500 text-sm leading-none">Đang hoạt động</span>
-            </div>
+        <div className="p-3 w-full flex items-center justify-between">
+            <Link href={`/profile/${user.account?.username}`} className=" rounded-lg p-2 pr-6 hover:bg-border/50 dark:hover:bg-componentForeground">
+                <div className="flex gap-x-4 items-center">
+                    <Image
+                        src={user.avatar}
+                        height={500}
+                        width={500}
+                        alt={"User Avatar"}
+                        className="object-cover rounded-full w-14 aspect-square"></Image>
+                    <div>
+                        <h2 className="font-semibold text-lg leading-none">{user.fullName}</h2>
+                        <span className="text-lime-500 text-sm leading-none">Đang hoạt động</span>
+                    </div>
+                </div>
+            </Link>
             <div className="flex items-center gap-x-2 ml-auto">
                 <TooltipProvider>
                     <Tooltip>
@@ -38,7 +43,7 @@ const UserHeaderBar = () => {
                             }
 
                         </TooltipTrigger>
-                        <TooltipContent className="dark:bg-slate-900">
+                        <TooltipContent className="dark:bg-componentBackground">
                             <p>Thông tin cuộc trò chuyện</p>
                         </TooltipContent>
                     </Tooltip>

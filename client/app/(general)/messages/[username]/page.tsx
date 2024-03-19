@@ -24,8 +24,8 @@ const UserMessageRoomPage = () => {
 
     return (
 
-        <div className="flex w-full h-full bg-background dark:bg-slate-900 rounded-xl shadow-lg dark:shadow-black">
-            <div className="w-full h-full flex flex-col relative">
+        <div className="flex w-full h-full bg-background dark:bg-componentBackground rounded-xl shadow-lg dark:shadow-black/25">
+            <div className="w-full h-full flex flex-col relative min-h-[clac(100vh-80px)] lg:min-h-fit">
                 <UserHeaderBar />
                 <ChatInput />
             </div>
