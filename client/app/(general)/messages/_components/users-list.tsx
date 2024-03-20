@@ -29,7 +29,7 @@ const UsersList = () => {
 
     return (
         <div className="flex flex-col w-fit xl:w-full min-h-[clac(100vh-80px)] lg:min-h-fit  h-full pb-3 xl:pb-5 bg-background dark:bg-componentBackground rounded-xl shadow-lg dark:shadow-black/25">
-            <UserFilterBar />
+            {/* <UserFilterBar /> */}
             {/* <div className="flex items-center space-x-4">
                 <Skeleton className="bg-muted-foreground/25 object-cover w-14 rounded-full" />
                 <div className="space-y-1">

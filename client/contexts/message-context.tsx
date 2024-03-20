@@ -1,13 +1,13 @@
 "use client"
 
 import { User } from '@/interfaces/User';
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 
 interface IMessageContext {
     user: User;
     setUser: React.Dispatch<React.SetStateAction<User>>;
-    expanded: boolean;
-    setExpanded: React.Dispatch<React.SetStateAction<boolean>>;
+    expanded: boolean | undefined;
+    setExpanded: React.Dispatch<React.SetStateAction<boolean | undefined>>;
 }
 
 const MessageContext = createContext<IMessageContext | undefined>(undefined);
@@ -15,8 +15,11 @@ const MessageContext = createContext<IMessageContext | undefined>(undefined);
 export const MessageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
     const [user, setUser] = useState<User>({});
-    const [expanded, setExpanded] = useState<boolean>(false);
+    const [expanded, setExpanded] = useState<boolean | undefined>();
 
+    useEffect(() => {
+        setExpanded(false);
+    }, []);
 
     return (
         <MessageContext.Provider value={{ user, setUser, expanded, setExpanded }}>

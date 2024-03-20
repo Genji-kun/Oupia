@@ -4,7 +4,8 @@ import React, { useEffect } from 'react';
 import UserHeaderBar from './_components/user-header-bar';
 import { useMessageContext } from '@/contexts/message-context';
 import MessageDetail from './_components/message-detail';
-import ChatInput from './_components/chat-input';
+import MessageContainer from './_components/message-container';
+import MessageInput from './_components/message-input';
 
 const UserMessageRoomPage = () => {
 
@@ -24,10 +25,11 @@ const UserMessageRoomPage = () => {
 
     return (
 
-        <div className="flex w-full h-full bg-background dark:bg-componentBackground rounded-xl shadow-lg dark:shadow-black/25">
-            <div className="w-full h-full flex flex-col relative min-h-[clac(100vh-80px)] lg:min-h-fit">
+        <div className="flex w-full h-full bg-background overflow-hidden dark:bg-componentBackground rounded-xl shadow-lg dark:shadow-black/25">
+            <div className="w-full h-full flex flex-col relative min-h-[clac(100vh-80px)] lg:min-h-fit px-1">
                 <UserHeaderBar />
-                <ChatInput />
+                <MessageContainer />
+                <MessageInput />
             </div>
             <MessageDetail user={user} />
         </div>
