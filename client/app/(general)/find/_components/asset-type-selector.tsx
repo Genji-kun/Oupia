@@ -2,7 +2,7 @@
 
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
-import { changeFilter } from '@/redux/filter/motelFilterSlice';
+import { changeFilter } from '@/redux/slices/assetFilterSlice';
 import { RootState } from '@/redux/store';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';

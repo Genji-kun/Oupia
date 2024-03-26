@@ -6,8 +6,8 @@ import React, { createContext, useState, useContext, ReactNode, useEffect } from
 interface IMessageContext {
     user: User;
     setUser: React.Dispatch<React.SetStateAction<User>>;
-    expanded: boolean | undefined;
-    setExpanded: React.Dispatch<React.SetStateAction<boolean | undefined>>;
+    expanded: any;
+    setExpanded: React.Dispatch<React.SetStateAction<any>>;
 }
 
 const MessageContext = createContext<IMessageContext | undefined>(undefined);
@@ -15,11 +15,18 @@ const MessageContext = createContext<IMessageContext | undefined>(undefined);
 export const MessageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
     const [user, setUser] = useState<User>({});
-    const [expanded, setExpanded] = useState<boolean | undefined>();
+    const [expanded, setExpanded] = useState<any>(() => {
+        if (localStorage.getItem('expanded'))
+            return JSON.parse(localStorage.getItem('expanded')!);
+        return false;
+    });
+
+
+
 
     useEffect(() => {
-        setExpanded(false);
-    }, []);
+        localStorage.setItem('expanded', JSON.stringify(expanded));
+    }, [expanded]);
 
     return (
         <MessageContext.Provider value={{ user, setUser, expanded, setExpanded }}>

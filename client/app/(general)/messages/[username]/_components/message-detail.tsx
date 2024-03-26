@@ -8,7 +8,7 @@ const MessageDetail = ({ user }: { user: User }) => {
     const { expanded } = useMessageContext();
 
     return (
-        <div className={cn("w-3/5 h-full border-l shadow dark:border-none dark:bg-componentForeground transition-all rounded-xl", !expanded && "w-0")}>
+        <div className={cn("w-3/5 h-full border-l shadow dark:border-none dark:bg-oupia-sub transition-all rounded-xl", !expanded && "w-0")}>
 
         </div>
     );

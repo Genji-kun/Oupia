@@ -15,7 +15,7 @@ const UserItem = ({ user }: { user: User }) => {
 
     return (
         <Link href={`/messages/${user.account?.username}`} className="px-3 xl:px-5">
-            <div className={cn(" flex items-center xl:space-x-4 px-3 xl:px-5 py-3 rounded-lg hover:bg-primary-200/50 dark:hover:bg-componentForeground", isActive && "bg-primary-200/50 dark:bg-componentForeground ")}>
+            <div className={cn(" flex items-center xl:space-x-4 px-3 py-3 rounded-lg hover:bg-primary-200/50 dark:hover:bg-oupia-sub", isActive && "bg-primary-200/50 dark:bg-oupia-sub ")}>
                 <Image height={500} width={500}
                     src={user.avatar}
                     alt={"user image"}

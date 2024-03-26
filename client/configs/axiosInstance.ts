@@ -1,7 +1,11 @@
+"use client";
+
 import axios from "axios";
 import { cookies } from "next/headers";
 
-const SERVER = "http://localhost:8080/api/";
+const cookieStore = cookies();
+const SERVER = process.env.NEXT_PUBLIC_SERVER_URL;
+
 
 const publicApi = axios.create({
     baseURL: SERVER,
@@ -10,7 +14,7 @@ const publicApi = axios.create({
 const authApi = axios.create({
     baseURL: SERVER,
     headers: {
-        "Authorization": typeof window !== 'undefined' ? document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1") : "",
+        "Authorization": "Bearer " + cookieStore.get("accessToken")
     },
 });
 

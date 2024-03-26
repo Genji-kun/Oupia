@@ -34,7 +34,7 @@ const HomeTitle = () => {
 
     return (
         <div className="flex flex-col gap-y-4 md:gap-y-6 2xl:gap-y-12 items-center 2xl:-translate-y-24">
-            <div className="w-12 h-12 md:w-24 2xl:w-48 md:h-24 2xl:h-48">
+            <div className="w-20 md:w-24 2xl:w-48 aspect-square">
                 <motion.svg variants={fillVariants} initial="initial" animate="animate" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 342 396.81">
                     <motion.path className="fill-primary-500 stroke-primary-500" variants={pathVariants} initial="initial" animate="animate" strokeWidth={5} fill="none" d="M4.87,316.94,69,381.06c35.8,35.89,93,6,76-45h0s-21.14-53.93-27-114c-8-82,35.64-120.23,85-112,42,7,58.95,49,57,75-3,40-47,59-46,87,1.07,30,24.79,40,34.89,40h76.43A16.68,16.68,0,0,0,342,295.38V143.93a16.69,16.69,0,0,0-6.07-12.87L181.61,3.81a16.68,16.68,0,0,0-21.22,0L6.07,131.06A16.69,16.69,0,0,0,0,143.93V305.16A16.66,16.66,0,0,0,4.87,316.94Z" />
                 </motion.svg>
@@ -44,17 +44,17 @@ const HomeTitle = () => {
                     Tìm ngay một nơi ở lý tưởng nhất giành cho bạn
                 </motion.h1>
             </div>
-            <motion.div variants={buttonVariants} initial="initial" animate="animate" className="grid grid-cols-2 gap-x-5 w-1/2 mx-auto">
+            <motion.div variants={buttonVariants} initial="initial" animate="animate" className="grid grid-cols-1 lg:grid-cols-2 gap-y-2 gap-x-5 w-3/4 lg:w-1/2 mx-auto">
                 <Link href="/find" className="w-full">
-                    <Button className="p-6 styled-button gap-1 w-full">
-                        <span className="xl:text-base font-semibold">Xem tin cho thuê</span>
+                    <Button className="p-2 xl:p-6 styled-button gap-1 w-full">
+                        <span className="text-sm xl:text-base font-semibold">Xem tin cho thuê</span>
                         <motion.div variants={arrowVariants} initial="initial" animate="animate">
                             <ChevronRight />
                         </motion.div>
                     </Button>
                 </Link>
-                <Button variant={"ghost"} className="p-6 border-gray-100 text-gray-100 border hover:text-gray-900 hover:bg-gray-100 gap-2">
-                    <span className="xl:text-base font-semibold">Tìm hiểu thêm</span>
+                <Button variant={"ghost"} className="p-2 xl:p-6 border-gray-100 text-gray-100 border hover:text-gray-900 hover:bg-gray-100 gap-2">
+                    <span className="text-sm xl:text-base font-semibold">Tìm hiểu thêm</span>
                 </Button>
             </motion.div>
 

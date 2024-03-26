@@ -9,7 +9,7 @@ const UserFilterBar = () => {
             <div className=" relative hidden xl:block w-full">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 z-10" />
                 <Input
-                    className="p-4 pl-8 dark:bg-componentForeground"
+                    className="p-4 pl-8 dark:bg-oupia-sub"
                     placeholder="Tìm kiếm người dùng..." />
             </div>
             <Button className="p-4 px-2.5 styled-button">

@@ -26,8 +26,8 @@ module.exports = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        componentBackground: "hsl(var(--component-background))",
-        componentForeground: "hsl(var(--component-foreground))",
+        "oupia-base": "hsl(var(--oupia-base))",
+        "oupia-sub": "hsl(var(--oupia-sub-base))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -98,6 +98,7 @@ module.exports = {
         '3/2': '3 / 2',
         '5/1': '5 / 1'
       },
+
     },
   },
   plugins: [require("tailwindcss-animate"), require('tailwind-scrollbar'),

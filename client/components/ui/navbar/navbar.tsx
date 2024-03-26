@@ -12,22 +12,16 @@ import Link from 'next/link';
 import SearchButton from './search-button';
 import { useTheme } from 'next-themes';
 import { Moon, Sun } from 'lucide-react';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
 
-    const user: User = {
-        fullName: "Võ Phú Phát",
-        avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1696484302/z8ch1cp7vfkdrcxgfbai.jpg",
-        account: {
-            username: "phatvo"
-        },
-        phoneNumber: "0987654321"
-    };
+    const user = useSelector((state: any) => state.currentUserSlice.user);
 
     const { theme, setTheme } = useTheme();
 
     return (
-        <nav className="bg-background dark:bg-componentForeground p-4 border-b dark:border-none h-[80px] w-full fixed inset-x-0 top-0 shadow z-50" >
+        <nav className="bg-background dark:bg-oupia-base p-4 border-b h-[60px] lg:h-[80px] w-full fixed inset-x-0 top-0 shadow z-50" >
             <div className="flex h-full items-center justify-between container">
                 <div className="hidden lg:flex gap-20 items-center">
                     <NavbarLogo />
@@ -43,11 +37,11 @@ const Navbar = () => {
                         </Link>
                         <>
                             {theme === "light" &&
-                                <Button variant={"ghost"} onClick={() => { setTheme("dark") }} className="p-2.5 dark:hover:bg-componentBackground">
+                                <Button variant={"ghost"} onClick={() => { setTheme("dark") }} className="p-2.5 dark:hover:bg-oupia-base">
                                     <Sun size={20} />
                                 </Button>}
                             {theme === "dark" &&
-                                <Button variant={"ghost"} onClick={() => { setTheme("light") }} className="p-2.5 dark:hover:bg-componentBackground">
+                                <Button variant={"ghost"} onClick={() => { setTheme("light") }} className="p-2.5 dark:hover:bg-oupia-base">
                                     <Moon size={20} />
                                 </Button>
                             }

@@ -26,7 +26,7 @@ function MessageRightBubble({ chat }: { chat: any }) {
                     <h4 className="text-muted-foreground text-sm">11:38</h4>
                 </div>
                 <div className="flex flex-row-reverse gap-2 items-center" onMouseEnter={() => { setIsHover(true) }} onMouseLeave={() => { setIsHover(false) }}>
-                    <p className={cn("bg-primary text-white py-3 px-5 rounded-2xl rounded-tr-none text-sm transition-all", expanded ? "max-w-sm" : "max-w-lg")}>I think our users will really appreciate the improvements. Continue to work!!</p>
+                    <p className={cn("bg-primary text-white px-3 py-2 rounded-2xl rounded-tr-none text-sm transition-all", expanded ? "max-w-sm" : "max-w-lg")}>Ok!!</p>
                     {isHover &&
                         <Button variant={"ghost"} className="p-2 h-fit">
                             <BiDotsHorizontalRounded className="w-4 h-4" />

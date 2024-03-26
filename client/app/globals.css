@@ -46,8 +46,8 @@
     --background: 247 18% 10%;
     --foreground: 210 40% 98%;
 
-    --component-background: 249 20% 13%;
-    --component-foreground: 251 16% 19%;
+    --oupia-base: 249 20% 13%;
+    --oupia-sub-base: 251 16% 19%;
 
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
@@ -70,7 +70,7 @@
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
+    --border: 251 16% 19%;
     --input: 217.2 32.6% 17.5%;
     --ring: 197 100% 50%;
   }
@@ -141,4 +141,16 @@
 .text-full>div {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   text-align: center;
+}
+
+.shadow-dark-theme {
+  @apply dark:shadow-lg dark:shadow-black/50;
+}
+
+.shadow-light-theme {
+  @apply shadow-lg shadow-gray-400/30;
+}
+
+.util-button {
+  @apply items-center justify-center flex flex-col aspect-square p-4 border-[1.5px] border-border gap-2 rounded-xl text-muted-foreground cursor-pointer hover:bg-border/50 hover:text-primary dark:hover:bg-background dark:hover:text-foreground;
 }

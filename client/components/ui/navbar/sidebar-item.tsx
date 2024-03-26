@@ -14,7 +14,7 @@ const SidebarItem = ({ route }: {
 
     return (
         <Link href={route.href}>
-            <div className={cn("px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 ", isActive && "text-primary border-r-2 border-primary")}>{route.name}</div>
+            <div className={cn("px-6 py-2 hover:bg-gray-100 dark:hover:bg-accent text-muted-foreground", isActive && " font-semibold text-foreground border-r-4 border-primary")}>{route.name}</div>
         </Link>
     );
 };

@@ -27,13 +27,13 @@ const AssetItem = ({ asset }: { asset: Asset }) => {
     }, [api])
 
     return (
-        <div onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)} className="w-full rounded-lg border-border flex flex-col gap-2 aspect-square">
+        <div onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)} className="xl:w-full rounded-lg border-border flex flex-col gap-2 xl:aspect-square">
             <Carousel setApi={setApi} className="w-full relative">
                 <CarouselContent>
                     {asset.imageList.map((image, index) => (
                         <CarouselItem key={index}>
-                            <Link href={`/find/${asset.slug}`} >
-                                <Image src={image.url} width={320} height={320} alt='AssetImage' className="w-full rounded-lg aspect-16/15" />
+                            <Link href={`/find/${asset.slug}`} className=" aspect-16/15 w-24">
+                                <Image src={image.url} width={500} height={500} alt='AssetImage' className="w-full rounded-lg aspect-16/15" />
                             </Link>
                         </CarouselItem>
                     ))}
@@ -46,7 +46,7 @@ const AssetItem = ({ asset }: { asset: Asset }) => {
                     ))}
                 </div>
             </Carousel>
-            <Link href={`/find/${asset.slug}`}>
+            <Link href={`/find/${asset.slug}`} className="w-full">
                 <h2 className="text-sm text-gray-600 dark:text-gray-400 uppercase truncate">{asset.location}</h2>
                 <h1 className="text-lg font-bold font-montserrat">{asset.name}</h1>
                 <h3 className="text-sm text-primary-500 font-semibold">{asset.price && numberToCurrency(asset.price)}</h3>

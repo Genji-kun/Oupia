@@ -1,11 +1,13 @@
 "use client"
 
 import { configureStore } from "@reduxjs/toolkit";
-import motelFilterReducer from "./filter/motelFilterSlice";
+import assetFilterSlice from "./slices/assetFilterSlice";
+import currentUserSlice from "./slices/currentUserSlice";
 
 export const store = configureStore({
     reducer: {
-        motelFilter: motelFilterReducer,
+        assetFilterSlice: assetFilterSlice,
+        currentUserSlice: currentUserSlice,
     }
 });
 

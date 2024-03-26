@@ -1,19 +1,19 @@
 "use client"
 
-import { createSlice, current } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit"
 
-interface MotelFilter {
+interface AssetFilter {
     assetType: string[],
     price: number[]
 }
 
-const initialState: MotelFilter = {
+const initialState: AssetFilter = {
     assetType: [],
     price: [0, 50000000]
 }
 
-const motelFilterSlice = createSlice({
-    name: "motelFilter",
+const assetFilterSlice = createSlice({
+    name: "assetFilter",
     initialState,
     reducers: {
         changeFilter: (state, action) => {
@@ -27,6 +27,6 @@ const motelFilterSlice = createSlice({
     }
 })
 
-export const { changeFilter } = motelFilterSlice.actions;
+export const { changeFilter } = assetFilterSlice.actions;
 
-export default motelFilterSlice.reducer;
+export default assetFilterSlice.reducer;

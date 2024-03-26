@@ -12,7 +12,6 @@ const SignUpContext = createContext<ISignUpContext | undefined>(undefined);
 
 export const SignUpProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
-
     const [user, setUser] = useState<User>({});
 
     return (

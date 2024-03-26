@@ -3,6 +3,10 @@ import { Menu } from 'lucide-react';
 import NavbarLogo from './navbar-logo';
 import SidebarRoutes from './sidebar-routes';
 import { Sheet, SheetContent, SheetTrigger } from '../sheet';
+import SearchButton from './search-button';
+import Link from 'next/link';
+import { Button } from '../button';
+import { MdOutlinePostAdd } from 'react-icons/md';
 
 const NavbarMenu = () => {
     return (
@@ -17,6 +21,15 @@ const NavbarMenu = () => {
                     </div>
                     <div className="flex flex-col gap-y-2 ">
                         <SidebarRoutes />
+                        <div className="flex flex-wrap items-center gap-2 py-2 px-6">
+                            <SearchButton />
+                            <Link href="/upload">
+                                <Button className="space-x-2 styled-button py-0 px-4">
+                                    <span className="text-sm">Đăng bài</span>
+                                    <MdOutlinePostAdd className="w-5 h-5" />
+                                </Button>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </SheetContent>

@@ -14,11 +14,11 @@ const MotelsPage = () => {
         <>
             <div>
                 <ToggleProvider>
-                    <div className="h-screen bg-background hidden xl:block fixed left-0 z-100">
+                    <div className="xl:h-screen bg-background hidden xl:block fixed left-0 z-100">
                         <FilterBar />
                     </div>
                     <div className="flex h-full w-full">
-                        <div className="min-w-96 hidden xl:block"></div>
+                        <div className="xl:min-w-96 hidden xl:block"></div>
                         <div className="flex-auto">
                             <AssetContainer />
                         </div>

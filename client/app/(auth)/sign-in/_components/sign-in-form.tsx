@@ -1,36 +1,33 @@
 "use client"
 
+import { cookies } from "next/headers"
+
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
 import { Button } from "@/components/ui/button"
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { LogIn } from "lucide-react"
 import { useState } from "react"
 import ForgetPasswordButton from "./forget-password-button"
 import Loader from "@/components/ui/loader"
+import { authApi, publicApi } from "@/configs/axiosInstance"
+import { authEndpoints } from "@/configs/axiosEndpoints"
+import { useDispatch } from "react-redux"
+import { login } from "@/redux/slices/currentUserSlice"
+import { redirect } from "next/navigation"
 
 const formSchema = z.object({
-    username: z.string().min(2, {
-        message: "Tên người dùng không được để trống",
-    }),
-    password: z.string().min(1, {
-        message: "Mật khẩu không được để trống"
-    })
+    username: z.string({ "required_error": "Tên người dùng không được để trống" }),
+    password: z.string({ "required_error": "Mật khẩu không được để trống" })
 })
 
 const SignInForm = () => {
 
     const [isSubmiting, setIsSubmitting] = useState(false);
+    const dispatch = useDispatch();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -40,10 +37,24 @@ const SignInForm = () => {
         },
     })
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
+    async function onSubmit(values: z.infer<typeof formSchema>) {
         setIsSubmitting(true);
-        console.log(values)
+        try {
+            const res = await publicApi.post(authEndpoints['sign-in'], values);
+            if (res.status === 200) {
+                const cookieStore = cookies();
+                cookieStore.set("accessToken", res.data.accessToken);
+                let { data } = await authApi.get(authEndpoints["current-user"]);
+                cookieStore.set("user", data);
+                dispatch(login(data));
+                redirect("/");
+            }
+        } catch (error) {
+            console.error(error);
+        }
+        setIsSubmitting(false);
     }
+
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -54,7 +65,7 @@ const SignInForm = () => {
                         <FormItem >
                             <FormLabel className="text-base font-semibold text-foreground">Tên nguời dùng</FormLabel>
                             <FormControl>
-                                <Input {...field} disabled={isSubmiting} className="text-base py-6 dark:bg-border/50" />
+                                <Input {...field} disabled={isSubmiting} className="text-base py-6 dark:bg-oupia-sub" />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -67,7 +78,7 @@ const SignInForm = () => {
                         <FormItem >
                             <FormLabel className="text-base font-semibold text-foreground">Mật khẩu</FormLabel>
                             <FormControl>
-                                <Input type="password" {...field} disabled={isSubmiting} className="text-base py-6 dark:bg-border/50" togglePassword={true} disableToggle={isSubmiting} />
+                                <Input type="password" {...field} disabled={isSubmiting} className="text-base py-6 dark:bg-oupia-sub" togglePassword={true} disableToggle={isSubmiting} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

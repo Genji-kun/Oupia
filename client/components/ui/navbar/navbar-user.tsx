@@ -22,20 +22,21 @@ const NavbarUser = ({ user }: { user: User }) => {
     }
     return (
         <div className="flex items-center gap-x-1">
-
-            <SearchButton />
-            <Link href="/upload" className="ml-1">
-                <Button className="space-x-2 styled-button py-0 px-4">
-                    <span className="text-sm">Đăng bài</span>
-                    <MdOutlinePostAdd className="w-5 h-5" />
-                </Button>
-            </Link>
+            <div className="hidden lg:flex items-center gap-x-1">
+                <SearchButton />
+                <Link href="/upload" className="ml-1">
+                    <Button className="space-x-2 styled-button py-0 px-4">
+                        <span className="text-sm">Đăng bài</span>
+                        <MdOutlinePostAdd className="w-5 h-5" />
+                    </Button>
+                </Link>
+            </div>
             <Link href="/messages" className="ml-1">
-                <Button variant="ghost" className="p-2.5 dark:hover:bg-componentBackground dark:hover:shadow dark:hover:shadow-black hover:text-">
+                <Button variant="ghost" className="p-2.5 hover:bg-border/70 hover:shadow dark:hover:bg-accent dark:hover:shadow-black">
                     <MessagesSquare size={20}></MessagesSquare>
                 </Button>
             </Link>
-            <Button variant="ghost" className="p-2.5 dark:hover:bg-componentBackground dark:hover:shadow dark:hover:shadow-black">
+            <Button variant="ghost" className="p-2.5 hover:bg-border/70 hover:shadow dark:hover:bg-accent dark:hover:shadow-black">
                 <Bell size={20}></Bell>
             </Button>
             <Popover>
@@ -50,9 +51,9 @@ const NavbarUser = ({ user }: { user: User }) => {
                         <Button className="absolute-button text-white"><ChevronDown className="dark:text-white" size={15} /></Button>
                     </div>
                 </PopoverTrigger>
-                <PopoverContent className="mt-[0.63rem] p-2 w-80 dark:bg-componentBackground flex flex-col gap-1" align='end'>
-                    <div className="mb-2">
-                        <Link href={`/profile/${user.account?.username}`} className="w-full flex gap-x-4 items-center py-1 px-2 hover:bg-border/50 dark:hover:bg-accent rounded">
+                <PopoverContent className="mt-[0.63rem] p-2 w-80 dark:bg-oupia-base flex flex-col gap-1" align='end'>
+                    <div className="mb-1">
+                        <Link href={`/profile/${user.account?.username}`} className="w-full flex gap-x-4 items-center p-2 hover:bg-accent rounded">
                             <Image
                                 className="rounded-full h-12 w-12"
                                 width={160}
@@ -64,17 +65,17 @@ const NavbarUser = ({ user }: { user: User }) => {
                     </div>
                     <Separator />
                     <div>
-                        <Link href="/settings" className="w-full flex items-center py-1 px-2 hover:bg-border/50 dark:hover:bg-accent rounded text-sm">
+                        <Link href="/settings" className="w-full flex items-center py-1 px-2 hover:bg-accent rounded text-sm">
                             <Settings className="mr-2 h-4 w-4" />
                             <span>Cài đặt</span>
                             <ChevronRight className="ml-auto h-4 w-4" />
                         </Link>
-                        <Link href="/settings/password" className="w-full flex items-center py-1 px-2 hover:bg-border/50 dark:hover:bg-accent rounded text-sm">
+                        <Link href="/settings/password" className="w-full flex items-center py-1 px-2 hover:bg-accent rounded text-sm">
                             <Key className="mr-2 h-4 w-4" />
                             <span>Đổi mật khẩu</span>
                             <ChevronRight className="ml-auto h-4 w-4" />
                         </Link>
-                        <div className="w-full flex items-center py-1 px-2 hover:bg-border/50 dark:hover:bg-accent rounded text-sm cursor-pointer" onClick={(e) => {
+                        <div className="w-full flex items-center py-1 px-2 hover:bg-accent rounded text-sm cursor-pointer" onClick={(e) => {
                             e.stopPropagation(); changeTheme();
                         }}>
                             <Moon className="mr-2 h-4 w-4" />
@@ -90,7 +91,7 @@ const NavbarUser = ({ user }: { user: User }) => {
                         </div>
                     </div>
                     <Separator />
-                    <div className="w-full flex items-center py-1 px-2 hover:bg-border/50 dark:hover:bg-accent rounded text-sm">
+                    <div className="w-full flex items-center py-1 px-2 hover:bg-accent rounded text-sm">
                         <LogOut className="mr-2 h-4 w-4" />
                         <span>Đăng xuất</span>
                     </div>

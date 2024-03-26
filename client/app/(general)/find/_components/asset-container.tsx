@@ -25,10 +25,10 @@ const AssetContainer = () => {
                             animate={{ y: 0, opacity: 1 }}
                             exit={{ y: -10, opacity: 0 }}
                             transition={{ duration: 0.1, ease: "easeInOut" }}>
-                            <SearchBar />
+                            {/* <SearchBar /> */}
                         </motion.div>}
                     </AnimatePresence>
-                    <div className="px-4">
+                    <div className="px-4 w-fit">
                         <AssetList />
                     </div>
                 </>
