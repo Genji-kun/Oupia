@@ -1,9 +1,8 @@
 "use client";
 
 import axios from "axios";
-import { cookies } from "next/headers";
+import cookies from "react-cookies";
 
-const cookieStore = cookies();
 const SERVER = process.env.NEXT_PUBLIC_SERVER_URL;
 
 
@@ -14,7 +13,7 @@ const publicApi = axios.create({
 const authApi = axios.create({
     baseURL: SERVER,
     headers: {
-        "Authorization": "Bearer " + cookieStore.get("accessToken")
+        "Authorization": "Bearer " + cookies.load("accessToken")
     },
 });
 

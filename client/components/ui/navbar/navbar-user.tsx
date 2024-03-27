@@ -12,14 +12,20 @@ import SearchButton from './search-button';
 import { MdOutlinePostAdd } from "react-icons/md";
 import { Popover, PopoverContent, PopoverTrigger } from '../popover';
 import { Separator } from '../separator';
+import { Avatar, AvatarFallback, AvatarImage } from '../avatar';
+import { useDispatch } from 'react-redux';
+import { logout } from '@/redux/slices/currentUserSlice';
 
 
-const NavbarUser = ({ user }: { user: User }) => {
+const NavbarUser = ({ user }: { user: any }) => {
     const { theme, setTheme } = useTheme();
 
     const changeTheme = () => {
         setTheme(theme === 'dark' ? 'light' : 'dark');
     }
+
+    const dispatch = useDispatch();
+
     return (
         <div className="flex items-center gap-x-1">
             <div className="hidden lg:flex items-center gap-x-1">
@@ -42,24 +48,20 @@ const NavbarUser = ({ user }: { user: User }) => {
             <Popover>
                 <PopoverTrigger asChild>
                     <div className="relative ml-1">
-                        <Image
-                            className="rounded-full h-12 w-12"
-                            width={160}
-                            height={160}
-                            src={user.avatar}
-                            alt="User avatar" />
+                        <Avatar className='w-12 h-12 cursor-pointer'>
+                            <AvatarImage src={user.avatar} alt={user.username} />
+                            <AvatarFallback>CN</AvatarFallback>
+                        </Avatar>
                         <Button className="absolute-button text-white"><ChevronDown className="dark:text-white" size={15} /></Button>
                     </div>
                 </PopoverTrigger>
                 <PopoverContent className="mt-[0.63rem] p-2 w-80 dark:bg-oupia-base flex flex-col gap-1" align='end'>
                     <div className="mb-1">
-                        <Link href={`/profile/${user.account?.username}`} className="w-full flex gap-x-4 items-center p-2 hover:bg-accent rounded">
-                            <Image
-                                className="rounded-full h-12 w-12"
-                                width={160}
-                                height={160}
-                                src={user.avatar}
-                                alt="User avatar" />
+                        <Link href={`/profile/${user.username}`} className="w-full flex gap-x-4 items-center p-2 hover:bg-accent rounded">
+                            <Avatar className='w-12 h-12'>
+                                <AvatarImage src={user.avatar} alt={user.username} />
+                                <AvatarFallback>CN</AvatarFallback>
+                            </Avatar>
                             <h2 className="font-semibold text-lg">{user.fullName}</h2>
                         </Link>
                     </div>
@@ -91,13 +93,13 @@ const NavbarUser = ({ user }: { user: User }) => {
                         </div>
                     </div>
                     <Separator />
-                    <div className="w-full flex items-center py-1 px-2 hover:bg-accent rounded text-sm">
+                    <div onClick={() => dispatch(logout())} className="w-full flex items-center py-1 px-2 hover:bg-accent rounded text-sm">
                         <LogOut className="mr-2 h-4 w-4" />
                         <span>Đăng xuất</span>
                     </div>
                 </PopoverContent>
             </Popover>
-        </div>
+        </div >
 
 
     );

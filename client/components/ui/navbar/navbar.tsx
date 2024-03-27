@@ -7,7 +7,6 @@ import NavbarRoutes from './navbar-routes';
 import "./style.css";
 import NavbarUser from './navbar-user';
 import { Button } from '../button';
-import { User } from '@/interfaces/User';
 import Link from 'next/link';
 import SearchButton from './search-button';
 import { useTheme } from 'next-themes';
@@ -20,6 +19,8 @@ const Navbar = () => {
 
     const { theme, setTheme } = useTheme();
 
+    console.log(user);
+
     return (
         <nav className="bg-background dark:bg-oupia-base p-4 border-b h-[60px] lg:h-[80px] w-full fixed inset-x-0 top-0 shadow z-50" >
             <div className="flex h-full items-center justify-between container">
@@ -31,10 +32,6 @@ const Navbar = () => {
                 {user ?
                     <NavbarUser user={user} /> :
                     <div className="flex gap-x-2">
-                        <SearchButton />
-                        <Link href="/sign-in">
-                            <Button className="styled-button">Đăng nhập</Button>
-                        </Link>
                         <>
                             {theme === "light" &&
                                 <Button variant={"ghost"} onClick={() => { setTheme("dark") }} className="p-2.5 dark:hover:bg-oupia-base">
@@ -46,6 +43,10 @@ const Navbar = () => {
                                 </Button>
                             }
                         </>
+                        <SearchButton />
+                        <Link href="/sign-in">
+                            <Button className="styled-button">Đăng nhập</Button>
+                        </Link>
                     </div>
                 }
             </div>
