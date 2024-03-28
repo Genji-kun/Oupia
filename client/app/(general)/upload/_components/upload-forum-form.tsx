@@ -66,7 +66,7 @@ function UploadForumForm() {
                         <span className="font-semibold text-lg">#HashTag</span>
                     </AccordionTrigger>
                     <AccordionContent>
-                        Yes. It's animated by default, but you can disable it if you prefer.
+                        {/* Yes. It's animated by default, but you can disable it if you prefer. */}
                     </AccordionContent>
                 </AccordionItem>
 
