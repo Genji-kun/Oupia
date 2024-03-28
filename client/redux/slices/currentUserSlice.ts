@@ -10,6 +10,8 @@ const currentUserSlice = createSlice({
         },
         logout: (state) => {
             state.user = null;
+            cookies.remove("accessToken");
+            cookies.remove("user");
         },
     },
 });

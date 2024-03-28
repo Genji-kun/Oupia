@@ -1,6 +1,6 @@
 export const authEndpoints = {
     "sign-in": `/auth/login/`,
-    "sign-up": `/api/users/`,
+    "sign-up": `/store/register/`,
     "current-user": `/auth/current-user/`,
 }
 

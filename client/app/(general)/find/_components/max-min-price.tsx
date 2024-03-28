@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const MaxMinPrice = () => {
     const dispatch = useDispatch();
-    const price = useSelector((state: RootState) => state.motelFilter.price);
+    const price = useSelector((state: RootState) => state.assetFilterSlice.price);
     const [values, setValues] = useState(price);
     const handleInputChange = (index: number, event: any) => {
         let value = parseInt(event.target.value, 10);

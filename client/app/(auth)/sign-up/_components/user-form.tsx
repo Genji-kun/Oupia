@@ -1,7 +1,7 @@
 "use client"
 
 import { Input } from '@/components/ui/input';
-import { ChevronLeft, Loader } from 'lucide-react';
+import { ChevronLeft, Loader, Loader2 } from 'lucide-react';
 import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 import defaultAvatar from "@/public/user-avatar.png";
@@ -12,6 +12,9 @@ import * as z from "zod"
 import { Button } from '@/components/ui/button';
 import { useAuthTabContext } from '@/contexts/auth-tab-context';
 import { useSignUpContext } from '@/contexts/sign-up-context';
+import { publicApi } from '@/configs/axiosInstance';
+import { authEndpoints } from '@/configs/axiosEndpoints';
+import { toast } from 'sonner';
 
 const formSchema = z.object({
     avatar: typeof File !== 'undefined' ? z.instanceof(File).optional() : z.any().optional(),
@@ -32,19 +35,18 @@ const formSchema = z.object({
 })
 
 const UserForm = () => {
-    const { user, setUser } = useSignUpContext();
+    const { user, setUser, avatar, setAvatar, avatarFile, setAvatarFile } = useSignUpContext();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            avatar: user ? user.avatar : undefined,
+            avatar: avatarFile,
             username: user ? user.account?.username : "",
             password: user ? user.account?.password : "",
             confirm: user ? user.account?.confirm : "",
         },
     })
 
-    const [avatar, setAvatar] = useState(user ? user.avatar : "");
     const [account, setAccount] = useState(user ? user.account : {});
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -56,13 +58,9 @@ const UserForm = () => {
             const file: File = evt.target.files[0];
             const fileURL = URL.createObjectURL(file);
             setAvatar(fileURL);
-            setUser((current: any) => {
-                return { ...current, avatar: fileURL };
-            });
+            setAvatarFile(file);
         }
     };
-
-    console.log(user)
 
 
     useEffect(() => {
@@ -91,11 +89,24 @@ const UserForm = () => {
     }, [account, setUser]);
 
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
+    async function onSubmit(values: z.infer<typeof formSchema>) {
         setIsSubmitting(true);
-        console.log(values);
-        // Kiểm tra email đã tồn tại chưa
+        if (user && avatarFile) {
+            const form = new FormData();
+            form.append("user", JSON.stringify(user));
+            form.append("avatarFile", avatarFile);
+            try {
+                const res = await publicApi.post(authEndpoints["sign-up"], form);
+                if (res.status === 200) {
+                    toast("Đăng ký thành công");
 
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        console.log(form);
+        setIsSubmitting(false);
     }
 
     return (
@@ -180,7 +191,7 @@ const UserForm = () => {
                     {isSubmitting ? <>
                         <Button disabled className=" ml-auto w-fit styled-button border-gray-200 border flex gap-3 ">
                             <span className="text-base">Đang xử lý</span>
-                            <Loader size={4} />
+                            <Loader2 size={4} className="animate-spin" />
                         </Button>
                     </> : <>
                         <div className="w-fit flex gap-x-2 items-center ml-auto pt-2">

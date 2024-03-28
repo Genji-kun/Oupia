@@ -39,7 +39,7 @@ const NavbarUser = ({ user }: { user: any }) => {
             </div>
             <Link href="/messages" className="ml-1">
                 <Button variant="ghost" className="p-2.5 hover:bg-border/70 hover:shadow dark:hover:bg-accent dark:hover:shadow-black">
-                    <MessagesSquare size={20}></MessagesSquare>
+                    <MessagesSquare size={20} />
                 </Button>
             </Link>
             <Button variant="ghost" className="p-2.5 hover:bg-border/70 hover:shadow dark:hover:bg-accent dark:hover:shadow-black">

@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import { AuthTabProvider } from '@/contexts/auth-tab-context';
 import React from 'react';

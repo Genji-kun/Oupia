@@ -15,10 +15,12 @@ const SearchButton = () => {
         <div>
             <Dialog>
                 <DialogTrigger asChild>
-                    <Button variant={"outline"} className="dark:bg-oupia-sub px-2.5 dark:border-none justify-between items-center xl:text-muted-foreground xl:w-80 xl:px-4 hover:shadow shadow-black/50">
-                        <span className="hidden xl:block">Tìm kiếm nơi thuê...</span>
-                        <Search size={20}></Search>
-                    </Button>
+                    <div>
+                        <Button variant={"outline"} className="dark:bg-oupia-sub px-2.5 dark:border-none justify-between items-center xl:text-muted-foreground xl:w-80 xl:px-4 hover:shadow shadow-black/50">
+                            <span className="hidden xl:block">Tìm kiếm nơi thuê...</span>
+                            <Search size={20}></Search>
+                        </Button>
+                    </div>
                 </DialogTrigger>
                 <DialogContent className=" p-0 top-[40%] h-fit">
                     <DialogHeader className="border-b border-border">
@@ -27,23 +29,25 @@ const SearchButton = () => {
                                 <Search className="h-4 w-4" />
                             </div>
                             <input
-                                className="enabled:focus:ring-0 enabled:focus:outline-none border-none col-span-10 px-0 py-3 bg-background"
+                                className="enabled:focus:ring-0 enabled:focus:outline-none border-none col-span-11 pl-11 py-3 bg-background"
                                 placeholder='Tìm kiếm địa điểm, dự án cụ thể bạn muốn thuê...' />
                         </div>
                     </DialogHeader>
-                    {
-                        results.length === 0 ?
-                            <ScrollArea className="h-72 w-full">
-                                <div className="text-sm">
-                                    <h1 className="text-muted-foreground font-semibold px-5">Tìm kiếm gần đây</h1>
-                                    <div className="flex flex-col w-full gap-1">
+                    <>
+                        {
+                            results.length === 0 ?
+                                <ScrollArea className="h-72 w-full">
+                                    <div className="text-sm">
+                                        <h1 className="text-muted-foreground font-semibold px-5">Tìm kiếm gần đây</h1>
+                                        <div className="flex flex-col w-full gap-1">
 
+                                        </div>
                                     </div>
+                                </ScrollArea> : <div className="p-5 pt-0 flex flex-col justify-center">
+                                    <span className="text-center">Không tìm thấy kiếm quả.</span>
                                 </div>
-                            </ScrollArea> : <div className="p-5 pt-0 flex flex-col justify-center">
-                                <span className="text-center">Không tìm thấy kiếm quả.</span>
-                            </div>
-                    }
+                        }
+                    </>
                 </DialogContent>
             </Dialog>
         </div >

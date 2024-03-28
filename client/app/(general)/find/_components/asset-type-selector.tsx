@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const AssetTypeSelector = () => {
     const dispatch = useDispatch();
 
-    const assetType = useSelector((state: RootState) => state.motelFilter.assetType);
+    const assetType = useSelector((state: RootState) => state.assetFilterSlice.assetType);
 
     const handleCheckboxChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
         const assetTypeValue = evt.target.id;

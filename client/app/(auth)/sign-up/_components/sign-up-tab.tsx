@@ -1,3 +1,5 @@
+"use client"
+
 import Link from 'next/link';
 import React from 'react';
 import GoogleSignInButton from '../../sign-in/_components/google-sign-in-button';

@@ -46,6 +46,7 @@ const SignInForm = () => {
                 let { data } = await authApi.get(authEndpoints["current-user"]);
                 cookies.save("user", data, {});
                 dispatch(login(data));
+                setIsSubmitting(false);
                 router.push("/");
             }
         } catch (error) {

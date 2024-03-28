@@ -15,11 +15,10 @@ import { useSelector } from 'react-redux';
 
 const Navbar = () => {
 
-    const user = useSelector((state: any) => state.currentUserSlice.user);
+    const { user } = useSelector((state: any) => state.currentUserSlice);
 
     const { theme, setTheme } = useTheme();
 
-    console.log(user);
 
     return (
         <nav className="bg-background dark:bg-oupia-base p-4 border-b h-[60px] lg:h-[80px] w-full fixed inset-x-0 top-0 shadow z-50" >
@@ -29,28 +28,31 @@ const Navbar = () => {
                     <NavbarRoutes />
                 </div>
                 <NavbarMenu />
-                {user ?
-                    <NavbarUser user={user} /> :
-                    <div className="flex gap-x-2">
-                        <>
-                            {theme === "light" &&
-                                <Button variant={"ghost"} onClick={() => { setTheme("dark") }} className="p-2.5 dark:hover:bg-oupia-base">
-                                    <Sun size={20} />
-                                </Button>}
-                            {theme === "dark" &&
-                                <Button variant={"ghost"} onClick={() => { setTheme("light") }} className="p-2.5 dark:hover:bg-oupia-base">
-                                    <Moon size={20} />
-                                </Button>
-                            }
-                        </>
-                        <SearchButton />
-                        <Link href="/sign-in">
-                            <Button className="styled-button">Đăng nhập</Button>
-                        </Link>
-                    </div>
-                }
+                <>
+                    {user ?
+                        <NavbarUser user={user} /> :
+                        <div className="flex gap-x-2">
+                            <>
+                                {theme === "light" &&
+                                    <Button variant={"ghost"} onClick={() => { setTheme("dark") }} className="p-2.5 dark:hover:bg-oupia-base">
+                                        <Sun size={20} />
+                                    </Button>
+                                }
+                                {theme === "dark" &&
+                                    <Button variant={"ghost"} onClick={() => { setTheme("light") }} className="p-2.5 dark:hover:bg-oupia-sub">
+                                        <Moon size={20} />
+                                    </Button>
+                                }
+                            </>
+                            <SearchButton />
+                            <Link href="/sign-in">
+                                <Button className="styled-button">Đăng nhập</Button>
+                            </Link>
+                        </div>
+                    }
+                </>
             </div>
-        </nav >
+        </nav>
     );
 };
 

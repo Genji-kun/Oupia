@@ -80,6 +80,7 @@ const InfoForm = () => {
         setIsSubmitting(true);
         console.log(values);
         // Kiểm tra email đã tồn tại chưa
+        setIsSubmitting(false);
         setTab("user");
     }
 

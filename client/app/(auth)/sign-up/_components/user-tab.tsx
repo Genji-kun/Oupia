@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react';
 import UserForm from './user-form';
 import { Separator } from '@/components/ui/separator';
