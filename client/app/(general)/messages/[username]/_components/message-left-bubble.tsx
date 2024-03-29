@@ -26,7 +26,7 @@ function MessageLeftBubble({ chat }: { chat: any }) {
                     <h4 className="text-muted-foreground">11:38</h4>
                 </div>
                 <div className="flex gap-2 items-center" onMouseEnter={() => { setIsHover(true) }} onMouseLeave={() => { setIsHover(false) }}>
-                    <p className={cn("bg-gray-200/60 dark:bg-accent py-2 px-3 rounded-2xl rounded-tl-none transition-all", expanded ? "max-w-sm" : "max-w-lg")}>I think our users will really appreciate the improvements.</p>
+                    <p className={cn("bg-gray-200/80 dark:bg-accent py-2 px-3 rounded-2xl rounded-tl-none transition-all", expanded ? "max-w-sm" : "max-w-lg")}>I think our users will really appreciate the improvements.</p>
                     {isHover &&
                         <Button variant={"ghost"} className="p-2 h-fit">
                             <BiDotsHorizontalRounded className="w-4 h-4" />

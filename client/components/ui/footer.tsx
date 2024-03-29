@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 
 const Footer = () => {
 
-    const [isHidden, setisHidden] = useState<boolean>();
+    const [isHidden, setisHidden] = useState<boolean>(true);
     const pathname = usePathname();
     useEffect(() => {
         if (pathname === "/find" || pathname === "/assets" || pathname.startsWith("/messages") || pathname.startsWith("/upload"))

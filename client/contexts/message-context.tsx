@@ -2,12 +2,13 @@
 
 import { User } from '@/interfaces/User';
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
+import cookies from "react-cookies";
 
 interface IMessageContext {
     user: User;
     setUser: React.Dispatch<React.SetStateAction<User>>;
-    expanded: any;
-    setExpanded: React.Dispatch<React.SetStateAction<any>>;
+    expanded: boolean;
+    setExpanded: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const MessageContext = createContext<IMessageContext | undefined>(undefined);
@@ -15,18 +16,7 @@ const MessageContext = createContext<IMessageContext | undefined>(undefined);
 export const MessageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
     const [user, setUser] = useState<User>({});
-    const [expanded, setExpanded] = useState<any>(() => {
-        if (localStorage.getItem('expanded'))
-            return JSON.parse(localStorage.getItem('expanded')!);
-        return false;
-    });
-
-
-
-
-    useEffect(() => {
-        localStorage.setItem('expanded', JSON.stringify(expanded));
-    }, [expanded]);
+    const [expanded, setExpanded] = useState<boolean>(false);
 
     return (
         <MessageContext.Provider value={{ user, setUser, expanded, setExpanded }}>

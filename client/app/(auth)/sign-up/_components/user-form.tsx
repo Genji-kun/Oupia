@@ -67,7 +67,7 @@ const UserForm = () => {
         const subscription = form.watch((values: any) => {
             for (const key in values) {
                 if (values[key]) {
-                    if (key === "username" || key === "password" || key === "confirm") {
+                    if (key === "username" || key === "password") {
                         setAccount((current: any) => {
                             return { ...current, [key]: values[key] };
                         });
@@ -93,13 +93,12 @@ const UserForm = () => {
         setIsSubmitting(true);
         if (user && avatarFile) {
             const form = new FormData();
-            form.append("user", JSON.stringify(user));
+            form.append('user', new Blob([JSON.stringify(user)], { type: "application/json" }))
             form.append("avatarFile", avatarFile);
             try {
                 const res = await publicApi.post(authEndpoints["sign-up"], form);
                 if (res.status === 200) {
                     toast("Đăng ký thành công");
-
                 }
             } catch (error) {
                 console.error(error);

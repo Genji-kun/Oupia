@@ -9,7 +9,7 @@ import MessageInput from './_components/message-input';
 
 const UserMessageRoomPage = () => {
 
-    const { user, setUser } = useMessageContext();
+    const { user, setUser, expanded } = useMessageContext();
 
     useEffect(() => {
         setUser({
@@ -26,7 +26,7 @@ const UserMessageRoomPage = () => {
     return (
 
         <div className="flex w-full h-full bg-background overflow-hidden dark:bg-oupia-base rounded-xl shadow-dark-theme shadow-light-theme">
-            <div className="w-full h-full flex flex-col relative min-h-[clac(100vh-80px)] lg:min-h-fit">
+            <div className={`w-full h-full flex flex-col relative min-h-[clac(100vh-80px)] lg:min-h-fit ${expanded && "border-r"}`}>
                 <UserHeaderBar />
                 <MessageContainer />
                 <MessageInput />
