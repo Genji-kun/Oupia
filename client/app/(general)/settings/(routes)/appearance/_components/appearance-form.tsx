@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
-import { useTranslation } from 'next-i18next';
 
 
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
@@ -17,10 +16,7 @@ const appearanceFormSchema = z.object({
     theme: z.enum(["light", "dark"], {
         required_error: "Hãy chọn một chế độ.",
     }),
-    language: z.enum(["vi", "en"], {
-        invalid_type_error: "Chọn một ngôn ngữ",
-        required_error: "Hãy chọn một ngôn ngữ.",
-    }),
+
 })
 
 type AppearanceFormValues = z.infer<typeof appearanceFormSchema>
@@ -29,11 +25,9 @@ type AppearanceFormValues = z.infer<typeof appearanceFormSchema>
 export function AppearanceForm() {
 
     const { theme, setTheme } = useTheme();
-    const { i18n } = useTranslation();
 
     const defaultValues: Partial<AppearanceFormValues> = {
         theme: theme === "dark" ? "dark" : "light",
-        language: "vi"
     }
 
     const form = useForm<AppearanceFormValues>({
@@ -43,39 +37,12 @@ export function AppearanceForm() {
 
     function onSubmit(data: AppearanceFormValues) {
         setTheme(data.theme);
-        i18n.changeLanguage(data.language);
         toast.success(`Đã thay đổi thành chủ đề thành "${data.theme === "dark" ? "Tối" : "Sáng"}".`)
     }
 
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                <FormField
-                    control={form.control}
-                    name="language"
-                    render={({ field }) => (
-                        <FormItem >
-                            <FormLabel className="text-base">Ngôn ngữ</FormLabel>
-                            <Select
-                                onValueChange={field.onChange}
-                                defaultValue={field.value}>
-                                <FormControl className="w-full md:w-96">
-                                    <SelectTrigger>
-                                        <SelectValue />
-                                    </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                    <SelectItem value="vi">Tiếng Việt</SelectItem>
-                                    <SelectItem value="en">Tiếng Anh</SelectItem>
-                                </SelectContent>
-                            </Select>
-                            <FormDescription>
-                                Chọn ngôn ngữ để hiển thị khi sử dụng trừ thông tin bài viết, nội dung đoạn chat, v.v...
-                            </FormDescription>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
                 <FormField
                     control={form.control}
                     name="theme"
