@@ -33,14 +33,18 @@ const HomeTitle = () => {
     }
 
     return (
-        <div className="flex flex-col gap-y-4 md:gap-y-6 2xl:gap-y-12 items-center 2xl:-translate-y-24">
-            <div className="w-20 md:w-24 2xl:w-48 aspect-square">
-                <motion.svg variants={fillVariants} initial="initial" animate="animate" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 342 396.81">
-                    <motion.path className="fill-primary-500 stroke-primary-500" variants={pathVariants} initial="initial" animate="animate" strokeWidth={5} fill="none" d="M4.87,316.94,69,381.06c35.8,35.89,93,6,76-45h0s-21.14-53.93-27-114c-8-82,35.64-120.23,85-112,42,7,58.95,49,57,75-3,40-47,59-46,87,1.07,30,24.79,40,34.89,40h76.43A16.68,16.68,0,0,0,342,295.38V143.93a16.69,16.69,0,0,0-6.07-12.87L181.61,3.81a16.68,16.68,0,0,0-21.22,0L6.07,131.06A16.69,16.69,0,0,0,0,143.93V305.16A16.66,16.66,0,0,0,4.87,316.94Z" />
-                </motion.svg>
+        <div className="flex flex-col gap-y-4 md:gap-y-6 items-center">
+            <div className="flex gap-2 items-center justify-center">
+                <div className="w-20 md:w-24 2xl:w-40 aspect-square">
+                    <motion.svg variants={fillVariants} initial="initial" animate="animate" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 342 396.81">
+                        <motion.path className="fill-primary stroke-primary" variants={pathVariants} initial="initial" animate="animate" strokeWidth={5} fill="none" d="M4.87,316.94,69,381.06c35.8,35.89,93,6,76-45h0s-21.14-53.93-27-114c-8-82,35.64-120.23,85-112,42,7,58.95,49,57,75-3,40-47,59-46,87,1.07,30,24.79,40,34.89,40h76.43A16.68,16.68,0,0,0,342,295.38V143.93a16.69,16.69,0,0,0-6.07-12.87L181.61,3.81a16.68,16.68,0,0,0-21.22,0L6.07,131.06A16.69,16.69,0,0,0,0,143.93V305.16A16.66,16.66,0,0,0,4.87,316.94Z" />
+                    </motion.svg>
+                </div>
+
             </div>
+
             <div className="overflow-hidden">
-                <motion.h1 variants={textVariants} initial="initial" animate="animate" className="uppercase text-2xl md:text-3xl 2xl:text-6xl 2xl:leading-tight font-bold text-gray-100 leading-tight text-center w-[75%] mx-auto">
+                <motion.h1 variants={textVariants} initial="initial" animate="animate" className="uppercase text-2xl md:text-3xl 2xl:text-5xl 2xl:leading-tight font-bold text-gray-100 leading-tight text-center w-[75%] mx-auto">
                     Tìm ngay một nơi ở lý tưởng nhất giành cho bạn
                 </motion.h1>
             </div>

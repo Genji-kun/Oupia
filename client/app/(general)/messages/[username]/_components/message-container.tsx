@@ -5,7 +5,7 @@ import MessageRightBubble from './message-right-bubble';
 const MessageContainer = () => {
     return (
         <div className="overflow-y-auto flex-grow">
-            <div className="px-4 flex flex-col gap-2 bg-accent dark:bg-oupia-base">
+            <div className="px-4 flex flex-col gap-2 dark:bg-oupia-base">
                 <MessageLeftBubble chat={undefined} />
                 <MessageRightBubble chat={undefined} />
                 <MessageRightBubble chat={undefined} />

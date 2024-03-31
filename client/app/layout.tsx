@@ -21,7 +21,7 @@ export default function RootLayout(
         <link rel="icon" href="./favicon.ico" />
         <link href='https://cdn.jsdelivr.net/npm/@goongmaps/goong-js@1.0.9/dist/goong-js.css' rel='stylesheet' />
       </Head>
-      <body className={`${BeauSans.variable}  bg-border dark:bg-background`}>
+      <body className={`${BeauSans.variable} bg-border/50 dark:bg-background`}>
         <Providers>
           {children}
           <Toaster />

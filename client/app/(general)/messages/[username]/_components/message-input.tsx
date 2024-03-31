@@ -131,9 +131,9 @@ const MessageInput = () => {
                     :
                     <div className={`bg-background dark:bg-oupia-base w-full`}>
                         <div className="flex gap-2 items-center p-4">
-                            <div className="h-10 bg-gray-300 aspect-square rounded animate-pulse"></div>
-                            <div className="h-10 bg-gray-300 w-full rounded animate-pulse"></div>
-                            <div className="h-10 bg-gray-300 aspect-video rounded animate-pulse"></div>
+                            <div className="h-10 bg-gray-300 dark:bg-oupia-sub aspect-square rounded animate-pulse"></div>
+                            <div className="h-10 bg-gray-300 dark:bg-oupia-sub w-full rounded animate-pulse"></div>
+                            <div className="h-10 bg-gray-300 dark:bg-oupia-sub aspect-video rounded animate-pulse"></div>
                         </div>
                     </div>
 
