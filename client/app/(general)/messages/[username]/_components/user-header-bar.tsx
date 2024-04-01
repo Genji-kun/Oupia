@@ -38,7 +38,6 @@ const UserHeaderBar = () => {
                 <TooltipProvider>
                     <Tooltip>
                         <TooltipTrigger>
-
                             {isClient ? (expanded ?
                                 <Button onClick={() => { setExpanded(false) }} variant={"ghost"} className="px-2.5 text-primary hover:text-primary">
                                     <PanelRightClose className="w-6 h-6" />

@@ -13,7 +13,7 @@ function UploadModeTab() {
 
     return (
         <Tabs defaultValue={""}>
-            <TabsList className="bg-oupia-sub p-1 h-fit shadow-dark-theme border w-full">
+            <TabsList className="bg-oupia-sub p-1 h-fit border w-full">
                 <TabsTrigger value="post" className="py-2 px-4 gap-2 w-full">
                     <span className="font-[500]">Đăng bài viết</span>
                 </TabsTrigger>

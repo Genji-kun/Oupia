@@ -8,6 +8,7 @@ import { useUploadContext } from '@/contexts/upload-context';
 import { UploadCloudIcon, X } from 'lucide-react';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
+import TagsInput from './tags-input';
 
 function UploadForumForm() {
 
@@ -16,7 +17,7 @@ function UploadForumForm() {
 
     useEffect(() => {
         setUploadForm((current: any) => { return { ...current, imageList: imageList } })
-    }, [imageList])
+    }, [imageList, setUploadForm])
 
     const handleFileChange = (evt: any) => {
         const newFiles = Array.prototype.slice.call(evt.target.files);
@@ -60,16 +61,14 @@ function UploadForumForm() {
                         />
                     </AccordionContent>
                 </AccordionItem>
-
                 <AccordionItem value="hash-tag">
                     <AccordionTrigger>
                         <span className="font-semibold text-lg">#HashTag</span>
                     </AccordionTrigger>
                     <AccordionContent>
-                        {/* Yes. It's animated by default, but you can disable it if you prefer. */}
+                        <TagsInput />
                     </AccordionContent>
                 </AccordionItem>
-
                 <AccordionItem value="images">
                     <AccordionTrigger>
                         <span className="font-semibold text-lg">Hình ảnh đính kèm</span>
