@@ -16,7 +16,7 @@ const AssetItem = ({ asset }: { asset: Asset }) => {
 
     useEffect(() => {
         if (!api) {
-            return
+            return;
         }
         setCount(api.scrollSnapList().length)
         setCurrent(api.selectedScrollSnap() + 1)

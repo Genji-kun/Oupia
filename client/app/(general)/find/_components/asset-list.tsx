@@ -5,12 +5,12 @@ import React, { useState } from 'react';
 import AssetItem from './asset-item';
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useToggleContext } from '@/contexts/toggle-search-context';
 import { cn } from '@/lib/utils';
+import { useFindAssetContext } from '@/contexts/find-asset-context';
 
 const AssetList = () => {
 
-    const { openMap } = useToggleContext();
+    const { openMap } = useFindAssetContext();
 
     const [assets, setAssets] = useState<Asset[]>([
         {

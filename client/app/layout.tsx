@@ -24,7 +24,7 @@ export default function RootLayout(
       <body className={`${BeauSans.variable} bg-border/50 dark:bg-background`}>
         <Providers>
           {children}
-          <Toaster />
+          <Toaster richColors />
         </Providers>
       </body>
     </html>

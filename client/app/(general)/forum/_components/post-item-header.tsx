@@ -10,16 +10,18 @@ import Link from 'next/link';
 import { Post } from '@/interfaces/Post';
 import React from 'react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { BsThreeDots } from "react-icons/bs";
+
 
 const PostItemHeader = ({ post }: { post: Post }) => {
     return (
-        <div className="flex gap-x-5 p-4 pb-0">
+        <div className="flex gap-x-3 items-start">
             <div>
                 <HoverCard>
                     <HoverCardTrigger asChild>
                         <div>
                             <Link href={`/profile/${post.user.account?.username}`}>
-                                <Image src={post.user.avatar} width={160} height={160} alt="User Avatar" className="rounded-full w-12 h-12 object-cover" />
+                                <Image src={post.user.avatar} width={160} height={160} alt="User Avatar" className="rounded-full w-12 aspect-square object-cover" />
                             </Link>
                         </div>
                     </HoverCardTrigger>
@@ -65,15 +67,12 @@ const PostItemHeader = ({ post }: { post: Post }) => {
                     </HoverCardContent>
                 </HoverCard>
             </div>
-
-            <div className="flex flex-col">
+            <div className="h-full flex flex-col justify-center">
                 <HoverCard>
                     <HoverCardTrigger asChild>
-                        <div>
-                            <Link href={`/profile/${post.user.account?.username}`}>
-                                <h2 className="font-semibold text-base hover:underline">{post.user.fullName}</h2>
-                            </Link>
-                        </div>
+                        <Link href={`/profile/${post.user.account?.username}`}>
+                            <h2 className="font-semibold hover:underline leading-0">{post.user.fullName}</h2>
+                        </Link>
                     </HoverCardTrigger>
                     <HoverCardContent className="w-96">
                         <div className="grid grid-cols-8 gap-x-5 w-full">
@@ -116,13 +115,23 @@ const PostItemHeader = ({ post }: { post: Post }) => {
                         </div>
                     </HoverCardContent>
                 </HoverCard>
-                <h4 className="text-gray-500 dark:text-gray-600 text-sm">1 giờ trước</h4>
+                <h4 className="text-muted-foreground text-xs">1 giờ trước</h4>
             </div>
-            <div className="ml-auto">
+            <div className="ml-auto flex gap-1">
                 <TooltipProvider>
                     <Tooltip>
                         <TooltipTrigger asChild>
-                            <Button variant={"ghost"} className="px-3 rounded-full">
+                            <Button variant={"ghost"} className="p-2 rounded-full w-fit h-fit">
+                                <BsThreeDots size="16" />
+                            </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>Tùy chọn</p>
+                        </TooltipContent>
+                    </Tooltip>
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <Button variant={"ghost"} className="p-2 rounded-full w-fit h-fit">
                                 <X size="16" />
                             </Button>
                         </TooltipTrigger>

@@ -15,6 +15,7 @@ import { useSignUpContext } from '@/contexts/sign-up-context';
 import { publicApi } from '@/configs/axiosInstance';
 import { authEndpoints } from '@/configs/axiosEndpoints';
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 const formSchema = z.object({
     avatar: typeof File !== 'undefined' ? z.instanceof(File).optional() : z.any().optional(),
@@ -35,7 +36,16 @@ const formSchema = z.object({
 })
 
 const UserForm = () => {
+
+    const router = useRouter();
+
     const { user, setUser, avatar, setAvatar, avatarFile, setAvatarFile } = useSignUpContext();
+    const { setTab } = useAuthTabContext();
+
+    const [account, setAccount] = useState(user ? user.account : {});
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const fileInputRef = useRef(null);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -46,22 +56,6 @@ const UserForm = () => {
             confirm: user ? user.account?.confirm : "",
         },
     })
-
-    const [account, setAccount] = useState(user ? user.account : {});
-    const [isSubmitting, setIsSubmitting] = useState(false);
-
-    const { setTab } = useAuthTabContext();
-
-    const fileInputRef = useRef(null);
-    const handleFileChange = (evt: any) => {
-        if (evt.target.files && evt.target.files[0]) {
-            const file: File = evt.target.files[0];
-            const fileURL = URL.createObjectURL(file);
-            setAvatar(fileURL);
-            setAvatarFile(file);
-        }
-    };
-
 
     useEffect(() => {
         const subscription = form.watch((values: any) => {
@@ -76,7 +70,6 @@ const UserForm = () => {
             }
 
         });
-
         return () => {
             subscription.unsubscribe();
         };
@@ -88,8 +81,17 @@ const UserForm = () => {
         });
     }, [account, setUser]);
 
+    const handleFileChange = (evt: any) => {
+        if (evt.target.files && evt.target.files[0]) {
+            const file: File = evt.target.files[0];
+            const fileURL = URL.createObjectURL(file);
+            console.log(file.name)
+            setAvatar(fileURL);
+            setAvatarFile(file);
+        }
+    };
 
-    async function onSubmit(values: z.infer<typeof formSchema>) {
+    const onSubmit = async () => {
         setIsSubmitting(true);
         if (user && avatarFile) {
             const form = new FormData();
@@ -98,7 +100,8 @@ const UserForm = () => {
             try {
                 const res = await publicApi.post(authEndpoints["sign-up"], form);
                 if (res.status === 200) {
-                    toast("Đăng ký thành công");
+                    toast.success("Đăng ký thành công");
+                    router.push("/sign-in");
                 }
             } catch (error) {
                 console.error(error);
@@ -134,7 +137,7 @@ const UserForm = () => {
                                             accept='image/png, image/jpeg, image/jpg'
                                             multiple={false}
                                             disabled={isSubmitting}
-                                            className="text-base dark:bg-border/50"
+                                            className="text-base dark:bg-oupia-sub"
                                             ref={fileInputRef}
                                             onChange={handleFileChange} />
                                     </div>
@@ -151,7 +154,7 @@ const UserForm = () => {
                             <FormItem >
                                 <FormLabel className="text-base font-semibold text-foreground">Tên người dùng</FormLabel>
                                 <FormControl>
-                                    <Input {...field} type="text" disabled={isSubmitting} className="text-base  dark:bg-border/50" />
+                                    <Input {...field} type="text" disabled={isSubmitting} className="text-base  dark:bg-oupia-sub" />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -166,7 +169,7 @@ const UserForm = () => {
                                 <FormItem >
                                     <FormLabel className="text-base font-semibold text-foreground">Mật khẩu</FormLabel>
                                     <FormControl>
-                                        <Input {...field} type="password" disabled={isSubmitting} togglePassword={true} className="text-base dark:bg-border/50" />
+                                        <Input {...field} type="password" disabled={isSubmitting} togglePassword={true} className="text-base dark:bg-oupia-sub" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -179,7 +182,7 @@ const UserForm = () => {
                                 <FormItem>
                                     <FormLabel className="text-base font-semibold text-foreground">Mật khẩu xác nhận</FormLabel>
                                     <FormControl>
-                                        <Input {...field} type="password" disabled={isSubmitting} togglePassword={true} className="text-base  dark:bg-border/50" />
+                                        <Input {...field} type="password" disabled={isSubmitting} togglePassword={true} className="text-base  dark:bg-oupia-sub" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -188,17 +191,19 @@ const UserForm = () => {
                     </div>
 
                     {isSubmitting ? <>
-                        <Button disabled className=" ml-auto w-fit styled-button border-gray-200 border flex gap-3 ">
-                            <span className="text-base">Đang xử lý</span>
-                            <Loader2 size={4} className="animate-spin" />
-                        </Button>
+                        <div className="pt-2  ml-auto w-fit">
+                            <Button disabled className=" styled-button flex gap-3 ">
+                                <span className="text-base">Đang xử lý</span>
+                                <Loader2 size="20" className="animate-spin" />
+                            </Button>
+                        </div>
                     </> : <>
                         <div className="w-fit flex gap-x-2 items-center ml-auto pt-2">
                             <Button type="button" variant="ghost" className="flex items-center gap-x-1 w-fit p-4" onClick={() => setTab("info")}>
                                 <ChevronLeft size="20" />
                                 <span className="font-semibold text-base">Quay lại</span>
                             </Button>
-                            <Button type="submit" className=" w-fit styled-button border-gray-200 border flex gap-2 px-6 py-4">
+                            <Button type="submit" className=" w-fit styled-button flex gap-2 px-6 py-4">
                                 <span className="text-base">Hoàn thành đăng ký</span>
                             </Button>
                         </div>

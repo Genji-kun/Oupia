@@ -5,13 +5,13 @@ import React from 'react';
 import SearchBar from './search-bar';
 import { AnimatePresence, motion } from "framer-motion";
 import MapContainer from './map-container';
-import { useToggleContext } from '@/contexts/toggle-search-context';
 import AssetList from './asset-list';
+import { useFindAssetContext } from '@/contexts/find-asset-context';
 
 
 const AssetContainer = () => {
 
-    const { openSearch, openMap } = useToggleContext();
+    const { openSearch, openMap } = useFindAssetContext();
 
     return (
         <div className="flex flex-col gap-4 w-full">

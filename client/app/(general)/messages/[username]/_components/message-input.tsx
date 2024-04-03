@@ -6,7 +6,6 @@ import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { cn } from '@/lib/utils';
 
 import Picker from "@emoji-mart/react";
 import data from "@emoji-mart/data";
@@ -16,6 +15,8 @@ import { ImageIcon, Link, Smile, StickyNote } from 'lucide-react';
 import { HiOutlineHomeModern } from "react-icons/hi2";
 import { BiSolidMessageSquareAdd } from "react-icons/bi";
 import { useTheme } from 'next-themes';
+
+import voice from "@/public/sounds/message.mp3";
 
 const MessageInput = () => {
 
@@ -39,6 +40,9 @@ const MessageInput = () => {
         evt.preventDefault();
         console.log(message);
         setMessage("");
+
+        const sound = new Audio(voice);
+        sound.play();
     }
 
 

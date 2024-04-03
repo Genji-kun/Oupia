@@ -4,6 +4,12 @@ export const authEndpoints = {
     "current-user": `/auth/current-user/`,
 }
 
+export const vnpEndpoints = {
+    "provinces": `/provinces/?basic=true&limit=100`,
+    "provId": (id: number) => `/provinces/${id}`,
+    "distId": (id: number) => `/districts/${id}`
+}
+
 export const Endpoints = {
     "assets": `/motels/`,
 }

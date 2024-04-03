@@ -23,14 +23,18 @@ import { User } from "@/interfaces/User";
 
 
 const formSchema = z.object({
-    fullName: z.string().min(4,
-        { message: "Vui lòng điền họ tên người dùng" }
+    fullName: z.string({
+        required_error: "Thông tin không được để trống"
+    }),
+    phoneNumber: z.string({
+        required_error: "Thông tin không được để trống"
+    }).min(10,
+        { message: "Số điện thoại phải là có 10 số" }
+    ).max(10,
+        { message: "Số điện thoại phải là có 10 số" }
     ),
-    phoneNumber: z.string().min(10,
-        { message: "Vui lòng điền số điện thoại" }
-    ),
-    email: z.string().min(1, {
-        message: "Vui lòng điền email người dùng"
+    email: z.string({
+        required_error: "Thông tin không được để trống"
     }).email({
         message: "Không đúng định dạng email",
     }),
@@ -95,7 +99,7 @@ const InfoForm = () => {
                         <FormItem >
                             <FormLabel className="text-base font-semibold text-foreground">Họ tên người dùng</FormLabel>
                             <FormControl>
-                                <Input {...field} type="text" disabled={isSubmiting} className="text-base  dark:bg-border/50" />
+                                <Input {...field} type="text" disabled={isSubmiting} className="text-base dark:bg-oupia-sub" />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -111,7 +115,7 @@ const InfoForm = () => {
                                 <FormLabel className="text-base font-semibold text-foreground">Giới tính</FormLabel>
                                 <Select disabled={isSubmiting} onValueChange={field.onChange} defaultValue={field.value}>
                                     <FormControl>
-                                        <SelectTrigger className="">
+                                        <SelectTrigger>
                                             <SelectValue />
                                         </SelectTrigger>
                                     </FormControl>
@@ -138,7 +142,7 @@ const InfoForm = () => {
                                                 <Button
                                                     variant={"outline"}
                                                     className={cn(
-                                                        "w-full text-left font-normal ",
+                                                        "w-full text-left font-normal dark:bg-oupia-sub",
                                                         !field.value && "text-muted-foreground"
                                                     )}
                                                     disabled={isSubmiting}
@@ -181,7 +185,7 @@ const InfoForm = () => {
                         <FormItem >
                             <FormLabel className="text-base font-semibold text-foreground">Tài khoản email</FormLabel>
                             <FormControl>
-                                <Input {...field} type="email" disabled={isSubmiting} className="text-base dark:bg-border/50" />
+                                <Input {...field} type="email" disabled={isSubmiting} className="text-basedark:bg-oupia-sub" />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -194,7 +198,7 @@ const InfoForm = () => {
                         <FormItem>
                             <FormLabel className="text-base font-semibold text-foreground">Số điện thoại</FormLabel>
                             <FormControl>
-                                <Input {...field} type="phone" disabled={isSubmiting} className="text-base  dark:bg-border/50" />
+                                <Input {...field} type="phone" disabled={isSubmiting} className="text-base dark:bg-oupia-sub" />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
