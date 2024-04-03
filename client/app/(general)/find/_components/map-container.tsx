@@ -129,7 +129,7 @@ const MapContainer = () => {
                 goongApiAccessToken={process.env.NEXT_PUBLIC_GOONG_MAPS_MAPTILES_KEY}
                 onViewportChange={(nextViewport: any) => setViewport(nextViewport)} >
                 {currentLayer === 'province' && selectedProv && (
-                    <Source id="province-source" type="geojson" data={geoJsonProv}>
+                    <Source id="province-source" type="geojson" data={geoJsonProv as any}>
                         <Layer
                             id="line"
                             type="line"
@@ -151,7 +151,7 @@ const MapContainer = () => {
                     </Source>
                 )}
                 {currentLayer === 'district' && selectedDist && (
-                    <Source id="district-source" type="geojson" data={geoJsonDist}>
+                    <Source id="district-source" type="geojson" data={geoJsonDist as any}>
                         <Layer
                             id="line"
                             type="line"
