@@ -1,9 +1,7 @@
 "use client";
 
-import { User } from '@/interfaces/User';
-import Image from 'next/image';
-import React from 'react';
-import { Bell, ChevronDown, ChevronRight, Key, LogOut, MessagesSquare, Moon, Settings } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Bell, ChevronDown, ChevronRight, Key, LogOut, MessagesSquare, Moon, Settings, UserRoundSearchIcon } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '../button';
 import { Switch } from '../switch';
@@ -15,16 +13,16 @@ import { Separator } from '../separator';
 import { Avatar, AvatarFallback, AvatarImage } from '../avatar';
 import { useDispatch } from 'react-redux';
 import { logout } from '@/redux/slices/currentUserSlice';
+import { convert } from '@/utils/convertAvatarAlt';
 
 
 const NavbarUser = ({ user }: { user: any }) => {
     const { theme, setTheme } = useTheme();
+    const dispatch = useDispatch();
 
     const changeTheme = () => {
         setTheme(theme === 'dark' ? 'light' : 'dark');
     }
-
-    const dispatch = useDispatch();
 
     return (
         <div className="flex items-center gap-x-1">
@@ -50,7 +48,7 @@ const NavbarUser = ({ user }: { user: any }) => {
                     <div className="relative ml-1">
                         <Avatar className='w-12 h-12 cursor-pointer'>
                             <AvatarImage src={user.avatar} alt={user.username} />
-                            <AvatarFallback>CN</AvatarFallback>
+                            <AvatarFallback>{convert(user.fullName)}</AvatarFallback>
                         </Avatar>
                         <Button className="absolute-button text-white"><ChevronDown className="dark:text-white" size={15} /></Button>
                     </div>
@@ -62,7 +60,21 @@ const NavbarUser = ({ user }: { user: any }) => {
                                 <AvatarImage src={user.avatar} alt={user.username} />
                                 <AvatarFallback>CN</AvatarFallback>
                             </Avatar>
-                            <h2 className="font-semibold text-lg">{user.fullName}</h2>
+                            <div className="flex flex-col">
+                                <h2 className="font-semibold text-lg">{user.fullName}</h2>
+                                {(() => {
+                                    switch (user.role) {
+                                        case "ROLE_TENANT":
+                                            return <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                                                <UserRoundSearchIcon className="w-4 h-4" />
+                                                <span>Người tìm căn hộ</span>
+                                            </div>
+                                        case "ROLE_LANDLORD":
+                                        default:
+                                            return <></>
+                                    }
+                                })()}
+                            </div>
                         </Link>
                     </div>
                     <Separator />

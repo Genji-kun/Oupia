@@ -7,7 +7,7 @@ export interface User {
     dob?: Date,
     avatar?: any,
     account?: Account,
-    roles?: ["ROLE_ADMIN" | "ROLE_LANDLORD" | "ROLE_TENANT"]
+    roles?: "ROLE_ADMIN" | "ROLE_LANDLORD" | "ROLE_TENANT",
 }
 
 export interface Account {

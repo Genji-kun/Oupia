@@ -1,13 +1,16 @@
 import React from 'react';
-import PostContainer from './_components/post-container';
 import PostUtilities from './_components/post-utilities';
+import PostList from './_components/post-list';
+import { ForumProvider } from '@/contexts/forum-context';
 
 const ForumPage = () => {
     return (
-        <div className="flex flex-col gap-y-6 py-6">
-            <PostUtilities />
-            <PostContainer />
-        </div>
+        <ForumProvider>
+            <div className="flex flex-col gap-y-6 py-6">
+                <PostUtilities />
+                <PostList />
+            </div>
+        </ForumProvider>
     );
 };
 

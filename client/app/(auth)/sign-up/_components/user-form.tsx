@@ -100,15 +100,15 @@ const UserForm = () => {
             try {
                 const res = await publicApi.post(authEndpoints["sign-up"], form);
                 if (res.status === 200) {
-                    toast.success("Đăng ký thành công");
+                    toast.success("Đăng ký người dùng thành công");
                     router.push("/sign-in");
                 }
             } catch (error) {
                 console.error(error);
+                toast.error("Đã có lỗi xảy ra, vui lòng thử lại.");
+                setIsSubmitting(false);
             }
         }
-        console.log(form);
-        setIsSubmitting(false);
     }
 
     return (

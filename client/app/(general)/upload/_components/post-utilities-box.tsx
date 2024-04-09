@@ -1,6 +1,6 @@
 "use client"
 
-import { Hash, Image, ImageIcon, Type } from 'lucide-react'
+import { ImageIcon, Paperclip, Type } from 'lucide-react'
 import React from 'react'
 
 function PostUtilitiesBox() {
@@ -13,8 +13,8 @@ function PostUtilitiesBox() {
                     <span className="font-semibold">Nội dung</span>
                 </div>
                 <div className="util-button dark:bg-oupia-sub">
-                    <Hash className="h-8 w-8" />
-                    <span className="font-semibold">Hash Tag</span>
+                    <Paperclip className="h-8 w-8" />
+                    <span className="font-semibold">Đính kèm</span>
                 </div>
                 <div className="col-span-2">
                     <div className="w-1/2 mx-auto util-button dark:bg-oupia-sub">

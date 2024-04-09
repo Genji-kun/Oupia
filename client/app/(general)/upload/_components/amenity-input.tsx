@@ -5,41 +5,43 @@ import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { useUploadContext } from '@/contexts/upload-context';
 import { useDebounce } from '@/hooks/useDebounce';
+import { Amenity } from '@/interfaces/Tags';
 import axios from 'axios';
 import { CornerDownLeft, X } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react'
 
-function TagsInput() {
+function AmenityInput() {
 
+    const { setAmenities } = useUploadContext();
     const [query, setQuery] = useState("");
     const [tags, setTags] = useState<any[]>([]);
-    const [selectedTags, setSelectedTags] = useState<any[]>([]);
     const [showResults, setShowResults] = useState<boolean>(false);
 
     const inputRef = useRef<HTMLDivElement>(null);
 
     const fetchData = useDebounce(async (searchQuery: string) => {
-        if (searchQuery) {
-            try {
-                const res = await axios.get(`https://registry.npmjs.org/-/v1/search?text=${searchQuery}`);
-                const data = res.data.objects.map((obj: any) => obj.package);
-                setTags(data);
-            } catch (error) {
-                console.log(error);
-            }
-        }
+        // if (searchQuery) {
+        //     try {
+        //         const res = await axios.get(`https://registry.npmjs.org/-/v1/search?text=${searchQuery}`);
+        //         const data = res.data.objects.map((obj: any) => obj.package);
+        //         setTags(data);
+        //     } catch (error) {
+        //         console.log(error);
+        //     }
+        // }
     }, 500);
 
-    const handleSelectTag = (tag: any) => {
-        setSelectedTags((prevTags) => [...prevTags, tag]);
+    const handleSelectTag = (tag: Amenity) => {
+        setAmenities((prev) => [...prev, tag]);
         setQuery("");
         setShowResults(false);
     }
 
-    const handleRemoveTag = (name: string) => {
-        setSelectedTags(selectedTags.filter((tag) => tag.name !== name));
-    }
+    // const handleRemoveTag = (name: string) => {
+    //     setSelectedTags(selectedTags.filter((tag) => tag.name !== name));
+    // }
 
     const handleClickOutSide = (evt: MouseEvent) => {
         if (inputRef.current && !inputRef.current.contains(evt.target as Node)) {
@@ -51,7 +53,7 @@ function TagsInput() {
     const handleKeyDown = (evt: KeyboardEvent) => {
         if (evt.key === "Enter") {
             if (query.trim().length > 6) {
-                setSelectedTags((prev) => [...prev, { name: query }]);
+                setAmenities((prev) => [...prev, { amenityName: query }]);
                 setQuery("");
                 setShowResults(false);
             }
@@ -63,7 +65,7 @@ function TagsInput() {
     }
 
     const handleAddNewTag = () => {
-        setSelectedTags((prev) => [...prev, { name: query }]);
+        setAmenities((prev) => [...prev, { amenityName: query }]);
         setQuery("");
         setShowResults(false);
     }
@@ -90,22 +92,8 @@ function TagsInput() {
     }, [query, fetchData])
 
     return (
-        <div className="relative space-y-2" ref={inputRef}>
-            {selectedTags.length > 0 &&
-                <div className="flex flex-wrap gap-2">
-                    {selectedTags.map((tag, index) => {
-                        return <div key={index} className="flex items-center gap-2 bg-primary/20 text-primary border border-primary-500 rounded-lg px-3 py-2">
-                            <span>{tag.name}</span>
-                            <Button
-                                variant={"ghost"}
-                                className="rounded-full w-fit h-fit p-1"
-                                onClick={() => handleRemoveTag(tag.name)}>
-                                <X className="w-4 h-4" />
-                            </Button>
-                        </div>
-                    })}
-                </div>
-            }
+        <div className="relative space-y-2 w-full" ref={inputRef}>
+
             <div className="relative">
                 <Input
                     value={query}
@@ -158,4 +146,4 @@ function TagsInput() {
     )
 }
 
-export default TagsInput;
+export default AmenityInput;

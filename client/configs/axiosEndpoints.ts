@@ -15,5 +15,8 @@ export const Endpoints = {
 }
 
 export const postEndpoints = {
-    "posts": `/posts/`
+    "posts": `/store/posts/`,
+    "postList": `/search/posts/`,
+    "deletePost": (id: number) => `/store/posts/${id}/`
+
 }

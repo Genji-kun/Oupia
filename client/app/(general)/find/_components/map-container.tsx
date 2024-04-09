@@ -134,7 +134,7 @@ const MapContainer = () => {
                             id="line"
                             type="line"
                             paint={{
-                                'line-color': '#00b7ff',
+                                'line-color': '#FF0000',
                                 'line-width': 2
                             }}
                             filter={['==', ['get', 'NAME_1'], selectedProv.name.replaceAll(" ", "")]}
@@ -143,7 +143,7 @@ const MapContainer = () => {
                             id="fill"
                             type="fill"
                             paint={{
-                                'fill-color': '#00b7ff',
+                                'fill-color': '#FF0000',
                                 'fill-opacity': 0.1
                             }}
                             filter={['==', ['get', 'NAME_1'], selectedProv.name.replaceAll(" ", "")]}
@@ -156,7 +156,7 @@ const MapContainer = () => {
                             id="line"
                             type="line"
                             paint={{
-                                'line-color': '#00b7ff',
+                                'line-color': '#FF0000',
                                 'line-width': 2
                             }}
                             filter={['==', ['get', 'NAME_2'], selectedDist.name.replaceAll(" ", "")]}
@@ -165,7 +165,7 @@ const MapContainer = () => {
                             id="fill"
                             type="fill"
                             paint={{
-                                'fill-color': '#00b7ff',
+                                'fill-color': '#FF0000',
                                 'fill-opacity': 0.1
                             }}
                             filter={['==', ['get', 'NAME_2'], selectedDist.name.replaceAll(" ", "")]}

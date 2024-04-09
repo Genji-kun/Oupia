@@ -2,22 +2,32 @@
 
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Lock } from 'lucide-react';
-import { usePathname } from 'next/navigation';
-import React, { useState } from 'react'
+import { usePathname, useRouter } from 'next/navigation';
+import React from 'react'
+import { useSelector } from 'react-redux';
 
 function UploadModeTab() {
 
-    const pathanme = usePathname();
+    const pathname = usePathname();
+    const router = useRouter();
 
-    const [tabName, setTabName] = useState();
+    const { user } = useSelector((state: any) => state.currentUserSlice);
+
+    const changeTab = (tabName: string) => {
+        if (tabName === "post") {
+            router.push("/upload");
+        } else {
+            router.push("/upload/asset");
+        }
+    }
 
     return (
-        <Tabs defaultValue={""}>
+        <Tabs defaultValue={pathname === "/upload" ? "post" : "asset"} onValueChange={(value) => { changeTab(value) }}>
             <TabsList className="bg-oupia-sub p-1 h-fit border w-full">
                 <TabsTrigger value="post" className="py-2 px-4 gap-2 w-full">
                     <span className="font-[500]">Đăng bài viết</span>
                 </TabsTrigger>
-                <TabsTrigger value="asset" className="py-2 px-4 gap-2 w-full">
+                <TabsTrigger disabled={user?.role !== "ROLE_LANDLORD"} value="asset" className="py-2 px-4 gap-2 w-full">
                     <Lock className="w-4 h-4" />
                     <span className="font-[500]">Thêm Căn hộ</span>
                 </TabsTrigger>

@@ -24,15 +24,15 @@ const Navbar = () => {
     }, [])
 
     return (
-        <nav className="bg-background dark:bg-oupia-base p-4 border-b h-[60px] lg:h-[80px] w-full fixed inset-x-0 top-0 shadow z-50" >
+        <nav className="bg-background dark:bg-oupia-base p-4 border-b h-[60px] lg:h-[80px] w-full fixed inset-x-0 top-0 shadow z-[9999]" >
             <div className="flex h-full items-center justify-between container">
                 <div className="hidden lg:flex gap-20 items-center">
                     <NavbarLogo />
                     <NavbarRoutes />
                 </div>
                 <NavbarMenu />
-                <>
-                    {user ?
+                <> {isClient && (
+                    user ?
                         <NavbarUser user={user} /> :
                         <div className="flex gap-x-2">
                             {
@@ -48,13 +48,12 @@ const Navbar = () => {
                                     }
                                 </>
                             }
-
                             <SearchButton />
                             <Link href="/sign-in">
                                 <Button className="styled-button">Đăng nhập</Button>
                             </Link>
                         </div>
-                    }
+                )}
                 </>
             </div>
         </nav>

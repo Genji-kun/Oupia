@@ -17,6 +17,7 @@ import { authEndpoints } from "@/configs/axiosEndpoints"
 import { useDispatch } from "react-redux"
 import { login } from "@/redux/slices/currentUserSlice"
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const formSchema = z.object({
     username: z.string({ "required_error": "Tên người dùng không được để trống" }),
@@ -43,16 +44,38 @@ const SignInForm = () => {
             const res = await publicApi.post(authEndpoints['sign-in'], values);
             if (res.status === 200) {
                 cookies.save("accessToken", res.data.accessToken, {});
-                let { data } = await authApi.get(authEndpoints["current-user"]);
-                cookies.save("user", data, {});
-                dispatch(login(data));
-                setIsSubmitting(false);
-                router.push("/");
+
+                // Cập nhât Header Request
+                updateAuthApi();
+
+                try {
+                    const res = await authApi.get(authEndpoints["current-user"]);
+                    if (res.status === 200) {
+                        cookies.save("user", res.data, {});
+                        dispatch(login(res.data));
+                        setIsSubmitting(false);
+                        router.push("/");
+                    }
+                } catch (error) {
+                    console.error(error);
+                    toast.error("Có lỗi xảy ra, vui lòng thử lại.");
+                    setIsSubmitting(false);
+                }
             }
         } catch (error) {
             console.error(error);
+            toast.error("Có lỗi xảy ra, vui lòng thử lại.");
+            setIsSubmitting(false);
         }
-        setIsSubmitting(false);
+    }
+
+    function updateAuthApi() {
+        authApi.interceptors.request.use(function (config) {
+            config.headers.Authorization = `Bearer ${cookies.load("accessToken")}`;
+            return config;
+        }, function (error) {
+            return Promise.reject(error);
+        });
     }
 
     return (

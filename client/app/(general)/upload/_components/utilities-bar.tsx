@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react'
 import UploadModeTab from './upload-mode-tab'
 import UploadButton from './upload-button'
@@ -13,4 +15,4 @@ function UtilitiesBar() {
     )
 }
 
-export default UtilitiesBar
+export default UtilitiesBar;

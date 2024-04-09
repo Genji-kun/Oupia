@@ -20,7 +20,7 @@ function CommentInput() {
     }
 
     return (
-        <div className='relative'>
+        <div className='relative pl-4 pr-16 pb-2'>
             <Input
                 value={text}
                 onChange={(evt) => setText(evt.target.value)}
@@ -30,7 +30,7 @@ function CommentInput() {
                 <Button
                     variant={"ghost"}
                     onClick={sendComment}
-                    className="w-fit h-fit p-2 rounded-full absolute right-0 top-1/2 -translate-y-1/2">
+                    className="w-fit h-fit p-2 rounded-full absolute right-4 top-1">
                     <IoSend size={18} className="text-primary" />
                 </Button>
             }

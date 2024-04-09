@@ -82,8 +82,6 @@ const InfoForm = () => {
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         setIsSubmitting(true);
-        console.log(values);
-        // Kiểm tra email đã tồn tại chưa
         setIsSubmitting(false);
         setTab("user");
     }
@@ -115,7 +113,7 @@ const InfoForm = () => {
                                 <FormLabel className="text-base font-semibold text-foreground">Giới tính</FormLabel>
                                 <Select disabled={isSubmiting} onValueChange={field.onChange} defaultValue={field.value}>
                                     <FormControl>
-                                        <SelectTrigger>
+                                        <SelectTrigger className="dark:bg-oupia-sub">
                                             <SelectValue />
                                         </SelectTrigger>
                                     </FormControl>
@@ -148,7 +146,7 @@ const InfoForm = () => {
                                                     disabled={isSubmiting}
                                                 >
                                                     {field.value ? (
-                                                        format(field.value, "PPP", { locale: vi })
+                                                        format(field.value, "dd-MM-yyyy")
                                                     ) : (
                                                         <span>Chọn ngày sinh</span>
                                                     )}
