@@ -8,11 +8,10 @@ import { useSelector } from 'react-redux';
 import { authApi } from '@/configs/axiosInstance';
 import { authEndpoints } from '@/configs/axiosEndpoints';
 import { signInWithCustomToken } from 'firebase/auth';
-import { auth, db } from '@/configs/firebase';
 import { collection, onSnapshot, orderBy, query, where } from 'firebase/firestore';
-import useRequireAuth from '@/hooks/use-require-auth';
 import { useRouter } from 'next/navigation';
 import { Skeleton } from '@/components/ui/skeleton';
+import { auth, db } from '@/configs/firebase';
 
 const UsersList = () => {
 
@@ -61,9 +60,6 @@ const UsersList = () => {
         }
     }, [authToken, currentUser]);
 
-    if (!currentUser) {
-        return <>{router.push("/sign-in")}</>
-    }
 
     return (
         <div className="flex flex-col w-full xl:w-full min-h-[clac(100vh-80px)] lg:min-h-fit h-full pb-3 xl:pb-5 bg-background dark:bg-oupia-base rounded-xl shadow-dark-theme shadow-light-theme">
