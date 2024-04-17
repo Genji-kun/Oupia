@@ -1,25 +1,27 @@
 "use client"
 
-import { User } from '@/interfaces/User';
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
-import cookies from "react-cookies";
 
 interface IMessageContext {
-    user: User;
-    setUser: React.Dispatch<React.SetStateAction<User>>;
+    receiveUser: any;
+    setReceiveUser: React.Dispatch<React.SetStateAction<any>>;
     expanded: boolean;
     setExpanded: React.Dispatch<React.SetStateAction<boolean>>;
+    messages: any[];
+    setMessages: React.Dispatch<React.SetStateAction<any[]>>;
 }
 
 const MessageContext = createContext<IMessageContext | undefined>(undefined);
 
 export const MessageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
-    const [user, setUser] = useState<User>({});
+    const [receiveUser, setReceiveUser] = useState<any>();
     const [expanded, setExpanded] = useState<boolean>(false);
+    const [messages, setMessages] = useState<any[]>([]);
+
 
     return (
-        <MessageContext.Provider value={{ user, setUser, expanded, setExpanded }}>
+        <MessageContext.Provider value={{ receiveUser, setReceiveUser, expanded, setExpanded, messages, setMessages }}>
             {children}
         </MessageContext.Provider>
     );

@@ -10,11 +10,6 @@ const GoogleSignInButton = () => {
     const [isLogging, setIsLogging] = useState(false);
     const { data: session } = useSession();
 
-    if (session?.user) {
-        console.log(session);
-    }
-
-
     return (
         <Button onClick={() => { signIn('google') }} variant="ghost" className="w-full mx-auto shadow border-border border flex gap-2 py-6 dark:bg-background dark:hover:bg-border">
             <FcGoogle size="24" />

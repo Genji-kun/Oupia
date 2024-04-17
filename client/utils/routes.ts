@@ -1,3 +1,8 @@
+import { Contact2, KeyIcon, UserRoundIcon } from "lucide-react";
+import { HiOutlineHomeModern } from "react-icons/hi2";
+import { MdOutlineScreenshotMonitor } from "react-icons/md";
+import { TbBellRinging2 } from "react-icons/tb";
+
 export const navRoutes = [
     {
         name: "Trang chủ",
@@ -16,19 +21,53 @@ export const navRoutes = [
 
 export const settingsRoutes = [
     {
+        name: "Tài khoản người cho thuê",
+        href: "/settings/landlord",
+    },
+    {
         name: "Thông tin cá nhân",
-        href: "/settings/profile"
+        href: "/settings/profile",
     }, {
         name: "Tài khoản",
-        href: "/settings/account"
+        href: "/settings/account",
     }, {
         name: "Thông báo",
-        href: "/settings/notifications"
+        href: "/settings/notifications",
     }, {
         name: "Mật khẩu",
-        href: "/settings/password"
+        href: "/settings/password",
     }, {
-        name: "Màn hình và ngôn ngữ",
-        href: "/settings/appearance"
+        name: "Màn hình giao diện",
+        href: "/settings/appearance",
+    }
+];
+
+
+export const mobileSettingsRoutes: { name: string, href: string, icon: any }[] = [
+    {
+        name: "Nâng cấp",
+        href: "/settings/landlord",
+        icon: HiOutlineHomeModern
+    },
+    {
+        name: "Thông tin",
+        href: "/settings/profile",
+        icon: Contact2
+    }, {
+        name: "Tài khoản",
+        href: "/settings/account",
+        icon: UserRoundIcon
+    }, {
+        name: "Thông báo",
+        href: "/settings/notifications",
+        icon: TbBellRinging2
+    }, {
+        name: "Mật khẩu",
+        href: "/settings/password",
+        icon: KeyIcon
+    }, {
+        name: "Màn hình",
+        href: "/settings/appearance",
+        icon: MdOutlineScreenshotMonitor
     }
 ];

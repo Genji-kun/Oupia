@@ -3,13 +3,13 @@ import cookies from "react-cookies";
 
 const currentUserSlice = createSlice({
     name: 'currentUser',
-    initialState: { user: cookies.load("user") || null },
+    initialState: { currentUser: cookies.load("user") || null },
     reducers: {
         login: (state, action) => {
-            state.user = action.payload;
+            state.currentUser = action.payload;
         },
         logout: (state) => {
-            state.user = null;
+            state.currentUser = null;
             cookies.remove("accessToken");
             cookies.remove("user");
         },

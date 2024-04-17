@@ -1,7 +1,6 @@
 import { useUploadContext } from '@/contexts/upload-context'
 import React from 'react'
 import PostItemReview from './post-item-review';
-import { Separator } from '@/components/ui/separator';
 
 function PostView() {
 

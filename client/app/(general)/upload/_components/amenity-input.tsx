@@ -8,18 +8,21 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { useUploadContext } from '@/contexts/upload-context';
 import { useDebounce } from '@/hooks/useDebounce';
 import { Amenity } from '@/interfaces/Tags';
-import axios from 'axios';
-import { CornerDownLeft, X } from 'lucide-react';
+import { CornerDownLeft, ThumbsUp, X } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react'
 
 function AmenityInput() {
 
-    const { setAmenities } = useUploadContext();
+    const { amenities, setAmenities } = useUploadContext();
     const [query, setQuery] = useState("");
     const [tags, setTags] = useState<any[]>([]);
     const [showResults, setShowResults] = useState<boolean>(false);
 
     const inputRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        setShowResults(tags.length > 0);
+    }, [tags])
 
     const fetchData = useDebounce(async (searchQuery: string) => {
         // if (searchQuery) {
@@ -71,10 +74,6 @@ function AmenityInput() {
     }
 
     useEffect(() => {
-        setShowResults(tags.length > 0);
-    }, [tags])
-
-    useEffect(() => {
         !query && setShowResults(false);
         document.addEventListener("mousedown", handleClickOutSide);
         document.addEventListener("keydown", handleKeyDown);
@@ -91,9 +90,30 @@ function AmenityInput() {
         }
     }, [query, fetchData])
 
+    const handleRemoveAmenity = (name: string) => {
+        setAmenities(amenities.filter((tag) => tag.amenityName !== name));
+    }
+
     return (
         <div className="relative space-y-2 w-full" ref={inputRef}>
-
+            {
+                amenities.length > 0 &&
+                <div className="flex flex-wrap gap-2">
+                    {
+                        amenities.map((tag, index) => {
+                            return <div key={index} className="flex items-center gap-1.5 bg-primary/20 text-primary border border-primary-500 rounded-lg h-fit px-3 py-1.5">
+                                <ThumbsUp className="w-4 h-4" />
+                                <span>{tag.amenityName}</span>
+                                <Button
+                                    variant={"ghost"}
+                                    className="rounded-full w-fit h-fit p-1"
+                                    onClick={() => handleRemoveAmenity(tag.amenityName)}>
+                                    <X className="w-4 h-4" />
+                                </Button>
+                            </div>
+                        })}
+                </div>
+            }
             <div className="relative">
                 <Input
                     value={query}
@@ -113,7 +133,7 @@ function AmenityInput() {
                                 </Button>
                             </TooltipTrigger>
                             <TooltipContent className="mb-1">
-                                <p>Thêm HashTag mới</p>
+                                <p>Thêm tiện ích</p>
                             </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>

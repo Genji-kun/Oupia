@@ -1,9 +1,17 @@
+"use client"
+
 import React from 'react';
 import UserIntroduce from './_components/user-introduce';
-import PostList from '../../forum/_components/post-list';
 import SuggestUserList from './_components/suggest-user-list';
+import { useProfileContext } from '@/contexts/profile-context';
 
-const UserProfilePage = () => {
+const ProfilePage = () => {
+
+    const { userInfo } = useProfileContext();
+
+    if (!userInfo) {
+        return <></>
+    }
 
     return (
         <div className="container h-full grid grid-cols-7 gap-4">
@@ -11,7 +19,7 @@ const UserProfilePage = () => {
                 <UserIntroduce />
             </div>
             <div className="col-span-3">
-                <PostList />
+                {/* <PostList /> */}
             </div>
             <div className="col-span-2">
                 <SuggestUserList />
@@ -20,4 +28,4 @@ const UserProfilePage = () => {
     );
 };
 
-export default UserProfilePage;
+export default ProfilePage;

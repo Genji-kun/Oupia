@@ -3,13 +3,14 @@ import FilterBar from './_components/filter-bar';
 import AssetContainer from './_components/asset-container';
 import { Metadata } from 'next';
 import { FindAssetProvider } from '@/contexts/find-asset-context';
+import dynamic from 'next/dynamic';
 
 export const metadata: Metadata = {
-    title: 'Oupia | Tìm thuê nơi ở',
+    title: 'Tìm thuê căn hộ | Oupia',
     description: '',
 }
 
-const MotelsPage = () => {
+const FindAssetsPage = () => {
     return (
         <FindAssetProvider>
             <div className="xl:h-screen bg-background hidden xl:block fixed left-0 z-100">
@@ -25,4 +26,4 @@ const MotelsPage = () => {
     );
 };
 
-export default MotelsPage;
+export default dynamic(() => Promise.resolve(FindAssetsPage), { ssr: false })

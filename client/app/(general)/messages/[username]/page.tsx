@@ -6,22 +6,79 @@ import { useMessageContext } from '@/contexts/message-context';
 import MessageDetail from './_components/message-detail';
 import MessageContainer from './_components/message-container';
 import MessageInput from './_components/message-input';
+import { notFound, useParams, useRouter } from 'next/navigation';
+import { userEndpoints } from '@/configs/axiosEndpoints';
+import { publicApi } from '@/configs/axiosInstance';
+import { collection, getDocs, onSnapshot, orderBy, query, where } from 'firebase/firestore';
+import { db } from '@/configs/firebase';
+import { useSelector } from 'react-redux';
+import useRequireAuth from '@/hooks/use-require-auth';
 
 const UserMessageRoomPage = () => {
 
-    const { user, setUser, expanded } = useMessageContext();
+    const { currentUser } = useSelector((state: any) => state.currentUserSlice);
+    let currUser = useRequireAuth(currentUser);
+    const router = useRouter();
+
+    const { setMessages, receiveUser, setReceiveUser, expanded } = useMessageContext();
+
+    const params = useParams();
+    const { username } = params;
+
 
     useEffect(() => {
-        setUser({
-            fullName: "Võ Phú Phát",
-            avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1696484302/z8ch1cp7vfkdrcxgfbai.jpg",
-            account: {
-                username: "phatvo"
-            },
-            roles: ["ROLE_LANDLORD"],
-            phoneNumber: "0987654321"
-        })
-    }, [setUser])
+        fetchUserInfo();
+    }, [])
+
+    useEffect(() => {
+        const updateMessage = () => {
+            const chatroomsRef = collection(db, 'chatrooms');
+            const combinedUsername = [currUser.username, receiveUser.username].sort().join(':');
+            const q = query(chatroomsRef, where('roomId', '==', combinedUsername));
+            getDocs(q).then((snapshot) => {
+                const chatroom = snapshot.docs[0];
+                if (chatroom) {
+                    const messageRef = collection(chatroom.ref, "messages");
+                    const q2 = query(messageRef, orderBy("createdAt"));
+                    onSnapshot(q2, (snapshot) => {
+                        setMessages(snapshot.docs.map((doc) => doc.data()));
+                    })
+                }
+            });
+
+        }
+        if (currUser && receiveUser) {
+            updateMessage();
+            //   if (sessionStorage.getItem('postChat') !== null) {
+            //     let postChatString = sessionStorage.getItem('postChat');
+            //     let postChat: Post | null = postChatString ? JSON.parse(postChatString) : null;
+            //     if (postChat && postChat.userId.id === receiverUser.id)
+            //       sendPostMessage(postChat);
+            //     sessionStorage.removeItem('postChat');
+            //   }
+        }
+    }, [currUser, receiveUser])
+
+    const fetchUserInfo = async () => {
+        if (typeof (username) === "string") {
+            try {
+                const url = userEndpoints.getUserByUsername(username);
+                const res = await publicApi.get(url);
+                if (res.status === 200) {
+                    setReceiveUser(res.data);
+                } else {
+                    notFound();
+                }
+            } catch (error) {
+                notFound();
+
+            }
+        }
+    }
+
+    if (!currUser) {
+        return <>{router.push("/sign-in")}</>
+    }
 
     return (
 
@@ -31,7 +88,7 @@ const UserMessageRoomPage = () => {
                 <MessageContainer />
                 <MessageInput />
             </div>
-            <MessageDetail user={user} />
+            {receiveUser && <MessageDetail />}
         </div>
 
     );

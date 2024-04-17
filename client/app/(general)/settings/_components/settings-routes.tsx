@@ -1,3 +1,5 @@
+"use client"
+
 import { settingsRoutes } from '@/utils/routes';
 import React from 'react';
 import SettingsRouteItem from './settings-routes-item';

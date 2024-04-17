@@ -4,9 +4,10 @@ import ContactInfo from './_components/contact-info';
 import ContactReportForms from './_components/contact-report-forms';
 
 import { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 
 export const metadata: Metadata = {
-    title: 'Oupia | Liên hệ và báo lỗi',
+    title: 'Liên hệ và báo lỗi | Oupia',
     description: '',
 }
 
@@ -22,4 +23,4 @@ const ContactPage = () => {
     );
 };
 
-export default ContactPage;
+export default dynamic(() => Promise.resolve(ContactPage), { ssr: false })

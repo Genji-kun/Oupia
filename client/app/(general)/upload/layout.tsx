@@ -1,14 +1,14 @@
 import { UploadProvider } from "@/contexts/upload-context";
 import UtilitiesBar from "./_components/utilities-bar";
 import { Metadata } from "next";
+import dynamic from "next/dynamic";
 
 export const metadata: Metadata = {
     title: 'Oupia | Đăng bài mới',
     description: '',
 }
 
-
-export default function UploadLayout(
+function UploadLayout(
     { children }: { children: React.ReactNode }
 ) {
 
@@ -25,3 +25,6 @@ export default function UploadLayout(
         </UploadProvider>
     )
 }
+
+export default dynamic(() => Promise.resolve(UploadLayout), { ssr: false })
+

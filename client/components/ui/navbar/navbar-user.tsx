@@ -14,6 +14,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '../avatar';
 import { useDispatch } from 'react-redux';
 import { logout } from '@/redux/slices/currentUserSlice';
 import { convert } from '@/utils/convertAvatarAlt';
+import { HiOutlineHomeModern } from 'react-icons/hi2';
 
 
 const NavbarUser = ({ user }: { user: any }) => {
@@ -57,8 +58,8 @@ const NavbarUser = ({ user }: { user: any }) => {
                     <div className="mb-1">
                         <Link href={`/profile/${user.username}`} className="w-full flex gap-x-4 items-center p-2 hover:bg-accent rounded">
                             <Avatar className='w-12 h-12'>
-                                <AvatarImage src={user.avatar} alt={user.username} />
-                                <AvatarFallback>CN</AvatarFallback>
+                                <AvatarImage src={user.avatar} alt={user.fullName} />
+                                <AvatarFallback>{convert(user.fullName)}</AvatarFallback>
                             </Avatar>
                             <div className="flex flex-col">
                                 <h2 className="font-semibold text-lg">{user.fullName}</h2>
@@ -70,6 +71,10 @@ const NavbarUser = ({ user }: { user: any }) => {
                                                 <span>Người tìm căn hộ</span>
                                             </div>
                                         case "ROLE_LANDLORD":
+                                            return <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                                                <HiOutlineHomeModern className="w-4 h-4" />
+                                                <span>Người cho thuê</span>
+                                            </div>
                                         default:
                                             return <></>
                                     }
@@ -79,6 +84,13 @@ const NavbarUser = ({ user }: { user: any }) => {
                     </div>
                     <Separator />
                     <div>
+                        {
+                            user.role === "ROLE_TENANT" && <Link href="/settings/landlord" className="w-full flex items-center py-1 px-2 hover:bg-accent rounded text-sm">
+                                <HiOutlineHomeModern className="mr-2 h-4 w-4" />
+                                <span>Tài khoản người cho thuê</span>
+                                <ChevronRight className="ml-auto h-4 w-4" />
+                            </Link>
+                        }
                         <Link href="/settings" className="w-full flex items-center py-1 px-2 hover:bg-accent rounded text-sm">
                             <Settings className="mr-2 h-4 w-4" />
                             <span>Cài đặt</span>
@@ -96,7 +108,7 @@ const NavbarUser = ({ user }: { user: any }) => {
                             <span>Chế độ tối</span>
                             <div className="ml-auto">
                                 <Switch
-                                    checked={theme !== "system" && theme === "dark"}
+                                    checked={theme === "dark"}
                                     onClick={(e) => {
                                         e.stopPropagation(); changeTheme();
                                     }}

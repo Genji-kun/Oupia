@@ -12,7 +12,7 @@ import React, { useEffect, useRef, useState } from 'react'
 
 function LocationInput() {
 
-    const { setLocationTag, locationTag } = useUploadContext();
+    const { tagLocation, setTagLocation } = useUploadContext();
     const [query, setQuery] = useState("");
     const [results, setResults] = useState<any[]>([]);
     const [showResults, setShowResults] = useState<boolean>(false);
@@ -37,9 +37,9 @@ function LocationInput() {
         const res = await axios.get(`https://rsapi.goong.io/Place/Detail?place_id=${placeId}&api_key=${process.env.NEXT_PUBLIC_GOONG_MAPS_API_KEY}`);
         const data = await res.data;
         if (data) {
-            setLocationTag({
+            setTagLocation({
                 fullLocation: data.result.formatted_address,
-                latitute: data.result.geometry.location.lat,
+                latitude: data.result.geometry.location.lat,
                 longtitude: data.result.geometry.location.lng,
             });
         }
@@ -94,7 +94,7 @@ function LocationInput() {
 
             <div className="relative">
                 <Input
-                    disabled={!isUndefined(locationTag)}
+                    disabled={!isUndefined(tagLocation)}
                     value={query}
                     onChange={(evt) => { setQuery(evt.target.value) }}
                     placeholder='Điền nội dung tag đính kèm bài viết...' />

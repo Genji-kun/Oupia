@@ -1,4 +1,5 @@
 import AuthContent from '@/components/ui/auth-content';
+import dynamic from 'next/dynamic';
 import React, { ReactNode } from 'react';
 
 
@@ -17,4 +18,4 @@ const AuthLayout = ({ children }: { children: ReactNode }) => {
     );
 };
 
-export default AuthLayout;
+export default dynamic(() => Promise.resolve(AuthLayout), { ssr: false })

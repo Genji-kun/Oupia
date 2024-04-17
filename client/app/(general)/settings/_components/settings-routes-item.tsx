@@ -10,7 +10,7 @@ import "./style.css";
 const SettingsRouteItem = ({ route }: {
     route: {
         href: string,
-        name: string
+        name: string,
     }
 }) => {
     const pathname = usePathname();

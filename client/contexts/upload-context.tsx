@@ -15,8 +15,8 @@ interface IUploadContext {
     setAmenities: React.Dispatch<React.SetStateAction<Amenity[]>>;
     tagPrice: TagPrice | undefined;
     setTagPrice: React.Dispatch<React.SetStateAction<TagPrice | undefined>>;
-    locationTag: TagLocation | undefined;
-    setLocationTag: React.Dispatch<React.SetStateAction<TagLocation | undefined>>;
+    tagLocation: TagLocation | undefined;
+    setTagLocation: React.Dispatch<React.SetStateAction<TagLocation | undefined>>;
 }
 
 const UploadContext = createContext<IUploadContext | undefined>(undefined);
@@ -25,12 +25,11 @@ export const UploadProvider: React.FC<{ children: ReactNode }> = ({ children }) 
 
     const [post, setPost] = useState<any>({});
     const [images, setImages] = useState<File[]>([]);
-    const [selectedTagType, setSelectedTagType] = useState<string>("amenity");
+    const [selectedTagType, setSelectedTagType] = useState<string>("price");
     const [amenities, setAmenities] = useState<Amenity[]>([]);
     const [tagPrice, setTagPrice] = useState<TagPrice | undefined>();
-    const [locationTag, setLocationTag] = useState<TagLocation | undefined>();
+    const [tagLocation, setTagLocation] = useState<TagLocation | undefined>();
     // const [assetTags, setassetTags] = useState<any>([]);
-
 
     useEffect(() => {
         if (tagPrice) {
@@ -48,7 +47,7 @@ export const UploadProvider: React.FC<{ children: ReactNode }> = ({ children }) 
 
 
     useEffect(() => {
-        if (amenities) {
+        if (amenities.length > 0) {
             setPost((prev: any) => {
                 return { ...prev, amenities: amenities }
             })
@@ -59,10 +58,10 @@ export const UploadProvider: React.FC<{ children: ReactNode }> = ({ children }) 
                 return newPost;
             })
         }
-    }, [amenities])
+    }, [amenities]);
 
     return (
-        <UploadContext.Provider value={{ post, setPost, images, setImages, selectedTagType, setSelectedTagType, amenities, setAmenities, tagPrice, setTagPrice, locationTag, setLocationTag }}>
+        <UploadContext.Provider value={{ post, setPost, images, setImages, selectedTagType, setSelectedTagType, amenities, setAmenities, tagPrice, setTagPrice, tagLocation, setTagLocation }}>
             {children}
         </UploadContext.Provider>
     );

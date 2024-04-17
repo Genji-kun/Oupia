@@ -41,9 +41,9 @@ const SuggestUserList = () => {
                 <Separator className="mb-2" />
                 <div className="flex flex-col gap-2">
                     {users.map((user, index) => {
-                        return <>
-                            <SuggestUserItem key={index} user={user} />
-                        </>
+                        return <React.Fragment key={index}>
+                            <SuggestUserItem user={user} />
+                        </React.Fragment>
                     })}
                 </div>
             </CardContent>

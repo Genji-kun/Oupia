@@ -3,61 +3,41 @@
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useUploadContext } from '@/contexts/upload-context';
-import { useDebounce } from '@/hooks/useDebounce';
-import axios from 'axios';
 import { CircleDollarSignIcon, MapPin, ThumbsUp, X } from 'lucide-react';
-import React, { useEffect, useRef, useState } from 'react'
-import AmenityInput from './amenity-input';
+import React from 'react'
 import PriceInput from './price-input';
 import { formatCurrency } from '@/utils/priceConvert';
 import LocationInput from './location-input';
 
 function TagsInputs() {
 
-    const { selectedTagType, setSelectedTagType, setAmenities, amenities, locationTag, setLocationTag, tagPrice, setTagPrice } = useUploadContext();
-
-    const handleRemoveAmenity = (name: string) => {
-        setAmenities(amenities.filter((tag) => tag.amenityName !== name));
-    }
-
+    const { selectedTagType, setSelectedTagType, tagLocation, setTagLocation, tagPrice, setTagPrice } = useUploadContext();
 
     return (
         <div className="relative space-y-2">
-            {(amenities.length > 0 || tagPrice || locationTag) &&
+            {(tagPrice || tagLocation) &&
                 <div className="flex flex-wrap gap-2">
-                    {amenities.length > 0 && amenities.map((tag, index) => {
-                        return <div key={index} className="flex items-center gap-2 bg-primary/20 text-primary border border-primary-500 rounded-lg px-3 py-2">
-                            <ThumbsUp className="w-4 h-4" />
-                            <span>{tag.amenityName}</span>
-                            <Button
-                                variant={"ghost"}
-                                className="rounded-full w-fit h-fit p-1 ml-2"
-                                onClick={() => handleRemoveAmenity(tag.amenityName)}>
-                                <X className="w-4 h-4" />
-                            </Button>
-                        </div>
-                    })}
                     {tagPrice &&
-                        <div className="flex items-center gap-2 bg-primary/20 text-primary border border-primary-500 rounded-lg px-3 py-2">
+                        <div className="flex items-center gap-1.5 bg-primary/20 text-primary border border-primary-500 rounded-lg h-fit px-3 py-1.5">
                             <CircleDollarSignIcon className="w-4 h-4" />
                             <span>{formatCurrency(tagPrice.minPrice)} - {formatCurrency(tagPrice.maxPrice)}đ</span>
                             <Button
                                 variant={"ghost"}
-                                className="rounded-full w-fit h-fit p-1 ml-2"
+                                className="rounded-full w-fit h-fit p-1"
                                 onClick={() => setTagPrice(undefined)}>
                                 <X className="w-4 h-4" />
                             </Button>
 
                         </div>
                     }
-                    {locationTag &&
-                        <div className="flex items-center gap-2 bg-primary/20 text-primary border border-primary-500 rounded-lg px-3 py-2">
+                    {tagLocation &&
+                        <div className="flex items-center gap-1.5 bg-primary/20 text-primary border border-primary-500 rounded-lg h-fit px-3 py-1.5">
                             <MapPin className="w-4 h-4" />
-                            <span>{locationTag.fullLocation}</span>
+                            <span>{tagLocation.fullLocation}</span>
                             <Button
                                 variant={"ghost"}
-                                className="rounded-full w-fit h-fit p-1 ml-2"
-                                onClick={() => setLocationTag(undefined)}>
+                                className="rounded-full w-fit h-fit p-1"
+                                onClick={() => setTagLocation(undefined)}>
                                 <X className="w-4 h-4" />
                             </Button>
 
@@ -73,7 +53,6 @@ function TagsInputs() {
                     <SelectContent>
                         <SelectGroup>
                             <SelectLabel>Loại tag đính kèm</SelectLabel>
-                            <SelectItem value="amenity">Tiện ích</SelectItem>
                             <SelectItem value="price">Giá tiền</SelectItem>
                             <SelectItem value="location">Địa điểm</SelectItem>
                             <SelectItem value="asset">Thông tin căn hộ</SelectItem>
@@ -83,8 +62,6 @@ function TagsInputs() {
                 <>
                     {(() => {
                         switch (selectedTagType) {
-                            case "amenity":
-                                return <AmenityInput />
                             case "price":
                                 return <PriceInput />
                             case "location":

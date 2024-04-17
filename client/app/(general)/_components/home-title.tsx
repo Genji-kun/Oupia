@@ -1,10 +1,8 @@
-"use client"
-
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { ChevronRight, ChevronRightIcon } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import Link from "next/link";
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 const HomeTitle = () => {
     const pathVariants = {
@@ -32,15 +30,9 @@ const HomeTitle = () => {
         animate: { x: 3, opacity: 0.7, transition: { duration: 0.5, repeat: Infinity } }
     }
 
-    const [isClient, setIsClient] = useState<boolean>(false);
-
-    useEffect(() => {
-        setIsClient(true);
-    }, [])
-
     return (
         <>
-            {isClient && <div className="flex flex-col gap-y-4 md:gap-y-6 items-center">
+            <div className="flex flex-col gap-y-4 md:gap-y-6 items-center">
                 <div className="flex gap-2 items-center justify-center">
                     <div className="w-20 md:w-24 2xl:w-40 aspect-square">
                         <motion.svg variants={fillVariants} initial="initial" animate="animate" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 342 396.81">
@@ -67,7 +59,6 @@ const HomeTitle = () => {
                     </Button>
                 </motion.div>
             </div>
-            }
         </>
     );
 };

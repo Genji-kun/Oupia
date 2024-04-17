@@ -10,10 +10,15 @@ import CommentInput from './comment-input';
 import PostStatus from './post-status';
 import Image from 'next/image';
 import { ThumbsUp } from 'lucide-react';
+import { useSelector } from 'react-redux';
+import { cn } from '@/lib/utils';
+import { PostUpdateProvider } from '@/contexts/post-update-context';
 
 const PostItem = (
     { post }: { post: PostResponse }
 ) => {
+
+    const { currentUser } = useSelector((state: any) => state.currentUserSlice);
 
     if (post.isDelete) {
         return null;
@@ -21,18 +26,38 @@ const PostItem = (
 
     return (
         <div className="border shadow bg-background dark:bg-oupia-base rounded-lg flex flex-col gap-y-2 shadow-dark-theme">
-            <PostItemHeader post={post} />
-            <div className="flex flex-wrap gap-2 py-2 px-4">
-                {post.amenities && post.amenities.length > 0 && post.amenities.map((tag, index) => {
-                    return <div key={index} className="text-sm flex items-center gap-2 bg-primary/20 text-primary border border-primary-500 rounded-lg px-3 py-2">
-                        <ThumbsUp className="w-4 h-4" />
-                        <span>{tag}</span>
-                    </div>
-                })}
-            </div>
+            <PostUpdateProvider>
+                <PostItemHeader post={post} />
+            </PostUpdateProvider>
+
             <p className="py-2 px-4">
-                {post.postContent}
+                {post.postContent.split('\n').map((line, index) => (
+                    <React.Fragment key={index}>
+                        {line}
+                        <br />
+                    </React.Fragment>
+                ))}
             </p>
+
+            {
+                post.amenities && post.amenities.length > 0 && <div className="flex flex-wrap gap-2 pb-2 px-4">
+                    {
+                        post.amenities.map((tag, index) => {
+                            if (index < 2) {
+                                return <div key={index} className="text-sm flex items-center gap-1.5 bg-primary/20 text-primary border border-primary-500 rounded-lg h-fit px-3 py-1.5">
+                                    <ThumbsUp className="w-4 h-4" />
+                                    <span>{tag}</span>
+                                </div>
+                            }
+                        })
+                    }
+                    {
+                        post.amenities && post.amenities.length > 2 && <div className="text-sm flex items-center bg-primary/20 text-primary border border-primary-500 rounded-lg h-fit px-3 py-1.5">
+                            <span>+{post.amenities.length - 2}</span>
+                        </div>
+                    }
+                </div>
+            }
             {post.images && post.images.length > 0 && (
                 <>
                     {(() => {
@@ -131,7 +156,7 @@ const PostItem = (
                     })()}
                 </>
             )}
-            <div className="flex justify-between px-4">
+            <div className={cn("flex justify-between px-4", !currentUser && "py-2")}>
                 <PostButtons />
                 <PostStatus />
             </div>

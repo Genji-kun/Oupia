@@ -1,4 +1,6 @@
-import React from 'react';
+"use client"
+
+import React, { useEffect, useState } from 'react';
 import SignInTab from './sign-in-tab';
 import ForgetPasswordTab from './forget-password-tab';
 import { useAuthTabContext } from '@/contexts/auth-tab-context';
@@ -10,7 +12,6 @@ const Tabs = () => {
 
     return (
         <>
-
             <div className="w-full xl:w-[75%] mx-auto h-full flex justify-center items-center relative ">
                 <AnimatePresence>
                     {(() => {

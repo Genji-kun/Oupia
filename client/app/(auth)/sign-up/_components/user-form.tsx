@@ -98,7 +98,7 @@ const UserForm = () => {
             form.append('user', new Blob([JSON.stringify(user)], { type: "application/json" }))
             form.append("avatarFile", avatarFile);
             try {
-                const res = await publicApi.post(authEndpoints["sign-up"], form);
+                const res = await publicApi.post(authEndpoints["signUp"], form);
                 if (res.status === 200) {
                     toast.success("Đăng ký người dùng thành công");
                     router.push("/sign-in");

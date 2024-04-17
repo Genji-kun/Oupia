@@ -1,9 +1,10 @@
 import React, { ReactNode } from 'react';
 import UserViewer from './_components/user-viewer';
 import { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 
 export const metadata: Metadata = {
-    title: 'Oupia | Diễn đàn trao đổi',
+    title: 'Diễn đàn trao đổi | Oupia',
     description: '',
 }
 
@@ -24,4 +25,4 @@ const ForumLayout = ({ children }: { children: ReactNode }) => {
     );
 };
 
-export default ForumLayout;
+export default dynamic(() => Promise.resolve(ForumLayout), { ssr: false })

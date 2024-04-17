@@ -1,8 +1,28 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     swcMinify: true,
+
     images: {
-        domains: ['i.pinimg.com', 'res.cloudinary.com', 'pixlok.com'],
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'i.pinimg.com',
+                port: '',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'res.cloudinary.com',
+                port: '',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'pixlok.com',
+                port: '',
+                pathname: '/**',
+            },
+        ],
     },
     webpack(config, options) {
         config.module.rules.push({

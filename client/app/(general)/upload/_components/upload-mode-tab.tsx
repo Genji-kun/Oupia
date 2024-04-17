@@ -11,7 +11,7 @@ function UploadModeTab() {
     const pathname = usePathname();
     const router = useRouter();
 
-    const { user } = useSelector((state: any) => state.currentUserSlice);
+    const { currentUser } = useSelector((state: any) => state.currentUserSlice);
 
     const changeTab = (tabName: string) => {
         if (tabName === "post") {
@@ -27,7 +27,7 @@ function UploadModeTab() {
                 <TabsTrigger value="post" className="py-2 px-4 gap-2 w-full">
                     <span className="font-[500]">Đăng bài viết</span>
                 </TabsTrigger>
-                <TabsTrigger disabled={user?.role !== "ROLE_LANDLORD"} value="asset" className="py-2 px-4 gap-2 w-full">
+                <TabsTrigger disabled={currentUser?.role !== "ROLE_LANDLORD"} value="asset" className="py-2 px-4 gap-2 w-full">
                     <Lock className="w-4 h-4" />
                     <span className="font-[500]">Thêm Căn hộ</span>
                 </TabsTrigger>

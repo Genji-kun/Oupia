@@ -8,7 +8,7 @@ import * as z from "zod"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { LogIn } from "lucide-react"
+import { Loader2, LogIn } from "lucide-react"
 import { useState } from "react"
 import ForgetPasswordButton from "./forget-password-button"
 import Loader from "@/components/ui/loader"
@@ -41,7 +41,7 @@ const SignInForm = () => {
     async function onSubmit(values: z.infer<typeof formSchema>) {
         setIsSubmitting(true);
         try {
-            const res = await publicApi.post(authEndpoints['sign-in'], values);
+            const res = await publicApi.post(authEndpoints['signIn'], values);
             if (res.status === 200) {
                 cookies.save("accessToken", res.data.accessToken, {});
 
@@ -49,7 +49,7 @@ const SignInForm = () => {
                 updateAuthApi();
 
                 try {
-                    const res = await authApi.get(authEndpoints["current-user"]);
+                    const res = await authApi.get(authEndpoints["currentUser"]);
                     if (res.status === 200) {
                         cookies.save("user", res.data, {});
                         dispatch(login(res.data));
@@ -58,13 +58,13 @@ const SignInForm = () => {
                     }
                 } catch (error) {
                     console.error(error);
-                    toast.error("Có lỗi xảy ra, vui lòng thử lại.");
+                    toast.error("Tên người dùng hoặc mật khẩu không đúng, vui lòng thử lại.");
                     setIsSubmitting(false);
                 }
             }
         } catch (error) {
             console.error(error);
-            toast.error("Có lỗi xảy ra, vui lòng thử lại.");
+            toast.error("Tên người dùng hoặc mật khẩu không đúng, vui lòng thử lại.");
             setIsSubmitting(false);
         }
     }
@@ -111,7 +111,7 @@ const SignInForm = () => {
                 {isSubmiting ? <>
                     <Button disabled type="submit" className=" mt-6 w-full xl:w-1/2 mx-auto styled-button border p-6 flex gap-3">
                         <span className="text-base">Đang xử lý</span>
-                        <Loader size={5} />
+                        <Loader2 size="22" className="animate-spin" />
                     </Button>
                 </> : <>
                     <Button type="submit" className=" mt-6 w-full xl:w-1/2 mx-auto styled-button p-6 flex gap-2 ">

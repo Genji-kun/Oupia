@@ -9,6 +9,13 @@ import Providers from './providers'
 export const metadata: Metadata = {
   title: 'Oupia',
   description: '',
+  icons: {
+    icon: './favicon.ico',
+    other: {
+      rel: 'stylesheet',
+      url: 'https://cdn.jsdelivr.net/npm/@goongmaps/goong-js@1.0.9/dist/goong-js.css',
+    },
+  },
 }
 
 export default function RootLayout(
@@ -17,10 +24,6 @@ export default function RootLayout(
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <Head>
-        <link rel="icon" href="./favicon.ico" />
-        <link href='https://cdn.jsdelivr.net/npm/@goongmaps/goong-js@1.0.9/dist/goong-js.css' rel='stylesheet' />
-      </Head>
       <body className={`${BeauSans.variable} bg-border/50 dark:bg-background`}>
         <Providers>
           {children}

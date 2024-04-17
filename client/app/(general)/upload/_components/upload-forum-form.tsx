@@ -10,10 +10,28 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
 import TagsInputs from './tags-inputs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import AmenityInput from './amenity-input';
 
 function UploadForumForm() {
 
-    const { post, setPost, images, setImages } = useUploadContext();
+    const { post, setPost, images, setImages, setAmenities, setTagLocation, setTagPrice } = useUploadContext();
+
+    const handlePostTypeChange = (value: string) => {
+        switch (value) {
+            case "POST_COMMON":
+                setAmenities([]);
+                setTagLocation(undefined);
+                setTagPrice(undefined);
+                break;
+            case "POST_FIND":
+                break;
+            case "POST_RENT":
+                break;
+            default:
+                break;
+        }
+        setPost((current: any) => { return { ...current, postType: value } })
+    }
 
     const handleFileChange = (evt: any) => {
         const newFiles = Array.prototype.slice.call(evt.target.files);
@@ -46,7 +64,7 @@ function UploadForumForm() {
                         <span className="font-semibold text-lg">Loại bài viết</span>
                     </AccordionTrigger>
                     <AccordionContent>
-                        <Select onValueChange={value => setPost((current: any) => { return { ...current, postType: value } })}>
+                        <Select defaultValue={post.postType && post.postType} onValueChange={value => handlePostTypeChange(value)}>
                             <SelectTrigger className="dark:bg-oupia-sub">
                                 <SelectValue placeholder="Bạn đăng bài viết này với mục đích gì?" />
                             </SelectTrigger>
@@ -73,14 +91,24 @@ function UploadForumForm() {
                         />
                     </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value="hash-tag">
+                {post.postType && post.postType !== "POST_COMMON" &&
+                    <AccordionItem value="amenities">
+                        <AccordionTrigger>
+                            <span className="font-semibold text-lg">{post.postType === "POST_FIND" ? "Tiện ích yêu cầu" : "Tiện ích của căn hộ"}</span>
+                        </AccordionTrigger>
+                        <AccordionContent>
+                            <AmenityInput />
+                        </AccordionContent>
+                    </AccordionItem>
+                }
+                {post.postType && post.postType !== "POST_COMMON" && <AccordionItem value="tags">
                     <AccordionTrigger>
                         <span className="font-semibold text-lg">Các tag đính kèm trong bài đăng</span>
                     </AccordionTrigger>
                     <AccordionContent>
                         <TagsInputs />
                     </AccordionContent>
-                </AccordionItem>
+                </AccordionItem>}
                 <AccordionItem value="images">
                     <AccordionTrigger>
                         <span className="font-semibold text-lg">Hình ảnh</span>

@@ -24,7 +24,7 @@ export const Thumb: React.FC<PropType> = (props) => {
                 <Image
                     width="500"
                     height="500"
-                    className="object-cover rounded-lg aspect-video"
+                    className="object-cover rounded-lg aspect-square w-24"
                     src={imgSrc}
                     alt="Your alt text"
                 />

@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button'
 import { postEndpoints } from '@/configs/axiosEndpoints';
 import { authApi } from '@/configs/axiosInstance';
 import { useUploadContext } from '@/contexts/upload-context'
-import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { toast } from 'sonner';
@@ -12,8 +11,6 @@ import { toast } from 'sonner';
 function UploadButton() {
 
     const { post, setPost, images } = useUploadContext();
-    const router = useRouter();
-
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleSubmit = async () => {

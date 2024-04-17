@@ -1,7 +1,8 @@
 export const authEndpoints = {
-    "sign-in": `/auth/login/`,
-    "sign-up": `/store/register/`,
-    "current-user": `/auth/current-user/`,
+    "signIn": `/auth/login/`,
+    "signUp": `/store/register/`,
+    "currentUser": `/auth/current-user/`,
+    "getAuthToken": `/auth/auth-token/`,
 }
 
 export const vnpEndpoints = {
@@ -17,6 +18,18 @@ export const Endpoints = {
 export const postEndpoints = {
     "posts": `/store/posts/`,
     "postList": `/search/posts/`,
+    "updatePost": (id: number) => `/store/posts/${id}/`,
     "deletePost": (id: number) => `/store/posts/${id}/`
+}
 
+export const userEndpoints = {
+    "getUserByUsername": (username: string) => `/store/users/${username}/`
+}
+
+
+export const followEndpoints = {
+    "unFollow": `/store/follows/`,
+    "followUser": `/store/follows/`,
+    "checkFollow": `/store/follows/`,
+    "getFollowersInfo": (id: number) => `/store/follows/${id}/followers/`,
 }

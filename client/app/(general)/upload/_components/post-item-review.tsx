@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { convert } from '@/utils/convertAvatarAlt';
-import { MessageSquareText, Search, ThumbsUp, X } from 'lucide-react';
+import { MessageSquareText, Search, TagsIcon, ThumbsUp, X } from 'lucide-react';
 import React, { useState } from 'react';
 import { BsThreeDots } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
@@ -17,7 +17,8 @@ const PostItemReview = (
     { post }: { post: any }
 ) => {
 
-    const { user } = useSelector((state: any) => state.currentUserSlice);
+    const { amenities } = useUploadContext();
+    const { currentUser } = useSelector((state: any) => state.currentUserSlice);
     const { images } = useUploadContext();
 
     const [text, setText] = useState<string>("");
@@ -27,16 +28,28 @@ const PostItemReview = (
             <div className="flex gap-x-3 items-start p-4 pb-0">
                 <div>
                     <Avatar className='w-12 h-12'>
-                        <AvatarImage src={user.avatar} alt={user.username} />
-                        <AvatarFallback>{convert(user.fullName)}</AvatarFallback>
+                        <AvatarImage src={currentUser.avatar} alt={currentUser.username} />
+                        <AvatarFallback>{convert(currentUser.fullName)}</AvatarFallback>
                     </Avatar>
                 </div>
                 <div className="h-full flex flex-col justify-center">
-                    <h2 className="font-semibold hover:underline leading-0">{user.fullName}</h2>
+                    <h2 className="font-semibold hover:underline leading-0">{currentUser.fullName}</h2>
                     <h4 className="text-muted-foreground text-xs">1 giờ trước</h4>
                 </div>
                 <div className="ml-auto flex gap-1">
                     <TooltipProvider>
+                        {(post.tagLocation || post.tagPrice) &&
+                            <Tooltip>
+                                <TooltipTrigger asChild>
+                                    <Button variant={"ghost"} className="p-2 rounded-full w-fit h-fit">
+                                        <TagsIcon size="16" />
+                                    </Button>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    <p>Các Tags đính kèm</p>
+                                </TooltipContent>
+                            </Tooltip>
+                        }
                         {(() => {
                             switch (post.postType) {
                                 case "POST_FIND":
@@ -88,9 +101,38 @@ const PostItemReview = (
                     </TooltipProvider>
                 </div>
             </div>
+
             <p className="pt-2 mb-2 px-4 line-clamp-3">
-                {post.postContent}
+                {post.postContent && post.postContent.split('\n').map((line: any, index: number) => (
+                    <React.Fragment key={index}>
+                        {line}
+                        <br />
+                    </React.Fragment>
+                ))}
             </p>
+
+            {
+                amenities && amenities.length > 0 &&
+                <div className="flex flex-wrap gap-2 pb-2 px-4">
+                    {
+                        post.amenities.map((tag: any, index: number) => {
+                            if (index < 2) {
+                                return <div key={index} className="text-sm flex items-center gap-1.5 bg-primary/20 text-primary border border-primary-500 rounded-lg h-fit px-3 py-1.5">
+                                    <ThumbsUp className="w-4 h-4" />
+                                    <span>{tag.amenityName}</span>
+                                </div>
+                            }
+                        })
+                    }
+                    {
+                        amenities && amenities.length > 2 &&
+                        <div className="text-sm flex items-center bg-primary/20 text-primary border border-primary-500 rounded-lg h-fit px-3 py-1.5">
+                            <span>+{amenities.length - 2}</span>
+                        </div>
+                    }
+                </div>
+            }
+
             {images && images.length > 0 && (
                 <>
                     {(() => {

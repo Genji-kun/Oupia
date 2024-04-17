@@ -59,11 +59,11 @@ const AssetCarousel: React.FC<PropType> = (props) => {
     }, [emblaMainApi, onSelect])
 
     return (
-        <div className="embla h-screen grid grid-rows-4 py-4 relative">
+        <div className="embla h-screen grid grid-rows-6  py-4 relative">
             <div className="absolute top-0 left-0 z-20">
                 <span className="font-bold text-xl">{selectedIndex + 1} / {images.length} hình ảnh</span>
             </div>
-            <div className="row-span-3 h-full relative">
+            <div className="row-span-5 h-full relative">
                 <Button variant={"ghost"}
                     className="hidden lg:flex justify-center items-center absolute left-8 top-1/2 -translate-y-1/2 rounded-full border-border border w-10 h-10 p-0 z-20"
                     disabled={selectedIndex === 0}
@@ -75,7 +75,7 @@ const AssetCarousel: React.FC<PropType> = (props) => {
                     <ArrowLeft className="h-4 w-4" />
                     <span className="sr-only">Previous slide</span>
                 </Button>
-                <div className="embla__viewport h-full" ref={emblaMainRef}>
+                <div className="embla__viewport h-full w-full" ref={emblaMainRef}>
                     <div className="embla__container touch-pan-y flex h-full relative ">
                         {images.map((image, index) => (
                             <div className="embla__slide relative flex justify-center items-center" key={index}>
@@ -99,11 +99,11 @@ const AssetCarousel: React.FC<PropType> = (props) => {
                         }
                     }}>
                     <ArrowRight className="h-4 w-4" />
-                    <span className="sr-only">Previous slide</span>
+                    <span className="sr-only">Next slide</span>
                 </Button>
             </div>
-            <div className="embla-thumbs flex items-center justify-center">
-                <div className="embla-thumbs__viewport" ref={emblaThumbsRef}>
+            <div className="embla-thumbs flex items-center justify-center w-full h-fit mt-auto p-5">
+                <div className="embla-thumbs__viewport w-full" ref={emblaThumbsRef}>
                     <div className="embla-thumbs__container items-center justify-center">
                         {images.map((image, index) => (
                             <Thumb
