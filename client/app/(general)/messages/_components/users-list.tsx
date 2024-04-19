@@ -31,11 +31,7 @@ const UsersList = () => {
     useEffect(() => {
         const getFbToken = async () => {
             try {
-                const res = await authApi.get(authEndpoints["getAuthToken"], {
-                    params: {
-                        username: currentUser.username
-                    }
-                });
+                const res = await authApi.get(authEndpoints["getAuthToken"]);
                 if (res.status === 200) {
                     setAuthToken(res.data);
                 }

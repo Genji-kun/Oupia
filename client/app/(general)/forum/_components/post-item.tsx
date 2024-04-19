@@ -157,8 +157,8 @@ const PostItem = (
                 </>
             )}
             <div className={cn("flex justify-between px-4", !currentUser && "py-2")}>
-                <PostButtons />
-                <PostStatus />
+                <PostButtons post={post} />
+                <PostStatus post={post} />
             </div>
             <div className='px-4'>
                 <Separator />

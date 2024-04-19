@@ -373,13 +373,13 @@ function PostUpdateDialog({ post }: { post: PostResponse }) {
                     </AccordionItem>
                 )
             }
-            {post.images.length > 0 && (
+            {post.images && post.images.length > 0 && (
                 <AccordionItem value="images">
                     <AccordionTrigger>
                         <span className="font-semibold text-lg">Hình ảnh</span>
                     </AccordionTrigger>
                     <AccordionContent>
-                        <div className="flex flex-wrap gap-5 items-center pt-4">
+                        <div className="flex flex-wrap gap-2 items-center pt-4">
                             {post.images.map((image, index) => (
                                 <div key={index} className="col-span-1 relative ">
                                     <Image width={500} height={500} className="rounded-lg object-cover w-32 aspect-square" src={image} alt={image} />

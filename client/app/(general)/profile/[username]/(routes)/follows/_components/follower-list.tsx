@@ -2,7 +2,7 @@
 
 import { Skeleton } from '@/components/ui/skeleton';
 import { followEndpoints } from '@/configs/axiosEndpoints';
-import { authApi, publicApi } from '@/configs/axiosInstance';
+import { publicApi } from '@/configs/axiosInstance';
 import { useProfileContext } from '@/contexts/profile-context';
 import { Follower } from '@/interfaces/User';
 import React, { useEffect, useState } from 'react'
@@ -24,7 +24,7 @@ function FollowerList() {
     const fetchFollowersData = async (id: number) => {
         try {
             const req = followEndpoints.getFollowersInfo(id);
-            const res = await authApi.get(req);
+            const res = await publicApi.get(req);
             if (res.status === 200) {
                 setFollowers(res.data.content);
             }

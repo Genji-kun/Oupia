@@ -1,7 +1,7 @@
 import Footer from "@/components/ui/footer";
 import Navbar from "@/components/ui/navbar/navbar";
 
-export default function DashboardLayout(
+export default function GeneralLayout(
     { children }: { children: React.ReactNode }
 ) {
 

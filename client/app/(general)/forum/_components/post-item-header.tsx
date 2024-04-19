@@ -33,7 +33,6 @@ import PostUpdateDialog from './post-update-dialog';
 import { DialogClose } from '@radix-ui/react-dialog';
 import { usePostUpdateContext } from '@/contexts/post-update-context';
 import { toast } from 'sonner';
-import { preloadStyle } from 'next/dist/server/app-render/entry-base';
 import { Skeleton } from '@/components/ui/skeleton';
 import { UserInfo } from '@/interfaces/User';
 
@@ -102,6 +101,7 @@ const PostItemHeader = ({ post }: { post: PostResponse }) => {
             const res = await authApi.delete(url);
             if (res.status === 200) {
                 setPosts(posts.filter((post: PostResponse) => post.id !== id))
+                toast.success("Xóa bài viết thành công.")
             }
         } catch (error) {
             console.log(error)

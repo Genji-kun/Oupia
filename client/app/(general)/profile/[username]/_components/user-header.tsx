@@ -82,8 +82,8 @@ const UserHeader = () => {
                             </div>
                             <div className="flex items-center gap-2">
                                 <div className="flex w-full gap-2">
-                                    <div className="bg-border dark:bg-oupia-sub px-16 py-4 animate-pulse rounded"></div>
-                                    <div className="bg-border dark:bg-oupia-sub px-16 py-4 animate-pulse rounded"></div>
+                                    <div className="bg-border dark:bg-oupia-sub px-16 py-5 animate-pulse rounded-lg"></div>
+                                    <div className="bg-border dark:bg-oupia-sub px-16 py-5 animate-pulse rounded-lg"></div>
                                 </div>
                             </div>
                         </>

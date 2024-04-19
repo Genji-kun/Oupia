@@ -1,7 +1,7 @@
 export const authEndpoints = {
     "signIn": `/auth/login/`,
     "signUp": `/store/register/`,
-    "currentUser": `/auth/current-user/`,
+    "currentUser": `/auth/me/`,
     "getAuthToken": `/auth/auth-token/`,
 }
 
@@ -23,7 +23,8 @@ export const postEndpoints = {
 }
 
 export const userEndpoints = {
-    "getUserByUsername": (username: string) => `/store/users/${username}/`
+    "getUserByUsername": (username: string) => `/store/users/${username}/`,
+    "upgrade": `/store/users/upgrade-landlord/`
 }
 
 
@@ -33,3 +34,11 @@ export const followEndpoints = {
     "checkFollow": `/store/follows/`,
     "getFollowersInfo": (id: number) => `/store/follows/${id}/followers/`,
 }
+
+export const favouriteEndpoints = {
+    "unFavourite": `/store/favourites/`,
+    "saveFavour": `/store/favourites/`,
+    "favourCount": (id: number) => `/store/follows/${id}/`,
+    "checkFavourite": `/store/favourites/`,
+}
+

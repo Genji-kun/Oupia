@@ -77,38 +77,40 @@ const PasswordForm = () => {
                         </FormItem>
                     )}
                 />
-                <FormField
-                    control={form.control}
-                    name="newPassword"
-                    render={({ field }) => (
-                        <FormItem className={`${!isEditting && "hidden"}`}>
-                            <FormLabel className="text-base">Mật khẩu mới</FormLabel>
-                            <FormControl>
-                                <Input
-                                    {...field}
-                                    disabled={!isEditting || isSubmitting}
-                                    type="password" />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="confirmPassword"
-                    render={({ field }) => (
-                        <FormItem className={`${!isEditting && "hidden"}`}>
-                            <FormLabel className="text-base">Mật khẩu xác nhận</FormLabel>
-                            <FormControl>
-                                <Input
-                                    {...field}
-                                    disabled={!isEditting || isSubmitting}
-                                    type="password" />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
+                <div className="grid grid-cols-1 xl:grid-cols-2 w-full gap-2">
+                    <FormField
+                        control={form.control}
+                        name="newPassword"
+                        render={({ field }) => (
+                            <FormItem className={`${!isEditting && "hidden"}`}>
+                                <FormLabel className="text-base">Mật khẩu mới</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        {...field}
+                                        disabled={!isEditting || isSubmitting}
+                                        type="password" />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="confirmPassword"
+                        render={({ field }) => (
+                            <FormItem className={`${!isEditting && "hidden"}`}>
+                                <FormLabel className="text-base">Mật khẩu xác nhận</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        {...field}
+                                        disabled={!isEditting || isSubmitting}
+                                        type="password" />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                </div>
                 {
                     isEditting ? <div className="flex gap-x-2">{
                         !isSubmitting ? <Button className="styled-button" type="submit">Cập nhật</Button> :

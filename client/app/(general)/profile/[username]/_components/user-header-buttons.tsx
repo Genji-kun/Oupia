@@ -30,7 +30,7 @@ function UserHeaderButtons() {
             const res = await authApi.get(followEndpoints["checkFollow"], {
                 params: {
                     followerId: currentUser.id,
-                    followingId: userInfo?.id,
+                    followingId: userInfo?.id
                 }
             });
             setIsFollowing(res.data);
@@ -44,7 +44,6 @@ function UserHeaderButtons() {
             setIsLoading(true);
             try {
                 const res = await authApi.post(followEndpoints["followUser"], {
-                    followerId: currentUser.id,
                     followingId: userInfo?.id,
                 });
                 if (res.status === 200 || res.status === 201) {
@@ -141,7 +140,7 @@ function UserHeaderButtons() {
                                         <span className="ml-2">Theo dõi</span>
                                     </>}
                                 </Button>
-                        ) : <div className="bg-border dark:bg-oupia-sub px-16 py-4 animate-pulse rounded"></div>
+                        ) : <div className="bg-border dark:bg-oupia-sub px-16 py-5 animate-pulse rounded-lg"></div>
                         }
 
                         <Link href={`/messages/${userInfo?.username}`}>
