@@ -1,13 +1,13 @@
 "use client";
 
-import GoogleProvider from '@/components/providers/google-provider';
 import { ThemeProvider } from '@/components/providers/theme-provider';
 import { store } from '@/redux/store';
+import { SessionProvider } from 'next-auth/react';
 import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { v4 as uuid } from 'uuid';
 
-const Providers = ({ children }: { children: React.ReactNode }) => {
+const Providers = ({ children, session }: { children: React.ReactNode, session: any }) => {
 
     useEffect(() => {
         if (!localStorage.getItem("sessionToken")) {
@@ -17,7 +17,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
     }, [])
 
     return (
-        <GoogleProvider>
+        <SessionProvider session={session}>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
                 <Provider store={store}>
                     <main>
@@ -25,7 +25,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
                     </main>
                 </Provider >
             </ThemeProvider>
-        </GoogleProvider>
+        </SessionProvider>
     );
 };
 

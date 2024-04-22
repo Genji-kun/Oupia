@@ -13,6 +13,7 @@ import { ThumbsUp } from 'lucide-react';
 import { useSelector } from 'react-redux';
 import { cn } from '@/lib/utils';
 import { PostUpdateProvider } from '@/contexts/post-update-context';
+import { PostFavouriteProvider } from '@/contexts/post-favourite-context';
 
 const PostItem = (
     { post }: { post: PostResponse }
@@ -156,10 +157,12 @@ const PostItem = (
                     })()}
                 </>
             )}
-            <div className={cn("flex justify-between px-4", !currentUser && "py-2")}>
-                <PostButtons post={post} />
-                <PostStatus post={post} />
-            </div>
+            <PostFavouriteProvider>
+                <div className={cn("flex justify-between px-4", !currentUser && "py-2")}>
+                    <PostButtons post={post} />
+                    <PostStatus post={post} />
+                </div>
+            </PostFavouriteProvider>
             <div className='px-4'>
                 <Separator />
             </div>

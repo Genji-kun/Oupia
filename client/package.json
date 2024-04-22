@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "fast": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "preview": "next preview"
   },
   "dependencies": {
     "@emoji-mart/data": "^1.1.2",
@@ -58,7 +60,6 @@
     "redux": "^5.0.1",
     "sonner": "^1.2.4",
     "tailwind-merge": "^2.1.0",
-    "tailwind-scrollbar": "^3.0.5",
     "tailwindcss-animate": "^1.0.7",
     "uuid": "^9.0.1",
     "vaul": "^0.9.0",

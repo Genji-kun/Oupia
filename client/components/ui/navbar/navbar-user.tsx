@@ -68,12 +68,12 @@ const NavbarUser = ({ user }: { user: any }) => {
                                         case "ROLE_TENANT":
                                             return <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
                                                 <UserRoundSearchIcon className="w-4 h-4" />
-                                                <span>Người tìm căn hộ</span>
+                                                <span>Ngươời tim trọ</span>
                                             </div>
                                         case "ROLE_LANDLORD":
                                             return <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
                                                 <HiOutlineHomeModern className="w-4 h-4" />
-                                                <span>Người cho thuê</span>
+                                                <span>Chủ nhà trọ</span>
                                             </div>
                                         default:
                                             return <></>
@@ -87,7 +87,7 @@ const NavbarUser = ({ user }: { user: any }) => {
                         {
                             user.role === "ROLE_TENANT" && <Link href="/settings/landlord" className="w-full flex items-center py-1 px-2 hover:bg-accent rounded text-sm">
                                 <HiOutlineHomeModern className="mr-2 h-4 w-4" />
-                                <span>Tài khoản người cho thuê</span>
+                                <span>Tài khoản chủ nhà trọ</span>
                                 <ChevronRight className="ml-auto h-4 w-4" />
                             </Link>
                         }

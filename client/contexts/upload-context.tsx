@@ -1,10 +1,13 @@
 "use client"
 
 import { Amenity, TagLocation, TagPrice } from '@/interfaces/Tags';
+import { usePathname } from 'next/navigation';
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 
 interface IUploadContext {
+
+    // Post Context
+
     post: any;
     setPost: React.Dispatch<React.SetStateAction<any>>;
     images: File[];
@@ -17,19 +20,37 @@ interface IUploadContext {
     setTagPrice: React.Dispatch<React.SetStateAction<TagPrice | undefined>>;
     tagLocation: TagLocation | undefined;
     setTagLocation: React.Dispatch<React.SetStateAction<TagLocation | undefined>>;
+
+    // AssetContext 
+    asset: any;
+    setAsset: React.Dispatch<React.SetStateAction<any>>;
+
 }
 
 const UploadContext = createContext<IUploadContext | undefined>(undefined);
 
 export const UploadProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
-    const [post, setPost] = useState<any>({});
+    // Genernal Context
+
+    const pathname = usePathname();
     const [images, setImages] = useState<File[]>([]);
+
+    useEffect(() => {
+        setPost({});
+        setAsset({});
+        setImages([]);
+    }, [pathname])
+
+    // Post Context
+
+    const [post, setPost] = useState<any>({});
     const [selectedTagType, setSelectedTagType] = useState<string>("price");
     const [amenities, setAmenities] = useState<Amenity[]>([]);
     const [tagPrice, setTagPrice] = useState<TagPrice | undefined>();
     const [tagLocation, setTagLocation] = useState<TagLocation | undefined>();
     // const [assetTags, setassetTags] = useState<any>([]);
+
 
     useEffect(() => {
         if (tagPrice) {
@@ -38,8 +59,7 @@ export const UploadProvider: React.FC<{ children: ReactNode }> = ({ children }) 
             })
         } else {
             setPost((prev: any) => {
-                const newPost = { ...prev };
-                delete newPost.tagPrice;
+                const { tagPrice, ...newPost } = prev;
                 return newPost;
             })
         }
@@ -48,20 +68,37 @@ export const UploadProvider: React.FC<{ children: ReactNode }> = ({ children }) 
 
     useEffect(() => {
         if (amenities.length > 0) {
-            setPost((prev: any) => {
-                return { ...prev, amenities: amenities }
-            })
+            if (pathname === "/upload/asset") {
+                setAsset((prev: any) => {
+                    return { ...prev, amenities: amenities }
+                })
+            } else {
+                setPost((prev: any) => {
+                    return { ...prev, amenities: amenities }
+                })
+            }
+
         } else {
-            setPost((prev: any) => {
-                const newPost = { ...prev };
-                delete newPost.amenities;
-                return newPost;
-            })
+            if (pathname === "/upload/asset") {
+                setAsset((prev: any) => {
+                    const { amenities, ...newAsset } = prev;
+                    return newAsset;
+                })
+            } else {
+                setPost((prev: any) => {
+                    const { amenities, ...newPost } = prev;
+                    return newPost;
+                })
+            }
         }
     }, [amenities]);
 
+    // Asset Context
+    const [asset, setAsset] = useState<any>({});
+
+
     return (
-        <UploadContext.Provider value={{ post, setPost, images, setImages, selectedTagType, setSelectedTagType, amenities, setAmenities, tagPrice, setTagPrice, tagLocation, setTagLocation }}>
+        <UploadContext.Provider value={{ post, setPost, images, setImages, selectedTagType, setSelectedTagType, amenities, setAmenities, tagPrice, setTagPrice, tagLocation, setTagLocation, asset, setAsset }}>
             {children}
         </UploadContext.Provider>
     );

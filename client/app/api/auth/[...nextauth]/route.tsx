@@ -1,10 +1,5 @@
 import NextAuth, { Session } from "next-auth"
 import GoogleProvider from "next-auth/providers/google";
-import axios from 'axios';
-
-type CustomSession = Session & {
-    accessToken?: string;
-};
 
 
 const handler = NextAuth({
@@ -21,12 +16,19 @@ const handler = NextAuth({
     ],
     callbacks: {
         async jwt({ token, account }) {
-            if (account?.accessToken) {
+            if (account) {
                 token.accessToken = account.access_token;
             }
             return token;
-        }
+        },
+
+        async session({ session, token }) {
+            session.accessToken = token.accessToken as any;
+            const { user, ...newSession } = session;
+            return newSession;
+        },
     }
+
 })
 
 export { handler as GET, handler as POST };

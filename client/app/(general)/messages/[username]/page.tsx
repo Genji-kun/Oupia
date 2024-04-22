@@ -71,7 +71,6 @@ const UserMessageRoomPage = () => {
                 }
             } catch (error) {
                 notFound();
-
             }
         }
     }

@@ -131,7 +131,7 @@
 
 .page-content {
   width: 100%;
-  height: clac(100vh - 80px);
+  height: calc(100vh - 80px);
 }
 
 .rdp-vhidden {

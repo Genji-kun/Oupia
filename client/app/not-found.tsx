@@ -1,9 +1,16 @@
 import { Button } from '@/components/ui/button'
+import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { IoHome } from 'react-icons/io5'
 
+export const metadata: Metadata = {
+    title: "Không tìm thấy trang | Oupia",
+    description: "Đường dẫn bạn truy cập không tồn tại, vui lòng về trang chủ."
+}
+
 export default function NotFound() {
+
     return (
         <div className="flex flex-col h-screen items-center justify-center">
             <div className="relative w-1/2">

@@ -25,11 +25,11 @@ function UploadModeTab() {
         <Tabs defaultValue={pathname === "/upload" ? "post" : "asset"} onValueChange={(value) => { changeTab(value) }}>
             <TabsList className="bg-oupia-sub p-1 h-fit border w-full">
                 <TabsTrigger value="post" className="py-2 px-4 gap-2 w-full">
-                    <span className="font-[500]">Đăng bài viết</span>
+                    <span className="font-semibold">Đăng bài viết</span>
                 </TabsTrigger>
-                <TabsTrigger disabled={currentUser?.role !== "ROLE_LANDLORD"} value="asset" className="py-2 px-4 gap-2 w-full">
-                    <Lock className="w-4 h-4" />
-                    <span className="font-[500]">Thêm Căn hộ</span>
+                <TabsTrigger disabled={currentUser.role === "ROLE_TENANT"} value="asset" className="py-2 px-4 gap-2 w-full">
+                    {currentUser.role === "ROLE_TENANT" && <Lock className="w-4 h-4" />}
+                    <span className="font-semibold">Thêm Căn hộ</span>
                 </TabsTrigger>
             </TabsList>
         </Tabs >

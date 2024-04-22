@@ -10,7 +10,7 @@ const AuthLayout = ({ children }: { children: ReactNode }) => {
                 <div className="h-full hidden xl:block lg:col-span-4">
                     <AuthContent />
                 </div>
-                <div className="bg-background dark:bg-oupia-base h-full p-4 md:p-10 xl:p-20 xl:py-16 xl:col-span-6 relative">
+                <div className="bg-background dark:bg-oupia-base h-full xl:col-span-6 relative">
                     {children}
                 </div>
             </div>

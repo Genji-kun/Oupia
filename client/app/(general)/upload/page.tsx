@@ -8,17 +8,20 @@ import PostView from './_components/post-view';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
+import useRequireAuth from '@/hooks/use-require-auth';
 
 function UploadPage() {
 
     const { currentUser } = useSelector((state: any) => state.currentUserSlice);
+    const currUser = useRequireAuth(currentUser);
+
     const router = useRouter();
 
-    useEffect(() => {
-        if (!currentUser) {
-            router.push("/sign-in?next=/upload");
-        }
-    }, [currentUser, router]);
+    if (!currUser) {
+        return <> {
+            router.push("/sign-in")
+        }</>
+    }
 
     return (
         <>

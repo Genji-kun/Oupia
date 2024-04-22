@@ -20,12 +20,12 @@ function FollowerItem({ user }: { user: Follower }) {
                         case "ROLE_TENANT":
                             return <div className="flex items-center gap-1.5 text-muted-foreground">
                                 <UserRoundSearchIcon className="w-4 h-4" />
-                                <span>Người tìm căn hộ</span>
+                                <span>Ngươời tim trọ</span>
                             </div>
                         case "ROLE_LANDLORD":
                             return <div className="flex items-center gap-1.5 text-muted-foreground">
                                 <HiOutlineHomeModern className="w-4 h-4" />
-                                <span>Người cho thuê</span>
+                                <span>Chủ nhà trọ</span>
                             </div>
                         default:
                             return <></>

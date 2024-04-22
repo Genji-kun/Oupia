@@ -15,7 +15,7 @@ const FilterBar = () => {
     const { openSearch, setOpenSearch, openMap, setOpenMap } = useFindAssetContext();
 
     return (
-        <div className="flex flex-col gap-y-4 p-6 border-r border-border w-96 h-screen overflow-y-auto scrollbar-thin dark:bg-oupia-base">
+        <div className="flex flex-col gap-y-4 p-6 border-r border-border w-96 h-screen overflow-y-auto dark:bg-oupia-base">
             <div>
                 <div className="flex items-center justify-between">
                     <h1 className="font-bold text-2xl">Bộ lọc tìm kiếm</h1>

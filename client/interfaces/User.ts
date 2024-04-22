@@ -26,11 +26,18 @@ export interface Account {
     confirm?: string,
 }
 
-
 export interface Follower {
     userId: number,
     username: string,
     avatar: string,
     fullName: string,
     role: "ROLE_ADMIN" | "ROLE_LANDLORD" | "ROLE_TENANT",
+}
+
+export interface SearchUser {
+    id: number,
+    fullName: string,
+    avatar: string,
+    username: string,
+    role: "ROLE_TENANT" | "ROLE_LANDLORD" | "ROLE_ADMIN"
 }

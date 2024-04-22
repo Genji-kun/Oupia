@@ -1,51 +1,23 @@
-"use client"
-
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Input } from '@/components/ui/input';
-import { Separator } from '@/components/ui/separator'
-import { Textarea } from '@/components/ui/textarea';
+import { Separator } from '@/components/ui/separator';
 import { useUploadContext } from '@/contexts/upload-context';
 import { UploadCloudIcon, X } from 'lucide-react';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react'
-import TagsInputs from './tags-inputs';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import React from 'react'
+import LocationInput from './location-input';
+import MapContainer from './map-containter';
+import AssetInfoInputs from './asset-info-inputs';
 import AmenityInput from './amenity-input';
 
-function UploadForumForm() {
-
-    const { post, setPost, images, setImages, setAmenities, setTagLocation, setTagPrice } = useUploadContext();
-
-    const handlePostTypeChange = (value: string) => {
-        switch (value) {
-            case "POST_COMMON":
-                setAmenities([]);
-                setTagLocation(undefined);
-                setTagPrice(undefined);
-                break;
-            case "POST_FIND":
-                break;
-            case "POST_RENT":
-                break;
-            default:
-                break;
-        }
-        setPost((current: any) => { return { ...current, postType: value } })
-    }
+function UploadAssetForm() {
+    const { asset, images, setImages } = useUploadContext();
 
     const handleFileChange = (evt: any) => {
         const newFiles = Array.prototype.slice.call(evt.target.files);
         setImages((current: any) => [...(current || []), ...newFiles]);
     }
 
-    const handleFormChange = (field: string, value: any) => {
-        setPost((current: any) => {
-            return {
-                ...current,
-                [field]: value,
-            }
-        })
-    }
 
     const handleDelete = (file: File) => {
         setImages((images: File[]) => images.filter((f) => f !== file));
@@ -54,61 +26,38 @@ function UploadForumForm() {
     return (
         <div className="flex flex-col gap-4 py-2 pb-4">
             <div>
-                <h4 className="text-xl font-semibold">Thông tin bài viết</h4>
-                <span className="text-sm text-muted-foreground">Thông tin bài viết sẽ được hiển thị trên trang diễn đàn.</span>
+                <h4 className="text-xl font-semibold">Thông tin căn hộ</h4>
+                <span className="text-sm text-muted-foreground">Thông tin căn hộ sẽ được hiển thị trên trang tìm thuê căn hộ.</span>
             </div>
             <Separator />
-            <Accordion type="multiple" defaultValue={["type", "infomation", "amenities","tags","images"]} className="w-full">
-                <AccordionItem value="type">
-                    <AccordionTrigger>
-                        <span className="font-semibold text-lg">Loại bài viết</span>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                        <Select defaultValue={post.postType && post.postType} onValueChange={value => handlePostTypeChange(value)}>
-                            <SelectTrigger className="dark:bg-oupia-sub">
-                                <SelectValue placeholder="Bạn đăng bài viết này với mục đích gì?" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="POST_COMMON">Đăng bài viết thông thường</SelectItem>
-                                <SelectItem value="POST_FIND">Tìm kiếm căn hộ</SelectItem>
-                                <SelectItem value="POST_RENT">Cho thuê</SelectItem>
-                            </SelectContent>
-                        </Select>
-                    </AccordionContent>
-                </AccordionItem>
+            <Accordion type="multiple" defaultValue={["infomation", "amenities","location", "images"]} className="w-full">
                 <AccordionItem value="infomation">
                     <AccordionTrigger>
-                        <span className="font-semibold text-lg">Nội dung bài viết</span>
+                        <span className="font-semibold text-lg">Mô tả về căn hộ</span>
                     </AccordionTrigger>
                     <AccordionContent>
-                        <Textarea
-                            rows={5}
-                            placeholder='Nhập nội dung...'
-                            className="dark:bg-oupia-sub"
-                            value={post.postContent}
-                            name="postContent"
-                            onChange={(evt) => handleFormChange(evt.target.name, evt.target.value)}
-                        />
+                        <AssetInfoInputs />
                     </AccordionContent>
                 </AccordionItem>
-                {post.postType && post.postType !== "POST_COMMON" &&
-                    <AccordionItem value="amenities">
-                        <AccordionTrigger>
-                            <span className="font-semibold text-lg">{post.postType === "POST_FIND" ? "Tiện ích yêu cầu" : "Tiện ích của căn hộ"}</span>
-                        </AccordionTrigger>
-                        <AccordionContent>
-                            <AmenityInput />
-                        </AccordionContent>
-                    </AccordionItem>
-                }
-                {post.postType && post.postType !== "POST_COMMON" && <AccordionItem value="tags">
+                <AccordionItem value="amenities">
                     <AccordionTrigger>
-                        <span className="font-semibold text-lg">Các tag đính kèm trong bài đăng</span>
+                        <span className="font-semibold text-lg">Tiện ích của căn hộ</span>
                     </AccordionTrigger>
                     <AccordionContent>
-                        <TagsInputs />
+                        <AmenityInput />
                     </AccordionContent>
-                </AccordionItem>}
+                </AccordionItem>
+                <AccordionItem value="location">
+                    <AccordionTrigger>
+                        <span className="font-semibold text-lg">Địa chỉ căn hộ</span>
+                    </AccordionTrigger>
+                    <AccordionContent>
+                        <div className="space-y-3">
+                            <LocationInput />
+                            <MapContainer longitude={asset.locationLong} latitude={asset.locationLat} />
+                        </div>
+                    </AccordionContent>
+                </AccordionItem>
                 <AccordionItem value="images">
                     <AccordionTrigger>
                         <span className="font-semibold text-lg">Hình ảnh</span>
@@ -154,4 +103,4 @@ function UploadForumForm() {
     )
 }
 
-export default UploadForumForm;
+export default UploadAssetForm;

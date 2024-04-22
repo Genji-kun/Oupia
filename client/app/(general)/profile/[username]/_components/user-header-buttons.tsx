@@ -43,10 +43,12 @@ function UserHeaderButtons() {
         if (currentUser && userInfo) {
             setIsLoading(true);
             try {
-                const res = await authApi.post(followEndpoints["followUser"], {
-                    followingId: userInfo?.id,
+                const res = await authApi.post(followEndpoints["followUser"], {}, {
+                    params: {
+                        followingId: Number(userInfo?.id),
+                    }
                 });
-                if (res.status === 200 || res.status === 201) {
+                if (res.status === 200) {
                     toast.success("Theo dõi người dùng thành công.");
                     setUserInfo({ ...userInfo, totalFollower: userInfo.totalFollower + 1 });
                     setIsFollowing(true);
@@ -66,9 +68,8 @@ function UserHeaderButtons() {
             setIsLoading(true);
             try {
                 const res = await authApi.delete(followEndpoints["unFollow"], {
-                    data: {
-                        followerId: currentUser.id,
-                        followingId: userInfo?.id,
+                    params: {
+                        followingId: Number(userInfo?.id),
                     }
                 });
                 if (res.status === 200 || res.status === 204) {

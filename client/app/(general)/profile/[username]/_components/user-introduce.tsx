@@ -13,7 +13,7 @@ const UserIntroduce = () => {
                 <Separator className="mb-2" />
                 <div className="flex items-center gap-x-3">
                     <Info size="20" className="text-gray-600 dark:text-gray-400" />
-                    <h1>Người cho thuê</h1>
+                    <h1>Chủ nhà trọ</h1>
                 </div>
                 <div className="flex items-center gap-x-3">
                     <UserRoundCheck size="20" className="text-gray-600 dark:text-gray-400" />

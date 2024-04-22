@@ -4,16 +4,18 @@ import { Button } from '@/components/ui/button'
 import { postEndpoints } from '@/configs/axiosEndpoints';
 import { authApi } from '@/configs/axiosInstance';
 import { useUploadContext } from '@/contexts/upload-context'
+import { usePathname } from 'next/navigation';
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux';
 import { toast } from 'sonner';
 
 function UploadButton() {
 
-    const { post, setPost, images } = useUploadContext();
+    const { asset, post, setPost, images } = useUploadContext();
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleSubmit = async () => {
+    const pathname = usePathname();
+
+    const handleSubmitPost = async () => {
         setIsSubmitting(true);
         if (post.postContent && post.postType) {
             const form = new FormData();
@@ -41,13 +43,19 @@ function UploadButton() {
         }
     }
 
+    
+    const handleSubmitAsset = async () => {
+        setIsSubmitting(true);
+        console.log(asset);
+    }
+
     return (
         <div className="flex justify-center gap-2 mt-auto">
             <Button onClick={() => setPost({})} variant={"destructive"} className="w-fit p-6">
                 <span>Xóa thông tin</span>
             </Button>
-            <Button onClick={handleSubmit} disabled={isSubmitting} className="styled-button w-fit p-6">
-                <span className="text-sm">Hoàn tất bài đăng</span>
+            <Button onClick={pathname === "/upload" ? handleSubmitPost : handleSubmitAsset} disabled={isSubmitting} className="styled-button w-fit p-6">
+                <span className="text-sm">{pathname === "/upload" ? "Hoàn tất bài đăng" : "Thêm căn hộ mới"}</span>
             </Button>
         </div>
     )

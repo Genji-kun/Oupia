@@ -3,6 +3,8 @@ export const authEndpoints = {
     "signUp": `/store/register/`,
     "currentUser": `/auth/me/`,
     "getAuthToken": `/auth/auth-token/`,
+    "loginSocial": `/auth/social-login/`,
+    "registerSocial": `store/register/social/`
 }
 
 export const vnpEndpoints = {
@@ -38,7 +40,10 @@ export const followEndpoints = {
 export const favouriteEndpoints = {
     "unFavourite": `/store/favourites/`,
     "saveFavour": `/store/favourites/`,
-    "favourCount": (id: number) => `/store/follows/${id}/`,
+    "favourCount": (id: number) => `/store/favourites/${id}/`,
     "checkFavourite": `/store/favourites/`,
 }
 
+export const searchEndpoints = {
+    "users": `/search/users/`
+}

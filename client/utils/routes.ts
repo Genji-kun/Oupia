@@ -21,7 +21,7 @@ export const navRoutes = [
 
 export const settingsRoutes = [
     {
-        name: "Tài khoản người cho thuê",
+        name: "Tài khoản Chủ nhà trọ",
         href: "/settings/landlord",
     },
     {
