@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import Head from 'next/head'
 import { BeauSans } from '@/utils/fontGenerates'
 import { Toaster } from '@/components/ui/sonner'
 import Providers from './providers'
@@ -19,13 +18,13 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout(
-  { children }: { children: React.ReactNode }
+  { children, session }: { children: React.ReactNode, session: any }
 ) {
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${BeauSans.variable} bg-border/50 dark:bg-background`}>
-        <Providers>
+      <body className={`${BeauSans.variable} bg-accent dark:bg-background`}>
+        <Providers session={session}>
           {children}
           <Toaster richColors />
         </Providers>

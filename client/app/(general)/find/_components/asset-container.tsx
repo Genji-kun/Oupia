@@ -14,7 +14,7 @@ const AssetContainer = () => {
     const { openSearch, openMap } = useFindAssetContext();
 
     return (
-        <div className="flex flex-col gap-4 w-full">
+        <div className="flex flex-col gap-4 w-full h-full">
             {openMap ?
                 <MapContainer />
                 :
@@ -28,7 +28,7 @@ const AssetContainer = () => {
                             {/* <SearchBar /> */}
                         </motion.div>}
                     </AnimatePresence>
-                    <div className="px-4 w-fit">
+                    <div className="px-4 w-full flex-grow">
                         <AssetList />
                     </div>
                 </>

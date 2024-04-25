@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { numberToCurrency } from '@/utils/priceConvert';
 
-const AssetItem = ({ asset }: { asset: Asset }) => {
+const AssetItem = ({ asset }: { asset: any }) => {
     const [api, setApi] = React.useState<any>()
     const [isHover, setIsHover] = useState<boolean>(false);
     const [current, setCurrent] = useState<number>(0);
@@ -27,13 +27,13 @@ const AssetItem = ({ asset }: { asset: Asset }) => {
     }, [api])
 
     return (
-        <div onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)} className="xl:w-full rounded-lg border-border flex flex-col gap-2 xl:aspect-square">
+        <div onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)} className="w-full rounded-lg border-border flex flex-col gap-1">
             <Carousel setApi={setApi} className="w-full relative">
                 <CarouselContent>
-                    {asset.imageList.map((image, index) => (
+                    {asset.images.map((image: string, index: number) => (
                         <CarouselItem key={index}>
-                            <Link href={`/find/${asset.slug}`} className=" aspect-16/15 w-24">
-                                <Image src={image.url} width={500} height={500} alt='AssetImage' className="w-full rounded-lg aspect-16/15" />
+                            <Link href={`/find/${asset.slug}`} className="w-full">
+                                <Image src={image} width={500} height={500} alt='AssetImage' className="w-full rounded-lg aspect-[10/9]" />
                             </Link>
                         </CarouselItem>
                     ))}
@@ -41,15 +41,15 @@ const AssetItem = ({ asset }: { asset: Asset }) => {
                 <CarouselPrevious className={cn("absolute left-2 hidden", isHover && "flex")} />
                 <CarouselNext className={cn("absolute right-2 hidden", isHover && "flex")} />
                 <div className="flex gap-1 absolute bottom-2 left-1/2 -translate-x-1/2">
-                    {asset.imageList.map((_, index) => (
+                    {asset.images.map((_: any, index: number) => (
                         <div key={index} className={cn("bg-border/50 rounded-full w-2 h-2", current === index + 1 && "bg-primary-500")} />
                     ))}
                 </div>
             </Carousel>
             <Link href={`/find/${asset.slug}`} className="w-full">
-                <h2 className="text-sm text-gray-600 dark:text-gray-400 uppercase truncate">{asset.location}</h2>
-                <h1 className="text-lg font-bold font-montserrat">{asset.name}</h1>
-                <h3 className="text-sm text-primary-500 font-semibold">{asset.price && numberToCurrency(asset.price)}</h3>
+                <h2 className="text-xs text-muted-foreground uppercase truncate">{asset.fullLocation}</h2>
+                <h1 className="leading-0 font-medium font-montserrat line-clamp-1 mt-1">{asset.assetName}</h1>
+                <h3 className="leading-0 text-primary font-medium">{asset.price && numberToCurrency(asset.price)}</h3>
             </Link>
         </div>
 

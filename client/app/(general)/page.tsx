@@ -21,7 +21,7 @@ const HomePage = () => {
         <div className="w-full z-10 absolute inset-0 flex items-center justify-center">
           <HomeTitle />
         </div>
-        <div className="absolute bg-gradient-to-t from-border dark:from-background to-transparent w-full h-[400px] z-5 inset-x-0 bottom-0" />
+        <div className="absolute bg-gradient-to-t from-accent dark:from-background to-transparent w-full h-[400px] z-5 inset-x-0 bottom-0" />
       </div>
     </div>
   </>

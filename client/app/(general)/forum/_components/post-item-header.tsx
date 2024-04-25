@@ -147,7 +147,7 @@ const PostItemHeader = ({ post }: { post: PostResponse }) => {
                                             {(() => {
                                                 switch (userInfo.role) {
                                                     case "ROLE_TENANT":
-                                                        return "Ngươời tim trọ"
+                                                        return "Người tim trọ"
                                                     case "ROLE_LANDLORD":
                                                         return "Chủ nhà trọ"
                                                     default:
@@ -214,7 +214,7 @@ const PostItemHeader = ({ post }: { post: PostResponse }) => {
                                             {(() => {
                                                 switch (userInfo.role) {
                                                     case "ROLE_TENANT":
-                                                        return "Ngươời tim trọ"
+                                                        return "Người tim trọ"
                                                     case "ROLE_LANDLORD":
                                                         return "Chủ nhà trọ"
                                                     default:

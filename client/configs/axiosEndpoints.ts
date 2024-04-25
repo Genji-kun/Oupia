@@ -13,8 +13,9 @@ export const vnpEndpoints = {
     "distId": (id: number) => `/districts/${id}`
 }
 
-export const Endpoints = {
-    "assets": `/motels/`,
+export const assetsEndpoints = {
+    "createAsset": `/store/landlord/assets/`,
+    "assets": `/search/assets/`
 }
 
 export const postEndpoints = {
@@ -45,5 +46,6 @@ export const favouriteEndpoints = {
 }
 
 export const searchEndpoints = {
-    "users": `/search/users/`
+    "users": `/search/users/`,
+    "amenities" : `/search/amenities/`
 }

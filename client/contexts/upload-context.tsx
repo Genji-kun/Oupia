@@ -1,5 +1,6 @@
 "use client"
 
+import { AssetResponse } from '@/interfaces/Asset';
 import { Amenity, TagLocation, TagPrice } from '@/interfaces/Tags';
 import { usePathname } from 'next/navigation';
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
@@ -20,6 +21,8 @@ interface IUploadContext {
     setTagPrice: React.Dispatch<React.SetStateAction<TagPrice | undefined>>;
     tagLocation: TagLocation | undefined;
     setTagLocation: React.Dispatch<React.SetStateAction<TagLocation | undefined>>;
+    tagAsset: AssetResponse | undefined;
+    setTagAsset: React.Dispatch<React.SetStateAction<AssetResponse | undefined>>;
 
     // AssetContext 
     asset: any;
@@ -49,7 +52,7 @@ export const UploadProvider: React.FC<{ children: ReactNode }> = ({ children }) 
     const [amenities, setAmenities] = useState<Amenity[]>([]);
     const [tagPrice, setTagPrice] = useState<TagPrice | undefined>();
     const [tagLocation, setTagLocation] = useState<TagLocation | undefined>();
-    // const [assetTags, setassetTags] = useState<any>([]);
+    const [tagAsset, setTagAsset] = useState<Asset | undefined>();
 
 
     useEffect(() => {
@@ -64,6 +67,19 @@ export const UploadProvider: React.FC<{ children: ReactNode }> = ({ children }) 
             })
         }
     }, [tagPrice])
+
+    useEffect(() => {
+        if (tagAsset) {
+            setPost((prev: any) => {
+                return { ...prev, assetId: tagAsset.id }
+            })
+        } else {
+            setPost((prev: any) => {
+                const { assetId, ...newPost } = prev;
+                return newPost;
+            })
+        }
+    }, [tagAsset])
 
 
     useEffect(() => {
@@ -98,7 +114,7 @@ export const UploadProvider: React.FC<{ children: ReactNode }> = ({ children }) 
 
 
     return (
-        <UploadContext.Provider value={{ post, setPost, images, setImages, selectedTagType, setSelectedTagType, amenities, setAmenities, tagPrice, setTagPrice, tagLocation, setTagLocation, asset, setAsset }}>
+        <UploadContext.Provider value={{ post, setPost, images, setImages, selectedTagType, setSelectedTagType, amenities, setAmenities, tagPrice, setTagPrice, tagLocation, setTagLocation, tagAsset, setTagAsset, asset, setAsset }}>
             {children}
         </UploadContext.Provider>
     );

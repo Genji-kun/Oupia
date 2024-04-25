@@ -5,6 +5,8 @@ import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { searchEndpoints } from '@/configs/axiosEndpoints';
+import { publicApi } from '@/configs/axiosInstance';
 import { useUploadContext } from '@/contexts/upload-context';
 import { useDebounce } from '@/hooks/useDebounce';
 import { Amenity } from '@/interfaces/Tags';
@@ -15,36 +17,36 @@ function AmenityInput() {
 
     const { amenities, setAmenities } = useUploadContext();
     const [query, setQuery] = useState("");
-    const [tags, setTags] = useState<any[]>([]);
+    const [searchAmenities, setSearchAmenities] = useState<any[]>([]);
     const [showResults, setShowResults] = useState<boolean>(false);
 
     const inputRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        setShowResults(tags.length > 0);
-    }, [tags])
+        setShowResults(searchAmenities.length > 0);
+    }, [searchAmenities])
 
     const fetchData = useDebounce(async (searchQuery: string) => {
-        // if (searchQuery) {
-        //     try {
-        //         const res = await axios.get(`https://registry.npmjs.org/-/v1/search?text=${searchQuery}`);
-        //         const data = res.data.objects.map((obj: any) => obj.package);
-        //         setTags(data);
-        //     } catch (error) {
-        //         console.log(error);
-        //     }
-        // }
+        if (searchQuery) {
+            try {
+                const res = await publicApi.get(searchEndpoints["amenities"], {
+                    params: {
+                        keyword: searchQuery,
+                        size: 8
+                    }
+                });
+                setSearchAmenities(res.data.content);
+            } catch (error) {
+                console.log(error);
+            }
+        }
     }, 500);
 
-    const handleSelectTag = (tag: Amenity) => {
-        setAmenities((prev) => [...prev, tag]);
+    const handleSelectAmenity = (amenity: Amenity) => {
+        setAmenities((prev) => [...prev, amenity]);
         setQuery("");
         setShowResults(false);
     }
-
-    // const handleRemoveTag = (name: string) => {
-    //     setSelectedTags(selectedTags.filter((tag) => tag.name !== name));
-    // }
 
     const handleClickOutSide = (evt: MouseEvent) => {
         if (inputRef.current && !inputRef.current.contains(evt.target as Node)) {
@@ -143,15 +145,15 @@ function AmenityInput() {
                 showResults &&
                 <ScrollArea className="absolute z-10 bottom-2 max-h-72 w-full rounded border border-t-0 rounded-t-none py-2">
                     <div className="flex flex-col px-2">
-                        {tags.map((tag, index) => {
+                        {searchAmenities.map((amenity, index) => {
                             return (
                                 <>
                                     <Button
                                         variant="ghost"
                                         key={index}
                                         className="justify-start"
-                                        onClick={() => handleSelectTag(tag)}>
-                                        {tag.name}
+                                        onClick={() => handleSelectAmenity(amenity)}>
+                                        {amenity.amenityName}
                                     </Button>
                                     <Separator />
                                 </>
