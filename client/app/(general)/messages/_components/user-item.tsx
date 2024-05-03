@@ -12,6 +12,7 @@ import { Timestamp } from 'firebase/firestore';
 import { useSelector } from 'react-redux';
 import { format, formatDistanceToNow } from 'date-fns';
 import { vi } from 'date-fns/locale';
+import { useAppContext } from '@/contexts/app-context';
 
 const UserItem = ({ user, lastMessage }:
     {
@@ -35,14 +36,14 @@ const UserItem = ({ user, lastMessage }:
 
     return (
         <Link href={`/messages/${user.username}`} className="px-3 xl:px-5 w-fit">
-            <div className={cn(" grid grid-cols-1 xl:grid-cols-7 items-center p-3 rounded-lg hover:bg-primary-200/50 dark:hover:bg-oupia-sub", isActive && "bg-primary-200/50 dark:bg-oupia-sub ")}>
+            <div className={cn(" grid grid-cols-1 xl:grid-cols-7 items-center p-3 rounded-lg hover:bg-primary-200/50 dark:hover:bg-oupia-sub", isActive && "bg-primary-200/50 dark:bg-oupia-sub")}>
                 <Avatar className='w-12 h-12'>
                     <AvatarImage src={user.avatar} alt={user.fullName} />
                     <AvatarFallback>{user.fullName && convert(user.fullName)}</AvatarFallback>
                 </Avatar>
                 <div className="ml-3 col-span-6 hidden xl:flex xl:flex-col justify-center">
                     <h2 className="font-semibold text-lg">{user.fullName}</h2>
-                    <p className="text-sm text-muted-foreground flex gap-1"><span>{lastMessage.sender === currentUser.username && "Bạn: "}</span> <span className="truncate">{lastMessage.content}</span>·<span className="whitespace-nowrap">{lastMessage.createdAt && formatDistanceToNow(lastMessage.createdAt.toDate(), { addSuffix: true, locale: vi })}</span></p>
+                    <p className="text-sm text-muted-foreground flex gap-1"><span>{lastMessage.sender === currentUser?.username && "Bạn: "}</span> <span className="truncate">{lastMessage.content}</span>·<span className="whitespace-nowrap">{lastMessage.createdAt && formatDistanceToNow(lastMessage.createdAt.toDate(), { addSuffix: true, locale: vi })}</span></p>
                 </div>
             </div>
         </Link>

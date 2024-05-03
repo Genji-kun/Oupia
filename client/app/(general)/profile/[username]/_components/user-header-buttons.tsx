@@ -141,7 +141,7 @@ function UserHeaderButtons() {
                                         <span className="ml-2">Theo dõi</span>
                                     </>}
                                 </Button>
-                        ) : <div className="bg-border dark:bg-oupia-sub px-16 py-5 animate-pulse rounded-lg"></div>
+                        ) : <div className="bg-border dark:bg-oupia-base px-16 py-5 animate-pulse rounded-lg"></div>
                         }
 
                         <Link href={`/messages/${userInfo?.username}`}>

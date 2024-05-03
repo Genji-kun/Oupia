@@ -1,9 +1,10 @@
 import Footer from "@/components/ui/footer";
 import Navbar from "@/components/ui/navbar/navbar";
+import dynamic from "next/dynamic";
 
-export default function GeneralLayout(
+const GeneralLayout = (
     { children }: { children: React.ReactNode }
-) {
+) => {
 
     return (
         <>
@@ -15,3 +16,6 @@ export default function GeneralLayout(
         </>
     )
 }
+
+export default dynamic(() => Promise.resolve(GeneralLayout), { ssr: false })
+

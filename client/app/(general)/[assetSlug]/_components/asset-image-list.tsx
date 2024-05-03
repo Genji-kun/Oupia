@@ -10,17 +10,20 @@ import { useAssetImageContext } from '@/contexts/view-asset-image';
 import AssetCarousel from './asset-carousel';
 import { ArrowUpRight } from 'lucide-react';
 import { AnimatePresence, motion } from "framer-motion";
+import { useAssetDetailContext } from '@/contexts/asset-detail-context';
 
 const OPTIONS: EmblaOptionsType = {}
 const SLIDE_COUNT = 10
 const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
-const AssetImageList = ({ images }: { images: image[] }) => {
+const AssetImageList = () => {
+
+    const { setImageIndex } = useAssetImageContext();
+    const {asset, isFetching} = useAssetDetailContext();
+
     const [mousePosition, setMousePosition] = useState<any>({ x: 0, y: 0 });
     const [cursorVariants, setCursorVariants] = useState<string>("default");
 
-
-    const { setImageIndex } = useAssetImageContext();
 
     const variants = {
         default: {
@@ -65,7 +68,7 @@ const AssetImageList = ({ images }: { images: image[] }) => {
                             <Image
                                 onMouseEnter={() => { setCursorVariants("hover") }}
                                 onMouseLeave={() => { setCursorVariants("default") }}
-                                onClick={() => setImageIndex(0)} src={images[0].url}
+                                onClick={() => setImageIndex(0)} src={asset.images[0]}
                                 alt="Asset Image 1"
                                 width={500}
                                 height={500}
@@ -80,7 +83,7 @@ const AssetImageList = ({ images }: { images: image[] }) => {
                                     onMouseEnter={() => { setCursorVariants("hover") }}
                                     onMouseLeave={() => { setCursorVariants("default") }}
                                     onClick={() => setImageIndex(1)}
-                                    src={images[1].url}
+                                    src={asset.images[1]}
                                     alt="Asset Image 2"
                                     width={500}
                                     height={500}
@@ -94,7 +97,7 @@ const AssetImageList = ({ images }: { images: image[] }) => {
                                     onMouseEnter={() => { setCursorVariants("hover") }}
                                     onMouseLeave={() => { setCursorVariants("default") }}
                                     onClick={() => setImageIndex(2)}
-                                    src={images[2].url}
+                                    src={asset.images[2]}
                                     alt="Asset Image 3" width={500}
                                     height={500}
                                     className="rounded-lg object-cover aspect-3/2  hover:cursor-none w-full"
@@ -102,13 +105,13 @@ const AssetImageList = ({ images }: { images: image[] }) => {
                             </DialogTrigger>
                         </div>
                     </div>
-                    {images.length > 3 &&
+                    {asset.images.length > 3 &&
                         <DialogTrigger asChild>
                             <Button onClick={() => setImageIndex(0)} className="styled-button absolute bottom-2 right-2">Xem tất cả hình ảnh</Button>
                         </DialogTrigger>
                     }
                     <DialogContent className="w-full h-screen images-view">
-                        <AssetCarousel slides={SLIDES} options={OPTIONS} images={images} />
+                        <AssetCarousel slides={SLIDES} options={OPTIONS} images={asset.images} />
                     </DialogContent>
                 </Dialog>
             </div>

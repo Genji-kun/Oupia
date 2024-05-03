@@ -116,11 +116,11 @@
 
 .map-route>div {
   width: 100%;
-  aspect-ratio: 3/1;
+  aspect-ratio: 5/2;
 }
 
 .images-view {
-  @apply max-w-full bg-background/80 border-0;
+  @apply max-w-full bg-background border-0;
   border-radius: 0% !important;
 }
 

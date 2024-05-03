@@ -5,42 +5,55 @@ import { Separator } from '@/components/ui/separator';
 import { User } from '@/interfaces/User';
 import React, { useState } from 'react';
 import SuggestUserItem from './suggest-user-item';
+import { useProfileContext } from '@/contexts/profile-context';
+import { publicApi } from '@/configs/axiosInstance';
+import { followEndpoints } from '@/configs/axiosEndpoints';
+import { useQuery } from '@tanstack/react-query';
+import UserSkeleton from './user-skeleton';
 
 const SuggestUserList = () => {
-    const [users, setUsers] = useState<User[]>([
-        {
-            fullName: "Võ Phú Phát",
-            account: {
-                username: "phatvo",
-            },
-            avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg",
-            phoneNumber: "09012345152"
-        }, {
-            fullName: "Nguyễn Kim Bảo Ngân",
-            account: {
-                username: "ngannguyen",
-            },
-            avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg",
-            phoneNumber: "09012345152"
-        }, {
-            fullName: "Phan Thanh Hải",
-            account: {
-                username: "haiphan",
-            },
-            avatar: "https://res.cloudinary.com/dzba4fewa/image/upload/v1697418342/bqiphv8ijowcb1ao2w8f.jpg",
-            phoneNumber: "09012345152"
-        }
+    const { userInfo } = useProfileContext();
 
-    ]);
+    const fetchPosts = async () => {
+        const url = followEndpoints.getFollowings(Number(userInfo?.id));
+        const res = await publicApi.get(url, {
+            params: {
+                size: 4
+            }
+        });
+        if (res.status === 200) {
+            return res.data.content;
+        } else {
+            throw new Error('Error fetching posts');
+        }
+    };
+
+    const { data: users, isLoading } = useQuery({ queryKey: ['followings'], queryFn: fetchPosts });
+
+    if (isLoading) {
+        return <>
+            <Card className="shadow-lg dark:bg-oupia-base">
+                <CardHeader>
+                    <h2 className="font-semibold text-xl">Người dùng gợi ý</h2>
+                </CardHeader>
+                <CardContent className="flex flex-col gap-2">
+                    <UserSkeleton />
+                    <UserSkeleton />
+                    <UserSkeleton />
+                </CardContent>
+            </Card >
+        </>
+    }
+
     return (
-        <Card className="shadow-lg">
+        <Card className="shadow-lg dark:bg-oupia-base">
             <CardHeader>
-                <h2 className="font-semibold text-xl">Danh sách người dùng liên quan</h2>
+                <h2 className="font-semibold text-xl">Người dùng gợi ý</h2>
             </CardHeader>
             <CardContent className="flex flex-col gap-2">
                 <Separator className="mb-2" />
                 <div className="flex flex-col gap-2">
-                    {users.map((user, index) => {
+                    {users && users.map((user: any, index: number) => {
                         return <React.Fragment key={index}>
                             <SuggestUserItem user={user} />
                         </React.Fragment>

@@ -42,7 +42,7 @@ const UserHeader = () => {
 
     return (
         <div className="flex flex-col">
-            <div className="relative bg-border dark:bg-oupia-sub aspect-[3/1] lg:aspect-[4/1] xl:aspect-[8/1] rounded-b-lg">
+            <div className="relative bg-border dark:bg-oupia-base aspect-[3/1] lg:aspect-[4/1] xl:aspect-[8/1] rounded-b-lg">
                 {
                     userInfo ?
                         <>
@@ -56,7 +56,7 @@ const UserHeader = () => {
                         :
                         <>
                             <div className="absolute -bottom-[8rem] left-1/2 -translate-x-1/2 xl:left-20 xl:translate-x-0">
-                                <div className='w-40 aspect-square rounded-full border-4 border-background bg-border dark:bg-oupia-sub'>
+                                <div className='w-40 aspect-square rounded-full border-4 border-background bg-border dark:bg-oupia-base'>
                                 </div>
                             </div>
                         </>
@@ -77,13 +77,13 @@ const UserHeader = () => {
                         :
                         <>
                             <div className="w-full flex flex-col justify-between gap-2">
-                                <div className="bg-border dark:bg-oupia-sub py-5 w-72 animate-pulse rounded-full"></div>
-                                <div className="bg-border dark:bg-oupia-sub p-3 w-40 animate-pulse rounded-full"></div>
+                                <div className="bg-border dark:bg-oupia-base py-5 w-72 animate-pulse rounded-full"></div>
+                                <div className="bg-border dark:bg-oupia-base p-3 w-40 animate-pulse rounded-full"></div>
                             </div>
                             <div className="flex items-center gap-2">
                                 <div className="flex w-full gap-2">
-                                    <div className="bg-border dark:bg-oupia-sub px-16 py-5 animate-pulse rounded-lg"></div>
-                                    <div className="bg-border dark:bg-oupia-sub px-16 py-5 animate-pulse rounded-lg"></div>
+                                    <div className="bg-border dark:bg-oupia-base px-16 py-5 animate-pulse rounded-lg"></div>
+                                    <div className="bg-border dark:bg-oupia-base px-16 py-5 animate-pulse rounded-lg"></div>
                                 </div>
                             </div>
                         </>

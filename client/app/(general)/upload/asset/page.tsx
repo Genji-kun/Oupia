@@ -2,7 +2,6 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import useRequireAuth from '@/hooks/use-require-auth';
 import { ScanEyeIcon } from 'lucide-react';
 import { notFound, useRouter } from 'next/navigation';
 import React from 'react'
@@ -13,11 +12,10 @@ import UploadAssetForm from './_components/upload-asset-form';
 function UploadAssetPage() {
 
     const { currentUser } = useSelector((state: any) => state.currentUserSlice);
-    const currUser = useRequireAuth(currentUser);
 
     const router = useRouter();
 
-    if (!currUser) {
+    if (!currentUser) {
         return <> {
             router.push("/sign-in")
         }</>

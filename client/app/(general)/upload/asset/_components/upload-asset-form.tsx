@@ -63,7 +63,7 @@ function UploadAssetForm() {
                         <span className="font-semibold text-lg">Hình ảnh</span>
                     </AccordionTrigger>
                     <AccordionContent>
-                        <div className="flex w-full justify-center rounded-lg border border-dashed dark:border-muted-foreground border-muted-foreground px-6 py-10 dark:bg-oupia-sub">
+                        <div className="flex w-full justify-center rounded-lg border border-dashed dark:border-muted-foreground border-muted-foreground px-6 py-10 dark:bg-oupia-base">
                             <div className="text-center relative">
                                 <UploadCloudIcon className="mx-auto h-12 w-12" aria-hidden="true" />
                                 <div className="mt-4 flex text-muted-foreground text-base">

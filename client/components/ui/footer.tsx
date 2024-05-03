@@ -10,7 +10,7 @@ const Footer = () => {
     const [isHidden, setisHidden] = useState<boolean>(true);
     const pathname = usePathname();
     useEffect(() => {
-        if (pathname === "/find" || pathname === "/assets" || pathname === "/forum" || pathname.startsWith("/messages") || pathname.startsWith("/upload"))
+        if (pathname.startsWith("/find") || pathname === "/assets" || pathname === "/forum" || pathname.startsWith("/messages") || pathname.startsWith("/upload"))
             setisHidden(true);
         else
             setisHidden(false);

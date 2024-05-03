@@ -1,17 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import ReactMapGL, { Layer, Source } from '@goongmaps/goong-map-react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import ReactMapGL, { Layer, Marker, Source } from '@goongmaps/goong-map-react';
 import { useFindAssetContext } from '@/contexts/find-asset-context';
 import geoJsonProv from "@/public/data/geoJson1.json";
 import geoJsonDist from "@/public/data/geoJson2.json";
 import { toast } from 'sonner';
+import Image from 'next/image';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import AssetItem from './asset-item';
 
 
 const MapContainer = () => {
 
-    const { selectedProv, selectedDist } = useFindAssetContext();
+    const { selectedProv, selectedDist, assets } = useFindAssetContext();
     const mapRef = useRef<any>(null);
 
     const [polygon, setPolygon] = React.useState<string[]>();
@@ -26,7 +29,7 @@ const MapContainer = () => {
 
     useEffect(() => {
         if (selectedProv) {
-            const feature = geoJsonProv.features.find((f: any) => f.properties.NAME_1 === selectedProv.name.replaceAll(" ", ""));
+            const feature = geoJsonProv.features.find((f: any) => f.properties.NAME_1 === normalizeName(selectedProv.name));
             if (!feature) {
                 toast.error("Somthing went wrong !!")
             } else {
@@ -66,9 +69,9 @@ const MapContainer = () => {
         }
     }, [selectedProv])
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (selectedDist) {
-            const feature = geoJsonDist.features.find((f: any) => f.properties.NAME_2 === selectedDist.name.replaceAll(" ", ""));
+            const feature = geoJsonDist.features.find((f: any) => f.properties.NAME_2 === normalizeName(selectedDist.name));
             if (!feature) {
                 toast.error("Somthing went wrong !!")
             } else {
@@ -121,6 +124,36 @@ const MapContainer = () => {
         mapRef.current = event.target;
     }, []);
 
+    const markers = useMemo(() => assets.map(
+        (asset, index) => (
+            <Marker className="relative z-[1]" key={index} longitude={asset.locationLong} latitude={asset.locationLat}>
+                <TooltipProvider>
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <div className="p-1 rounded-full bg-gray-400 hover:bg-gray-500 cursor-pointer">
+                                <Image width={500}
+                                    height={500}
+                                    src={asset.images[0]}
+                                    className="object-cover w-16 h-16 rounded-full"
+                                    alt="Asset Image" />
+                            </div>
+                        </TooltipTrigger>
+                        <TooltipContent align='center' className="w-96 py-2 z-[99999]">
+                            <AssetItem asset={asset} />
+                        </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
+            </Marker>
+        )
+    ), [assets]);
+
+    function normalizeName(name: string) {
+        if (/^\d+$/.test(name)) {
+            return 'Quận' + name;
+        }
+        return name.replaceAll(" ", "");
+    }
+
     return (
         <div className="map-container w-full overflow-hidden">
             <ReactMapGL
@@ -137,7 +170,7 @@ const MapContainer = () => {
                                 'line-color': '#FF0000',
                                 'line-width': 2
                             }}
-                            filter={['==', ['get', 'NAME_1'], selectedProv.name.replaceAll(" ", "")]}
+                            filter={['==', ['get', 'NAME_1'], normalizeName(selectedProv.name)]}
                         />
                         <Layer
                             id="fill"
@@ -146,7 +179,7 @@ const MapContainer = () => {
                                 'fill-color': '#FF0000',
                                 'fill-opacity': 0.1
                             }}
-                            filter={['==', ['get', 'NAME_1'], selectedProv.name.replaceAll(" ", "")]}
+                            filter={['==', ['get', 'NAME_1'], normalizeName(selectedProv.name)]}
                         />
                     </Source>
                 )}
@@ -159,7 +192,7 @@ const MapContainer = () => {
                                 'line-color': '#FF0000',
                                 'line-width': 2
                             }}
-                            filter={['==', ['get', 'NAME_2'], selectedDist.name.replaceAll(" ", "")]}
+                            filter={['==', ['get', 'NAME_2'], normalizeName(selectedDist.name)]}
                         />
                         <Layer
                             id="fill"
@@ -168,10 +201,11 @@ const MapContainer = () => {
                                 'fill-color': '#FF0000',
                                 'fill-opacity': 0.1
                             }}
-                            filter={['==', ['get', 'NAME_2'], selectedDist.name.replaceAll(" ", "")]}
+                            filter={['==', ['get', 'NAME_2'], normalizeName(selectedDist.name)]}
                         />
                     </Source>
                 )}
+                {markers}
             </ReactMapGL>
 
         </div>

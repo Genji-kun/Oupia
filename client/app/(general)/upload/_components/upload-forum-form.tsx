@@ -7,14 +7,16 @@ import { Textarea } from '@/components/ui/textarea';
 import { useUploadContext } from '@/contexts/upload-context';
 import { UploadCloudIcon, X } from 'lucide-react';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import TagsInputs from './tags-inputs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import AmenityInput from './amenity-input';
+import { useSelector } from 'react-redux';
 
 function UploadForumForm() {
 
-    const { post, setPost, images, setImages, setAmenities, setTagLocation, setTagPrice } = useUploadContext();
+    const { post, setPost, images, setImages, setAmenities, setTagLocation, setTagPrice, tagAsset, setTagAsset } = useUploadContext();
+    const { currentUser } = useSelector((state: any) => state.currentUserSlice);
 
     const handlePostTypeChange = (value: string) => {
         switch (value) {
@@ -22,10 +24,10 @@ function UploadForumForm() {
                 setAmenities([]);
                 setTagLocation(undefined);
                 setTagPrice(undefined);
+                setTagAsset(undefined);
                 break;
             case "POST_FIND":
-                break;
-            case "POST_RENT":
+                setTagAsset(undefined);
                 break;
             default:
                 break;
@@ -58,7 +60,7 @@ function UploadForumForm() {
                 <span className="text-sm text-muted-foreground">Thông tin bài viết sẽ được hiển thị trên trang diễn đàn.</span>
             </div>
             <Separator />
-            <Accordion type="multiple" defaultValue={["type", "infomation", "amenities","tags","images"]} className="w-full">
+            <Accordion type="multiple" defaultValue={["type", "infomation", "amenities", "tags", "images"]} className="w-full">
                 <AccordionItem value="type">
                     <AccordionTrigger>
                         <span className="font-semibold text-lg">Loại bài viết</span>
@@ -71,7 +73,7 @@ function UploadForumForm() {
                             <SelectContent>
                                 <SelectItem value="POST_COMMON">Đăng bài viết thông thường</SelectItem>
                                 <SelectItem value="POST_FIND">Tìm kiếm căn hộ</SelectItem>
-                                <SelectItem value="POST_RENT">Cho thuê</SelectItem>
+                                {currentUser.role !== "ROLE_TENANT" && <SelectItem value="POST_RENT">Cho thuê</SelectItem>}
                             </SelectContent>
                         </Select>
                     </AccordionContent>
@@ -109,46 +111,48 @@ function UploadForumForm() {
                         <TagsInputs />
                     </AccordionContent>
                 </AccordionItem>}
-                <AccordionItem value="images">
-                    <AccordionTrigger>
-                        <span className="font-semibold text-lg">Hình ảnh</span>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                        <div className="flex w-full justify-center rounded-lg border border-dashed dark:border-muted-foreground border-muted-foreground px-6 py-10 dark:bg-oupia-sub">
-                            <div className="text-center relative">
-                                <UploadCloudIcon className="mx-auto h-12 w-12" aria-hidden="true" />
-                                <div className="mt-4 flex text-muted-foreground text-base">
-                                    <label
-                                        htmlFor="assetImages"
-                                        className="relative cursor-pointer rounded-md text-primary hover:text-primary-700 hover:underline"
-                                    >
-                                        <span>Tải lên file</span>
-                                        <Input
-                                            id="assetImages"
-                                            name="assetImages"
-                                            type="file"
-                                            multiple
-                                            className="sr-only"
-                                            accept="image/png, image/jpeg"
-                                            onChange={handleFileChange}
-                                        />
-                                    </label>
-                                    <p className="pl-1">hoặc kéo thả từ thư mục</p>
-                                </div>
-                                <p className="text-sm">Chỉ nhận ảnh PNG, JPG</p>
-                            </div>
-                        </div>
-                        {images.length !== 0 && (
-                            <div className="flex flex-wrap gap-5 items-center pt-4">
-                                {images.map((image, index) => (
-                                    <div key={index} className="col-span-1 relative ">
-                                        <X className="text-destructive font-bold w-6 h-6 p-1 bg-background hover:bg-border dark:hover:bg-oupia-sub dark:bg-oupia-base rounded-full absolute -right-2 -top-2 cursor-pointer" onClick={() => handleDelete(image)} />
-                                        <Image width={500} height={500} className="rounded-lg object-cover w-32 aspect-square" src={URL.createObjectURL(image)} alt={image.name} />
+                {
+                    !tagAsset && <AccordionItem value="images">
+                        <AccordionTrigger>
+                            <span className="font-semibold text-lg">Hình ảnh</span>
+                        </AccordionTrigger>
+                        <AccordionContent>
+                            <div className="flex w-full justify-center rounded-lg border border-dashed dark:border-muted-foreground border-muted-foreground px-6 py-10 dark:bg-oupia-base">
+                                <div className="text-center relative">
+                                    <UploadCloudIcon className="mx-auto h-12 w-12" aria-hidden="true" />
+                                    <div className="mt-4 flex text-muted-foreground text-base">
+                                        <label
+                                            htmlFor="assetImages"
+                                            className="relative cursor-pointer rounded-md text-primary hover:text-primary-700 hover:underline"
+                                        >
+                                            <span>Tải lên file</span>
+                                            <Input
+                                                id="assetImages"
+                                                name="assetImages"
+                                                type="file"
+                                                multiple
+                                                className="sr-only"
+                                                accept="image/png, image/jpeg"
+                                                onChange={handleFileChange}
+                                            />
+                                        </label>
+                                        <p className="pl-1">hoặc kéo thả từ thư mục</p>
                                     </div>
-                                ))}
-                            </div>)}
-                    </AccordionContent>
-                </AccordionItem>
+                                    <p className="text-sm">Chỉ nhận ảnh PNG, JPG</p>
+                                </div>
+                            </div>
+                            {images.length !== 0 && (
+                                <div className="flex flex-wrap gap-5 items-center pt-4">
+                                    {images.map((image, index) => (
+                                        <div key={index} className="col-span-1 relative ">
+                                            <X className="text-destructive font-bold w-6 h-6 p-1 bg-background hover:bg-border dark:hover:bg-oupia-sub dark:bg-oupia-base rounded-full absolute -right-2 -top-2 cursor-pointer" onClick={() => handleDelete(image)} />
+                                            <Image width={500} height={500} className="rounded-lg object-cover w-32 aspect-square" src={URL.createObjectURL(image)} alt={image.name} />
+                                        </div>
+                                    ))}
+                                </div>)}
+                        </AccordionContent>
+                    </AccordionItem>
+                }
             </Accordion>
         </div>
     )

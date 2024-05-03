@@ -14,6 +14,7 @@ import { useSelector } from 'react-redux';
 import { cn } from '@/lib/utils';
 import { PostUpdateProvider } from '@/contexts/post-update-context';
 import { PostFavouriteProvider } from '@/contexts/post-favourite-context';
+import CommentList from './comment-list';
 
 const PostItem = (
     { post }: { post: PostResponse }
@@ -157,6 +158,15 @@ const PostItem = (
                     })()}
                 </>
             )}
+
+            {/* {post.ass && <div className='w-full flex items-center gap-4 border-y'>
+                <Image src={tagAsset.images[0]} alt="Asset Image" className="w-20 aspect-square object-cover" width={500} height={500} />
+                <div className="flex-grow flex flex-col justify-center h-fit">
+                    <h3 className="line-clamp-1 font-semibold text-lg">{tagAsset.assetName}</h3>
+                    <h4 className="text-primary text-sm">{numberToCurrency(tagAsset.price)}</h4>
+                </div>
+            </div>} */}
+
             <PostFavouriteProvider>
                 <div className={cn("flex justify-between px-4", !currentUser && "py-2")}>
                     <PostButtons post={post} />
@@ -166,7 +176,8 @@ const PostItem = (
             <div className='px-4'>
                 <Separator />
             </div>
-            <CommentInput />
+            <CommentList postId={post.id}/>
+            <CommentInput postId={post.id}/>
         </div >
     );
 };

@@ -52,7 +52,7 @@ export const UploadProvider: React.FC<{ children: ReactNode }> = ({ children }) 
     const [amenities, setAmenities] = useState<Amenity[]>([]);
     const [tagPrice, setTagPrice] = useState<TagPrice | undefined>();
     const [tagLocation, setTagLocation] = useState<TagLocation | undefined>();
-    const [tagAsset, setTagAsset] = useState<Asset | undefined>();
+    const [tagAsset, setTagAsset] = useState<AssetResponse | undefined>();
 
 
     useEffect(() => {
@@ -73,6 +73,7 @@ export const UploadProvider: React.FC<{ children: ReactNode }> = ({ children }) 
             setPost((prev: any) => {
                 return { ...prev, assetId: tagAsset.id }
             })
+            setImages([]);
         } else {
             setPost((prev: any) => {
                 const { assetId, ...newPost } = prev;

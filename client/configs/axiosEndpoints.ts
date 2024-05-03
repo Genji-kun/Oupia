@@ -15,7 +15,8 @@ export const vnpEndpoints = {
 
 export const assetsEndpoints = {
     "createAsset": `/store/landlord/assets/`,
-    "assets": `/search/assets/`
+    "assets": `/search/assets/`,
+    "getAssetBySlugName": (slug: string) => `search/assets/${slug}`
 }
 
 export const postEndpoints = {
@@ -25,17 +26,23 @@ export const postEndpoints = {
     "deletePost": (id: number) => `/store/posts/${id}/`
 }
 
+export const commentEndpoints = {
+    "comments" : `/store/comments/`,
+    "addComment": `/store/comments/`,
+}
+
 export const userEndpoints = {
     "getUserByUsername": (username: string) => `/store/users/${username}/`,
     "upgrade": `/store/users/upgrade-landlord/`
 }
-
 
 export const followEndpoints = {
     "unFollow": `/store/follows/`,
     "followUser": `/store/follows/`,
     "checkFollow": `/store/follows/`,
     "getFollowersInfo": (id: number) => `/store/follows/${id}/followers/`,
+    "getFollowings": (id: number) => `/store/follows/${id}/followings/`,
+
 }
 
 export const favouriteEndpoints = {

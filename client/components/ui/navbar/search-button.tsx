@@ -1,19 +1,63 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '../button';
-import { Search } from 'lucide-react';
+import { Clock, Loader2, Router, Search, X } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTrigger } from '../dialog';
 import { ScrollArea } from '../scroll-area';
+import { useDispatch, useSelector } from 'react-redux';
+import { Separator } from '../separator';
+import { publicApi } from '@/configs/axiosInstance';
+import { assetsEndpoints } from '@/configs/axiosEndpoints';
+import { useQuery } from '@tanstack/react-query';
+import { useDebounce } from 'use-debounce';
+import { AssetResponse } from '@/interfaces/Asset';
+import Link from 'next/link';
+import { History, addHistory, removeHistory } from '@/redux/slices/searchHistorySlice';
+import { useRouter } from 'next/navigation';
+
+
+const fetchAssets = async (searchQuery: string) => {
+    try {
+        const res = await publicApi.get(assetsEndpoints["assets"], {
+            params: {
+                keyword: searchQuery,
+            }
+        })
+        if (res.status === 200) {
+            return res.data.content;
+        }
+    } catch (error) {
+        console.error(error);
+    }
+};
 
 const SearchButton = () => {
 
-    const [results, setResults] = useState<any[]>([]);
-    const [histories, setHistories] = useState<string[]>();
+    const  {searchHistories}  = useSelector((state: any) => state.searchHistorySlice);
+    const dispatch = useDispatch();
+    const router = useRouter();
+
+    const [query, setQuery] = useState<string>("");
+    const [isOpen, setIsOpen] = useState<boolean>(true);
+
+    const [debouncedQuery] = useDebounce(query, 2000);
+
+    const { data: results, isLoading, refetch } = useQuery({
+        queryKey: ["searchAssets", query],
+        queryFn: () => fetchAssets(debouncedQuery),
+        enabled: false,
+    });
+
+    useEffect(() => {
+        if (debouncedQuery) {
+            refetch();
+        }
+    }, [debouncedQuery, refetch]);
 
     return (
         <div>
-            <Dialog>
+            <Dialog onOpenChange={() => setQuery("")}>
                 <DialogTrigger asChild>
                     <div>
                         <Button variant={"outline"} className="dark:bg-oupia-sub px-2.5 dark:border-none justify-between items-center xl:text-muted-foreground xl:w-80 xl:px-4 hover:shadow shadow-black/50">
@@ -29,25 +73,79 @@ const SearchButton = () => {
                                 <Search className="h-4 w-4" />
                             </div>
                             <input
+                                value={query}
+                                onChange={(evt) => { setQuery(evt.target.value) }}
                                 className="enabled:focus:ring-0 enabled:focus:outline-none border-none col-span-11 pl-11 py-3 bg-background"
                                 placeholder='Tìm kiếm địa điểm, dự án cụ thể bạn muốn thuê...' />
                         </div>
                     </DialogHeader>
-                    <>
-                        {
-                            results.length === 0 ?
-                                <ScrollArea className="h-72 w-full">
+                    <ScrollArea className="h-72 w-full">
+                        <>
+                            {searchHistories.length > 0 &&
+                                <>
                                     <div className="text-sm">
-                                        <h1 className="text-muted-foreground font-semibold px-5">Tìm kiếm gần đây</h1>
-                                        <div className="flex flex-col w-full gap-1">
-
+                                        <h1 className="text-muted-foreground font-semibold px-5 pb-3">Tìm kiếm gần đây</h1>
+                                        <div className="flex flex-col w-full">
+                                            {
+                                                searchHistories.map((history: History, index: number) => {
+                                                    return <React.Fragment key={index}>
+                                                        <div
+                                                            onClick={() => {
+                                                                router.push(`/${history.assetSlug}`)
+                                                            }}
+                                                            className="w-full flex items-center justify-between py-2 px-4 cursor-pointer dark:hover:bg-oupia-sub/50">
+                                                            <div className="flex items-center gap-2">
+                                                                <Clock className="w-4 h-4 text-muted-foreground" />
+                                                                <span className="line-clamp-1 max-w-[3/4]">{history.result}</span>
+                                                            </div>
+                                                            <Button onClick={() => dispatch(removeHistory(history))} className="w-fit h-fit p-2 rounded-full" variant={"ghost"}>
+                                                                <X className="w-4 h-4" />
+                                                            </Button>
+                                                        </div>
+                                                    </React.Fragment>
+                                                })
+                                            }
                                         </div>
                                     </div>
-                                </ScrollArea> : <div className="p-5 pt-0 flex flex-col justify-center">
-                                    <span className="text-center">Không tìm thấy kiếm quả.</span>
-                                </div>
-                        }
-                    </>
+                                    <Separator className="my-2" />
+                                </>
+                            }
+                            {isLoading && <Loader2 className="text-primary animate-spin mx-auto"></Loader2>}
+                            {
+                                results &&
+                                (
+                                    results.length > 0 ?
+                                        <div className="text-sm">
+                                            <h1 className="text-muted-foreground font-semibold px-5 pb-3">Kết quả tìm kiếm</h1>
+                                            <div className="flex flex-col w-full">
+                                                {
+                                                    results.map((asset: AssetResponse, index: number) => {
+                                                        return <React.Fragment key={index}>
+                                                            <div
+                                                                onClick={
+                                                                    () => {
+                                                                        router.push(`/${asset.assetSlug}`)
+                                                                        dispatch(addHistory(
+                                                                            {
+                                                                                assetSlug: asset.assetSlug,
+                                                                                result: asset.assetName
+                                                                            }
+                                                                        ));
+                                                                    }} className="w-full py-3 px-4 cursor-pointer dark:hover:bg-oupia-sub">
+                                                                <span className="line-clamp-1 max-w-[4/5]">{asset.assetName}</span>
+                                                            </div>
+                                                        </React.Fragment>
+                                                    })
+                                                }
+                                            </div>
+                                        </div>
+                                        : <div className="p-5 pt-0 flex flex-col justify-center">
+                                            <span className="text-center">Không tìm thấy kiếm quả.</span>
+                                        </div>
+                                )
+                            }
+                        </>
+                    </ScrollArea>
                 </DialogContent>
             </Dialog>
         </div >

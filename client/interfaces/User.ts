@@ -10,6 +10,15 @@ export interface User {
     roles?: "ROLE_ADMIN" | "ROLE_LANDLORD" | "ROLE_TENANT",
 }
 
+export interface CurrentUser {
+    id: number,
+    fullName: string,
+    avatar: string,
+    username: string,
+    role: "ROLE_ADMIN" | "ROLE_LANDLORD" | "ROLE_TENANT"
+}
+
+
 export interface UserInfo {
     id: string,
     fullName: string,

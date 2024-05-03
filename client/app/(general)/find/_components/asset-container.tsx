@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import MapContainer from './map-container';
 import AssetList from './asset-list';
 import { useFindAssetContext } from '@/contexts/find-asset-context';
+import AssetPagination from './asset-pagination';
 
 
 const AssetContainer = () => {
@@ -28,8 +29,9 @@ const AssetContainer = () => {
                             {/* <SearchBar /> */}
                         </motion.div>}
                     </AnimatePresence>
-                    <div className="px-4 w-full flex-grow">
+                    <div className="px-4 w-full flex-grow space-y-2">
                         <AssetList />
+                        <AssetPagination/>
                     </div>
                 </>
             }

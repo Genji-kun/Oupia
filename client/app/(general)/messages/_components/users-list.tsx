@@ -130,7 +130,7 @@ const UsersList = () => {
                                                                                 case "ROLE_TENANT":
                                                                                     return <div className="flex text-xs items-center gap-1.5 text-muted-foreground">
                                                                                         <UserRoundSearchIcon className="w-3 h-3" />
-                                                                                        <span>Người tim trọ</span>
+                                                                                        <span>Người tìm trọ</span>
                                                                                     </div>
                                                                                 case "ROLE_LANDLORD":
                                                                                     return <div className="flex items-center gap-1.5 text-muted-foreground">

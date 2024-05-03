@@ -8,7 +8,6 @@ export const metadata: Metadata = {
     description: '',
 }
 
-
 const SignInPage = () => {
 
     return (

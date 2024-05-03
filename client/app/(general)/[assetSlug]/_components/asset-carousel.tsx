@@ -14,7 +14,7 @@ import { useAssetImageContext } from '@/contexts/view-asset-image'
 type PropType = {
     slides: number[]
     options?: EmblaOptionsType
-    images: image[]
+    images: string[]
 }
 
 const AssetCarousel: React.FC<PropType> = (props) => {
@@ -83,7 +83,7 @@ const AssetCarousel: React.FC<PropType> = (props) => {
                                     width="500"
                                     height="500"
                                     className={`${index !== 0 && "ml-8"} lg:ml-0 w-auto h-fit rounded-lg md:h-full`}
-                                    src={image.url}
+                                    src={image}
                                     alt="Asset Image"
                                 />
                             </div>
@@ -109,7 +109,7 @@ const AssetCarousel: React.FC<PropType> = (props) => {
                             <Thumb
                                 onClick={() => onThumbClick(index)}
                                 selected={index === selectedIndex}
-                                imgSrc={image.url}
+                                imgSrc={image}
                                 key={index}
                             />
                         ))}

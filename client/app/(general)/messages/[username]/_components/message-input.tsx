@@ -20,12 +20,11 @@ import { DocumentData, addDoc, collection, getDocs, onSnapshot, orderBy, query, 
 import { db } from '@/configs/firebase';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
-import useRequireAuth from '@/hooks/use-require-auth';
+import withAuth from '@/utils/withAuth';
 
 const MessageInput = () => {
 
     const { currentUser } = useSelector((state: any) => state.currentUserSlice);
-    const currUser = useRequireAuth(currentUser);
     const router = useRouter();
 
     const { receiveUser, setMessages, expanded } = useMessageContext();
@@ -40,16 +39,16 @@ const MessageInput = () => {
     const sendMessage = async (evt: any) => {
         evt.preventDefault();
 
-        if (message.trim().length > 0 && currUser && receiveUser) {
+        if (message.trim().length > 0 && currentUser && receiveUser) {
 
-            const nameArr = currUser.fullName.split(" ");
+            const nameArr = currentUser.fullName.split(" ");
             const chatroomsRef = collection(db, 'chatrooms');
-            const combinedUsername = [currUser.username, receiveUser.username].sort().join(':');
+            const combinedUsername = [currentUser.username, receiveUser.username].sort().join(':');
             const q = query(chatroomsRef, where('roomId', '==', combinedUsername));
             getDocs(q).then((snapshot: any) => {
                 const chatroom = snapshot.docs[0];
                 const newMessage: any = {
-                    sender: currUser?.username,
+                    sender: currentUser?.username,
                     content: message,
                     createdAt: serverTimestamp(),
                     firstName: nameArr[nameArr.length - 1]
@@ -70,8 +69,8 @@ const MessageInput = () => {
                 } else {
                     addDoc(chatroomsRef, {
                         roomId: combinedUsername,
-                        members: [currUser?.username, receiveUser.username],
-                        user1: currUser,
+                        members: [currentUser?.username, receiveUser.username],
+                        user1: currentUser,
                         user2: receiveUser
                     }).then((chatroomsRef) => {
                         updateMessage();
@@ -92,9 +91,9 @@ const MessageInput = () => {
     }
 
     const updateMessage = () => {
-        if (currUser) {
+        if (currentUser) {
             const chatroomsRef = collection(db, 'chatrooms');
-            const combinedUsername = [currUser.username, receiveUser.username].sort().join(':');
+            const combinedUsername = [currentUser.username, receiveUser.username].sort().join(':');
             const q = query(chatroomsRef, where('roomId', '==', combinedUsername));
             getDocs(q).then((snapshot) => {
                 const chatroom = snapshot.docs[0];
@@ -109,7 +108,7 @@ const MessageInput = () => {
         }
     }
 
-    if (!currUser) {
+    if (!currentUser) {
         return <>{router.push("/sign-in")}</>
     }
 
@@ -203,4 +202,4 @@ const MessageInput = () => {
     );
 };
 
-export default MessageInput;
+export default withAuth(MessageInput);

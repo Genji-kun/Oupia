@@ -6,17 +6,16 @@ import UploadButton from './upload-button'
 import PostUtilitiesBox from './post-utilities-box'
 import { useSelector } from 'react-redux'
 import { usePathname, useRouter } from 'next/navigation'
-import useRequireAuth from '@/hooks/use-require-auth'
+import withAuth from '@/utils/withAuth'
 
 function UtilitiesBar() {
 
     const { currentUser } = useSelector((state: any) => state.currentUserSlice);
-    const currUser = useRequireAuth(currentUser);
 
     const pathname = usePathname();
     const router = useRouter();
 
-    if (!currUser) {
+    if (!currentUser) {
         return <> {
             router.push("/sign-in")
         }</>
@@ -31,4 +30,4 @@ function UtilitiesBar() {
     )
 }
 
-export default UtilitiesBar;
+export default withAuth(UtilitiesBar);

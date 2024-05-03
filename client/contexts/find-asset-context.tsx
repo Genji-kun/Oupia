@@ -1,5 +1,8 @@
 "use client"
 
+import { assetsEndpoints } from '@/configs/axiosEndpoints';
+import { publicApi } from '@/configs/axiosInstance';
+import { AssetResponse } from '@/interfaces/Asset';
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 
 type Province = {
@@ -31,6 +34,12 @@ interface IFindAssetContext {
     setDistricts: React.Dispatch<React.SetStateAction<District[]>>;
     selectedDist: District | undefined;
     setSelectedDist: React.Dispatch<React.SetStateAction<District | undefined>>;
+    assets: AssetResponse[];
+    setAssets: React.Dispatch<React.SetStateAction<AssetResponse[]>>;
+    isLoadingAsset: boolean;
+    setIsLoadingAsset: React.Dispatch<React.SetStateAction<boolean>>;
+    pageSize: number;
+    setPageSize : React.Dispatch<React.SetStateAction<number>>;
 }
 
 const FindAssetContext = createContext<IFindAssetContext | undefined>(undefined);
@@ -50,6 +59,69 @@ export const FindAssetProvider: React.FC<{ children: ReactNode }> = ({ children 
     const [districts, setDistricts] = useState<District[]>([]);
     const [selectedDist, setSelectedDist] = useState<District | undefined>();
 
+    // Assets
+    const [assets, setAssets] = useState<AssetResponse[]>([]);
+    const [isLoadingAsset, setIsLoadingAsset] = useState<boolean>(true);
+
+    // Paginations
+    const [pageSize, setPageSize] = useState<number>(8);
+
+    useEffect(() => {
+        const getAssetsData = async () => {
+            try {
+                const res = await publicApi.get(assetsEndpoints["assets"], {
+                    params : {
+                        size: pageSize
+                    }
+                });
+                if (res.status === 200) {
+                    setAssets(res.data.content);
+                }
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setIsLoadingAsset(false);
+            }
+        }
+        getAssetsData();
+    }, [])
+
+    useEffect(() => {
+        const getAssetsDataByParams = async () => {
+            try {
+                const res = await publicApi.get(assetsEndpoints["assets"]);
+                if (res.status === 200) {
+                    setAssets(res.data.content);
+                }
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setIsLoadingAsset(false);
+            }
+        }
+        getAssetsDataByParams();
+    }, [])
+
+    useEffect(() => {
+        const getAssetsDataByPageSize = async (pageSize: number) => {
+            try {
+                const res = await publicApi.get(assetsEndpoints["assets"], {
+                    params:{
+                        size: pageSize,
+                    } 
+                });
+                if (res.status === 200) {
+                    setAssets(res.data.content);
+                }
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setIsLoadingAsset(false);
+            }
+        }
+        getAssetsDataByPageSize(pageSize);
+    }, [pageSize])
+
 
     useEffect(() => {
         if (!openMap) {
@@ -61,7 +133,20 @@ export const FindAssetProvider: React.FC<{ children: ReactNode }> = ({ children 
 
 
     return (
-        <FindAssetContext.Provider value={{ openSearch, setOpenSearch, openMap, setOpenMap, provinces, setProvinces, selectedProv, setSelectedProv, districts, setDistricts, selectedDist, setSelectedDist }}>
+        <FindAssetContext.Provider value={
+            {
+                openSearch, setOpenSearch,
+                openMap, setOpenMap,
+                provinces, setProvinces,
+                selectedProv, setSelectedProv,
+                districts, setDistricts,
+                selectedDist, setSelectedDist,
+
+                assets, setAssets,
+                isLoadingAsset, setIsLoadingAsset,
+
+                pageSize, setPageSize
+            }}>
             {children}
         </FindAssetContext.Provider>
     );

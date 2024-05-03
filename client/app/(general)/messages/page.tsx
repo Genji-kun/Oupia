@@ -1,6 +1,6 @@
 "use client"
 
-import useRequireAuth from '@/hooks/use-require-auth';
+import withAuth from '@/utils/withAuth';
 import { MessageSquareOff } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import React from 'react';
@@ -11,9 +11,7 @@ const MessagesPage = () => {
     const { currentUser } = useSelector((state: any) => state.currentUserSlice);
     const router = useRouter();
 
-    let currUser = useRequireAuth(currentUser);
-
-    if (!currUser) {
+    if (!currentUser) {
         return <>{router.push("/sign-in")}</>
     }
 
@@ -25,4 +23,4 @@ const MessagesPage = () => {
     );
 };
 
-export default MessagesPage;
+export default withAuth(MessagesPage);

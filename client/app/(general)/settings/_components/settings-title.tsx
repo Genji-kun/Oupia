@@ -1,3 +1,4 @@
+import withAuth from '@/utils/withAuth';
 import React from 'react';
 
 const SettingsTitle = () => {
@@ -9,4 +10,4 @@ const SettingsTitle = () => {
     );
 };
 
-export default SettingsTitle;
+export default withAuth(SettingsTitle);

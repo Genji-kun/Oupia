@@ -1,8 +1,7 @@
-import React from 'react';
-import AssetContainer from './_components/asset-container';
-import dynamic from 'next/dynamic';
+import React from 'react'
+import AssetContainer from '../../_components/asset-container';
 
-const FindAssetsPage = () => {
+function FindAssetByNumberPage() {
     return (
         <div className="flex-auto">
             <div className=" w-full h-full">
@@ -11,7 +10,7 @@ const FindAssetsPage = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default dynamic(() => Promise.resolve(FindAssetsPage), { ssr: false })
+export default FindAssetByNumberPage;

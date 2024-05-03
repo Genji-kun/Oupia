@@ -2,26 +2,17 @@
 
 import React from 'react';
 import AssetItem from './asset-item';
-import { useQuery } from '@tanstack/react-query';
-import { publicApi } from '@/configs/axiosInstance';
-import { assetsEndpoints } from '@/configs/axiosEndpoints';
 import AssetSkeleton from './asset-skeleton';
-
-const fetchAssets = async () => {
-    const res = await publicApi.get(assetsEndpoints["assets"]);
-    return res.data.content;
-};
+import { useFindAssetContext } from '@/contexts/find-asset-context';
 
 const AssetList = () => {
+    const {assets, isLoadingAsset} = useFindAssetContext();
 
-    const { data: assets, isLoading } = useQuery({
-        queryKey: ['assets'],
-        queryFn: fetchAssets
-    });
-
-    if (isLoading) {
+    if (isLoadingAsset) {
         return (
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
+                <AssetSkeleton />
+                <AssetSkeleton />
                 <AssetSkeleton />
                 <AssetSkeleton />
                 <AssetSkeleton />

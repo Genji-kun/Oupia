@@ -9,7 +9,7 @@ export interface Post {
 export interface PostResponse {
     id: number,
     postContent: string,
-    assetName?: string,
+    assetId?: string,
     fullLocation?: string,
     locationLat?: number,
     locationLong?: number,

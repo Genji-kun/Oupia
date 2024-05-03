@@ -2,24 +2,57 @@
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input'
+import { commentEndpoints } from '@/configs/axiosEndpoints';
+import { authApi } from '@/configs/axiosInstance';
+import { CommentRequest } from '@/interfaces/Comment';
 import React, { useEffect, useState } from 'react'
 import { IoSend } from "react-icons/io5";
 import { useSelector } from 'react-redux';
+import { toast } from 'sonner';
 
-
-function CommentInput() {
+function CommentInput({ postId }: { postId: number }) {
 
     const { currentUser } = useSelector((state: any) => state.currentUserSlice);
 
     const [text, setText] = useState<string>("");
     const [isHidden, setIsHidden] = useState<boolean>(true);
+    const [commentReq, setCommentReq] = useState<CommentRequest | undefined>();
 
     useEffect(() => {
-        text ? setIsHidden(false) : setIsHidden(true);
+        if (text) {
+            setCommentReq({
+                postId: postId,
+                commentContent: text
+            });
+            setIsHidden(false);
+        }
+        else
+            setIsHidden(true);
+        document.addEventListener("keydown", handleKeyDown);
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+        }
     }, [text])
 
+    const handleKeyDown = (evt: KeyboardEvent) => {
+        if (evt.key === "Enter") {
+            sendComment();
+        }
+    }
+
+
     const sendComment = async () => {
-        setText("");
+        if (commentReq) {
+            try {
+                const res = await authApi.post(commentEndpoints["addComment"], commentReq);
+                if (res.status === 200) {
+                    setText("");
+                }
+            } catch (error) {
+                console.error(error);
+                toast.error("Có lỗi xảy ra, vui lòng thử lại.");
+            }
+        }
     }
 
     return (

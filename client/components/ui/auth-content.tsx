@@ -6,13 +6,18 @@ import background from "@/public/background.jpg";
 import { motion } from "framer-motion";
 import NavbarLogo from './navbar/navbar-logo';
 import { useSelector } from 'react-redux';
+import { useRouter } from 'next/navigation';
 
 const AuthContent = () => {
     const [isHovered, setIsHovered] = useState(false);
 
     const { currentUser } = useSelector((state: any) => state.currentUserSlice);
-    if (currentUser) {
+    const router = useRouter();
 
+    if (currentUser) {
+        return <>
+            { router.push("/") }
+        </>
     }
 
     return (

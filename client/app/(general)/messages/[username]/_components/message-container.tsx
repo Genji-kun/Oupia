@@ -6,16 +6,15 @@ import MessageRightBubble from './message-right-bubble';
 import { useMessageContext } from '@/contexts/message-context';
 import { useSelector } from 'react-redux';
 import voice from "@/public/sounds/message.mp3";
-import useRequireAuth from '@/hooks/use-require-auth';
 import { useRouter } from 'next/navigation';
 import { format, isToday, isYesterday } from 'date-fns';
 import { Separator } from '@/components/ui/separator';
+import withAuth from '@/utils/withAuth';
 
 
 const MessageContainer = () => {
 
     const { currentUser } = useSelector((state: any) => state.currentUserSlice);
-    const currUser = useRequireAuth(currentUser);
     const router = useRouter();
 
     const { receiveUser, messages } = useMessageContext();
@@ -80,7 +79,7 @@ const MessageContainer = () => {
     };
 
 
-    if (!currUser) {
+    if (!currentUser) {
         return <>{router.push("/sign-in")}</>
     }
 
@@ -100,8 +99,8 @@ const MessageContainer = () => {
                                 </div>}
 
                                 {
-                                    message.sender === currUser.username ?
-                                        <MessageRightBubble message={message} sender={currUser} isConsecutive={isConsecutive} />
+                                    message.sender === currentUser.username ?
+                                        <MessageRightBubble message={message} sender={currentUser} isConsecutive={isConsecutive} />
                                         : <MessageLeftBubble message={message} sender={receiveUser} isConsecutive={isConsecutive} />
                                 }
 
@@ -115,4 +114,4 @@ const MessageContainer = () => {
     )
 }
 
-export default MessageContainer;
+export default withAuth(MessageContainer);

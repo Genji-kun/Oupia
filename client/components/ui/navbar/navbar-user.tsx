@@ -68,7 +68,7 @@ const NavbarUser = ({ user }: { user: any }) => {
                                         case "ROLE_TENANT":
                                             return <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
                                                 <UserRoundSearchIcon className="w-4 h-4" />
-                                                <span>Người tim trọ</span>
+                                                <span>Người tìm trọ</span>
                                             </div>
                                         case "ROLE_LANDLORD":
                                             return <div className="flex items-center gap-1.5 text-sm text-muted-foreground">

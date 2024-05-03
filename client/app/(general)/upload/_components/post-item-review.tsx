@@ -12,12 +12,14 @@ import { useSelector } from 'react-redux';
 import { Input } from '@/components/ui/input';
 import Image from 'next/image';
 import { useUploadContext } from '@/contexts/upload-context';
+import { formatCurrency, numberToCurrency } from '@/utils/priceConvert';
+import { cn } from '@/lib/utils';
 
 const PostItemReview = (
     { post }: { post: any }
 ) => {
 
-    const { amenities } = useUploadContext();
+    const { amenities, tagAsset} = useUploadContext();
     const { currentUser } = useSelector((state: any) => state.currentUserSlice);
     const { images } = useUploadContext();
 
@@ -112,8 +114,8 @@ const PostItemReview = (
             </p>
 
             {
-                amenities && amenities.length > 0 &&
-                <div className="flex flex-wrap gap-2 pb-2 px-4">
+                post.amenities && post.amenities.length > 0 &&
+                <div className={cn("flex flex-wrap gap-2 px-4", !tagAsset && "pb-2")}>
                     {
                         post.amenities.map((tag: any, index: number) => {
                             if (index < 2) {
@@ -125,9 +127,9 @@ const PostItemReview = (
                         })
                     }
                     {
-                        amenities && amenities.length > 2 &&
+                        post.amenities && post.amenities.length > 2 &&
                         <div className="text-sm flex items-center bg-primary/20 text-primary border border-primary-500 rounded-lg h-fit px-3 py-1.5">
-                            <span>+{amenities.length - 2}</span>
+                            <span>+{post.amenities.length - 2}</span>
                         </div>
                     }
                 </div>
@@ -231,6 +233,14 @@ const PostItemReview = (
                     })()}
                 </>
             )}
+
+            {tagAsset && <div className='w-full flex items-center gap-4 border-y'>
+                    <Image src={tagAsset.images[0]} alt="Asset Image" className="w-20 aspect-square object-cover" width={500} height={500} />
+                    <div className="flex-grow flex flex-col justify-center h-fit">
+                        <h3 className="line-clamp-1 font-semibold text-lg">{tagAsset.assetName}</h3>
+                        <h4 className="text-primary text-sm">{numberToCurrency(tagAsset.price)}</h4>
+                    </div>
+                </div>}
 
             <div className="flex justify-between px-4">
                 <div className="flex gap-1">

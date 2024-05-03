@@ -26,7 +26,7 @@ const PostList = () => {
 
     return (
         <div className="flex flex-col gap-4 transition-all">
-            {posts.map((post : PostResponse, index: number) => {
+            {posts && posts.map((post : PostResponse, index: number) => {
                 return <PostItem key={index} post={post} />
             })}
         </div>

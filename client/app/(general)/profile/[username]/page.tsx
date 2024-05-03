@@ -4,6 +4,8 @@ import React from 'react';
 import UserIntroduce from './_components/user-introduce';
 import SuggestUserList from './_components/suggest-user-list';
 import { useProfileContext } from '@/contexts/profile-context';
+import { ForumProvider } from '@/contexts/forum-context';
+import UserPostList from './_components/user-post-list';
 
 const ProfilePage = () => {
 
@@ -19,7 +21,9 @@ const ProfilePage = () => {
                 <UserIntroduce />
             </div>
             <div className="col-span-3">
-                {/* <PostList /> */}
+                <ForumProvider>
+                    <UserPostList />
+                </ForumProvider>
             </div>
             <div className="col-span-2">
                 <SuggestUserList />

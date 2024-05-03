@@ -12,7 +12,7 @@ import LocationFilter from './location-filter';
 
 const FilterBar = () => {
 
-    const { openSearch, setOpenSearch, openMap, setOpenMap } = useFindAssetContext();
+    const { openSearch, setOpenSearch, openMap, setOpenMap , assets} = useFindAssetContext();
 
     return (
         <div className="flex flex-col gap-y-4 p-6 border-r border-border w-96 h-screen overflow-y-auto dark:bg-oupia-base">
@@ -61,7 +61,7 @@ const FilterBar = () => {
                             </>}
                     </div>
                 </div>
-                <span className="text-gray-600 dark:text-gray-400">126 kết quả</span>
+                <span className="text-gray-600 dark:text-gray-400">{assets.length} kết quả</span>
             </div>
             <Separator className="h-[2px]" />
             {openMap ?

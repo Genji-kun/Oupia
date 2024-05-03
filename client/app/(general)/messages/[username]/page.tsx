@@ -12,12 +12,11 @@ import { publicApi } from '@/configs/axiosInstance';
 import { collection, getDocs, onSnapshot, orderBy, query, where } from 'firebase/firestore';
 import { db } from '@/configs/firebase';
 import { useSelector } from 'react-redux';
-import useRequireAuth from '@/hooks/use-require-auth';
+import withAuth from '@/utils/withAuth';
 
 const UserMessageRoomPage = () => {
 
     const { currentUser } = useSelector((state: any) => state.currentUserSlice);
-    let currUser = useRequireAuth(currentUser);
     const router = useRouter();
 
     const { setMessages, receiveUser, setReceiveUser, expanded } = useMessageContext();
@@ -33,7 +32,7 @@ const UserMessageRoomPage = () => {
     useEffect(() => {
         const updateMessage = () => {
             const chatroomsRef = collection(db, 'chatrooms');
-            const combinedUsername = [currUser.username, receiveUser.username].sort().join(':');
+            const combinedUsername = [currentUser.username, receiveUser.username].sort().join(':');
             const q = query(chatroomsRef, where('roomId', '==', combinedUsername));
             getDocs(q).then((snapshot) => {
                 const chatroom = snapshot.docs[0];
@@ -47,7 +46,7 @@ const UserMessageRoomPage = () => {
             });
 
         }
-        if (currUser && receiveUser) {
+        if (currentUser && receiveUser) {
             updateMessage();
             //   if (sessionStorage.getItem('postChat') !== null) {
             //     let postChatString = sessionStorage.getItem('postChat');
@@ -57,7 +56,7 @@ const UserMessageRoomPage = () => {
             //     sessionStorage.removeItem('postChat');
             //   }
         }
-    }, [currUser, receiveUser])
+    }, [currentUser, receiveUser])
 
     const fetchUserInfo = async () => {
         if (typeof (username) === "string") {
@@ -75,7 +74,7 @@ const UserMessageRoomPage = () => {
         }
     }
 
-    if (!currUser) {
+    if (!currentUser) {
         return <>{router.push("/sign-in")}</>
     }
 
@@ -92,4 +91,4 @@ const UserMessageRoomPage = () => {
 
     );
 };
-export default UserMessageRoomPage;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+export default withAuth(UserMessageRoomPage);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
