@@ -24,7 +24,8 @@ function CommentList({ postId }: { postId: number }) {
 
     const { data: comments, isFetching } = useQuery<CommentResponse[] | undefined>({
         queryKey: ["getComments", postId],
-        queryFn: () => getComments(postId)
+        queryFn: () => getComments(postId),
+        refetchOnWindowFocus: false,
     })
 
     if (isFetching) {
@@ -34,7 +35,7 @@ function CommentList({ postId }: { postId: number }) {
     return (
         <>
             {
-                comments &&
+                comments && comments.length > 0 &&
                 <>
                     <div className="px-4 py-2 flex flex-col gap-2">
                         <>

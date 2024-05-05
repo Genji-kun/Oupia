@@ -9,6 +9,8 @@ import React, { createContext, useState, useContext, ReactNode, useEffect } from
 interface IAssetDetailContext {
     asset: any;
     isFetching: boolean;
+    isOpenSearch: boolean;
+    setIsOpenSearch: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AssetDetailContext = createContext<IAssetDetailContext | undefined>(undefined);
@@ -18,10 +20,12 @@ export const AssetDetailProvider: React.FC<{ children: ReactNode }> = ({ childre
     const params = useParams();
     const { assetSlug } = params;
 
-    const fetchAssetData = async (slug : any) => {
+    const [isOpenSearch, setIsOpenSearch] = useState<boolean>(false);
+
+    const fetchAssetData = async (slug: any) => {
         try {
             const res = await publicApi.get(assetsEndpoints.getAssetBySlugName(slug));
-            if(res.status === 200) {
+            if (res.status === 200) {
                 return res.data;
             }
         } catch (error) {
@@ -43,10 +47,10 @@ export const AssetDetailProvider: React.FC<{ children: ReactNode }> = ({ childre
 
     useEffect(() => {
         isError && notFound();
-    },[isError])
+    }, [isError])
 
     return (
-        <AssetDetailContext.Provider value={{ asset, isFetching }}>
+        <AssetDetailContext.Provider value={{ asset, isFetching, isOpenSearch, setIsOpenSearch }}>
             {children}
         </AssetDetailContext.Provider>
     );

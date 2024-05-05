@@ -1,6 +1,5 @@
 "use client"
 
-import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { changeFilter } from '@/redux/slices/assetFilterSlice';
 import { RootState } from '@/redux/store';

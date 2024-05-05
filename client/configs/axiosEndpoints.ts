@@ -19,6 +19,11 @@ export const assetsEndpoints = {
     "getAssetBySlugName": (slug: string) => `search/assets/${slug}`
 }
 
+export const reviewEndpoints = {
+    "getReviews" : `/store/reviews/`,
+    "addReview" : `/store/reviews/`,
+}
+
 export const postEndpoints = {
     "posts": `/store/posts/`,
     "postList": `/search/posts/`,

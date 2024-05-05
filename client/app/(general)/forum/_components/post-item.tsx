@@ -17,7 +17,7 @@ import { PostFavouriteProvider } from '@/contexts/post-favourite-context';
 import CommentList from './comment-list';
 
 const PostItem = (
-    { post }: { post: PostResponse }
+    { post, innerRef }: { post: PostResponse, innerRef?: any }
 ) => {
 
     const { currentUser } = useSelector((state: any) => state.currentUserSlice);
@@ -27,7 +27,7 @@ const PostItem = (
     }
 
     return (
-        <div className="border shadow bg-background dark:bg-oupia-base rounded-lg flex flex-col gap-y-2 shadow-dark-theme">
+        <div ref={innerRef} className="border shadow bg-background dark:bg-oupia-base rounded-lg flex flex-col gap-y-2 shadow-dark-theme">
             <PostUpdateProvider>
                 <PostItemHeader post={post} />
             </PostUpdateProvider>
@@ -176,8 +176,8 @@ const PostItem = (
             <div className='px-4'>
                 <Separator />
             </div>
-            <CommentList postId={post.id}/>
-            <CommentInput postId={post.id}/>
+            <CommentList postId={post.id} />
+            <CommentInput postId={post.id} />
         </div >
     );
 };
