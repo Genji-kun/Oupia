@@ -12,12 +12,13 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import AssetItem from './asset-item';
 
 
+
 const MapContainer = () => {
 
-    const { selectedProv, selectedDist, assets } = useFindAssetContext();
+    const { selectedProv, selectedDist, assets, setPolyReq , assetsByPolygon} = useFindAssetContext();
     const mapRef = useRef<any>(null);
 
-    const [polygon, setPolygon] = React.useState<string[]>();
+    const [polygon, setPolygon] = React.useState<string[]>([]);
     const [currentLayer, setCurrentLayer] = useState('province');
     const [viewport, setViewport] = useState({
         width: "100%",
@@ -120,11 +121,36 @@ const MapContainer = () => {
         }
     }, [selectedProv, selectedDist]);
 
+    useEffect(() => {
+        if (polygon[0])
+            setPolyReq(polygon[0]);
+    }, [polygon])
+
     const onMapLoad = useCallback((event: any) => {
         mapRef.current = event.target;
     }, []);
 
-    const markers = useMemo(() => assets.map(
+    const markers = assetsByPolygon ?  useMemo(() => assetsByPolygon && assetsByPolygon.map((asset, index) => (
+            <Marker className="relative z-[1]" key={index} longitude={asset.locationLong} latitude={asset.locationLat}>
+                <TooltipProvider>
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <div className="p-1 rounded-full bg-gray-400 hover:bg-gray-500 cursor-pointer">
+                                <Image width={500}
+                                    height={500}
+                                    src={asset.images[0]}
+                                    className="object-cover w-16 h-16 rounded-full"
+                                    alt="Asset Image" />
+                            </div>
+                        </TooltipTrigger>
+                        <TooltipContent align='center' className="w-96 py-2 z-[99999]">
+                            <AssetItem asset={asset} />
+                        </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
+            </Marker>
+        )
+    ), [assets]) : useMemo(() => assets && assets.map(
         (asset, index) => (
             <Marker className="relative z-[1]" key={index} longitude={asset.locationLong} latitude={asset.locationLat}>
                 <TooltipProvider>

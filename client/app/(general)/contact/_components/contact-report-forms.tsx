@@ -16,7 +16,7 @@ const ContactReportForms = () => {
             transition={{ duration: 1, type: "spring" }}
             className="flex justify-center w-full">
             <Tabs defaultValue="contact" className="flex flex-col gap-2 lg:gap-4 w-full">
-                <TabsList className="grid w-full grid-cols-2 h-fit border-card border">
+                <TabsList className="grid w-full grid-cols-2 h-fit border-card border bg-background dark:bg-oupia-base">
                     <TabsTrigger value="contact">
                         <div className="md:text-base p-1  flex items-center gap-x-2">
                             <Phone size={18} />
@@ -24,14 +24,14 @@ const ContactReportForms = () => {
                         </div>
                     </TabsTrigger>
                     <TabsTrigger value="report">
-                        <div className="md:text-base p-1  flex items-center gap-x-2">
+                        <div className="md:text-base p-1 flex items-center gap-x-2">
                             <Bug size={18} />
                             <span>Báo cáo lỗi</span>
                         </div>
                     </TabsTrigger>
                 </TabsList>
                 <TabsContent value="contact">
-                    <Card>
+                    <Card className="bg-background dark:bg-oupia-base">
                         <CardHeader>
                             <CardTitle>Liên hệ trao đổi</CardTitle>
                             <CardDescription>
@@ -44,7 +44,7 @@ const ContactReportForms = () => {
                     </Card>
                 </TabsContent>
                 <TabsContent value="report">
-                    <Card>
+                    <Card className="bg-background dark:bg-oupia-base">
                         <CardHeader>
                             <CardTitle>Báo cáo lỗi</CardTitle>
                             <CardDescription>

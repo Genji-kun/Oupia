@@ -1,21 +1,6 @@
 "use client"
 
 import React, { useEffect } from 'react'
-import { Check, ChevronsUpDown } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import {
-    Command,
-    CommandEmpty,
-    CommandGroup,
-    CommandInput,
-    CommandItem,
-} from "@/components/ui/command"
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover"
 import { useFindAssetContext } from '@/contexts/find-asset-context'
 import { vnProvincesApi } from '@/configs/axiosInstance'
 import { vnpEndpoints } from '@/configs/axiosEndpoints'
@@ -24,7 +9,7 @@ import { Separator } from '@/components/ui/separator'
 
 const LocationFilter = () => {
 
-    const { provinces, setProvinces, selectedProv, setSelectedProv, districts, setDistricts, setSelectedDist } = useFindAssetContext();
+    const { provinces, setProvinces, setSelectedProv, districts, setDistricts, setSelectedDist } = useFindAssetContext();
 
     useEffect(() => {
         if (provinces.length === 0) {
@@ -35,19 +20,27 @@ const LocationFilter = () => {
     // Fetch Province Data
     const handleGetProvs = async () => {
         try {
-            const res = await vnProvincesApi.get(vnpEndpoints["provinces"]);
-            setProvinces(res.data.results);
+            const res = await vnProvincesApi.get(vnpEndpoints["provinces"], {
+                params: {
+                    limit: -1,
+                }
+            });
+            setProvinces(res.data.data.data);
         } catch (error) {
             console.log(error);
         }
     }
 
     // Fetch District Data
-    const handleSelectProv = async (id: number) => {
+    const handleSelectProv = async (code: number) => {
         setDistricts([]);
         try {
-            const url = vnpEndpoints.provId(id);
-            const res = await vnProvincesApi.get(url);
+            const res = await vnProvincesApi.get(vnpEndpoints["getDistrictsByProv"], {
+                params: {
+                    provinceCode: code,
+                    limit: -1
+                }
+            });
             setSelectedProv(res.data);
             setDistricts(res.data.districts);
         } catch (error) {
@@ -76,8 +69,8 @@ const LocationFilter = () => {
                     {provinces.map((prov) => {
                         return (<SelectItem
                             key={prov.id}
-                            value={prov.id.toString()}>
-                            {prov["full_name"]}
+                            value={prov.code}>
+                            {prov["name_with_type"]}
                         </SelectItem>)
                     })}
                 </SelectContent>
@@ -92,8 +85,8 @@ const LocationFilter = () => {
                     {districts.length > 0 ? districts.map((dist) => {
                         return (<SelectItem
                             key={dist.id}
-                            value={dist.id.toString()}>
-                            {dist["full_name"]}
+                            value={dist.code}>
+                            {dist["name_with_type"]}
                         </SelectItem>)
                     }) : <h4 className="text-sm text-muted-foreground text-center p-2">
                         Chưa có dữ liệu

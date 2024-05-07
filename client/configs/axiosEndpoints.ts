@@ -8,7 +8,9 @@ export const authEndpoints = {
 }
 
 export const vnpEndpoints = {
-    "provinces": `/provinces/?basic=true&limit=100`,
+    "provinces": `/provinces/getAll`,
+    "getDistrictsByProv" : `/districts/getByProvince`,
+
     "provId": (id: number) => `/provinces/${id}`,
     "distId": (id: number) => `/districts/${id}`
 }
@@ -16,7 +18,8 @@ export const vnpEndpoints = {
 export const assetsEndpoints = {
     "createAsset": `/store/landlord/assets/`,
     "assets": `/search/assets/`,
-    "getAssetBySlugName": (slug: string) => `search/assets/${slug}`
+    "getAssetBySlugName": (slug: string) => `search/assets/${slug}`,
+    "polygon": `search/assets/polygon/`
 }
 
 export const reviewEndpoints = {

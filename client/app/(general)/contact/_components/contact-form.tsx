@@ -67,7 +67,9 @@ const ContactForm = () => {
                                 <Textarea
                                     rows={5}
                                     {...field}
-                                    disabled={isSubmitting} />
+                                    disabled={isSubmitting} 
+                                    className="dark:bg-oupia-sub"
+                                    />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

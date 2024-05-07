@@ -16,7 +16,7 @@ const ContactInfo = () => {
                     <NavbarLogo />
                 </div>
                 <Separator />
-                <blockquote className="text-lg md:text-xl italic font-bold text-gray-700 dark:text-gray-400">
+                <blockquote className="text-lg md:text-xl italic font-bold text-muted-foreground">
                     <p>&quot;Sự đóng góp của bạn sẽ tạo động lực giúp hệ thống Oupia ngày càng phát triển, hoàn thiện hơn trong tương lai.&quot;</p>
                 </blockquote>
                 <Separator />

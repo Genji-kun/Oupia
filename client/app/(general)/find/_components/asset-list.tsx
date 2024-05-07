@@ -6,9 +6,9 @@ import AssetSkeleton from './asset-skeleton';
 import { useFindAssetContext } from '@/contexts/find-asset-context';
 
 const AssetList = () => {
-    const {assets, isLoadingAsset} = useFindAssetContext();
+    const {assets, isFetching} = useFindAssetContext();
 
-    if (isLoadingAsset) {
+    if (isFetching) {
         return (
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
                 <AssetSkeleton />

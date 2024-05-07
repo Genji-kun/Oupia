@@ -66,6 +66,7 @@ const BugReportForm = () => {
                             <FormLabel>Đã có lỗi gì trong quá trình sử dụng Oupia?</FormLabel>
                             <FormControl>
                                 <Textarea
+                                    className="dark:bg-oupia-sub"
                                     rows={5}
                                     {...field}
                                     disabled={isSubmitting} />

@@ -3,22 +3,22 @@
 import { assetsEndpoints } from '@/configs/axiosEndpoints';
 import { publicApi } from '@/configs/axiosInstance';
 import { AssetResponse } from '@/interfaces/Asset';
+import { useQuery } from '@tanstack/react-query';
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
+import { useDebounce } from 'use-debounce';
 
 type Province = {
-    id: number,
+    id: string
     name: string,
-    "full_name": string,
-    type: string,
-    districts: District[],
-
+    code: string,
+    "name_with_type" : string,
 }
 
 type District = {
-    id: number,
+    id: string,
+    code: string,
     name: string,
-    "full_name": string,
-    type: string,
+    "name_with_type" : string,
 }
 
 interface IFindAssetContext {
@@ -35,11 +35,22 @@ interface IFindAssetContext {
     selectedDist: District | undefined;
     setSelectedDist: React.Dispatch<React.SetStateAction<District | undefined>>;
     assets: AssetResponse[];
-    setAssets: React.Dispatch<React.SetStateAction<AssetResponse[]>>;
-    isLoadingAsset: boolean;
-    setIsLoadingAsset: React.Dispatch<React.SetStateAction<boolean>>;
+    isFetching: boolean;
     pageSize: number;
-    setPageSize : React.Dispatch<React.SetStateAction<number>>;
+    setPageSize: React.Dispatch<React.SetStateAction<number>>;
+    currentPage: number;
+    setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+    keyword: string;
+    setKeyword: React.Dispatch<React.SetStateAction<string>>;
+    priceRate: number[];
+    setPriceRate: React.Dispatch<React.SetStateAction<number[]>>;
+    polyReq: string;
+    setPolyReq: React.Dispatch<React.SetStateAction<string>>;
+    assetsByPolygon: AssetResponse[];
+    isFetchingPolygon: boolean;
+
+    maxPeople: string;
+    setmaxPeople: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const FindAssetContext = createContext<IFindAssetContext | undefined>(undefined);
@@ -59,75 +70,74 @@ export const FindAssetProvider: React.FC<{ children: ReactNode }> = ({ children 
     const [districts, setDistricts] = useState<District[]>([]);
     const [selectedDist, setSelectedDist] = useState<District | undefined>();
 
-    // Assets
-    const [assets, setAssets] = useState<AssetResponse[]>([]);
-    const [isLoadingAsset, setIsLoadingAsset] = useState<boolean>(true);
-
     // Paginations
     const [pageSize, setPageSize] = useState<number>(8);
+    const [currentPage, setCurrentPage] = useState<number>(1);
 
-    useEffect(() => {
-        const getAssetsData = async () => {
-            try {
-                const res = await publicApi.get(assetsEndpoints["assets"], {
-                    params : {
-                        size: pageSize
-                    }
-                });
-                if (res.status === 200) {
-                    setAssets(res.data.content);
+    // Filter
+    const [keyword, setKeyword] = useState<string>("");
+    const [priceRate, setPriceRate] = useState<number[]>([0, 50000000]);
+    const [maxPeople, setmaxPeople] = useState<string>("");
+
+
+    //Map Polygon
+    const [polyReq, setPolyReq] = useState<string>("");
+
+    const debounceKw = useDebounce(keyword, 1000);
+
+    const debouncePrice = useDebounce(priceRate, 1000);
+
+
+    const getAssetsData = async ({ queryKey }: any) => {
+        const [_key, { pageSize, currentPage, debounceKw, debouncePrice }] = queryKey;
+        try {
+            const res = await publicApi.get(assetsEndpoints["assets"], {
+                params: {
+                    keyword: debounceKw[0],
+                    size: pageSize,
+                    page: currentPage,
+                    minPrice: debouncePrice[0][0],
+                    maxPrice: debouncePrice[0][1],
                 }
+            })
+            return res.data.content;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const getAssetsDataByPolygon = async ({ queryKey }: any) => {
+        const [_key, { polyReq }] = queryKey;
+        if (polyReq) {
+            try {
+                const res = await publicApi.post(assetsEndpoints["polygon"], polyReq);
+                return res.data.content;
             } catch (error) {
                 console.error(error);
-            } finally {
-                setIsLoadingAsset(false);
             }
         }
-        getAssetsData();
-    }, [])
+        return [];
+    }
 
-    useEffect(() => {
-        const getAssetsDataByParams = async () => {
-            try {
-                const res = await publicApi.get(assetsEndpoints["assets"]);
-                if (res.status === 200) {
-                    setAssets(res.data.content);
-                }
-            } catch (error) {
-                console.error(error);
-            } finally {
-                setIsLoadingAsset(false);
-            }
-        }
-        getAssetsDataByParams();
-    }, [])
+    const { data: assetsByPolygon, isFetching: isFetchingPolygon } = useQuery({
+        queryKey: ["searchAssetByPolygon", { polyReq }],
+        queryFn: getAssetsDataByPolygon,
+    });
 
-    useEffect(() => {
-        const getAssetsDataByPageSize = async (pageSize: number) => {
-            try {
-                const res = await publicApi.get(assetsEndpoints["assets"], {
-                    params:{
-                        size: pageSize,
-                    } 
-                });
-                if (res.status === 200) {
-                    setAssets(res.data.content);
-                }
-            } catch (error) {
-                console.error(error);
-            } finally {
-                setIsLoadingAsset(false);
-            }
-        }
-        getAssetsDataByPageSize(pageSize);
-    }, [pageSize])
-
+    const { data: assets, isFetching } = useQuery({
+        queryKey: ["searchAsset", { pageSize, currentPage, debounceKw, debouncePrice }],
+        queryFn: getAssetsData,
+    })
 
     useEffect(() => {
         if (!openMap) {
             setSelectedProv(undefined);
             setDistricts([]);
             setSelectedDist(undefined);
+        } else {
+            setKeyword("");
+            setPageSize(8);
+            setCurrentPage(1);
         }
     }, [openMap]);
 
@@ -142,10 +152,17 @@ export const FindAssetProvider: React.FC<{ children: ReactNode }> = ({ children 
                 districts, setDistricts,
                 selectedDist, setSelectedDist,
 
-                assets, setAssets,
-                isLoadingAsset, setIsLoadingAsset,
+                assets, isFetching,
 
-                pageSize, setPageSize
+                pageSize, setPageSize,
+                currentPage, setCurrentPage,
+                keyword, setKeyword,
+                priceRate, setPriceRate,
+                polyReq, setPolyReq,
+
+                assetsByPolygon, isFetchingPolygon,
+
+                maxPeople, setmaxPeople
             }}>
             {children}
         </FindAssetContext.Provider>

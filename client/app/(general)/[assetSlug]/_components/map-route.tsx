@@ -133,7 +133,7 @@ const MapRoute = () => {
             <TooltipProvider>
                 <Tooltip>
                     <TooltipTrigger asChild>
-                        <TbMapPinFilled className="w-6 h-6 text-heart fill-heart"/>
+                        <TbMapPinFilled className="w-6 h-6 text-heart fill-heart" />
                     </TooltipTrigger>
                     <TooltipContent side="top" align='center'>
                         <p>{asset.assetName}</p>
@@ -162,11 +162,8 @@ const MapRoute = () => {
     const geteocode = async (placeId: string) => {
         const res = await axios.get(`https://rsapi.goong.io/Place/Detail?place_id=${placeId}&api_key=${process.env.NEXT_PUBLIC_GOONG_MAPS_API_KEY}`);
         const data = await res.data;
-        if (data) {
-            setOrigin(data.result.geometry.location.lat + "," + data.result.geometry.location.lng);
-            setQuery(data.result.formatted_address);
-        }
-
+        setOrigin(data.result.geometry.location.lat + "," + data.result.geometry.location.lng);
+        setQuery(data.result.formatted_address);
     }
 
     const handleSelect = (evt: any) => {
@@ -188,8 +185,8 @@ const MapRoute = () => {
 
     const handleClearData = () => {
         setOrigin("");
-        setDestination("");
         setSteps([]);
+        setQuery("");
     }
 
     return (
