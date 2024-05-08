@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux';
 const PostStatus = ({ post }: { post: PostResponse }) => {
 
     const { currentUser } = useSelector((state: any) => state.currentUserSlice);
-    const { totalFavourites, setTotalFavourites, isLoading, setIsLoading } = usePostFavouriteContext();
+    const { setTotalFavourites, totalFavourTemp, isLoading, setIsLoading, comments } = usePostFavouriteContext();
 
     useEffect(() => {
         fetchFavourCount();
@@ -40,18 +40,21 @@ const PostStatus = ({ post }: { post: PostResponse }) => {
                         <div className="bg-border dark:bg-oupia-sub py-4 px-8 animate-pulse rounded"></div>
                         <div className="bg-border dark:bg-oupia-sub py-4 px-10 animate-pulse rounded"></div>
                     </div> : <>
-                        {totalFavourites > 0 && <>
-                            <span className="text-sm">{totalFavourites}</span>
+                        {totalFavourTemp > 0 && <>
+                            <span className="text-sm">{totalFavourTemp}</span>
                             <div className="flex gap-x-1 items-center">
                                 <div className="rounded-full p-1 bg-heart">
                                     <RiHeart3Fill size="10" className="fill-white" />
                                 </div>
                             </div>
                         </>}
-                        <Separator orientation='vertical' className="w-[2px] h-1/2" />
-                        <div className="cursor-pointer hover:underline">
-                            <h2 className="text-sm">6 bình luận</h2>
-                        </div>
+                        {totalFavourTemp > 0 && comments && comments.length > 0 && <Separator orientation='vertical' className="w-[2px] h-1/2" />}
+                        {comments && comments.length > 0 && <>
+                            <div className="cursor-pointer hover:underline">
+                                <h2 className="text-sm">{comments.length} bình luận</h2>
+                            </div>
+                        </>
+                        }
                     </>
             }
         </div>

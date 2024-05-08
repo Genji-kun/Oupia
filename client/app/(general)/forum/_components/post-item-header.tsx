@@ -282,7 +282,7 @@ const PostItemHeader = ({ post }: { post: PostResponse }) => {
                                 return <></>
                         }
                     })()}
-                    {currentUser && <>
+                    {currentUser && post.userId === currentUser.id && <>
                         <Popover>
                             <PopoverTrigger>
                                 <Tooltip>
@@ -297,82 +297,81 @@ const PostItemHeader = ({ post }: { post: PostResponse }) => {
                                 </Tooltip>
                             </PopoverTrigger>
                             <PopoverContent side='bottom' align='end' className="mb-1 flex flex-col w-fit z-10 p-2">
-                                {post.userId === currentUser.id &&
-                                    <>
-                                        <Dialog>
-                                            <DialogTrigger asChild>
-                                                <Button variant={"ghost"} className="justify-start gap-2 px-4 py-2">
-                                                    <EditIcon className="w-4 h-4" />
-                                                    <span>Chỉnh sửa bài viết</span>
-                                                </Button>
-                                            </DialogTrigger>
-                                            <DialogContent className="sm:max-w-xl max-h-[calc(100vh-80px)] overflow-y-auto">
-                                                <DialogHeader>
-                                                    <DialogTitle><span className="text-2xl">Chỉnh sửa bài viết</span></DialogTitle>
-                                                    <DialogDescription>
-                                                        <span className="text-red-600 underline mr-1">
-                                                            Lưu ý:
+                                <>
+                                    <Dialog>
+                                        <DialogTrigger asChild>
+                                            <Button variant={"ghost"} className="justify-start gap-2 px-4 py-2">
+                                                <EditIcon className="w-4 h-4" />
+                                                <span>Chỉnh sửa bài viết</span>
+                                            </Button>
+                                        </DialogTrigger>
+                                        <DialogContent className="sm:max-w-xl max-h-[calc(100vh-80px)] overflow-y-auto">
+                                            <DialogHeader>
+                                                <DialogTitle><span className="text-2xl">Chỉnh sửa bài viết</span></DialogTitle>
+                                                <DialogDescription>
+                                                    <span className="text-red-600 underline mr-1">
+                                                        Lưu ý:
+                                                    </span>
+                                                    <span>
+                                                        Bạn không thể sửa đổi hình ảnh trong bài viết.
+                                                    </span>
+                                                </DialogDescription>
+                                            </DialogHeader>
+                                            <PostUpdateDialog post={post} />
+                                            <DialogFooter>
+                                                <DialogClose asChild>
+                                                    <Button variant={"outline"} type="button">
+                                                        <span className="text-sm">
+                                                            Hủy
                                                         </span>
-                                                        <span>
-                                                            Bạn không thể sửa đổi hình ảnh trong bài viết.
-                                                        </span>
-                                                    </DialogDescription>
-                                                </DialogHeader>
-                                                <PostUpdateDialog post={post} />
-                                                <DialogFooter>
-                                                    <DialogClose asChild>
-                                                        <Button variant={"outline"} type="button">
-                                                            <span className="text-sm">
-                                                                Hủy
-                                                            </span>
-                                                        </Button>
-                                                    </DialogClose>
-                                                    <Button disabled={isSubmitting} className="styled-button gap-2" onClick={handleUpdate}>
-                                                        {
-                                                            isSubmitting ?
-                                                                <>
-                                                                    <span className="text-base">Đang xử lý</span>
-                                                                    <Loader2 size="22" className="animate-spin" />
-                                                                </>
-                                                                :
-                                                                <>
-                                                                    <span className="text-sm">
-                                                                        Cập nhật
-                                                                    </span>
-                                                                </>
-                                                        }
-
                                                     </Button>
-                                                </DialogFooter>
-                                            </DialogContent>
-                                        </Dialog>
-                                        <AlertDialog>
-                                            <AlertDialogTrigger>
-                                                <Button variant={"ghost"} className="justify-start gap-2 px-4 py-2 w-full">
-                                                    <XSquare className="w-4 h-4" />
-                                                    <span>Xóa bài viết</span>
+                                                </DialogClose>
+                                                <Button disabled={isSubmitting} className="styled-button gap-2" onClick={handleUpdate}>
+                                                    {
+                                                        isSubmitting ?
+                                                            <>
+                                                                <span className="text-base">Đang xử lý</span>
+                                                                <Loader2 size="22" className="animate-spin" />
+                                                            </>
+                                                            :
+                                                            <>
+                                                                <span className="text-sm">
+                                                                    Cập nhật
+                                                                </span>
+                                                            </>
+                                                    }
+
                                                 </Button>
-                                            </AlertDialogTrigger>
-                                            <AlertDialogContent>
-                                                <AlertDialogHeader>
-                                                    <AlertDialogTitle>Xóa bài viết này?</AlertDialogTitle>
-                                                    <AlertDialogDescription>
-                                                        Bài viết sẽ được xóa và thông tin sẽ không hiển thị trong diễn đàn nữa. Bạn có chắc chứ?
-                                                    </AlertDialogDescription>
-                                                </AlertDialogHeader>
-                                                <AlertDialogFooter>
-                                                    <AlertDialogCancel>Hủy</AlertDialogCancel>
-                                                    <AlertDialogAction
-                                                        onClick={() => { deletePost(post.id); }}
-                                                        className="bg-destructive/70 hover:bg-destructive text-destructive-foreground">Xóa</AlertDialogAction>
-                                                </AlertDialogFooter>
-                                            </AlertDialogContent>
-                                        </AlertDialog>
-                                    </>
-                                }
+                                            </DialogFooter>
+                                        </DialogContent>
+                                    </Dialog>
+                                    <AlertDialog>
+                                        <AlertDialogTrigger>
+                                            <Button variant={"ghost"} className="justify-start gap-2 px-4 py-2 w-full">
+                                                <XSquare className="w-4 h-4" />
+                                                <span>Xóa bài viết</span>
+                                            </Button>
+                                        </AlertDialogTrigger>
+                                        <AlertDialogContent>
+                                            <AlertDialogHeader>
+                                                <AlertDialogTitle>Xóa bài viết này?</AlertDialogTitle>
+                                                <AlertDialogDescription>
+                                                    Bài viết sẽ được xóa và thông tin sẽ không hiển thị trong diễn đàn nữa. Bạn có chắc chứ?
+                                                </AlertDialogDescription>
+                                            </AlertDialogHeader>
+                                            <AlertDialogFooter>
+                                                <AlertDialogCancel>Hủy</AlertDialogCancel>
+                                                <AlertDialogAction
+                                                    onClick={() => { deletePost(post.id); }}
+                                                    className="bg-destructive/70 hover:bg-destructive text-destructive-foreground">Xóa</AlertDialogAction>
+                                            </AlertDialogFooter>
+                                        </AlertDialogContent>
+                                    </AlertDialog>
+                                </>
                             </PopoverContent>
                         </Popover>
-                    </>}
+                    </>
+                    }
                 </TooltipProvider>
             </div>
         </div>

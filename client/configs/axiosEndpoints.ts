@@ -8,11 +8,8 @@ export const authEndpoints = {
 }
 
 export const vnpEndpoints = {
-    "provinces": `/provinces/getAll`,
-    "getDistrictsByProv" : `/districts/getByProvince`,
-
-    "provId": (id: number) => `/provinces/${id}`,
-    "distId": (id: number) => `/districts/${id}`
+    "provinces": `/provinces/`,
+    "districts": `/districts/`
 }
 
 export const assetsEndpoints = {

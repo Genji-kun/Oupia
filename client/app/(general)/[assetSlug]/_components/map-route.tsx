@@ -19,7 +19,7 @@ import { TbMapPinFilled } from 'react-icons/tb';
 
 const MapRoute = () => {
 
-    const { asset, isOpenSearch } = useAssetDetailContext();
+    const { asset, isOpenSearch, setIsOpenSearch } = useAssetDetailContext();
 
     const [query, setQuery] = useState<string>("");
     const [results, setResults] = useState<any[]>([]);
@@ -99,7 +99,9 @@ const MapRoute = () => {
                 ...viewport,
                 longitude: (bounds[0][0] + bounds[1][0]) / 2,
                 latitude: (bounds[0][1] + bounds[1][1]) / 2,
+                zoom: 11
             });
+            setIsOpenSearch(false);
         }
 
         if (direction) {

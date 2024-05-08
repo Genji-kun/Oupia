@@ -8,17 +8,19 @@ import React, { createContext, useState, useContext, ReactNode, useEffect } from
 import { useDebounce } from 'use-debounce';
 
 type Province = {
-    id: string
+    id: string,
     name: string,
-    code: string,
-    "name_with_type" : string,
+    typeText: string,
+    slug: string,
 }
 
 type District = {
     id: string,
     code: string,
     name: string,
-    "name_with_type" : string,
+    provinceId: string,
+    type: number,
+    typeText: string,
 }
 
 interface IFindAssetContext {
@@ -48,9 +50,11 @@ interface IFindAssetContext {
     setPolyReq: React.Dispatch<React.SetStateAction<string>>;
     assetsByPolygon: AssetResponse[];
     isFetchingPolygon: boolean;
+    totalPages: number;
+    setTotalPages: React.Dispatch<React.SetStateAction<number>>;
 
     maxPeople: string;
-    setmaxPeople: React.Dispatch<React.SetStateAction<string>>;
+    setMaxPeople: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const FindAssetContext = createContext<IFindAssetContext | undefined>(undefined);
@@ -73,11 +77,13 @@ export const FindAssetProvider: React.FC<{ children: ReactNode }> = ({ children 
     // Paginations
     const [pageSize, setPageSize] = useState<number>(8);
     const [currentPage, setCurrentPage] = useState<number>(1);
+    const [totalPages, setTotalPages] = useState<number>(1);
+
 
     // Filter
     const [keyword, setKeyword] = useState<string>("");
     const [priceRate, setPriceRate] = useState<number[]>([0, 50000000]);
-    const [maxPeople, setmaxPeople] = useState<string>("");
+    const [maxPeople, setMaxPeople] = useState<string>("");
 
 
     //Map Polygon
@@ -89,7 +95,7 @@ export const FindAssetProvider: React.FC<{ children: ReactNode }> = ({ children 
 
 
     const getAssetsData = async ({ queryKey }: any) => {
-        const [_key, { pageSize, currentPage, debounceKw, debouncePrice }] = queryKey;
+        const [_key, { pageSize, currentPage, debounceKw, debouncePrice, maxPeople}] = queryKey;
         try {
             const res = await publicApi.get(assetsEndpoints["assets"], {
                 params: {
@@ -98,8 +104,13 @@ export const FindAssetProvider: React.FC<{ children: ReactNode }> = ({ children 
                     page: currentPage,
                     minPrice: debouncePrice[0][0],
                     maxPrice: debouncePrice[0][1],
+                    maxPeople: maxPeople
                 }
             })
+            if (res.data.totalPages > 0)
+                setTotalPages(res.data.totalPages);
+            else
+                setTotalPages(1);
             return res.data.content;
         } catch (error) {
             console.error(error);
@@ -109,9 +120,13 @@ export const FindAssetProvider: React.FC<{ children: ReactNode }> = ({ children 
     const getAssetsDataByPolygon = async ({ queryKey }: any) => {
         const [_key, { polyReq }] = queryKey;
         if (polyReq) {
+            console.log(polyReq)
             try {
-                const res = await publicApi.post(assetsEndpoints["polygon"], polyReq);
-                return res.data.content;
+                const res = await publicApi.post(assetsEndpoints["polygon"], 
+                {
+                    polygon: polyReq
+                });
+                return res.data;
             } catch (error) {
                 console.error(error);
             }
@@ -122,11 +137,14 @@ export const FindAssetProvider: React.FC<{ children: ReactNode }> = ({ children 
     const { data: assetsByPolygon, isFetching: isFetchingPolygon } = useQuery({
         queryKey: ["searchAssetByPolygon", { polyReq }],
         queryFn: getAssetsDataByPolygon,
+        enabled: !!polyReq,
+        refetchOnWindowFocus: false,
     });
 
     const { data: assets, isFetching } = useQuery({
-        queryKey: ["searchAsset", { pageSize, currentPage, debounceKw, debouncePrice }],
+        queryKey: ["searchAsset", { pageSize, currentPage, debounceKw, debouncePrice , maxPeople}],
         queryFn: getAssetsData,
+        refetchOnWindowFocus: false,
     })
 
     useEffect(() => {
@@ -162,7 +180,8 @@ export const FindAssetProvider: React.FC<{ children: ReactNode }> = ({ children 
 
                 assetsByPolygon, isFetchingPolygon,
 
-                maxPeople, setmaxPeople
+                maxPeople, setMaxPeople,
+                totalPages, setTotalPages
             }}>
             {children}
         </FindAssetContext.Provider>

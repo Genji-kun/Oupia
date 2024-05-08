@@ -7,6 +7,7 @@ function AssetSkeleton() {
       <Skeleton className="aspect-[10/9] w-full bg-border dark:bg-oupia-sub" />
       <Skeleton className="rounded-full h-4 w-full bg-border dark:bg-oupia-sub" />
       <Skeleton className="rounded-full h-4 w-1/3 bg-border dark:bg-oupia-sub" />
+      <Skeleton className="rounded-full h-4 w-full bg-border dark:bg-oupia-sub" />
     </div>
   )
 }

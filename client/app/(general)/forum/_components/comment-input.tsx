@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input'
 import { commentEndpoints } from '@/configs/axiosEndpoints';
 import { authApi } from '@/configs/axiosInstance';
+import { usePostFavouriteContext } from '@/contexts/post-favourite-context';
 import { CommentRequest } from '@/interfaces/Comment';
 import React, { useEffect, useState } from 'react'
 import { IoSend } from "react-icons/io5";
@@ -13,6 +14,7 @@ import { toast } from 'sonner';
 function CommentInput({ postId }: { postId: number }) {
 
     const { currentUser } = useSelector((state: any) => state.currentUserSlice);
+    const { commentInputRef, refetch } = usePostFavouriteContext();
 
     const [text, setText] = useState<string>("");
     const [isHidden, setIsHidden] = useState<boolean>(true);
@@ -47,6 +49,7 @@ function CommentInput({ postId }: { postId: number }) {
                 const res = await authApi.post(commentEndpoints["addComment"], commentReq);
                 if (res.status === 200) {
                     setText("");
+                    refetch();
                 }
             } catch (error) {
                 console.error(error);
@@ -60,6 +63,7 @@ function CommentInput({ postId }: { postId: number }) {
             {
                 currentUser && <div className='relative pl-4 pr-16 pb-2'>
                     <Input
+                        ref={commentInputRef}
                         value={text}
                         onChange={(evt) => setText(evt.target.value)}
                         placeholder='Nhập bình luận...'

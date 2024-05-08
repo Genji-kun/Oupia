@@ -8,10 +8,12 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { useFindAssetContext } from '@/contexts/find-asset-context';
 import LocationFilter from './location-filter';
 import { Input } from '@/components/ui/input';
+import MaxPeopleSection from './max-people-section';
 
 const FilterBar = () => {
 
-    const { openMap, setOpenMap, assets, keyword, setKeyword } = useFindAssetContext();
+    const { openMap, setOpenMap, assets, keyword, setKeyword, setMaxPeople } = useFindAssetContext();
+
 
     return (
         <div className="flex flex-col gap-y-4 p-6 border-r border-border w-96 h-screen overflow-y-auto dark:bg-oupia-base">
@@ -50,7 +52,7 @@ const FilterBar = () => {
                             </>}
                     </div>
                 </div>
-                <span className="text-gray-600 dark:text-gray-400">{assets && assets.length} kết quả</span>
+                <span className="text-muted-foreground">{assets ? assets.length : "0"} kết quả</span>
             </div>
             <Separator className="h-[2px]" />
             {openMap ?
@@ -66,10 +68,7 @@ const FilterBar = () => {
                     <Separator className="h-[2px]" />
                     <MaxMinPrice />
                     <Separator className="h-[2px]" />
-                    <div className="flex flex-col gap-y-2">
-                        <h2 className="font-semibold text-lg">Số người ở</h2>
-                        <Input value={keyword} onChange={(evt) => setKeyword(evt.target.value)} placeholder='Nhập từ khóa tìm kiếm...' />
-                    </div>
+                    <MaxPeopleSection />
                 </>}
         </div >
     );

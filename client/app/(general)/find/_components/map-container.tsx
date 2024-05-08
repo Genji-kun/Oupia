@@ -10,15 +10,14 @@ import { toast } from 'sonner';
 import Image from 'next/image';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import AssetItem from './asset-item';
-
-
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
 const MapContainer = () => {
 
-    const { selectedProv, selectedDist, assets, setPolyReq , assetsByPolygon} = useFindAssetContext();
+    const { selectedProv, selectedDist, setSelectedDist, assets, setPolyReq, assetsByPolygon, isFetchingPolygon } = useFindAssetContext();
     const mapRef = useRef<any>(null);
 
-    const [polygon, setPolygon] = React.useState<string[]>([]);
+    const [polygon, setPolygon] = React.useState<string>("");
     const [currentLayer, setCurrentLayer] = useState('province');
     const [viewport, setViewport] = useState({
         width: "100%",
@@ -30,6 +29,7 @@ const MapContainer = () => {
 
     useEffect(() => {
         if (selectedProv) {
+            setSelectedDist(undefined);
             const feature = geoJsonProv.features.find((f: any) => f.properties.NAME_1 === normalizeName(selectedProv.name));
             if (!feature) {
                 toast.error("Somthing went wrong !!")
@@ -60,11 +60,12 @@ const MapContainer = () => {
                     [maxX, maxY]
                 ];
                 mapRef.current?.fitBounds(bounds);
-                setPolygon(listPolygon);
+                setPolygon(listPolygon[0]);
                 setViewport({
                     ...viewport,
                     longitude: (bounds[0][0] + bounds[1][0]) / 2,
                     latitude: (bounds[0][1] + bounds[1][1]) / 2,
+                    zoom: 9
                 });
             }
         }
@@ -72,7 +73,7 @@ const MapContainer = () => {
 
     useEffect(() => {
         if (selectedDist) {
-            const feature = geoJsonDist.features.find((f: any) => f.properties.NAME_2 === normalizeName(selectedDist.name));
+            const feature = geoJsonDist.features.find((f: any) => f.properties.NAME_2 === normalizeName(selectedDist.name.replace(selectedDist.typeText.substring(0, 9), "").trim()));
             if (!feature) {
                 toast.error("Somthing went wrong !!")
             } else {
@@ -102,11 +103,12 @@ const MapContainer = () => {
                     [maxX, maxY]
                 ];
                 mapRef.current?.fitBounds(bounds);
-                setPolygon(listPolygon);
+                setPolygon(listPolygon[0]);
                 setViewport({
                     ...viewport,
                     longitude: (bounds[0][0] + bounds[1][0]) / 2,
                     latitude: (bounds[0][1] + bounds[1][1]) / 2,
+                    zoom: 13
                 });
             }
 
@@ -122,19 +124,21 @@ const MapContainer = () => {
     }, [selectedProv, selectedDist]);
 
     useEffect(() => {
-        if (polygon[0])
-            setPolyReq(polygon[0]);
+        if (polygon) {
+            setPolyReq(polygon);
+        }
     }, [polygon])
 
     const onMapLoad = useCallback((event: any) => {
         mapRef.current = event.target;
     }, []);
 
-    const markers = assetsByPolygon ?  useMemo(() => assetsByPolygon && assetsByPolygon.map((asset, index) => (
-            <Marker className="relative z-[1]" key={index} longitude={asset.locationLong} latitude={asset.locationLat}>
-                <TooltipProvider>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
+    const markers = useMemo(() => {
+        if (assetsByPolygon && assetsByPolygon.length > 0 || isFetchingPolygon) {
+            return assetsByPolygon && assetsByPolygon.map((asset, index) => (
+                <Marker className="relative z-[1]" key={index} longitude={asset.locationLong} latitude={asset.locationLat}>
+                    <Popover>
+                        <PopoverTrigger asChild>
                             <div className="p-1 rounded-full bg-gray-400 hover:bg-gray-500 cursor-pointer">
                                 <Image width={500}
                                     height={500}
@@ -142,20 +146,18 @@ const MapContainer = () => {
                                     className="object-cover w-16 h-16 rounded-full"
                                     alt="Asset Image" />
                             </div>
-                        </TooltipTrigger>
-                        <TooltipContent align='center' className="w-96 py-2 z-[99999]">
+                        </PopoverTrigger>
+                        <PopoverContent align='center' className="w-96 py-4 z-[99999]">
                             <AssetItem asset={asset} />
-                        </TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
-            </Marker>
-        )
-    ), [assets]) : useMemo(() => assets && assets.map(
-        (asset, index) => (
-            <Marker className="relative z-[1]" key={index} longitude={asset.locationLong} latitude={asset.locationLat}>
-                <TooltipProvider>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
+                        </PopoverContent>
+                    </Popover>
+                </Marker>
+            ))
+        } else if (assets && assets.length > 0) {
+            return assets.map((asset, index) => (
+                <Marker className="relative z-[1]" key={index} longitude={asset.locationLong} latitude={asset.locationLat}>
+                    <Popover>
+                        <PopoverTrigger asChild>
                             <div className="p-1 rounded-full bg-gray-400 hover:bg-gray-500 cursor-pointer">
                                 <Image width={500}
                                     height={500}
@@ -163,15 +165,19 @@ const MapContainer = () => {
                                     className="object-cover w-16 h-16 rounded-full"
                                     alt="Asset Image" />
                             </div>
-                        </TooltipTrigger>
-                        <TooltipContent align='center' className="w-96 py-2 z-[99999]">
+                        </PopoverTrigger>
+                        <PopoverContent align='center' className="w-96 py-4 z-[99999]">
                             <AssetItem asset={asset} />
-                        </TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
-            </Marker>
-        )
-    ), [assets]);
+                        </PopoverContent>
+                    </Popover>
+                </Marker>
+            ))
+        }
+        else {
+            return null;
+        }
+    }, [assets, assetsByPolygon]);
+
 
     function normalizeName(name: string) {
         if (/^\d+$/.test(name)) {
@@ -218,7 +224,7 @@ const MapContainer = () => {
                                 'line-color': '#FF0000',
                                 'line-width': 2
                             }}
-                            filter={['==', ['get', 'NAME_2'], normalizeName(selectedDist.name)]}
+                            filter={['==', ['get', 'NAME_2'], normalizeName(selectedDist.name.replace(selectedDist.typeText.substring(0, 9), "").trim())]}
                         />
                         <Layer
                             id="fill"
@@ -227,7 +233,7 @@ const MapContainer = () => {
                                 'fill-color': '#FF0000',
                                 'fill-opacity': 0.1
                             }}
-                            filter={['==', ['get', 'NAME_2'], normalizeName(selectedDist.name)]}
+                            filter={['==', ['get', 'NAME_2'], normalizeName(selectedDist.name.replace(selectedDist.typeText.substring(0, 9), "").trim())]}
                         />
                     </Source>
                 )}

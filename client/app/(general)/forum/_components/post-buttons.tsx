@@ -2,27 +2,28 @@ import { Button } from '@/components/ui/button';
 import { favouriteEndpoints } from '@/configs/axiosEndpoints';
 import { authApi } from '@/configs/axiosInstance';
 import { usePostFavouriteContext } from '@/contexts/post-favourite-context';
-import { useDebounce } from '@/hooks/useDebounce';
 import { PostResponse } from '@/interfaces/Post';
 import { isUndefined } from 'lodash-es';
 import { MessageSquareText } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
 import { useSelector } from 'react-redux';
+import { useDebounce } from 'use-debounce';
 
 
 const PostButtons = ({ post }: { post: PostResponse }) => {
 
     const { currentUser } = useSelector((state: any) => state.currentUserSlice);
-    const { setTotalFavourites, isLoading, setIsLoading } = usePostFavouriteContext();
+    const { setTotalFavourTemp, isLoading, setIsLoading, commentInputRef } = usePostFavouriteContext();
 
     const [isFavourited, setIsFavourited] = useState<boolean>(false);
-    const [currFavour, setCurrFavour] = useState<boolean | undefined>();
-    const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
+    const [favourResult, setFavourResult] = useState<boolean>(false);
 
-    const handleDebounceFavourite = useDebounce(async () => {
-        setCurrFavour(isFavourited);
-    }, 1000);
+    const [debouncedFavourTemp] = useDebounce(isFavourited, 1000);
+
+    const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
+    const hasFetchedFavour = useRef(false);
+
 
     useEffect(() => {
         const fetchIsFavourite = async () => {
@@ -33,6 +34,7 @@ const PostButtons = ({ post }: { post: PostResponse }) => {
                     }
                 });
                 setIsFavourited(res.data);
+                setFavourResult(res.data);
             } catch (error) {
                 console.error(error);
             } finally {
@@ -44,10 +46,6 @@ const PostButtons = ({ post }: { post: PostResponse }) => {
         }
     }, [currentUser, post])
 
-    useEffect(() => {
-        isFavourited ? setTotalFavourites(prev => prev + 1) : setTotalFavourites(prev => prev - 1);
-        handleDebounceFavourite();
-    }, [isFavourited, handleDebounceFavourite])
 
     useEffect(() => {
         const addFavour = async () => {
@@ -57,9 +55,11 @@ const PostButtons = ({ post }: { post: PostResponse }) => {
                         postId: post.id
                     }
                 });
+                console.log('addFavour has been called'); // Thêm lệnh console.log
+                hasFetchedFavour.current = false;
             } catch (error) {
                 console.error(error);
-            } finally { }
+            }
         }
 
         const removeFavour = async () => {
@@ -69,15 +69,29 @@ const PostButtons = ({ post }: { post: PostResponse }) => {
                         postId: post.id
                     }
                 });
+                console.log('removeFavour has been called'); // Thêm lệnh console.log
+                hasFetchedFavour.current = false;
             } catch (error) {
                 console.error(error);
-            } finally { }
+            }
         }
 
-        if (!isUndefined(currFavour) && !isFirstRender) {
-            currFavour ? addFavour() : removeFavour();
+        if (isFirstRender) {
+            setIsFirstRender(false);
+            return;
         }
-    }, [currFavour])
+
+        if (!hasFetchedFavour.current) {
+            if (debouncedFavourTemp && !favourResult) {
+                addFavour();
+                hasFetchedFavour.current = true;
+            }
+            else if (!debouncedFavourTemp && favourResult) {
+                removeFavour();
+                hasFetchedFavour.current = true;
+            }
+        }
+    }, [debouncedFavourTemp])
 
     return (
         <>
@@ -94,8 +108,8 @@ const PostButtons = ({ post }: { post: PostResponse }) => {
                                     isFavourited ?
                                         <Button
                                             onClick={() => {
-                                                setIsFirstRender(false);
                                                 setIsFavourited(prev => !prev);
+                                                setTotalFavourTemp(prev => prev - 1);
                                             }}
                                             variant={"ghost"}
                                             className="flex gap-x-2 px-3 h-fit text-heart hover:text-hover">
@@ -105,15 +119,15 @@ const PostButtons = ({ post }: { post: PostResponse }) => {
                                         :
                                         <Button
                                             onClick={() => {
-                                                setIsFirstRender(false);
                                                 setIsFavourited(prev => !prev);
+                                                setTotalFavourTemp(prev => prev + 1);
                                             }}
                                             variant={"ghost"}
                                             className="flex gap-x-2 px-3 h-fit hover:text-hover" >
                                             <RiHeart3Line size="20" />
                                             <span className="text-sm font-semibold">Thích</span>
                                         </Button >}
-                                <Button variant={"ghost"} className="flex gap-x-2 px-3 h-fit">
+                                <Button onClick={() => commentInputRef.current?.focus()} variant={"ghost"} className="flex gap-x-2 px-3 h-fit">
                                     <MessageSquareText size="20" />
                                     <span className="text-sm font-semibold">Bình luận</span>
                                 </Button>

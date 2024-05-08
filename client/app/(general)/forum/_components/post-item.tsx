@@ -21,7 +21,6 @@ const PostItem = (
 ) => {
 
     const { currentUser } = useSelector((state: any) => state.currentUserSlice);
-
     if (post.isDelete) {
         return null;
     }
@@ -172,12 +171,13 @@ const PostItem = (
                     <PostButtons post={post} />
                     <PostStatus post={post} />
                 </div>
+                <div className='px-4'>
+                    <Separator />
+                </div>
+                <CommentList postId={post.id} />
+                <CommentInput postId={post.id} />
             </PostFavouriteProvider>
-            <div className='px-4'>
-                <Separator />
-            </div>
-            <CommentList postId={post.id} />
-            <CommentInput postId={post.id} />
+
         </div >
     );
 };

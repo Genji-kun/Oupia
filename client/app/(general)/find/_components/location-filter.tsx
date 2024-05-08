@@ -9,7 +9,7 @@ import { Separator } from '@/components/ui/separator'
 
 const LocationFilter = () => {
 
-    const { provinces, setProvinces, setSelectedProv, districts, setDistricts, setSelectedDist } = useFindAssetContext();
+    const { provinces, setProvinces, setSelectedProv, districts, setDistricts, setSelectedDist, selectedDist } = useFindAssetContext();
 
     useEffect(() => {
         if (provinces.length === 0) {
@@ -22,46 +22,42 @@ const LocationFilter = () => {
         try {
             const res = await vnProvincesApi.get(vnpEndpoints["provinces"], {
                 params: {
-                    limit: -1,
+                    size: 63,
                 }
             });
-            setProvinces(res.data.data.data);
+            setProvinces(res.data.data);
         } catch (error) {
             console.log(error);
         }
     }
 
     // Fetch District Data
-    const handleSelectProv = async (code: number) => {
+    const handleSelectProv = async (prov: string) => {
+        const provJSON = JSON.parse(prov);
+        setSelectedProv(provJSON);
         setDistricts([]);
         try {
-            const res = await vnProvincesApi.get(vnpEndpoints["getDistrictsByProv"], {
+            const res = await vnProvincesApi.get(vnpEndpoints["districts"], {
                 params: {
-                    provinceCode: code,
-                    limit: -1
+                    provinceId: provJSON.id,
+                    size: 999,
                 }
             });
-            setSelectedProv(res.data);
-            setDistricts(res.data.districts);
+            setDistricts(res.data.data);
         } catch (error) {
             console.log(error);
         }
     }
 
-    const handleSelectDist = async (id: number) => {
-        try {
-            const url = vnpEndpoints.distId(id);
-            const res = await vnProvincesApi.get(url);
-            setSelectedDist(res.data);
-        } catch (error) {
-            console.log(error);
-        }
+    const handleSelectDist = async (dist: string) => {
+        const distJSON = JSON.parse(dist);
+        setSelectedDist(distJSON);
     }
 
     return (
         <div className="flex flex-col gap-y-4">
             <h2 className="font-semibold text-lg">Thành phố - Tỉnh thành</h2>
-            <Select onValueChange={(value) => handleSelectProv(Number(value))}>
+            <Select onValueChange={(value) => handleSelectProv(value)}>
                 <SelectTrigger className="dark:bg-oupia-sub">
                     <SelectValue placeholder="-- Chọn tên thành phố --" />
                 </SelectTrigger>
@@ -69,15 +65,15 @@ const LocationFilter = () => {
                     {provinces.map((prov) => {
                         return (<SelectItem
                             key={prov.id}
-                            value={prov.code}>
-                            {prov["name_with_type"]}
+                            value={JSON.stringify(prov)}>
+                            {prov.name}
                         </SelectItem>)
                     })}
                 </SelectContent>
             </Select>
             <Separator />
             <h2 className="font-semibold text-lg">Quận - Huyện</h2>
-            <Select onValueChange={(value) => handleSelectDist(Number(value))}>
+            <Select defaultValue={JSON.stringify(selectedDist) ?? ""} onValueChange={(value) => handleSelectDist(value)}>
                 <SelectTrigger className="dark:bg-oupia-sub">
                     <SelectValue placeholder="-- Chọn quận / huyện --" />
                 </SelectTrigger>
@@ -85,8 +81,8 @@ const LocationFilter = () => {
                     {districts.length > 0 ? districts.map((dist) => {
                         return (<SelectItem
                             key={dist.id}
-                            value={dist.code}>
-                            {dist["name_with_type"]}
+                            value={JSON.stringify(dist)}>
+                            {dist.name}
                         </SelectItem>)
                     }) : <h4 className="text-sm text-muted-foreground text-center p-2">
                         Chưa có dữ liệu
