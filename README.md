@@ -1,4 +1,4 @@
-# Phát triển hệ thống hỗ trợ tìm kiếm nhà trọ bằng công nghệ React
+# Phát triển hệ thống hỗ trợ tìm kiếm nhà trọ bằng công nghệ NextJS + TypeScript
 
 ## Yêu Cầu
 
