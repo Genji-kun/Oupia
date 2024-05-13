@@ -14,7 +14,6 @@ import UserHeaderButtons from './user-header-buttons';
 
 const UserHeader = () => {
 
-    const router = useRouter();
     const params = useParams();
     const { username } = params;
 

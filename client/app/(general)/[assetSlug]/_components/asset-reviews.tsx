@@ -1,37 +1,16 @@
 "use client"
 
-import { reviewEndpoints } from '@/configs/axiosEndpoints';
-import { authApi } from '@/configs/axiosInstance';
 import { useAssetDetailContext } from '@/contexts/asset-detail-context';
-import { ReviewResponse } from '@/interfaces/Review';
-import { useQuery } from '@tanstack/react-query';
 import React from 'react'
 import ReviewItem from './review-item';
 
 function AssetReviews() {
 
-    const { asset } = useAssetDetailContext();
+    const { asset, isFetchingReviews, reviews} = useAssetDetailContext();
 
-    const getReviews = async (assetId: number): Promise<ReviewResponse[] | undefined> => {
-        try {
-            const res = await authApi.get(reviewEndpoints["getReviews"], {
-                params: {
-                    assetId: assetId,
-                }
-            })
-            return res.data.content;
-        } catch (error) {
-            console.error(error);
-        }
-    }
 
-    const { data: reviews, isFetching } = useQuery<ReviewResponse[] | undefined>({
-        queryKey: ["getReviews", asset && asset.id],
-        queryFn: () => getReviews(asset && asset.id),
-        refetchOnWindowFocus: false,
-    })
 
-    if (isFetching || !asset) {
+    if (isFetchingReviews || !asset) {
         return <></>
     }
 

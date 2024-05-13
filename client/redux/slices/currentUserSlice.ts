@@ -10,10 +10,10 @@ const currentUserSlice = createSlice({
             state.currentUser = action.payload;
         },
         logout: (state) => {
-            signOut({ redirect: false })
-            state.currentUser = null;
             cookies.remove("accessToken");
             cookies.remove("user");
+            signOut({ redirect: false })
+            state.currentUser = null;
         },
     },
 });

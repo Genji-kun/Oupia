@@ -11,7 +11,7 @@ export default function withAuth(Component: any) {
 
     useEffect(() => {
       if (!cookies.load("user")) {
-        router.push('/sign-in')
+        router.push(pathname === "/sign-in" ? '/sign-in' : '/sign-up')
       } else if(pathname === "/sign-in" || pathname === "/sign-up"){
         router.push("/");
       }

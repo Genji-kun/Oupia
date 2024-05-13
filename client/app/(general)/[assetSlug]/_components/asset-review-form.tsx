@@ -20,7 +20,7 @@ import { toast } from 'sonner'
 function AssetReviewForm() {
 
     const { currentUser } = useSelector((state: any) => state.currentUserSlice);
-    const { asset } = useAssetDetailContext();
+    const { asset, refetch } = useAssetDetailContext();
 
     const [currentStar, setCurrentStar] = useState<number>(0);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -46,6 +46,7 @@ function AssetReviewForm() {
                 const res = await authApi.post(reviewEndpoints["addReview"], reviewReq);
                 if (res.status === 200) {
                     toast.success("Thêm đánh giá thành công.");
+                    refetch();
                 }
             } catch (error) {
                 console.error(error);

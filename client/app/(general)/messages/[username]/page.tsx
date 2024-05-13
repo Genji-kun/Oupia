@@ -13,6 +13,7 @@ import { collection, getDocs, onSnapshot, orderBy, query, where } from 'firebase
 import { db } from '@/configs/firebase';
 import { useSelector } from 'react-redux';
 import withAuth from '@/utils/withAuth';
+import { MessageToUserProvider } from '@/contexts/message-to-user-context';
 
 const UserMessageRoomPage = () => {
 
@@ -79,16 +80,16 @@ const UserMessageRoomPage = () => {
     }
 
     return (
-
-        <div className="flex w-full h-full bg-background overflow-hidden dark:bg-oupia-base rounded-xl shadow-dark-theme shadow-light-theme">
-            <div className={`w-full h-full flex flex-col relative min-h-[clac(100vh-80px)] lg:min-h-fit ${expanded && "border-r"}`}>
-                <UserHeaderBar />
-                <MessageContainer />
-                <MessageInput />
+        <MessageToUserProvider>
+            <div className="flex w-full h-full bg-background overflow-hidden dark:bg-oupia-base rounded-xl shadow-dark-theme shadow-light-theme">
+                <div className={`w-full h-full flex flex-col relative min-h-[clac(100vh-80px)] lg:min-h-fit ${expanded && "border-r"}`}>
+                    <UserHeaderBar />
+                    <MessageContainer />
+                    <MessageInput />
+                </div>
+                {receiveUser && <MessageDetail />}
             </div>
-            {receiveUser && <MessageDetail />}
-        </div>
-
+        </MessageToUserProvider>
     );
 };
 export default withAuth(UserMessageRoomPage);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     

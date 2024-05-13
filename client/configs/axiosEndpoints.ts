@@ -4,7 +4,6 @@ export const authEndpoints = {
     "currentUser": `/auth/me/`,
     "getAuthToken": `/auth/auth-token/`,
     "loginSocial": `/auth/social-login/`,
-    "registerSocial": `store/register/social/`
 }
 
 export const vnpEndpoints = {

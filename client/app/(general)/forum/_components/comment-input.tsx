@@ -18,27 +18,36 @@ function CommentInput({ postId }: { postId: number }) {
 
     const [text, setText] = useState<string>("");
     const [isHidden, setIsHidden] = useState<boolean>(true);
+    const [submit, setSubmit] = useState<boolean>(false);
     const [commentReq, setCommentReq] = useState<CommentRequest | undefined>();
 
     useEffect(() => {
         if (text) {
-            setCommentReq({
-                postId: postId,
-                commentContent: text
-            });
             setIsHidden(false);
         }
         else
             setIsHidden(true);
+
+        if (text && submit) {
+            setCommentReq({
+                postId: postId,
+                commentContent: text
+            });
+            sendComment();
+            setSubmit(false);
+        }
+
         document.addEventListener("keydown", handleKeyDown);
         return () => {
             document.removeEventListener("keydown", handleKeyDown);
         }
-    }, [text])
+    }, [text, submit])
+
+
 
     const handleKeyDown = (evt: KeyboardEvent) => {
         if (evt.key === "Enter") {
-            sendComment();
+            setSubmit(true);
         }
     }
 
@@ -71,7 +80,7 @@ function CommentInput({ postId }: { postId: number }) {
                     {!isHidden &&
                         <Button
                             variant={"ghost"}
-                            onClick={sendComment}
+                            onClick={() => setSubmit(true)}
                             className="w-fit h-fit p-2 rounded-full absolute right-4 top-1">
                             <IoSend size={18} className="text-primary" />
                         </Button>

@@ -8,7 +8,7 @@ const ForgetPasswordTab = () => {
         <>
             <div>
                 <h1 className="font-montserrat font-bold text-3xl lg:text-4xl mb-2  text-center lg:text-left ">Quên mật khẩu</h1>
-                <p className="text-gray-600 dark:text-gray-700 text-center lg:text-left ">Vui lòng nhập tài khoản email đã đăng ký tại Oupia để lấy mã xác nhận</p>
+                <p className="text-muted-foreground text-center lg:text-left ">Vui lòng nhập tài khoản email đã đăng ký tại Oupia để lấy mã xác nhận.</p>
             </div>
             <Separator className="lg:w-1/2" />
             <ForgetPasswordForm />

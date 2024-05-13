@@ -14,6 +14,8 @@ import cookies from "react-cookies";
 import { useDispatch } from 'react-redux';
 import { login } from '@/redux/slices/currentUserSlice';
 import { useRouter } from 'next/navigation';
+import OtpTab from './otp-tab';
+import NewPasswordTab from './new-password-tab';
 
 const Tabs = () => {
 
@@ -25,19 +27,6 @@ const Tabs = () => {
     const { data: session } = useSession();
 
     useEffect(() => {
-        const registerSocial = async (accessToken: string, provider: string) => {
-            try {
-                const res = await publicApi.post(authEndpoints["registerSocial"], {
-                    accessToken: accessToken,
-                    provider: provider
-                });
-                if (res.status === 200) {
-                    loginSocial(accessToken, provider);
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        }
 
         const loginSocial = async (accessToken: string, provider: string) => {
             try {
@@ -65,10 +54,7 @@ const Tabs = () => {
                     }
                 }
             } catch (error: any) {
-                if (error.response.data.code === "2003")
-                    registerSocial(accessToken, provider);
-                else
-                    console.log(error);
+                console.log(error);
             }
         }
 
@@ -128,6 +114,30 @@ const Tabs = () => {
                                         transition={{ duration: 0.5, ease: "easeInOut" }}
                                         className="flex flex-col justify-center gap-y-8 absolute w-full p-4 md:py-10 md:px-24 xl:py-16 xl:px-44 ">
                                         <ChangePasswordTab />
+                                    </motion.div>
+                                );
+                            case "otp":
+                                return (
+                                    <motion.div
+                                        key="otp"
+                                        initial={{ opacity: 0, x: 50 }}
+                                        animate={{ x: 0, opacity: 1 }}
+                                        exit={{ opacity: 0, x: 50 }}
+                                        transition={{ duration: 0.5, ease: "easeInOut" }}
+                                        className="flex flex-col justify-center gap-y-8 absolute w-full p-4 md:py-10 md:px-24 xl:py-16 xl:px-44 ">
+                                        <OtpTab />
+                                    </motion.div>
+                                );
+                            case "new-password":
+                                return (
+                                    <motion.div
+                                        key="new-password"
+                                        initial={{ opacity: 0, x: 50 }}
+                                        animate={{ x: 0, opacity: 1 }}
+                                        exit={{ opacity: 0, x: 50 }}
+                                        transition={{ duration: 0.5, ease: "easeInOut" }}
+                                        className="flex flex-col justify-center gap-y-8 absolute w-full p-4 md:py-10 md:px-24 xl:py-16 xl:px-44 ">
+                                        <NewPasswordTab/>
                                     </motion.div>
                                 );
                             default:

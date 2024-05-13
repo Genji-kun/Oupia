@@ -129,6 +129,17 @@ const MapContainer = () => {
         }
     }, [polygon])
 
+    useEffect(() => {
+        if (assets.length > 0 && assets[0]) {
+            setViewport({
+                ...viewport,
+                longitude: assets[0].locationLong,
+                latitude: assets[0].locationLat,
+                zoom: 11,
+            });
+        }
+    }, [assets])
+
     const onMapLoad = useCallback((event: any) => {
         mapRef.current = event.target;
     }, []);

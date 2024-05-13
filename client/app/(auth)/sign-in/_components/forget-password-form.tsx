@@ -13,12 +13,10 @@ import { useAuthTabContext } from "@/contexts/auth-tab-context";
 import Loader from "@/components/ui/loader";
 
 const formSchema = z.object({
-    email: z.string().min(1, {
-        message: "Vui lòng điền email người dùng"
-    }).email({
-        message: "Không đúng định dạng email",
-    }),
-})
+    username: z.string().min(1, {
+        message: "Vui lòng điền tên người dùng"
+    })
+});
 
 const ForgetPasswordForm = () => {
     const { setTab } = useAuthTabContext();
@@ -27,32 +25,31 @@ const ForgetPasswordForm = () => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            email: "",
+            username: "",
         },
     })
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        setIsSubmitting(true);
-        console.log(values)
+        setTab("otp");
     }
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-12">
                 <FormField
                     control={form.control}
-                    name="email"
+                    name="username"
                     render={({ field }) => (
                         <FormItem >
-                            <FormLabel className="text-base font-semibold text-foreground">Email người dùng</FormLabel>
+                            <FormLabel className="text-base font-semibold text-foreground">Tên người dùng</FormLabel>
                             <FormControl>
-                                <Input {...field} type="email" disabled={isSubmiting} />
+                                <Input {...field} type="text" disabled={isSubmiting} className="py-6"/>
                             </FormControl>
                             <FormMessage />
                         </FormItem>
                     )}
                 />
                 {isSubmiting ? <>
-                    <Button disabled type="submit" className=" ml-auto w-fit styled-button border-gray-200 border flex gap-3 ">
+                    <Button disabled type="submit" className=" ml-auto w-fit styled-button flex gap-2">
                         <span className="text-base">Đang xử lý</span>
                         <Loader size={4} />
                     </Button>
@@ -62,7 +59,7 @@ const ForgetPasswordForm = () => {
                             <ChevronLeft size="20" />
                             <span className="font-semibold text-base">Quay lại</span>
                         </Button>
-                        <Button type="submit" className=" w-fit styled-button border-gray-200 border flex gap-2 ">
+                        <Button type="submit" className=" w-fit styled-button flex gap-2">
                             <span className="text-base">Gửi mã xác nhận</span>
                         </Button>
                     </div>

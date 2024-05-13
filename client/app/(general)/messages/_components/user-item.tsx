@@ -12,7 +12,6 @@ import { Timestamp } from 'firebase/firestore';
 import { useSelector } from 'react-redux';
 import { format, formatDistanceToNow } from 'date-fns';
 import { vi } from 'date-fns/locale';
-import { useAppContext } from '@/contexts/app-context';
 
 const UserItem = ({ user, lastMessage }:
     {

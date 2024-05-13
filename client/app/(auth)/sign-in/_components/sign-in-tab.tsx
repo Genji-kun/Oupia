@@ -11,7 +11,7 @@ const SignInTab = () => {
         <>
             <div>
                 <h1 className="font-montserrat font-bold text-4xl mb-2 text-center">Đăng nhập</h1>
-                <p className="text-gray-600 dark:text-gray-400 text-center">Truy cập để đăng tin tìm mái nhà ưng ý dành cho bạn</p>
+                <p className="text-muted-foreground text-center">Truy cập để đăng tin tìm mái nhà ưng ý dành cho bạn.</p>
             </div>
             <Separator />
             <SignInForm />

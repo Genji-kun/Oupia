@@ -129,8 +129,8 @@ const MapRoute = () => {
         <Marker
             longitude={asset.locationLong}
             latitude={asset.locationLat}
-            offsetLeft={-2}
-            offsetTop={-4}
+            offsetLeft={-10}
+            offsetTop={-20}
             className="flex items-center justify-center">
             <TooltipProvider>
                 <Tooltip>
