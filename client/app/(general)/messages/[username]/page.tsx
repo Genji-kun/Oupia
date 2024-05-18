@@ -27,8 +27,8 @@ const UserMessageRoomPage = () => {
 
 
     useEffect(() => {
-        fetchUserInfo();
-    }, [])
+        fetchUserInfo(username);
+    }, [username])
 
     useEffect(() => {
         const updateMessage = () => {
@@ -59,7 +59,7 @@ const UserMessageRoomPage = () => {
         }
     }, [currentUser, receiveUser])
 
-    const fetchUserInfo = async () => {
+    const fetchUserInfo = async (username: string) => {
         if (username) {
             try {
                 const url = userEndpoints.getUserByUsername(username);
