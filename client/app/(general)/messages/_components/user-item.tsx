@@ -42,7 +42,7 @@ const UserItem = ({ user, lastMessage }:
                 </Avatar>
                 <div className="ml-3 col-span-6 hidden xl:flex xl:flex-col justify-center">
                     <h2 className="font-semibold text-lg">{user.fullName}</h2>
-                    <p className="text-sm text-muted-foreground flex gap-1"><span>{lastMessage.sender === currentUser?.username && "Bạn: "}</span> <span className="truncate">{lastMessage.content}</span>·<span className="whitespace-nowrap">{lastMessage.createdAt && formatDistanceToNow(lastMessage.createdAt.toDate(), { addSuffix: true, locale: vi })}</span></p>
+                    <p className="text-sm text-muted-foreground flex gap-1"><span>{lastMessage.sender === currentUser?.username && "Bạn: "}</span> <span className="truncate">{lastMessage.type === "text" ? lastMessage.content : (lastMessage.type === "image" && "Đã gửi hình ảnh")}</span>·<span className="whitespace-nowrap">{lastMessage.createdAt && formatDistanceToNow(lastMessage.createdAt.toDate(), { addSuffix: true, locale: vi })}</span></p>
                 </div>
             </div>
         </Link>

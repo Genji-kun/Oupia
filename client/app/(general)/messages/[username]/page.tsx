@@ -22,7 +22,7 @@ const UserMessageRoomPage = () => {
 
     const { setMessages, receiveUser, setReceiveUser, expanded } = useMessageContext();
 
-    const params = useParams();
+    const params = useParams<{ username: string}>()
     const { username } = params;
 
 
@@ -60,7 +60,7 @@ const UserMessageRoomPage = () => {
     }, [currentUser, receiveUser])
 
     const fetchUserInfo = async () => {
-        if (typeof (username) === "string") {
+        if (username) {
             try {
                 const url = userEndpoints.getUserByUsername(username);
                 const res = await publicApi.get(url);

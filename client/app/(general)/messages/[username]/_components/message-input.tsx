@@ -17,13 +17,14 @@ import { BiSolidMessageSquareAdd } from "react-icons/bi";
 import { useTheme } from 'next-themes';
 
 import { DocumentData, addDoc, collection, getDocs, onSnapshot, orderBy, query, serverTimestamp, updateDoc, where } from 'firebase/firestore';
-import { db } from '@/configs/firebase';
+import { db, storage } from '@/configs/firebase';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import withAuth from '@/utils/withAuth';
 import { useMessageToUserContext } from '@/contexts/message-to-user-context';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
 const MessageInput = () => {
 
@@ -44,16 +45,29 @@ const MessageInput = () => {
         const newFiles = Array.prototype.slice.call(evt.target.files);
         setImageFiles((current: any) => [...(current || []), ...newFiles]);
     }
+
+    const handleDelete = (file: File) => {
+        setImageFiles((images: File[]) => images.filter((f) => f !== file));
+    }
+
+    const uploadImage = async (imgFile: File) => {
+        const imagePath = `images/${Date.now()}-${currentUser?.username}-${imgFile.name}`;
+        const storageRef = ref(storage, imagePath);
+        await uploadBytes(storageRef, imgFile);
+        const url = await getDownloadURL(storageRef);
+        return url;
+    }
+
     const sendMessage = async (evt: any) => {
         evt.preventDefault();
 
-        if (message.trim().length > 0 && currentUser && receiveUser) {
+        if (message.trim().length > 0 || imageFiles.length > 0) {
 
             const nameArr = currentUser.fullName.split(" ");
             const chatroomsRef = collection(db, 'chatrooms');
             const combinedUsername = [currentUser.username, receiveUser.username].sort().join(':');
             const q = query(chatroomsRef, where('roomId', '==', combinedUsername));
-            getDocs(q).then((snapshot: any) => {
+            getDocs(q).then(async (snapshot: any) => {
                 const chatroom = snapshot.docs[0];
                 const newMessage: any = {
                     sender: currentUser?.username,
@@ -64,6 +78,12 @@ const MessageInput = () => {
                 if (message.trim().length > 0) {
                     newMessage.type = "text";
                     newMessage.content = message.trim();
+                } else if (imageFiles.length > 0) {
+                    newMessage.type = "image";
+                    newMessage.images = [];
+                    const uploadPromises = imageFiles.map(imgFile => uploadImage(imgFile));
+                    const imageUrls = await Promise.all(uploadPromises);
+                    newMessage.images = imageUrls;
                 }
                 if (chatroom) {
                     addDoc(collection(chatroom.ref, 'messages'), {
@@ -94,7 +114,7 @@ const MessageInput = () => {
                 }
             })
             setMessage('');
-
+            setImageFiles([]);
         }
     }
 
@@ -123,13 +143,13 @@ const MessageInput = () => {
 
     return (
         <>
-            <div className={cn("w-full", imageFiles.length > 0 && "flex flex-cols gap-2 border-t")}>
+            <div className={cn("w-full", imageFiles.length > 0 && "flex flex-col gap-2 border-t")}>
                 {imageFiles.length !== 0 && (
-                    <div className="flex flex-wrap gap-5 items-center pt-4">
+                    <div className="flex flex-wrap gap-2 items-center p-4 pb-0">
                         {imageFiles.map((image, index) => (
                             <div key={index} className="col-span-1 relative">
-                                <X className="text-destructive font-bold w-6 h-6 p-1 bg-background hover:bg-border dark:hover:bg-oupia-sub dark:bg-oupia-base rounded-full absolute -right-2 -top-2 cursor-pointer" 
-                                 //onClick={() => handleDelete(image)} 
+                                <X className="text-destructive font-bold w-6 h-6 p-1 bg-background hover:bg-border dark:hover:bg-oupia-sub dark:bg-oupia-base rounded-full absolute -right-2 -top-2 cursor-pointer"
+                                    onClick={() => handleDelete(image)}
                                 />
                                 <Image width={500} height={500} className="rounded-lg object-cover w-16 aspect-square" src={URL.createObjectURL(image)} alt={image.name} />
                             </div>
@@ -167,13 +187,15 @@ const MessageInput = () => {
                                         multiple
                                         className="sr-only"
                                         accept="image/png, image/jpeg"
-                                    // onChange={() => handleFileChange}
+                                        onChange={handleFileChange}
                                     />
                                 </label>
-                                <div className="flex gap-x-2 items-center text-sm hover:bg-accent p-2 cursor-pointer rounded">
-                                    <HiOutlineHomeModern className="w-4 h-4" />
-                                    <span>Thông tin căn hộ</span>
-                                </div>
+                                {
+                                    currentUser && currentUser.role === "ROLE_LANDLORD" && <div className="flex gap-x-2 items-center text-sm hover:bg-accent p-2 cursor-pointer rounded">
+                                        <HiOutlineHomeModern className="w-4 h-4" />
+                                        <span>Thông tin căn hộ</span>
+                                    </div>
+                                }
                                 <div className="flex gap-x-2 items-center text-sm hover:bg-accent p-2 cursor-pointer rounded">
                                     <StickyNote className="w-4 h-4" />
                                     <span>Bài viết</span>
@@ -209,7 +231,6 @@ const MessageInput = () => {
                             <Popover>
                                 <PopoverTrigger className="absolute right-[3.25rem] top-1/2 -translate-y-1/2">
                                     <TooltipProvider>
-
                                         <Tooltip>
                                             <TooltipTrigger >
                                                 <Button type="button" variant={"ghost"} className="rounded-full p-2 h-fit text-foreground bg-background dark:bg-oupia-sub">

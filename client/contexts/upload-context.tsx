@@ -2,8 +2,11 @@
 
 import { AssetResponse } from '@/interfaces/Asset';
 import { Amenity, TagLocation, TagPrice } from '@/interfaces/Tags';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { usePathname } from 'next/navigation';
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
+import { UseFormReturn, useForm } from 'react-hook-form';
+import * as z from "zod"
 
 interface IUploadContext {
 
@@ -28,6 +31,30 @@ interface IUploadContext {
     asset: any;
     setAsset: React.Dispatch<React.SetStateAction<any>>;
 
+    postForm: UseFormReturn<PostReq, any, undefined>;
+
+    assetForm: UseFormReturn<AssetReq, any, undefined>
+
+}
+
+export type PostReq = {
+    postContent: string;
+    postType: "POST_COMMON" | "POST_RENT" | "POST_FIND";
+    images: File[];
+};
+
+export type AssetReq = {
+    assetName: string;
+    assetType: "BOARDING_HOUSE" | "SHARED_HOUSING_SYSTEM" | "APARTMENT" | "DORMIROTY" | "STUDIO_APARTMENT" | "ENTIRE_HOUSE";
+    assetDescription: string;
+    fullLocation: string;
+    locationLong: number;
+    locationLat: number;
+    price: number;
+    area: number;
+    maxPeople: number;
+    amenities: string[];
+    images: File[];
 }
 
 const UploadContext = createContext<IUploadContext | undefined>(undefined);
@@ -54,6 +81,85 @@ export const UploadProvider: React.FC<{ children: ReactNode }> = ({ children }) 
     const [tagLocation, setTagLocation] = useState<TagLocation | undefined>();
     const [tagAsset, setTagAsset] = useState<AssetResponse | undefined>();
 
+    const formPostSchema = z.object({
+        postContent: z.string({
+            required_error: "Nội dung không được để trống",
+        }).min(20, {
+            message: "Nội dung phải lớn hơn 20 kí tự"
+        }),
+        postType: z.enum(['POST_COMMON', 'POST_RENT', 'POST_FIND'], {
+            required_error: "Chưa chọn loại bài viết"
+        }),
+        images: z.array(z.instanceof(File))
+    })
+
+    const formAssetSchema = z.object({
+        assetName: z.string({
+            required_error: "Tên căn hộ không được để trống",
+        }).min(10, {
+            message: "Tên căn hộ phải lớn hơn 10 kí tự"
+        }),
+        assetType: z.enum(['BOARDING_HOUSE', 'SHARED_HOUSING_SYSTEM', 'APARTMENT', 'DORMIROTY', 'STUDIO_APARTMENT', 'ENTIRE_HOUSE'], {
+            required_error: "Chưa chọn loại căn hộ"
+        }),
+        assetDescription: z.string({
+            required_error: "Nội dung mô tả không được để trống",
+        }).min(50, {
+            message: "Nội dung mô tả phải lớn hơn 50 kí tự"
+        }),
+        fullLocation: z.string({
+            required_error: "Địa chỉ không được để trống",
+        }),
+        locationLong: z.number({
+            required_error: "Địa chỉ không được để trống",
+        }),
+        locationLat: z.number({
+            required_error: "Địa chỉ không được để trống",
+        }),
+        price: z.number({
+            required_error: "Giá không được để trống",
+        }).min(1, {
+            message: "Giá phải là số dương"
+        }),
+        area: z.number({
+            required_error: "Diện tích không được để trống",
+        }).min(1, {
+            message: "Diện tích phải là số dương"
+        }),
+        maxPeople: z.number({
+            required_error: "Số người tối đa không được để trống",
+        }).min(1, {
+            message: "Số người tối đa phải là số dương"
+        }),
+        amenities: z.array(z.string()),
+        images: z.array(z.instanceof(File))
+    })
+
+    const assetForm = useForm<AssetReq>({
+        resolver: zodResolver(formAssetSchema),
+        defaultValues: {
+            assetName: "",
+            assetType: undefined,
+            assetDescription: "",
+            fullLocation: "",
+            locationLong: undefined,
+            locationLat: undefined,
+            price: undefined,
+            area: undefined,
+            maxPeople: undefined,
+            amenities: [],
+            images: []
+        },
+    })
+
+    const postForm = useForm<PostReq>({
+        resolver: zodResolver(formPostSchema),
+        defaultValues: {
+            postContent: "",
+            postType: undefined,
+            images: []
+        },
+    })
 
     useEffect(() => {
         if (tagPrice) {
@@ -115,7 +221,7 @@ export const UploadProvider: React.FC<{ children: ReactNode }> = ({ children }) 
 
 
     return (
-        <UploadContext.Provider value={{ post, setPost, images, setImages, selectedTagType, setSelectedTagType, amenities, setAmenities, tagPrice, setTagPrice, tagLocation, setTagLocation, tagAsset, setTagAsset, asset, setAsset }}>
+        <UploadContext.Provider value={{ post, setPost, images, setImages, selectedTagType, setSelectedTagType, amenities, setAmenities, tagPrice, setTagPrice, tagLocation, setTagLocation, tagAsset, setTagAsset, asset, setAsset, postForm, assetForm }}>
             {children}
         </UploadContext.Provider>
     );

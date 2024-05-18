@@ -8,8 +8,6 @@ function AssetReviews() {
 
     const { asset, isFetchingReviews, reviews} = useAssetDetailContext();
 
-
-
     if (isFetchingReviews || !asset) {
         return <></>
     }

@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { assetsEndpoints, postEndpoints } from '@/configs/axiosEndpoints';
 import { authApi } from '@/configs/axiosInstance';
-import { useUploadContext } from '@/contexts/upload-context'
+import { PostReq, useUploadContext } from '@/contexts/upload-context'
 import { Loader2 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import React, { useState } from 'react'
@@ -11,7 +11,7 @@ import { toast } from 'sonner';
 
 function UploadButton() {
 
-    const { asset, setAsset, post, setPost, images } = useUploadContext();
+    const { asset, setAsset, post, setPost, images, postForm } = useUploadContext();
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const pathname = usePathname();
@@ -71,6 +71,15 @@ function UploadButton() {
             toast.error("Không được bỏ trống nội dung bài viết và loại bài viết.");
             setIsSubmitting(false);
         }
+    }
+
+    const onSubmit = (form: PostReq) => {
+        console.log(1);
+        console.log(form);
+    }
+
+    const handleSubmit = () => {
+        postForm.handleSubmit(onSubmit)();
     }
 
     return (

@@ -5,11 +5,9 @@ import { Button } from '@/components/ui/button';
 import { useMessageContext } from '@/contexts/message-context';
 import { cn } from '@/lib/utils';
 import { convert } from '@/utils/convertAvatarAlt';
+import Image from 'next/image';
 import React, { useState } from 'react'
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
-
-import { formatDistanceToNow } from 'date-fns';
-import { vi } from 'date-fns/locale'
 
 function MessageLeftBubble({ message, sender, isConsecutive }: { message: any, sender: any, isConsecutive: boolean }) {
 
@@ -31,14 +29,33 @@ function MessageLeftBubble({ message, sender, isConsecutive }: { message: any, s
                         <h3 className="font-semibold">{sender.fullName}</h3>
                     </div>
                 )}
-                <div className={cn("flex gap-2 items-center", isConsecutive && "ml-12")} onMouseEnter={() => { setIsHover(true) }} onMouseLeave={() => { setIsHover(false) }}>
-                    <p className={cn("bg-gray-200/80 dark:bg-accent py-2 px-3 rounded-2xl rounded-tl-none transition-all", expanded ? "max-w-sm" : "max-w-lg")}>{message.content}</p>
-                    {isHover &&
-                        <Button variant={"ghost"} className="p-2 h-fit">
-                            <BiDotsHorizontalRounded className="w-4 h-4" />
-                        </Button>
+                {(() => {
+                    switch (message.type) {
+                        case "text":
+                            return <>
+                                <div className={cn("flex gap-2 items-center", isConsecutive && "ml-12")} onMouseEnter={() => { setIsHover(true) }} onMouseLeave={() => { setIsHover(false) }}>
+                                    <p className={cn("bg-gray-200/80 dark:bg-accent py-2 px-3 rounded-2xl rounded-tl-none transition-all", expanded ? "max-w-sm" : "max-w-lg")}>{message.content}</p>
+                                    {isHover &&
+                                        <Button variant={"ghost"} className="p-2 h-fit">
+                                            <BiDotsHorizontalRounded className="w-4 h-4" />
+                                        </Button>
+                                    }
+                                </div>
+                            </>
+                        case "image":
+                            return <>
+                              <div className={cn('grid gap-1', isConsecutive && "ml-12", message.images.length > 3 ? "grid-cols-3" : `grid-cols-${message.images.length}`)}>
+                                    {message.images && message.images.map((image: string, index: number) => (
+                                        <div key={index} className=" relative">
+                                            <Image width={500} height={500} className="rounded-lg object-cover w-24 aspect-square" src={image} alt={"Message Image"} />
+                                        </div>
+                                    ))}
+                                </div>
+                            </>
+                        default:
+                            return <></>;
                     }
-                </div>
+                })()}
             </div>
 
         </div>
