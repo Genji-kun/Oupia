@@ -4,7 +4,7 @@ import { usePathname, useRouter } from "next/navigation"
 import { useEffect } from "react"
 import cookies from "react-cookies"
 
-export default function withAuth(Component: any) {
+export default function withAuth(Component: React.FC) {
   return function ProtectedRoute({ ...props }) {
     const router = useRouter();
     const pathname = usePathname();
