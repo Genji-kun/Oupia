@@ -15,14 +15,14 @@ import { useSelector } from 'react-redux';
 import withAuth from '@/utils/withAuth';
 import { MessageToUserProvider } from '@/contexts/message-to-user-context';
 
-const UserMessageRoomPage = () => {
+const UserMessageRoomPage: React.FC = () => {
 
     const { currentUser } = useSelector((state: any) => state.currentUserSlice);
     const router = useRouter();
 
     const { setMessages, receiveUser, setReceiveUser, expanded } = useMessageContext();
 
-    const params = useParams<{ username: string}>()
+    const params = useParams<{ username: string }>()
     const { username } = params;
 
 

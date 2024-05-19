@@ -69,7 +69,7 @@ function UploadForumForm() {
 
     return (
         <Form  {...postForm}>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4 py-2 pb-4">
+            <form className="flex flex-col gap-4 py-2 pb-4">
                 <div>
                     <h4 className="text-xl font-semibold">Thông tin bài viết</h4>
                     <span className="text-sm text-muted-foreground">Thông tin bài viết sẽ được hiển thị trên trang diễn đàn.</span>
@@ -92,7 +92,6 @@ function UploadForumForm() {
                                                     <SelectValue placeholder="Bạn đăng bài viết này với mục đích gì?" />
                                                 </SelectTrigger>
                                                 <SelectContent>
-                                                    <SelectItem value="okok">ờng</SelectItem>
                                                     <SelectItem value="POST_COMMON">Đăng bài viết thông thường</SelectItem>
                                                     <SelectItem value="POST_FIND">Tìm kiếm căn hộ</SelectItem>
                                                     {currentUser.role !== "ROLE_TENANT" && <SelectItem value="POST_RENT">Cho thuê</SelectItem>}

@@ -12,7 +12,7 @@ import { Separator } from '@/components/ui/separator';
 import withAuth from '@/utils/withAuth';
 
 
-const MessageContainer = () => {
+const MessageContainer : React.FC = () => {
 
     const { currentUser } = useSelector((state: any) => state.currentUserSlice);
     const router = useRouter();

@@ -18,11 +18,12 @@ function UploadButton() {
 
     const handleSubmitPost = async () => {
         setIsSubmitting(true);
-        if (post.postContent && post.postType) {
+        console.log(postForm);
+        if (postForm.getValues("postContent") && postForm.getValues("postType")) {
             const form = new FormData();
             form.append('post', new Blob([JSON.stringify(post)], { type: "application/json" }))
             if (images.length > 0) {
-                images.forEach((file) => {
+                postForm.getValues("images").forEach((file) => {
                     form.append('images', file);
                 });
             }
@@ -31,6 +32,7 @@ function UploadButton() {
                 if (res.status === 200) {
                     toast.success("Thêm bài viết thành công");
                     setPost({});
+                    postForm.reset({});
                     setIsSubmitting(false);
                 }
             } catch (error) {

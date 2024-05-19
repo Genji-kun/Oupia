@@ -11,7 +11,7 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
 
-const UserHeaderBar = () => {
+const UserHeaderBar : React.FC= () => {
 
     const { receiveUser, expanded, setExpanded } = useMessageContext();
 

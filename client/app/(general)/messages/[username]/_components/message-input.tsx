@@ -26,7 +26,7 @@ import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
-const MessageInput = () => {
+const MessageInput: React.FC= () => {
 
     const { currentUser } = useSelector((state: any) => state.currentUserSlice);
     const router = useRouter();

@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 import { convert } from '@/utils/convertAvatarAlt';
 import React from 'react';
 
-const MessageDetail = () => {
+const MessageDetail: React.FC = () => {
 
     const { expanded, receiveUser } = useMessageContext();
 
