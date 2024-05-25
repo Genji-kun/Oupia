@@ -1,0 +1,146 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;500;700&family=Open+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --component-background: 214.3 31.8% 91.4%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 197 100% 50%;
+    /* Màu chính mới */
+    --primary-foreground: 197 100% 30%;
+    /* Độ đậm nhạt của màu chính */
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 197 100% 50%;
+    /* Màu chính mới */
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 247 18% 10%;
+    --foreground: 210 40% 98%;
+
+    --oupia-base: 249 20% 13%;
+    --oupia-sub-base: 251 16% 19%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 249 20% 13%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 197 100% 50%;
+    --primary-foreground: 197 100% 20%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 251 16% 19%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 251 16% 19%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 197 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+* {
+  @apply font-beauSans;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 0.5rem !important;
+}
+
+.styled-button {
+  @apply text-white text-base bg-primary-500 hover:bg-gradient-to-r from-primary-500 to-primary-700 hover:shadow;
+}
+
+.styled-form {
+  @apply w-full space-y-4 flex flex-wrap items-end;
+}
+
+.styled-form > div {
+  @apply w-full;
+}
+
+.map-container {
+  height: calc(100vh - 80px);
+}
+
+.map-container > div {
+  width: 100%;
+}
+
+.map-route > div {
+  width: 100%;
+  @apply aspect-3/2 xl:aspect-[5/2];
+}
+
+.images-view {
+  @apply max-w-full bg-background border-0;
+  border-radius: 0% !important;
+}
+
+.page-content {
+  width: 100%;
+  height: calc(100vh - 80px);
+}
+
+.calendar-header > div {
+  @apply col-span-2 text-center;
+}
+
+.shadow-dark-theme {
+  @apply dark:shadow-lg dark:shadow-black/50;
+}
+
+.shadow-light-theme {
+  @apply shadow-lg shadow-gray-400/30;
+}
+
+.util-button {
+  @apply items-center justify-center flex flex-col aspect-square p-4 border-[1.5px] border-border gap-2 rounded-xl text-muted-foreground cursor-pointer hover:bg-border/50 hover:text-primary dark:hover:bg-background dark:hover:text-foreground;
+}
