@@ -2,7 +2,7 @@
 
 import { commentEndpoints } from '@/configs/axiosEndpoints';
 import { authApi } from '@/configs/axiosInstance';
-import { CommentResponse } from '@/interfaces/Comment';
+import { CommentResponse } from '@/lib/types/interfaces/Comment';
 import { useQuery } from '@tanstack/react-query';
 import React, { createContext, useState, useContext, ReactNode, useEffect, useRef } from 'react';
 

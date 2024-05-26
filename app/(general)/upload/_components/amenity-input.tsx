@@ -7,7 +7,7 @@ import { Separator } from '@/components/ui/separator';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { useUploadContext } from '@/contexts/upload-context';
 import { useDebounce } from '@/hooks/useDebounce';
-import { Amenity } from '@/interfaces/Tags';
+import { Amenity } from '@/lib/types/interfaces/Tags';
 import { CornerDownLeft, ThumbsUp, X } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react'
 

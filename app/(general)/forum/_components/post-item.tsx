@@ -1,6 +1,6 @@
 "use client";
 
-import { PostResponse } from '@/interfaces/Post';
+import { PostResponse } from '@/lib/types/interfaces/Post';
 
 import React from 'react';
 import PostItemHeader from './post-item-header';

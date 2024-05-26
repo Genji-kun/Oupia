@@ -1,88 +1,47 @@
 "use client"
 
-import cookies from "react-cookies";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import * as z from "zod"
-
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Loader2, LogIn } from "lucide-react"
 import { useState } from "react"
 import ForgetPasswordButton from "./forget-password-button"
-import Loader from "@/components/ui/loader"
-import { authApi, publicApi } from "@/configs/axiosInstance"
-import { authEndpoints } from "@/configs/axiosEndpoints"
-import { useDispatch } from "react-redux"
-import { login } from "@/redux/slices/currentUserSlice"
-import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-
-const formSchema = z.object({
-    username: z.string({ "required_error": "Tên người dùng không được để trống" }),
-    password: z.string({ "required_error": "Mật khẩu không được để trống" })
-})
+import { loginSchema } from "@/lib/schemas/UserSchema";
+import { IUserLogin } from "@/lib/types/interfaces";
+import { useLogin } from "@/hooks/mutation";
 
 const SignInForm = () => {
 
     const [isSubmiting, setIsSubmitting] = useState(false);
-    const dispatch = useDispatch();
-    const router = useRouter()
 
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const loginForm = useForm<IUserLogin>({
+        resolver: zodResolver(loginSchema),
         defaultValues: {
             username: "",
             password: "",
         },
     })
 
-    async function onSubmit(values: z.infer<typeof formSchema>) {
+    const { mutateLogin } = useLogin();
+
+    async function onSubmit(values: IUserLogin) {
         setIsSubmitting(true);
-        try {
-            const res = await publicApi.post(authEndpoints['signIn'], values);
-            if (res.status === 200) {
-                cookies.save("accessToken", res.data.accessToken, {});
 
-                // Cập nhât Header Request
-                updateAuthApi();
-
-                try {
-                    const res = await authApi.get(authEndpoints["currentUser"]);
-                    if (res.status === 200) {
-                        cookies.save("user", res.data, {});
-                        dispatch(login(res.data));
-                        setIsSubmitting(false);
-                        router.push("/");
-                    }
-                } catch (error) {
-                    console.error(error);
-                    toast.error("Tên người dùng hoặc mật khẩu không đúng, vui lòng thử lại.");
-                    setIsSubmitting(false);
-                }
-            }
-        } catch (error) {
-            console.error(error);
-            toast.error("Tên người dùng hoặc mật khẩu không đúng, vui lòng thử lại.");
+        await mutateLogin(values).catch(() => {
+            toast.error("Có lỗi xảy ra. Vui lòng thử lại sau.");
             setIsSubmitting(false);
-        }
-    }
-
-    function updateAuthApi() {
-        authApi.interceptors.request.use(function (config) {
-            config.headers.Authorization = `Bearer ${cookies.load("accessToken")}`;
-            return config;
-        }, function (error) {
-            return Promise.reject(error);
+            return;
         });
     }
 
     return (
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <Form {...loginForm}>
+            <form onSubmit={loginForm.handleSubmit(onSubmit)} className="space-y-4">
                 <FormField
-                    control={form.control}
+                    control={loginForm.control}
                     name="username"
                     render={({ field }) => (
                         <FormItem >
@@ -95,7 +54,7 @@ const SignInForm = () => {
                     )}
                 />
                 <FormField
-                    control={form.control}
+                    control={loginForm.control}
                     name="password"
                     render={({ field }) => (
                         <FormItem >

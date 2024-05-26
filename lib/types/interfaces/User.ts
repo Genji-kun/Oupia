@@ -3,7 +3,7 @@ export interface User {
     fullName?: string,
     phoneNumber?: string,
     email?: string,
-    gender?: "MALE" | "FEMALE" | "ORTHER",
+    gender?: "MALE" | "FEMALE" | "OTHER",
     dob?: Date,
     avatar?: any,
     account?: Account,

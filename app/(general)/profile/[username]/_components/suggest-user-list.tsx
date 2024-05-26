@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { User } from '@/interfaces/User';
+import { User } from '@/lib/types/interfaces/User';
 import React, { useState } from 'react';
 import SuggestUserItem from './suggest-user-item';
 import { useProfileContext } from '@/contexts/profile-context';

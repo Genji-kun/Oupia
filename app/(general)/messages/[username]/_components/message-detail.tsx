@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
 import { useMessageContext } from '@/contexts/message-context';
-import { User } from '@/interfaces/User';
+import { User } from '@/lib/types/interfaces/User';
 import { cn } from '@/lib/utils';
 import { convert } from '@/utils/convertAvatarAlt';
 import React from 'react';

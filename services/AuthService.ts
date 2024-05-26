@@ -1,4 +1,4 @@
-import { IUserLogin, IUserRegister } from "@/interfaces";
+import { IUserLogin, IUserRegister } from "@/lib/types/interfaces";
 import BaseService from "./BaseService";
 import { AUTH_ENDPOINTS } from "@/lib/constants/EndPoints";
 
@@ -6,16 +6,16 @@ class AuthService extends BaseService {
     constructor() {
         super();
     }
-    register = (userRegister: IUserRegister) => {
-        return this.post(AUTH_ENDPOINTS.SIGN_UP, userRegister);
+    register = (form: FormData) => {
+        return this.post(AUTH_ENDPOINTS.SIGN_UP, form);
     };
 
     login = (userLogin: IUserLogin) => {
         return this.post(AUTH_ENDPOINTS.SIGN_IN, userLogin);
     };
 
-    currentUser = () => {
-        return this.get(AUTH_ENDPOINTS.CURRENY_USER);
+    currentUser = (accessToken: string) => {
+        return this.get(AUTH_ENDPOINTS.CURRENT_USER, accessToken);
     }
 
     getToken = () => {

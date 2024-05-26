@@ -1,7 +1,7 @@
 "use client"
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { ReviewResponse } from '@/interfaces/Review';
+import { ReviewResponse } from '@/lib/types/interfaces/Review';
 import { cn } from '@/lib/utils';
 import { convert } from '@/utils/convertAvatarAlt';
 import { Star } from 'lucide-react';

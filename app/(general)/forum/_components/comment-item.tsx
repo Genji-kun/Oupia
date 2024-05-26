@@ -1,7 +1,7 @@
 "use client"
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { CommentResponse } from '@/interfaces/Comment';
+import { CommentResponse } from '@/lib/types/interfaces/Comment';
 import { convert } from '@/utils/convertAvatarAlt';
 import Link from 'next/link';
 import React from 'react'
@@ -21,6 +21,6 @@ function CommentItem({ comment }: { comment: CommentResponse }) {
             </div>
         </div>
     )
-}   
+}
 
 export default CommentItem;

@@ -2,10 +2,7 @@ import { SERVER_URL } from "@/lib/constants/SettingSystem";
 import axios, { type Method } from "axios";
 
 axios.interceptors.request.use(async (config) => {
-    // const session = await getSession();
-    // config.headers.Authorization = session?.access_token || '';
-    // config.headers[CLIENT_ID] = session?.id || '';
-    // config.headers['x-api-key'] = API_KEY;
+    config.headers.Authorization = localStorage.getItem("accessToken") ? `Bearer ${localStorage.getItem("accessToken")}` : '';
     return config;
 });
 
@@ -20,7 +17,6 @@ class BaseService {
             withCredentials: true
         });
     }
-
 
     get(url: string, data?: object | string) {
         return this.request('get', url, data);

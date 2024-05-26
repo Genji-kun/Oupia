@@ -5,7 +5,7 @@ import PostLoading from '@/app/(general)/forum/_components/post-loading';
 import { postEndpoints } from '@/configs/axiosEndpoints';
 import { publicApi } from '@/configs/axiosInstance';
 import { useProfileContext } from '@/contexts/profile-context';
-import { PostResponse } from '@/interfaces/Post';
+import { PostResponse } from '@/lib/types/interfaces/Post';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
 import React from 'react';
@@ -14,8 +14,8 @@ function UserPostList() {
 
     const { userInfo } = useProfileContext();
 
-    const fetchPosts = async ({queryKey} : any) => {
-        const [_key, {userInfo}] = queryKey;
+    const fetchPosts = async ({ queryKey }: any) => {
+        const [_key, { userInfo }] = queryKey;
         const res = await publicApi.get(postEndpoints["postList"], {
             params: {
                 userId: userInfo?.id,
@@ -29,7 +29,7 @@ function UserPostList() {
         }
     };
 
-    const { data: posts, isLoading } = useQuery({ queryKey: ['postsProfile', {userInfo}], queryFn: fetchPosts });
+    const { data: posts, isLoading } = useQuery({ queryKey: ['postsProfile', { userInfo }], queryFn: fetchPosts });
 
     if (isLoading) {
         return <PostLoading />;

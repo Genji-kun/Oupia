@@ -1,11 +1,11 @@
 "use client"
 
-import { User } from '@/interfaces/User';
+import { IUserRegister } from '@/lib/types/interfaces';
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 
 interface ISignUpContext {
-    user: User;
-    setUser: React.Dispatch<React.SetStateAction<User>>;
+    user: IUserRegister;
+    setUser: React.Dispatch<React.SetStateAction<IUserRegister>>;
     avatar: string;
     setAvatar: React.Dispatch<React.SetStateAction<string>>;
     avatarFile: any;
@@ -16,7 +16,7 @@ const SignUpContext = createContext<ISignUpContext | undefined>(undefined);
 
 export const SignUpProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
-    const [user, setUser] = useState<User>({});
+    const [user, setUser] = useState<IUserRegister>({});
     const [avatar, setAvatar] = useState<string>("");
     const [avatarFile, setAvatarFile] = useState<File>();
 

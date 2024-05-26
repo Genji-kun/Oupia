@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 import { followEndpoints } from '@/configs/axiosEndpoints';
 import { authApi } from '@/configs/axiosInstance';
 import { useProfileContext } from '@/contexts/profile-context';
-import { UserInfo } from '@/interfaces/User';
+import { UserInfo } from '@/lib/types/interfaces/User';
 import { isUndefined } from 'lodash-es';
 import { Edit3Icon, Loader2, MessagesSquareIcon, UserRoundCheckIcon } from 'lucide-react'
 import Link from 'next/link';

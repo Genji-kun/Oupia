@@ -4,14 +4,14 @@ import React, { useEffect } from 'react'
 import CommentItem from './comment-item';
 import { Separator } from '@/components/ui/separator';
 import { usePostFavouriteContext } from '@/contexts/post-favourite-context';
-import { CommentResponse } from '@/interfaces/Comment';
+import { CommentResponse } from '@/lib/types/interfaces/Comment';
 
 function CommentList({ postId }: { postId: number }) {
 
-    const {comments, setPostId, isFetching} = usePostFavouriteContext();
+    const { comments, setPostId, isFetching } = usePostFavouriteContext();
     useEffect(() => {
         setPostId(postId);
-    },[])
+    }, [])
 
     if (isFetching) {
         return <></>

@@ -2,11 +2,9 @@
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from 'react-hook-form';
-import * as z from "zod"
-
 import { Button } from '@/components/ui/button';
 import { CalendarIcon, ChevronLeft } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useAuthTabContext } from "@/contexts/auth-tab-context";
@@ -18,10 +16,11 @@ import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import { vi } from "date-fns/locale";
 import { useSignUpContext } from "@/contexts/sign-up-context";
-import { User } from "@/interfaces/User";
 import { registerInfoSchema } from "@/lib/schemas/UserSchema";
-import { IRegisterInfoForm } from "@/interfaces/Register";
+import { IRegisterInfoForm } from "@/lib/types/interfaces/Register";
 import GenderSelect from "./GenderSelect";
+import { IUserRegister } from "@/lib/types/interfaces";
+import { Gender } from "@/lib/types/enums";
 
 const InfoForm = () => {
     const { setTab } = useAuthTabContext();
@@ -35,30 +34,16 @@ const InfoForm = () => {
             fullName: user ? user.fullName : "",
             phoneNumber: user ? user.phoneNumber : "",
             email: user ? user.email : "",
-            gender: undefined,
-            dob: user ? (typeof user.dob === 'string' ? new Date(user.dob) : user.dob) : undefined,
+            gender: user.gender || Gender.OTHER,
+            dob: user ? (typeof user.dob === 'string' ? new Date(user.dob) : user.dob) : new Date(),
         },
     })
 
-    useEffect(() => {
-        const subscription = infoSchema.watch((values: any) => {
-            for (const key in values) {
-                if (values[key]) {
-                    setUser((current: User) => {
-                        return { ...current, [key]: values[key] };
-                    });
-                }
-            }
-        });
-
-        return () => {
-            subscription.unsubscribe();
-        };
-    }, [infoSchema, setUser]);
-
-
     function onSubmit(values: IRegisterInfoForm) {
         setIsSubmitting(true);
+        setUser((prev) => {
+            return { ...prev, ...values, gender: values.gender.toString() as string } as IUserRegister;
+        })
         setIsSubmitting(false);
         setTab("user");
     }

@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { favouriteEndpoints } from '@/configs/axiosEndpoints';
 import { authApi } from '@/configs/axiosInstance';
 import { usePostFavouriteContext } from '@/contexts/post-favourite-context';
-import { PostResponse } from '@/interfaces/Post';
+import { PostResponse } from '@/lib/types/interfaces/Post';
 import { isUndefined } from 'lodash-es';
 import { MessageSquareText } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';

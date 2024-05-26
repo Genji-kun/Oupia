@@ -12,7 +12,7 @@ const Tabs = () => {
 
     return (
         <>
-            <div className="w-full xl:w-[75%] mx-auto h-full flex justify-center items-center relative ">
+            <div className="w-full h-full flex justify-center items-center relative">
                 <AnimatePresence>
                     {(() => {
                         switch (tab) {
@@ -24,7 +24,7 @@ const Tabs = () => {
                                         animate={{ x: 0, opacity: 1 }}
                                         exit={{ opacity: 0, x: -50 }}
                                         transition={{ duration: 0.5, ease: "easeInOut" }}
-                                        className="flex flex-col justify-center gap-y-5 absolute w-full">
+                                        className="flex flex-col justify-center gap-y-5 absolute w-full p-4 md:py-10 md:px-24 xl:py-16 xl:px-36">
                                         <SignUpTab />
                                     </motion.div>
                                 );
@@ -36,11 +36,10 @@ const Tabs = () => {
                                         animate={{ x: 0, opacity: 1 }}
                                         exit={{ opacity: 0, x: 50 }}
                                         transition={{ duration: 0.5, ease: "easeInOut" }}
-                                        className="flex flex-col justify-center gap-y-5 absolute w-full">
+                                        className="flex flex-col justify-center gap-y-5 absolute w-full p-4 md:py-10 md:px-24 xl:py-16 xl:px-36">
                                         <InfoTab />
                                     </motion.div>
                                 );
-
                             case "user":
                                 return (
                                     <motion.div
@@ -49,7 +48,7 @@ const Tabs = () => {
                                         animate={{ x: 0, opacity: 1 }}
                                         exit={{ opacity: 0, x: 50 }}
                                         transition={{ duration: 0.5, ease: "easeInOut" }}
-                                        className="flex flex-col justify-center gap-y-5 absolute w-full">
+                                        className="flex flex-col justify-center gap-y-5 absolute w-full p-4 md:py-10 md:px-24 xl:py-16 xl:px-36">
                                         <UserTab />
                                     </motion.div>
                                 );

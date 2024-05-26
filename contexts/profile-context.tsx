@@ -1,6 +1,6 @@
 "use client"
 
-import { UserInfo } from '@/interfaces/User';
+import { UserInfo } from '@/lib/types/interfaces/User';
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 
 interface IProfileContext {

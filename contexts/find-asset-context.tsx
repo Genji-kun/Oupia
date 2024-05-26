@@ -2,7 +2,7 @@
 
 import { assetsEndpoints } from '@/configs/axiosEndpoints';
 import { publicApi } from '@/configs/axiosInstance';
-import { AssetResponse } from '@/interfaces/Asset';
+import { AssetResponse } from '@/lib/types/interfaces/Asset';
 import { useQuery } from '@tanstack/react-query';
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 import { useDebounce } from 'use-debounce';
@@ -95,7 +95,7 @@ export const FindAssetProvider: React.FC<{ children: ReactNode }> = ({ children 
 
 
     const getAssetsData = async ({ queryKey }: any) => {
-        const [_key, { pageSize, currentPage, debounceKw, debouncePrice, maxPeople}] = queryKey;
+        const [_key, { pageSize, currentPage, debounceKw, debouncePrice, maxPeople }] = queryKey;
         try {
             const res = await publicApi.get(assetsEndpoints["assets"], {
                 params: {
@@ -122,10 +122,10 @@ export const FindAssetProvider: React.FC<{ children: ReactNode }> = ({ children 
         if (polyReq) {
             console.log(polyReq)
             try {
-                const res = await publicApi.post(assetsEndpoints["polygon"], 
-                {
-                    polygon: polyReq
-                });
+                const res = await publicApi.post(assetsEndpoints["polygon"],
+                    {
+                        polygon: polyReq
+                    });
                 return res.data;
             } catch (error) {
                 console.error(error);
@@ -142,7 +142,7 @@ export const FindAssetProvider: React.FC<{ children: ReactNode }> = ({ children 
     });
 
     const { data: assets, isFetching } = useQuery({
-        queryKey: ["searchAsset", { pageSize, currentPage, debounceKw, debouncePrice , maxPeople}],
+        queryKey: ["searchAsset", { pageSize, currentPage, debounceKw, debouncePrice, maxPeople }],
         queryFn: getAssetsData,
         refetchOnWindowFocus: false,
     })

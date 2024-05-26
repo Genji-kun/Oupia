@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from 'react';
-import { User } from '@/interfaces/User';
+import { User } from '@/lib/types/interfaces/User';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';

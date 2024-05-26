@@ -1,7 +1,7 @@
 "use client"
 
-import { AssetResponse } from '@/interfaces/Asset';
-import { Amenity, TagLocation, TagPrice } from '@/interfaces/Tags';
+import { AssetResponse } from '@/lib/types/interfaces/Asset';
+import { Amenity, TagLocation, TagPrice } from '@/lib/types/interfaces/Tags';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { usePathname } from 'next/navigation';
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
@@ -200,12 +200,12 @@ export const UploadProvider: React.FC<{ children: ReactNode }> = ({ children }) 
                 }
             }
         });
-    
+
         return () => {
             subscription.unsubscribe();
         };
     }, [postForm]);
-    
+
     useEffect(() => {
         if (amenities.length > 0) {
             if (pathname === "/upload/asset") {

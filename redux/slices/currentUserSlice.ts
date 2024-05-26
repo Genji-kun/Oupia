@@ -7,10 +7,11 @@ const currentUserSlice = createSlice({
     initialState: { currentUser: cookies.load("user") || null },
     reducers: {
         login: (state, action) => {
+            cookies.save("user", action.payload, {});
             state.currentUser = action.payload;
         },
         logout: (state) => {
-            cookies.remove("accessToken");
+            localStorage.removeItem("accessToken");
             cookies.remove("user");
             signOut({ redirect: false })
             state.currentUser = null;

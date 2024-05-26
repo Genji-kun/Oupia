@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { EmblaOptionsType } from 'embla-carousel'
-import { Image as image } from '@/interfaces/Image';
+import { Image as image } from '@/lib/types/interfaces/Image';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { useAssetImageContext } from '@/contexts/view-asset-image';
@@ -19,7 +19,7 @@ const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 const AssetImageList = () => {
 
     const { setImageIndex } = useAssetImageContext();
-    const {asset, isFetching} = useAssetDetailContext();
+    const { asset, isFetching } = useAssetDetailContext();
 
     const [mousePosition, setMousePosition] = useState<any>({ x: 0, y: 0 });
     const [cursorVariants, setCursorVariants] = useState<string>("default");

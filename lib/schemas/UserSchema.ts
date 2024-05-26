@@ -1,5 +1,7 @@
-import { Gender } from "@/enums";
+import { Gender } from "@/lib/types/enums";
 import { z } from "zod";
+
+const passwordRegex = /^(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
 export const registerAccountSchema = z.object({
     avatar: typeof File !== 'undefined' ? z.instanceof(File).optional() : z.any().optional(),
@@ -9,14 +11,21 @@ export const registerAccountSchema = z.object({
     }),
     password: z.string({
         required_error: "Mật khẩu không được bỏ trống",
-    }).min(8,
-        { message: "Mật khẩu cần tối thiểu 8 ký tự" }
-    ),
+    }).min(8, {
+        message: "Mật khẩu cần tối thiểu 8 ký tự",
+    }).regex(passwordRegex, {
+        message: "Mật khẩu phải bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt",
+    }),
     confirm: z.string({
         required_error: "Mật khẩu xác nhận không được bỏ trống",
-    }).min(8,
-        { message: "Mật khẩu xác nhận cần tối thiểu 8 ký tự" }
-    ),
+    }).min(8, {
+        message: "Mật khẩu xác nhận cần tối thiểu 8 ký tự",
+    }).regex(passwordRegex, {
+        message: "Mật khẩu xác nhận phải bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt",
+    }),
+}).refine((values) => values.password === values.confirm, {
+    path: ["confirm"],
+    message: "Mật khẩu không trùng khớp",
 });
 
 export const registerInfoSchema = z.object({
@@ -43,3 +52,12 @@ export const registerInfoSchema = z.object({
         required_error: "Ngày sinh không được bỏ trống",
     }),
 })
+
+export const loginSchema = z.object({
+    username: z.string({
+        required_error: "Tên tài khoản không được bỏ trống",
+    }),
+    password: z.string({
+        required_error: "Mật khẩu không được bỏ trống",
+    })
+});

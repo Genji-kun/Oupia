@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import PostItem from './post-item';
 import PostLoading from './post-loading';
-import { PostResponse } from '@/interfaces/Post';
+import { PostResponse } from '@/lib/types/interfaces/Post';
 import { useInView } from "react-intersection-observer";
 import { useForumContext } from '@/contexts/forum-context';
 

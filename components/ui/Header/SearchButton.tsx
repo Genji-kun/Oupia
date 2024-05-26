@@ -11,7 +11,7 @@ import { publicApi } from '@/configs/axiosInstance';
 import { assetsEndpoints } from '@/configs/axiosEndpoints';
 import { useQuery } from '@tanstack/react-query';
 import { useDebounce } from 'use-debounce';
-import { AssetResponse } from '@/interfaces/Asset';
+import { AssetResponse } from '@/lib/types/interfaces/Asset';
 import { History, addHistory, removeHistory } from '@/redux/slices/searchHistorySlice';
 import { useRouter } from 'next/navigation';
 

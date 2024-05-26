@@ -14,7 +14,8 @@ import { logout } from '@/redux/slices/currentUserSlice';
 import { convert } from '@/utils/convertAvatarAlt';
 import { HiOutlineHomeModern } from 'react-icons/hi2';
 import React, { PropsWithChildren } from 'react';
-import { ICurrentUser } from '@/interfaces';
+import { ICurrentUser } from '@/lib/types/interfaces';
+import SearchButton from './SearchButton';
 
 type IProps = PropsWithChildren<{
     user: ICurrentUser
@@ -31,7 +32,7 @@ const NavbarUser: React.FC<IProps> = ({ user }) => {
     return (
         <div className="flex items-center gap-x-1">
             <div className="hidden lg:flex items-center gap-x-1">
-                {/* <SearchButton /> */}
+                <SearchButton />
                 <Link href="/upload" className="ml-1">
                     <Button className="space-x-2 styled-button py-0 px-4">
                         <span className="text-sm">Đăng bài</span>
@@ -54,7 +55,7 @@ const NavbarUser: React.FC<IProps> = ({ user }) => {
                             <AvatarImage src={user.avatar} alt={user.username} />
                             <AvatarFallback>{convert(user.fullName)}</AvatarFallback>
                         </Avatar>
-                        <Button className="p-0 w-fit h-fit y w-fit p-0 h-fit absolute -bottom-0.5 -right-0.5 rounded-full border-2 border-backgroun text-white"><ChevronDown className="dark:text-white" size={15} /></Button>
+                        <Button className="p-0 w-fit h-fit absolute -bottom-0.5 -right-0.5 rounded-full border-2 border-backgroun text-white"><ChevronDown className="dark:text-white" size={15} /></Button>
                     </div>
                 </PopoverTrigger>
                 <PopoverContent className="mt-[0.63rem] p-2 w-80 dark:bg-oupia-base flex flex-col gap-1" align='end'>

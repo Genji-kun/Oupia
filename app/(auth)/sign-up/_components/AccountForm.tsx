@@ -15,8 +15,10 @@ import { publicApi } from '@/configs/axiosInstance';
 import { authEndpoints } from '@/configs/axiosEndpoints';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
-import { IRegisterAccountForm } from '@/interfaces/Register';
+import { IRegisterAccountForm } from '@/lib/types/interfaces/Register';
 import { registerAccountSchema } from '@/lib/schemas/UserSchema';
+import { IAcount } from '@/lib/types/interfaces';
+import { useRegister } from '@/hooks/mutation';
 
 
 const AccountForm = () => {
@@ -26,18 +28,16 @@ const AccountForm = () => {
     const { user, setUser, avatar, setAvatar, avatarFile, setAvatarFile } = useSignUpContext();
     const { setTab } = useAuthTabContext();
 
-    const [account, setAccount] = useState(user ? user.account : {});
-    const [isSubmitting, setIsSubmitting] = useState(false);
-
+    const [account, setAccount] = useState<IAcount>(user.account!);
     const fileInputRef = useRef(null);
 
     const accountForm = useForm<IRegisterAccountForm>({
         resolver: zodResolver(registerAccountSchema),
         defaultValues: {
             avatar: avatarFile,
-            username: user ? user.account?.username : "",
-            password: user ? user.account?.password : "",
-            confirm: user ? user.account?.confirm : "",
+            username: account?.username ? account.username : "",
+            password: account?.password ? account.password : "",
+            confirm: account?.confirm ? account.confirm : "",
         },
     })
 
@@ -46,7 +46,7 @@ const AccountForm = () => {
             for (const key in values) {
                 if (values[key]) {
                     if (key === "username" || key === "password") {
-                        setAccount((current: any) => {
+                        setAccount((current) => {
                             return { ...current, [key]: values[key] };
                         });
                     }
@@ -59,40 +59,33 @@ const AccountForm = () => {
     }, [accountForm]);
 
     useEffect(() => {
-        setUser((current: any) => {
+        setUser((current) => {
             return { ...current, account: account };
         });
     }, [account, setUser]);
 
-    const handleFileChange = (evt: any) => {
+    const handleFileChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
         if (evt.target.files && evt.target.files[0]) {
             const file: File = evt.target.files[0];
             const fileURL = URL.createObjectURL(file);
-            console.log(file.name)
             setAvatar(fileURL);
             setAvatarFile(file);
         }
     };
 
+    const { mutateRegister, isPendingRegister } = useRegister();
+
     const onSubmit = async () => {
-        setIsSubmitting(true);
-        if (user && avatarFile) {
-            const form = new FormData();
-            form.append('user', new Blob([JSON.stringify(user)], { type: "application/json" }))
-            form.append("avatarFile", avatarFile);
-            try {
-                const res = await publicApi.post(authEndpoints["signUp"], form);
-                if (res.status === 200) {
-                    toast.success("Đăng ký người dùng thành công");
-                    router.push("/sign-in");
-                }
-            } catch (error) {
-                console.error(error);
-                toast.error("Đã có lỗi xảy ra, vui lòng thử lại.");
-                setIsSubmitting(false);
-            }
-        }
-    }
+        const form = new FormData();
+        form.append('user', new Blob([JSON.stringify(user)], { type: "application/json" }));
+        form.append("avatarFile", avatarFile);
+        await mutateRegister(form).catch((err) => {
+            toast.error("Có lỗi xảy ra. Vui lòng thử lại sau.");
+            return;
+        });
+        toast.success("Đăng ký người dùng thành công.");
+        router.push("/sign-in");
+    };
 
     return (
         <div className="flex flex-col gap-2">
@@ -119,7 +112,7 @@ const AccountForm = () => {
                                             type="file"
                                             accept='image/png, image/jpeg, image/jpg'
                                             multiple={false}
-                                            disabled={isSubmitting}
+                                            disabled={isPendingRegister}
                                             className="text-base dark:bg-oupia-sub"
                                             ref={fileInputRef}
                                             onChange={handleFileChange} />
@@ -137,7 +130,7 @@ const AccountForm = () => {
                             <FormItem >
                                 <FormLabel className="text-base font-semibold text-foreground">Tên người dùng</FormLabel>
                                 <FormControl>
-                                    <Input {...field} type="text" disabled={isSubmitting} className="text-base  dark:bg-oupia-sub" />
+                                    <Input {...field} type="text" disabled={isPendingRegister} className="text-base  dark:bg-oupia-sub" />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -152,7 +145,7 @@ const AccountForm = () => {
                                 <FormItem >
                                     <FormLabel className="text-base font-semibold text-foreground">Mật khẩu</FormLabel>
                                     <FormControl>
-                                        <Input {...field} type="password" disabled={isSubmitting} togglePassword={true} className="text-base dark:bg-oupia-sub" />
+                                        <Input {...field} type="password" disabled={isPendingRegister} togglePassword={true} className="text-base dark:bg-oupia-sub" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -165,7 +158,7 @@ const AccountForm = () => {
                                 <FormItem>
                                     <FormLabel className="text-base font-semibold text-foreground">Mật khẩu xác nhận</FormLabel>
                                     <FormControl>
-                                        <Input {...field} type="password" disabled={isSubmitting} togglePassword={true} className="text-base  dark:bg-oupia-sub" />
+                                        <Input {...field} type="password" disabled={isPendingRegister} togglePassword={true} className="text-base  dark:bg-oupia-sub" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -173,7 +166,7 @@ const AccountForm = () => {
                         />
                     </div>
 
-                    {isSubmitting ? <>
+                    {isPendingRegister ? <>
                         <div className="pt-2  ml-auto w-fit">
                             <Button disabled className=" styled-button flex gap-3 ">
                                 <span className="text-base">Đang xử lý</span>

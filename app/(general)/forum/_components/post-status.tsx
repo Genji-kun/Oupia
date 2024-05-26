@@ -4,7 +4,7 @@ import { Separator } from '@/components/ui/separator';
 import { favouriteEndpoints } from '@/configs/axiosEndpoints';
 import { publicApi } from '@/configs/axiosInstance';
 import { usePostFavouriteContext } from '@/contexts/post-favourite-context';
-import { PostResponse } from '@/interfaces/Post';
+import { PostResponse } from '@/lib/types/interfaces/Post';
 import { cn } from '@/lib/utils';
 import React, { useEffect, useState } from 'react';
 import { RiHeart3Fill } from 'react-icons/ri';

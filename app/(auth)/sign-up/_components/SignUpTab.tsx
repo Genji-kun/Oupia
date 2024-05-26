@@ -4,10 +4,14 @@ import Link from 'next/link';
 import React from 'react';
 import GoogleSignInButton from '../../sign-in/_components/google-sign-in-button';
 import FacebookSignInButton from '../../sign-in/_components/facebook-sign-in-button';
-import EmailSignUpButton from './email-sign-up-button';
 import { Separator } from '@/components/ui/separator';
+import { Button } from '@/components/ui/button';
+import { useAuthTabContext } from '@/contexts/auth-tab-context';
 
 const SignUpTab = () => {
+
+    const { setTab } = useAuthTabContext();
+
     return (
         <>
             <div>
@@ -16,7 +20,9 @@ const SignUpTab = () => {
             </div>
             <Separator />
             <div className="flex flex-col gap-3">
-                <EmailSignUpButton />
+                <Button onClick={() => setTab("info")} className="styled-button w-full mx-auto shadow border-border border flex gap-2 py-6">
+                    <span className="text-base">Đăng ký thông thường</span>
+                </Button>
                 <GoogleSignInButton />
                 <FacebookSignInButton />
             </div>

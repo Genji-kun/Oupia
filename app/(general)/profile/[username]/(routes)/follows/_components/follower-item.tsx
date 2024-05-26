@@ -1,5 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Follower } from '@/interfaces/User'
+import { Follower } from '@/lib/types/interfaces/User'
 import { convert } from '@/utils/convertAvatarAlt'
 import { UserRoundSearchIcon } from 'lucide-react'
 import Link from 'next/link'
