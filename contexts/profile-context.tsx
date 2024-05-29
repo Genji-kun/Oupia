@@ -21,11 +21,7 @@ export const ProfileProvider: React.FC<{ children: ReactNode }> = ({ children })
     const params = useParams()
     const { username } = params;
     const userNameString = Array.isArray(username) ? username.join('') : username;
-
-
     const { isFetchingUserInfo, userInfoData } = useUserInfo(userNameString);
-
-
 
     useEffect(() => {
         if (userInfoData) {
