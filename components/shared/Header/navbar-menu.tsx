@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Button } from '../../ui/button';
 import { MdOutlinePostAdd } from 'react-icons/md';
 import SearchButton from './search-button';
-import NavbarLogo from './Logo';
+import NavbarLogo from './navbar-logo';
 
 const NavbarMenu = () => {
     return (
