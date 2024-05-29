@@ -7,8 +7,8 @@ import dynamic from 'next/dynamic';
 
 const FollowsProfilePage = () => {
 
-    const { userInfo } = useProfileContext();
-    const names = userInfo?.fullName.split(" ");
+    const { userInfoData } = useProfileContext();
+    const names = userInfoData?.fullName.split(" ");
 
     return (
         <div className="flex flex-col gap-4 container">
