@@ -1,4 +1,4 @@
-import Header from "@/components/ui/Header";
+import Header from "@/components/shared/Header";
 import Footer from "@/components/ui/footer";
 
 const GeneralLayout = ({ children }: { children: React.ReactNode }) => {

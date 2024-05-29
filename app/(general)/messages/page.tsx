@@ -1,19 +1,10 @@
 "use client"
 
-import withAuth from '@/utils/withAuth';
 import { MessageSquareOff } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { NextPage } from 'next';
 import React from 'react';
-import { useSelector } from 'react-redux';
 
-const MessagesPage = () => {
-
-    const { currentUser } = useSelector((state: any) => state.currentUserSlice);
-    const router = useRouter();
-
-    if (!currentUser) {
-        return <>{router.push("/sign-in")}</>
-    }
+const MessagesPage: NextPage = () => {
 
     return (
         <div className="h-full w-full flex flex-col gap-5 items-center justify-center">
@@ -23,4 +14,4 @@ const MessagesPage = () => {
     );
 };
 
-export default withAuth(MessagesPage);
+export default MessagesPage;

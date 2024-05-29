@@ -1,11 +1,13 @@
 "use client"
 
+import { useUserInfo } from '@/hooks/query';
 import { UserInfo } from '@/lib/types/interfaces/User';
+import { useParams } from 'next/navigation';
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 
 interface IProfileContext {
-    userInfo: UserInfo | undefined;
-    setUserInfo: React.Dispatch<React.SetStateAction<UserInfo | undefined>>;
+    isFetchingUserInfo: boolean;
+    userInfoData: UserInfo;
     follows: any[] | undefined;
     setFollows: React.Dispatch<React.SetStateAction<any[] | undefined>>;
 }
@@ -14,18 +16,26 @@ const ProfileContext = createContext<IProfileContext | undefined>(undefined);
 
 export const ProfileProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
-    const [userInfo, setUserInfo] = useState<UserInfo | undefined>();
     const [follows, setFollows] = useState<any[] | undefined>();
 
+    const params = useParams()
+    const { username } = params;
+    const userNameString = Array.isArray(username) ? username.join('') : username;
+
+
+    const { isFetchingUserInfo, userInfoData } = useUserInfo(userNameString);
+
+
+
     useEffect(() => {
-        if (userInfo) {
-            document.title = `${userInfo.fullName} | Oupia`;
+        if (userInfoData) {
+            document.title = `${userInfoData.fullName} | Oupia`;
         }
-    }, [userInfo])
+    }, [userInfoData])
 
 
     return (
-        <ProfileContext.Provider value={{ userInfo, setUserInfo, follows, setFollows }}>
+        <ProfileContext.Provider value={{ isFetchingUserInfo, userInfoData, follows, setFollows }}>
             {children}
         </ProfileContext.Provider>
     );

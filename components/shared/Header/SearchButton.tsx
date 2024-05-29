@@ -1,12 +1,12 @@
 "use client"
 
 import React, { useEffect, useState } from 'react';
-import { Button } from '../button';
+import { Button } from '../../ui/button';
 import { Clock, Loader2, Router, Search, X } from 'lucide-react';
-import { Dialog, DialogContent, DialogHeader, DialogTrigger } from '../dialog';
-import { ScrollArea } from '../scroll-area';
+import { Dialog, DialogContent, DialogHeader, DialogTrigger } from '../../ui/dialog';
+import { ScrollArea } from '../../ui/scroll-area';
 import { useDispatch, useSelector } from 'react-redux';
-import { Separator } from '../separator';
+import { Separator } from '../../ui/separator';
 import { publicApi } from '@/configs/axiosInstance';
 import { assetsEndpoints } from '@/configs/axiosEndpoints';
 import { useQuery } from '@tanstack/react-query';

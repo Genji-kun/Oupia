@@ -8,13 +8,13 @@ import { useProfileContext } from '@/contexts/profile-context';
 
 const UserProfile = () => {
 
-    const { userInfo } = useProfileContext();
+    const { userInfoData } = useProfileContext();
 
     return (
         <div className="container flex flex-col">
             <UserHeader />
             <Separator />
-            {userInfo && <UserTab />}
+            {userInfoData && <UserTab />}
         </div>
     );
 };

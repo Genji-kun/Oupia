@@ -1,10 +1,12 @@
 "use client"
 
-import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
+import { useUserInfo } from '@/hooks/query';
+import { useParams } from 'next/navigation';
+import React, { createContext, useState, useContext, ReactNode } from 'react';
 
 interface IMessageContext {
-    receiveUser: any;
-    setReceiveUser: React.Dispatch<React.SetStateAction<any>>;
+    userInfoData: any;
+    isFetchingUserInfo: boolean;
     expanded: boolean;
     setExpanded: React.Dispatch<React.SetStateAction<boolean>>;
     messages: any[];
@@ -15,18 +17,22 @@ const MessageContext = createContext<IMessageContext | undefined>(undefined);
 
 export const MessageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
-    const [receiveUser, setReceiveUser] = useState<any>();
+
+    const params = useParams()
+    const { username } = params;
+    const userNameString = Array.isArray(username) ? username.join('') : username;
+
+    const { isFetchingUserInfo, userInfoData } = useUserInfo(userNameString);
+
     const [expanded, setExpanded] = useState<boolean>(false);
     const [messages, setMessages] = useState<any[]>([]);
 
-
     return (
-        <MessageContext.Provider value={{ receiveUser, setReceiveUser, expanded, setExpanded, messages, setMessages }}>
+        <MessageContext.Provider value={{ userInfoData, isFetchingUserInfo, expanded, setExpanded, messages, setMessages }}>
             {children}
         </MessageContext.Provider>
     );
 };
-
 
 export const useMessageContext = (): IMessageContext => {
     const context = useContext(MessageContext);

@@ -20,18 +20,17 @@ import { DocumentData, addDoc, collection, getDocs, onSnapshot, orderBy, query, 
 import { db, storage } from '@/configs/firebase';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
-import withAuth from '@/utils/withAuth';
 import { useMessageToUserContext } from '@/contexts/message-to-user-context';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
-const MessageInput: React.FC= () => {
+const MessageInput: React.FC = () => {
 
     const { currentUser } = useSelector((state: any) => state.currentUserSlice);
     const router = useRouter();
 
-    const { receiveUser, setMessages, expanded } = useMessageContext();
+    const { userInfoData, setMessages, expanded } = useMessageContext();
     const { imageFiles, setImageFiles } = useMessageToUserContext();
     const { theme } = useTheme();
 
@@ -65,7 +64,7 @@ const MessageInput: React.FC= () => {
 
             const nameArr = currentUser.fullName.split(" ");
             const chatroomsRef = collection(db, 'chatrooms');
-            const combinedUsername = [currentUser.username, receiveUser.username].sort().join(':');
+            const combinedUsername = [currentUser.username, userInfoData.username].sort().join(':');
             const q = query(chatroomsRef, where('roomId', '==', combinedUsername));
             getDocs(q).then(async (snapshot: any) => {
                 const chatroom = snapshot.docs[0];
@@ -97,9 +96,9 @@ const MessageInput: React.FC= () => {
                 } else {
                     addDoc(chatroomsRef, {
                         roomId: combinedUsername,
-                        members: [currentUser?.username, receiveUser.username],
+                        members: [currentUser?.username, userInfoData.username],
                         user1: currentUser,
-                        user2: receiveUser
+                        user2: userInfoData
                     }).then((chatroomsRef) => {
                         updateMessage();
                         addDoc(collection(chatroomsRef, 'messages'), {
@@ -121,7 +120,7 @@ const MessageInput: React.FC= () => {
     const updateMessage = () => {
         if (currentUser) {
             const chatroomsRef = collection(db, 'chatrooms');
-            const combinedUsername = [currentUser.username, receiveUser.username].sort().join(':');
+            const combinedUsername = [currentUser.username, userInfoData.username].sort().join(':');
             const q = query(chatroomsRef, where('roomId', '==', combinedUsername));
             getDocs(q).then((snapshot) => {
                 const chatroom = snapshot.docs[0];
@@ -258,4 +257,4 @@ const MessageInput: React.FC= () => {
     );
 };
 
-export default withAuth(MessageInput);
+export default MessageInput;

@@ -6,34 +6,23 @@ import { useMessageContext } from '@/contexts/message-context';
 import MessageDetail from './_components/message-detail';
 import MessageContainer from './_components/message-container';
 import MessageInput from './_components/message-input';
-import { notFound, useParams, useRouter } from 'next/navigation';
-import { userEndpoints } from '@/configs/axiosEndpoints';
-import { publicApi } from '@/configs/axiosInstance';
+import { notFound, useRouter } from 'next/navigation';
 import { collection, getDocs, onSnapshot, orderBy, query, where } from 'firebase/firestore';
 import { db } from '@/configs/firebase';
 import { useSelector } from 'react-redux';
-import withAuth from '@/utils/withAuth';
 import { MessageToUserProvider } from '@/contexts/message-to-user-context';
+import { NextPage } from 'next';
 
-const UserMessageRoomPage: React.FC = () => {
+const UserMessageRoomPage: NextPage = () => {
 
     const { currentUser } = useSelector((state: any) => state.currentUserSlice);
-    const router = useRouter();
+    const { setMessages, userInfoData, expanded } = useMessageContext();
 
-    const { setMessages, receiveUser, setReceiveUser, expanded } = useMessageContext();
-
-    const params = useParams<{ username: string }>()
-    const { username } = params;
-
-
-    useEffect(() => {
-        fetchUserInfo(username);
-    }, [username])
 
     useEffect(() => {
         const updateMessage = () => {
             const chatroomsRef = collection(db, 'chatrooms');
-            const combinedUsername = [currentUser.username, receiveUser.username].sort().join(':');
+            const combinedUsername = [currentUser.username, userInfoData.username].sort().join(':');
             const q = query(chatroomsRef, where('roomId', '==', combinedUsername));
             getDocs(q).then((snapshot) => {
                 const chatroom = snapshot.docs[0];
@@ -47,7 +36,7 @@ const UserMessageRoomPage: React.FC = () => {
             });
 
         }
-        if (currentUser && receiveUser) {
+        if (currentUser && userInfoData) {
             updateMessage();
             //   if (sessionStorage.getItem('postChat') !== null) {
             //     let postChatString = sessionStorage.getItem('postChat');
@@ -57,27 +46,7 @@ const UserMessageRoomPage: React.FC = () => {
             //     sessionStorage.removeItem('postChat');
             //   }
         }
-    }, [currentUser, receiveUser])
-
-    const fetchUserInfo = async (username: string) => {
-        if (username) {
-            try {
-                const url = userEndpoints.getUserByUsername(username);
-                const res = await publicApi.get(url);
-                if (res.status === 200) {
-                    setReceiveUser(res.data);
-                } else {
-                    notFound();
-                }
-            } catch (error) {
-                notFound();
-            }
-        }
-    }
-
-    if (!currentUser) {
-        return <>{router.push("/sign-in")}</>
-    }
+    }, [currentUser, userInfoData, setMessages]);
 
     return (
         <MessageToUserProvider>
@@ -87,9 +56,9 @@ const UserMessageRoomPage: React.FC = () => {
                     <MessageContainer />
                     <MessageInput />
                 </div>
-                {receiveUser && <MessageDetail />}
+                {userInfoData && <MessageDetail />}
             </div>
         </MessageToUserProvider>
     );
 };
-export default withAuth(UserMessageRoomPage);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+export default UserMessageRoomPage;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     

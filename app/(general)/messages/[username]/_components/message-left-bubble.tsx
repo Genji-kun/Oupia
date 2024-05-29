@@ -44,7 +44,7 @@ function MessageLeftBubble({ message, sender, isConsecutive }: { message: any, s
                             </>
                         case "image":
                             return <>
-                              <div className={cn('grid gap-1', isConsecutive && "ml-12", message.images.length > 3 ? "grid-cols-3" : `grid-cols-${message.images.length}`)}>
+                                <div className={cn('grid gap-1', isConsecutive && "ml-12", message.images.length > 3 ? "grid-cols-3" : `grid-cols-${message.images.length}`)}>
                                     {message.images && message.images.map((image: string, index: number) => (
                                         <div key={index} className=" relative">
                                             <Image width={500} height={500} className="rounded-lg object-cover w-24 aspect-square" src={image} alt={"Message Image"} />

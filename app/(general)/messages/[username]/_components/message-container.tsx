@@ -9,15 +9,13 @@ import voice from "@/public/sounds/message.mp3";
 import { useRouter } from 'next/navigation';
 import { format, isToday, isYesterday } from 'date-fns';
 import { Separator } from '@/components/ui/separator';
-import withAuth from '@/utils/withAuth';
 
-
-const MessageContainer : React.FC = () => {
+const MessageContainer: React.FC = () => {
 
     const { currentUser } = useSelector((state: any) => state.currentUserSlice);
     const router = useRouter();
 
-    const { receiveUser, messages } = useMessageContext();
+    const { userInfoData, messages } = useMessageContext();
 
     const intervalId = useRef<any>();
 
@@ -101,7 +99,7 @@ const MessageContainer : React.FC = () => {
                                 {
                                     message.sender === currentUser.username ?
                                         <MessageRightBubble message={message} sender={currentUser} isConsecutive={isConsecutive} />
-                                        : <MessageLeftBubble message={message} sender={receiveUser} isConsecutive={isConsecutive} />
+                                        : <MessageLeftBubble message={message} sender={userInfoData} isConsecutive={isConsecutive} />
                                 }
 
                             </React.Fragment>
@@ -114,4 +112,4 @@ const MessageContainer : React.FC = () => {
     )
 }
 
-export default withAuth(MessageContainer);
+export default MessageContainer;

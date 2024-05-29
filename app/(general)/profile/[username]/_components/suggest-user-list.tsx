@@ -2,8 +2,7 @@
 
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { User } from '@/lib/types/interfaces/User';
-import React, { useState } from 'react';
+import React from 'react';
 import SuggestUserItem from './suggest-user-item';
 import { useProfileContext } from '@/contexts/profile-context';
 import { publicApi } from '@/configs/axiosInstance';
@@ -12,10 +11,10 @@ import { useQuery } from '@tanstack/react-query';
 import UserSkeleton from './user-skeleton';
 
 const SuggestUserList = () => {
-    const { userInfo } = useProfileContext();
+    const { userInfoData } = useProfileContext();
 
     const fetchPosts = async () => {
-        const url = followEndpoints.getFollowings(Number(userInfo?.id));
+        const url = followEndpoints.getFollowings(Number(userInfoData?.id));
         const res = await publicApi.get(url, {
             params: {
                 size: 4

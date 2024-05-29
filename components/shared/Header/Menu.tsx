@@ -2,9 +2,9 @@ import React from 'react';
 import { Menu } from 'lucide-react';
 import NavbarLogo from './Logo';
 import SidebarRoutes from './sidebar-routes';
-import { Sheet, SheetContent, SheetTrigger } from '../sheet';
+import { Sheet, SheetContent, SheetTrigger } from '../../ui/sheet';
 import Link from 'next/link';
-import { Button } from '../button';
+import { Button } from '../../ui/button';
 import { MdOutlinePostAdd } from 'react-icons/md';
 import SearchButton from './SearchButton';
 

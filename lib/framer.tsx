@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import { Tab } from '@/hooks/use-tabs';
 import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
+import { Tab } from '@/hooks';
 
 const transition = {
     type: 'tween',

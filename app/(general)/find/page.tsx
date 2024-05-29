@@ -1,6 +1,5 @@
 import React from 'react';
 import AssetContainer from './_components/asset-container';
-import dynamic from 'next/dynamic';
 
 const FindAssetsPage = () => {
     return (
@@ -14,4 +13,4 @@ const FindAssetsPage = () => {
     );
 };
 
-export default dynamic(() => Promise.resolve(FindAssetsPage), { ssr: false })
+export default FindAssetsPage;

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import NavbarLogo from './Header/Logo';
+import NavbarLogo from '../shared/Header/Logo';
 import { usePathname } from 'next/navigation';
 
 const Footer = () => {

@@ -36,8 +36,8 @@ interface IFindAssetContext {
     setDistricts: React.Dispatch<React.SetStateAction<District[]>>;
     selectedDist: District | undefined;
     setSelectedDist: React.Dispatch<React.SetStateAction<District | undefined>>;
-    assets: AssetResponse[];
-    isFetching: boolean;
+    // assets: AssetResponse[];
+    // isFetching: boolean;
     pageSize: number;
     setPageSize: React.Dispatch<React.SetStateAction<number>>;
     currentPage: number;
@@ -94,28 +94,28 @@ export const FindAssetProvider: React.FC<{ children: ReactNode }> = ({ children 
     const debouncePrice = useDebounce(priceRate, 1000);
 
 
-    const getAssetsData = async ({ queryKey }: any) => {
-        const [_key, { pageSize, currentPage, debounceKw, debouncePrice, maxPeople }] = queryKey;
-        try {
-            const res = await publicApi.get(assetsEndpoints["assets"], {
-                params: {
-                    keyword: debounceKw[0],
-                    size: pageSize,
-                    page: currentPage,
-                    minPrice: debouncePrice[0][0],
-                    maxPrice: debouncePrice[0][1],
-                    maxPeople: maxPeople
-                }
-            })
-            if (res.data.totalPages > 0)
-                setTotalPages(res.data.totalPages);
-            else
-                setTotalPages(1);
-            return res.data.content;
-        } catch (error) {
-            console.error(error);
-        }
-    }
+    // const getAssetsData = async ({ queryKey }: any) => {
+    //     const [_key, { pageSize, currentPage, debounceKw, debouncePrice, maxPeople }] = queryKey;
+    //     try {
+    //         const res = await publicApi.get(assetsEndpoints["assets"], {
+    //             params: {
+    //                 keyword: debounceKw[0],
+    //                 size: pageSize,
+    //                 page: currentPage,
+    //                 minPrice: debouncePrice[0][0],
+    //                 maxPrice: debouncePrice[0][1],
+    //                 maxPeople: maxPeople
+    //             }
+    //         })
+    //         if (res.data.totalPages > 0)
+    //             setTotalPages(res.data.totalPages);
+    //         else
+    //             setTotalPages(1);
+    //         return res.data.content;
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // }
 
     const getAssetsDataByPolygon = async ({ queryKey }: any) => {
         const [_key, { polyReq }] = queryKey;
@@ -141,11 +141,11 @@ export const FindAssetProvider: React.FC<{ children: ReactNode }> = ({ children 
         refetchOnWindowFocus: false,
     });
 
-    const { data: assets, isFetching } = useQuery({
-        queryKey: ["searchAsset", { pageSize, currentPage, debounceKw, debouncePrice, maxPeople }],
-        queryFn: getAssetsData,
-        refetchOnWindowFocus: false,
-    })
+    // const { data: assets, isFetching } = useQuery({
+    //     queryKey: ["searchAsset", { pageSize, currentPage, debounceKw, debouncePrice, maxPeople }],
+    //     queryFn: getAssetsData,
+    //     refetchOnWindowFocus: false,
+    // })
 
     useEffect(() => {
         if (!openMap) {
@@ -170,7 +170,7 @@ export const FindAssetProvider: React.FC<{ children: ReactNode }> = ({ children 
                 districts, setDistricts,
                 selectedDist, setSelectedDist,
 
-                assets, isFetching,
+                // assets, isFetching,
 
                 pageSize, setPageSize,
                 currentPage, setCurrentPage,

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import background from "@/public/background.jpg";
 import { motion } from "framer-motion";
-import NavbarLogo from './Header/Logo';
+import NavbarLogo from '../shared/Header/Logo';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 
@@ -16,7 +16,7 @@ const AuthContent = () => {
 
     if (currentUser) {
         return <>
-            { router.push("/") }
+            {router.push("/")}
         </>
     }
 

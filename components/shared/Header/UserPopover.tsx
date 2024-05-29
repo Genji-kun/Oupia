@@ -2,13 +2,13 @@
 
 import { Bell, ChevronDown, ChevronRight, Key, LogOut, MessagesSquare, Moon, Settings, UserRoundSearchIcon } from 'lucide-react';
 import Link from 'next/link';
-import { Button } from '../button';
-import { Switch } from '../switch';
+import { Button } from '../../ui/button';
+import { Switch } from '../../ui/switch';
 import { useTheme } from 'next-themes';
 import { MdOutlinePostAdd } from "react-icons/md";
-import { Popover, PopoverContent, PopoverTrigger } from '../popover';
-import { Separator } from '../separator';
-import { Avatar, AvatarFallback, AvatarImage } from '../avatar';
+import { Popover, PopoverContent, PopoverTrigger } from '../../ui/popover';
+import { Separator } from '../../ui/separator';
+import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar';
 import { useDispatch } from 'react-redux';
 import { logout } from '@/redux/slices/currentUserSlice';
 import { convert } from '@/utils/convertAvatarAlt';
@@ -16,12 +16,13 @@ import { HiOutlineHomeModern } from 'react-icons/hi2';
 import React, { PropsWithChildren } from 'react';
 import { ICurrentUser } from '@/lib/types/interfaces';
 import SearchButton from './SearchButton';
+import { UserRole } from '@/lib/types/enums';
 
 type IProps = PropsWithChildren<{
     user: ICurrentUser
 }>;
 
-const NavbarUser: React.FC<IProps> = ({ user }) => {
+const UserPopover: React.FC<IProps> = ({ user }) => {
     const { theme, setTheme } = useTheme();
     const dispatch = useDispatch();
 
@@ -67,29 +68,31 @@ const NavbarUser: React.FC<IProps> = ({ user }) => {
                             </Avatar>
                             <div className="flex flex-col">
                                 <h2 className="font-semibold text-lg">{user.fullName}</h2>
-                                {(() => {
-                                    switch (user.role) {
-                                        case "ROLE_TENANT":
-                                            return <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-                                                <UserRoundSearchIcon className="w-4 h-4" />
-                                                <span>Người tìm trọ</span>
-                                            </div>
-                                        case "ROLE_LANDLORD":
-                                            return <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-                                                <HiOutlineHomeModern className="w-4 h-4" />
-                                                <span>Chủ nhà trọ</span>
-                                            </div>
-                                        default:
-                                            return <></>
-                                    }
-                                })()}
+                                <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                                    {(() => {
+                                        switch (user.role) {
+                                            case UserRole.TENANT:
+                                                return <>
+                                                    <UserRoundSearchIcon className="w-4 h-4" />
+                                                    <span>Người tìm trọ</span>
+                                                </>
+                                            case UserRole.LANDLORD:
+                                                return <>
+                                                    <HiOutlineHomeModern className="w-4 h-4" />
+                                                    <span>Chủ nhà trọ</span>
+                                                </>
+                                            default:
+                                                return <></>
+                                        }
+                                    })()}
+                                </div>
                             </div>
                         </Link>
                     </div>
                     <Separator />
                     <div>
                         {
-                            user.role === "ROLE_TENANT" && <Link href="/settings/landlord" className="w-full flex items-center py-1 px-2 hover:bg-accent rounded text-sm">
+                            user.role === UserRole.TENANT && <Link href="/settings/landlord" className="w-full flex items-center py-1 px-2 hover:bg-accent rounded text-sm">
                                 <HiOutlineHomeModern className="mr-2 h-4 w-4" />
                                 <span>Tài khoản chủ nhà trọ</span>
                                 <ChevronRight className="ml-auto h-4 w-4" />
@@ -133,4 +136,4 @@ const NavbarUser: React.FC<IProps> = ({ user }) => {
     );
 };
 
-export default NavbarUser;
+export default UserPopover;

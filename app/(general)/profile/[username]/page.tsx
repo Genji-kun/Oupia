@@ -3,17 +3,12 @@
 import React from 'react';
 import UserIntroduce from './_components/user-introduce';
 import SuggestUserList from './_components/suggest-user-list';
-import { useProfileContext } from '@/contexts/profile-context';
 import { ForumProvider } from '@/contexts/forum-context';
 import UserPostList from './_components/user-post-list';
+import { NextPage } from 'next';
 
-const ProfilePage = () => {
+const ProfilePage: NextPage = () => {
 
-    const { userInfo } = useProfileContext();
-
-    if (!userInfo) {
-        return <></>
-    }
 
     return (
         <div className="container h-full grid grid-cols-7 gap-4">

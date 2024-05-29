@@ -3,7 +3,6 @@
 import { settingsRoutes } from '@/utils/routes';
 import React from 'react';
 import SettingsRouteItem from './settings-routes-item';
-import withAuth from '@/utils/withAuth';
 
 const SettingsRoutes = () => {
     return (
@@ -21,4 +20,4 @@ const SettingsRoutes = () => {
     );
 };
 
-export default withAuth(SettingsRoutes);
+export default SettingsRoutes;

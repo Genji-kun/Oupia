@@ -9,7 +9,7 @@ import React from 'react';
 
 const UserIntroduce = () => {
 
-    const { userInfo } = useProfileContext();
+    const { userInfoData } = useProfileContext();
 
     return (
         <Card className="shadow-lg dark:bg-oupia-base">
@@ -22,12 +22,12 @@ const UserIntroduce = () => {
                     <Info size="20" className="text-muted-foreground" />
                     <h3>
                         {(() => {
-                            switch (userInfo?.role) {
+                            switch (userInfoData?.role) {
                                 case "ROLE_TENANT":
                                     return "Người tìm trọ"
                                 case "ROLE_LANDLORD":
                                     return "Chủ nhà trọ"
-                                    case "ROLE_ADMIN":
+                                case "ROLE_ADMIN":
                                     return "Quản trị viên"
                                 default:
                                     return <></>
@@ -37,11 +37,11 @@ const UserIntroduce = () => {
                 </div>
                 <div className="flex items-center gap-x-3">
                     <UserRoundCheck size="20" className="text-muted-foreground" />
-                    <h3>Có {userInfo?.totalFollower} người theo dõi</h3>
+                    <h3>Có {userInfoData?.totalFollower} người theo dõi</h3>
                 </div>
                 <div className="flex items-center gap-x-3">
                     <Clock size="20" className="text-muted-foreground" />
-                    <h3>Tham gia vào {format(userInfo!.createdAt, "dd-MM-yyyy")}</h3>
+                    <h3>Tham gia vào {format(userInfoData!.createdAt, "dd-MM-yyyy")}</h3>
                 </div>
             </CardContent>
         </Card>

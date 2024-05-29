@@ -3,7 +3,6 @@ import { Button } from '@/components/ui/button'
 import { followEndpoints } from '@/configs/axiosEndpoints';
 import { authApi } from '@/configs/axiosInstance';
 import { useProfileContext } from '@/contexts/profile-context';
-import { UserInfo } from '@/lib/types/interfaces/User';
 import { isUndefined } from 'lodash-es';
 import { Edit3Icon, Loader2, MessagesSquareIcon, UserRoundCheckIcon } from 'lucide-react'
 import Link from 'next/link';
@@ -14,7 +13,7 @@ import { toast } from 'sonner';
 function UserHeaderButtons() {
 
     const { currentUser } = useSelector((state: any) => state.currentUserSlice);
-    const { setUserInfo, userInfo } = useProfileContext();
+    const { userInfoData } = useProfileContext();
 
     const [isFollowing, setIsFollowing] = useState<boolean | undefined>();
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -30,7 +29,7 @@ function UserHeaderButtons() {
             const res = await authApi.get(followEndpoints["checkFollow"], {
                 params: {
                     followerId: currentUser.id,
-                    followingId: userInfo?.id
+                    followingId: userInfoData?.id
                 }
             });
             setIsFollowing(res.data);
@@ -40,17 +39,17 @@ function UserHeaderButtons() {
     }
 
     const handleFollow = async () => {
-        if (currentUser && userInfo) {
+        if (currentUser && userInfoData) {
             setIsLoading(true);
             try {
                 const res = await authApi.post(followEndpoints["followUser"], {}, {
                     params: {
-                        followingId: Number(userInfo?.id),
+                        followingId: Number(userInfoData?.id),
                     }
                 });
                 if (res.status === 200) {
                     toast.success("Theo dõi người dùng thành công.");
-                    setUserInfo({ ...userInfo, totalFollower: userInfo.totalFollower + 1 });
+                    // setUserInfo({ ...userInfo, totalFollower: userInfo.totalFollower + 1 });
                     setIsFollowing(true);
                 }
             } catch (error) {
@@ -64,17 +63,17 @@ function UserHeaderButtons() {
     }
 
     const handleUnFollow = async () => {
-        if (currentUser && userInfo) {
+        if (currentUser && userInfoData) {
             setIsLoading(true);
             try {
                 const res = await authApi.delete(followEndpoints["unFollow"], {
                     params: {
-                        followingId: Number(userInfo?.id),
+                        followingId: Number(userInfoData?.id),
                     }
                 });
                 if (res.status === 200 || res.status === 204) {
                     toast.success("Bỏ theo dõi người dùng thành công.")
-                    setUserInfo({ ...userInfo, totalFollower: userInfo.totalFollower - 1 });
+                    // setUserInfo({ ...userInfo, totalFollower: userInfo.totalFollower - 1 });
                     setIsFollowing(false);
                 }
             } catch (error) {
@@ -96,7 +95,7 @@ function UserHeaderButtons() {
         <div className="flex w-full justify-center xl:justify-end items-center gap-2 ">
             <>
                 {
-                    userInfo?.id === currentUser.id ? <>
+                    userInfoData?.id === currentUser.id ? <>
                         <Link href={`/settings/account`}>
                             <Button className="styled-button flex gap-x-2">
                                 <Edit3Icon size={16} />
@@ -144,7 +143,7 @@ function UserHeaderButtons() {
                         ) : <div className="bg-border dark:bg-oupia-base px-16 py-5 animate-pulse rounded-lg"></div>
                         }
 
-                        <Link href={`/messages/${userInfo?.username}`}>
+                        <Link href={`/messages/${userInfoData?.username}`}>
                             <Button className="styled-button flex gap-x-2">
                                 <MessagesSquareIcon size={16} />
                                 <span>Nhắn tin</span>

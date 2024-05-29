@@ -7,18 +7,17 @@ import { publicApi } from '@/configs/axiosInstance';
 import { useProfileContext } from '@/contexts/profile-context';
 import { PostResponse } from '@/lib/types/interfaces/Post';
 import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'next/navigation';
 import React from 'react';
 
 function UserPostList() {
 
-    const { userInfo } = useProfileContext();
+    const { userInfoData } = useProfileContext();
 
     const fetchPosts = async ({ queryKey }: any) => {
-        const [_key, { userInfo }] = queryKey;
+        const [_key, { userInfoData }] = queryKey;
         const res = await publicApi.get(postEndpoints["postList"], {
             params: {
-                userId: userInfo?.id,
+                userId: userInfoData?.id,
                 size: 8
             }
         });
@@ -29,7 +28,7 @@ function UserPostList() {
         }
     };
 
-    const { data: posts, isLoading } = useQuery({ queryKey: ['postsProfile', { userInfo }], queryFn: fetchPosts });
+    const { data: posts, isLoading } = useQuery({ queryKey: ['postsProfile', { userInfoData }], queryFn: fetchPosts });
 
     if (isLoading) {
         return <PostLoading />;

@@ -3,7 +3,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import ReactMapGL, { FlyToInterpolator, Layer, Marker, Source } from '@goongmaps/goong-map-react';
 import { useAssetDetailContext } from '@/contexts/asset-detail-context';
-import { HiMapPin } from 'react-icons/hi2';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
@@ -12,7 +11,7 @@ import { useDebounce } from '@/hooks/useDebounce';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { MapPin, MoveRight, X } from 'lucide-react';
+import { MoveRight, X } from 'lucide-react';
 import * as polyline from '@mapbox/polyline';
 import { TbMapPinFilled } from 'react-icons/tb';
 

@@ -22,28 +22,28 @@ function UploadForumForm() {
     const watchPostType = postForm.watch("postType");
 
     useEffect(() => {
-      handlePostTypeChange(watchPostType);
+        const handlePostTypeChange = (value: string) => {
+            switch (value) {
+                case "POST_COMMON":
+                    setAmenities([]);
+                    setTagLocation(undefined);
+                    setTagPrice(undefined);
+                    setTagAsset(undefined);
+                    break;
+                case "POST_FIND":
+                    setTagAsset(undefined);
+                    break;
+                default:
+                    break;
+            }
+        }
+        handlePostTypeChange(watchPostType);
     }, [watchPostType]);
 
-    const handlePostTypeChange = (value: string) => {
-        switch (value) {
-            case "POST_COMMON":
-                setAmenities([]);
-                setTagLocation(undefined);
-                setTagPrice(undefined);
-                setTagAsset(undefined);
-                break;
-            case "POST_FIND":
-                setTagAsset(undefined);
-                break;
-            default:
-                break;
-        }
-    }
+
 
     const handleFileChange = (evt: any) => {
         const newFiles = Array.prototype.slice.call(evt.target.files);
-        const { images } = postForm.getValues();
         postForm.setValue("images", [...postForm.getValues("images"), ...newFiles]);
     }
 
@@ -176,7 +176,7 @@ function UploadForumForm() {
                                 />
                                 {postForm.getValues("images")?.length !== 0 && (
                                     <div className="flex flex-wrap gap-5 items-center pt-4">
-                                        {postForm.getValues("images")?.map((image:File, index: number) => (
+                                        {postForm.getValues("images")?.map((image: File, index: number) => (
                                             <div key={index} className="col-span-1 relative ">
                                                 <X className="text-destructive font-bold w-6 h-6 p-1 bg-background hover:bg-border dark:hover:bg-oupia-sub dark:bg-oupia-base rounded-full absolute -right-2 -top-2 cursor-pointer" onClick={() => handleDelete(image)} />
                                                 <Image width={500} height={500} className="rounded-lg object-cover w-32 aspect-square" src={URL.createObjectURL(image)} alt={image.name} />
