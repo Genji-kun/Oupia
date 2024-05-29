@@ -10,7 +10,7 @@ export const ASSET_ENDPOINTS = {
     GET_ASSET_LIST: `search/assets/`,
     CREATE: `store/landlord/assets/`,
     GET_ASSET_BY_SLUG: (slug: string) => `search/assets/${slug}`,
-    GET_ASSET_BY_POLYGON: `search/assets/`,
+    GET_ASSET_BY_POLYGON: `search/assets/polygon/`,
 }
 
 export const POST_ENDPOINTS = {

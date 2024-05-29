@@ -2,13 +2,13 @@
 
 import React from 'react';
 import NavbarLogo from './Logo';
-import NavbarMenu from './Menu';
-import NavbarRoutes from './Routes';
+import NavbarMenu from './menu';
+import NavbarRoutes from './navbar-routes';
 import { useSelector } from 'react-redux';
 import { cn } from "@/lib/utils";
-import UnAuthorizedHeader from './UnAuthorizedHeader';
+import UnAuthorizedHeader from './unauthorized-header';
 import Hydration from '../Hydration';
-import UserPopover from './UserPopover';
+import UserPopover from './user-popover';
 
 const Header = () => {
 

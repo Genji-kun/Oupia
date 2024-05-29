@@ -2,6 +2,7 @@
 
 import { assetsEndpoints } from '@/configs/axiosEndpoints';
 import { publicApi } from '@/configs/axiosInstance';
+import { useSearchAssetsByPolygon } from '@/hooks/query';
 import { AssetResponse } from '@/lib/types/interfaces/Asset';
 import { useQuery } from '@tanstack/react-query';
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
@@ -117,30 +118,7 @@ export const FindAssetProvider: React.FC<{ children: ReactNode }> = ({ children 
         }
     }
 
-    const getAssetsDataByPolygon = async ({ queryKey }: any) => {
-        const [_key, { polyReq }] = queryKey;
-        if (polyReq) {
-            console.log(polyReq)
-            try {
-                const res = await publicApi.post(assetsEndpoints["polygon"],
-                    {
-                        polygon: polyReq
-                    });
-                return res.data;
-            } catch (error) {
-                console.error(error);
-            }
-        }
-        return [];
-    }
-
-    const { data: assetsByPolygon, isFetching: isFetchingPolygon } = useQuery({
-        queryKey: ["searchAssetByPolygon", { polyReq }],
-        queryFn: getAssetsDataByPolygon,
-        enabled: !!polyReq,
-        refetchOnWindowFocus: false,
-    });
-
+    const { assetsByPolygon, isFetchingPolygon } = useSearchAssetsByPolygon(polyReq)
     const { data: assets, isFetching } = useQuery({
         queryKey: ["searchAsset", { pageSize, currentPage, debounceKw, debouncePrice, maxPeople }],
         queryFn: getAssetsData,

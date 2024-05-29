@@ -76,7 +76,7 @@ const SearchButton: React.FC = () => {
                                 placeholder='Tìm kiếm địa điểm, dự án cụ thể bạn muốn thuê...' />
                         </div>
                     </DialogHeader>
-                    {/* <ScrollArea className="h-72 w-full">
+                    <ScrollArea className="h-72 w-full">
                         <>
                             {searchHistories.length > 0 &&
                                 <>
@@ -142,7 +142,7 @@ const SearchButton: React.FC = () => {
                                 )
                             }
                         </>
-                    </ScrollArea> */}
+                    </ScrollArea>F
                 </DialogContent>
             </Dialog>
         </div >

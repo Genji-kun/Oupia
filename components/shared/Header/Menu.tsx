@@ -1,12 +1,12 @@
 import React from 'react';
 import { Menu } from 'lucide-react';
-import NavbarLogo from './Logo';
 import SidebarRoutes from './sidebar-routes';
 import { Sheet, SheetContent, SheetTrigger } from '../../ui/sheet';
 import Link from 'next/link';
 import { Button } from '../../ui/button';
 import { MdOutlinePostAdd } from 'react-icons/md';
-import SearchButton from './SearchButton';
+import SearchButton from './search-button';
+import NavbarLogo from './Logo';
 
 const NavbarMenu = () => {
     return (

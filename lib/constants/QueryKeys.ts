@@ -5,6 +5,8 @@ export const QUERY_KEY = {
 
     // ASSET KEYS
     GET_ASSETS: "getAssets",
+    GET_ASSETS_BY_POLYGON: "getAssetsByPolygon",
+
 
     // USER KEYS 
     GET_USER_INFO: "getUserInfo",

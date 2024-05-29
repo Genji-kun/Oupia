@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { navRoutes } from '@/utils/routes';
-import NavbarItem from './NavbarItem';
+import NavbarItem from './navbar-item';
 
 const NavbarRoutes = () => {
     return (

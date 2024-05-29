@@ -6,7 +6,7 @@ import { useTheme } from 'next-themes';
 import React from 'react'
 import { Button } from '../../ui/button';
 import Link from 'next/link';
-import SearchButton from './SearchButton';
+import SearchButton from './search-button';
 
 const UnAuthorizedHeader: React.FC = () => {
 

@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query"
 import { useState } from "react";
 
 
+// ---------- ASSET ------------
 export const useSearchAssets = (pageSize: number, currentPage: number, kw: string, price: [number, number], maxPeople: number) => {
     const [totalPages, setTotalPages] = useState(1);
 
@@ -38,15 +39,38 @@ export const useSearchAssets = (pageSize: number, currentPage: number, kw: strin
     };
 }
 
+export const useSearchAssetsByPolygon = (polygon: string) => {
+    const { data, isFetching } = useQuery({
+        queryKey: [QUERY_KEY.GET_ASSETS_BY_POLYGON, polygon],
+        queryFn: async ({ queryKey }) => {
+            const [_key, polygon] = queryKey;
+            if (!polygon) return [];
+            const res = await assetService.searchAssetsByPolygon(polygon);
+            return res.data;
+        },
+        enabled: !!polygon,
+        refetchOnWindowFocus: false,
+    });
+
+    return {
+        assetsByPolygon: data,
+        isFetchingPolygon: isFetching
+    }
+}
+
+// ---------- USER -------------
+
 export const useUserInfo = (username: string) => {
 
     const { data, isFetching } = useQuery({
         queryKey: [QUERY_KEY.GET_USER_INFO, username],
         queryFn: async ({ queryKey }) => {
             const [_key, username] = queryKey;
+            if (!username) return;
             const res = await userService.getUserInfo(username);
             return res.data;
         },
+        enabled: !!username,
         refetchOnWindowFocus: false,
     })
 
@@ -55,6 +79,8 @@ export const useUserInfo = (username: string) => {
         isFetchingUserInfo: isFetching
     }
 }
+
+// -------- AUTH TOKEN ---------
 
 export const useAuthToken = () => {
     const { data, isFetching } = useQuery({
@@ -71,3 +97,5 @@ export const useAuthToken = () => {
         isFetchingAuthToken: isFetching
     };
 }
+
+// ---------- POST -------------

@@ -15,7 +15,7 @@ import { convert } from '@/utils/convertAvatarAlt';
 import { HiOutlineHomeModern } from 'react-icons/hi2';
 import React, { PropsWithChildren } from 'react';
 import { ICurrentUser } from '@/lib/types/interfaces';
-import SearchButton from './SearchButton';
+import SearchButton from './search-button';
 import { UserRole } from '@/lib/types/enums';
 
 type IProps = PropsWithChildren<{

@@ -34,7 +34,7 @@ const UserHeaderBar: React.FC = () => {
                     </Link>
                 </>
             }
-            {isFetchingUserInfo &&
+            {(isFetchingUserInfo && !userInfoData) &&
                 <>
                     <div className=" rounded-lg p-2 pr-6">
                         <div className="flex gap-x-4 items-center">
