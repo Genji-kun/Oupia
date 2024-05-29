@@ -7,13 +7,13 @@ import { notFound } from 'next/navigation';
 
 const ProfileAssetPage = () => {
 
-  const { userInfo } = useProfileContext();
-  
-  useEffect(() => { 
-    if(userInfo?.role !== "ROLE_LANDLORD") {
+  const { userInfoData } = useProfileContext();
+
+  useEffect(() => {
+    if (userInfoData?.role !== "ROLE_LANDLORD") {
       notFound();
     }
-  }, [userInfo])
+  }, [userInfoData])
 
   return (
     <div className="flex flex-col gap-4 container">
