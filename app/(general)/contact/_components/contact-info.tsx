@@ -1,6 +1,6 @@
 "use client"
 
-import NavbarLogo from '@/components/shared/Header/Logo';
+import NavbarLogo from '@/components/shared/Header/navbar-logo';
 import { Separator } from '@/components/ui/separator';
 import React from 'react';
 import { motion } from "framer-motion"

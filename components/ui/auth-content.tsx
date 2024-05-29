@@ -4,7 +4,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import background from "@/public/background.jpg";
 import { motion } from "framer-motion";
-import NavbarLogo from '../shared/Header/Logo';
+import NavbarLogo from '../shared/Header/navbar-logo';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 
