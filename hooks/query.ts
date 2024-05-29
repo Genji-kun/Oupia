@@ -62,7 +62,8 @@ export const useAuthToken = () => {
         queryFn: async () => {
             const res = await authService.getToken();
             return res.data;
-        }
+        },
+        refetchOnWindowFocus: false,
     })
 
     return {
