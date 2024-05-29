@@ -11,14 +11,14 @@ import FollowerItem from './follower-item';
 
 function FollowerList() {
 
-    const { userInfo } = useProfileContext();
+    const { userInfoData } = useProfileContext();
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [followers, setFollowers] = useState<Follower[] | undefined>();
 
     useEffect(() => {
-        if (userInfo)
-            fetchFollowersData(Number(userInfo.id));
-    }, [userInfo])
+        if (userInfoData)
+            fetchFollowersData(Number(userInfoData.id));
+    }, [userInfoData])
 
 
     const fetchFollowersData = async (id: number) => {

@@ -41,7 +41,7 @@ const UserIntroduce = () => {
                 </div>
                 <div className="flex items-center gap-x-3">
                     <Clock size="20" className="text-muted-foreground" />
-                    <h3>Tham gia vào {format(new Date(userInfoData?.createdAt), "dd-MM-yyyy")}</h3>
+                    {/* <h3>Tham gia vào {format(new Date(userInfoData?.createdAt), "dd-MM-yyyy")}</h3> */}
                 </div>
             </CardContent>
         </Card>

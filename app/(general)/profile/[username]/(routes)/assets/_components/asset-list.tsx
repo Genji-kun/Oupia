@@ -13,19 +13,19 @@ import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 
 function AssetList() {
 
-    const { userInfo } = useProfileContext();
+    const { userInfoData } = useProfileContext();
 
     const [totalPages, setTotalPages] = useState<number>(0);
     const [currentPage, setCurrentPage] = useState<number>(1);
 
     const getAssetsData = async ({ queryKey }: any) => {
-        const [_key, { userInfo }] = queryKey;
+        const [_key, { userInfoData }] = queryKey;
         try {
             const res = await publicApi.get(assetsEndpoints["assets"], {
                 params: {
                     size: 4,
                     page: currentPage,
-                    userId: userInfo?.id
+                    userId: userInfoData?.id
                 }
             })
             if (res.data.totalPages > 0)
@@ -39,7 +39,7 @@ function AssetList() {
     }
 
     const { data: assets, isFetching } = useQuery({
-        queryKey: ["searchAssetByProfile", { userInfo, currentPage }],
+        queryKey: ["searchAssetByProfile", { userInfoData, currentPage }],
         queryFn: getAssetsData,
         refetchOnWindowFocus: false,
     })
