@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { login } from "@/redux/slices/currentUserSlice";
+import Cookies from "js-cookie";
 
 export const useRegister = () => {
 
@@ -29,7 +30,7 @@ export const useLogin = () => {
     const { mutateAsync, isPending } = useMutation({
         mutationFn: async (form: IUserLogin) => {
             const { data } = await authService.login(form);
-            localStorage.setItem("accessToken", data.accessToken);
+            Cookies.set("accessToken", data.accessToken);
             const { data: currentUserInfo } = await authService.currentUser(data.accessToken);
             dispatch(login(currentUserInfo));
             router.push("/");

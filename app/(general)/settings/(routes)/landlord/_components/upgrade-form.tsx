@@ -5,8 +5,7 @@ import { Button } from '@/components/ui/button'
 import { authEndpoints, userEndpoints } from '@/configs/axiosEndpoints';
 import { authApi } from '@/configs/axiosInstance';
 import { Loader2 } from 'lucide-react';
-
-import cookies from "react-cookies";
+import Cookies from 'js-cookie';
 import React, { useState } from 'react';
 import { toast } from 'sonner';
 import { useDispatch } from 'react-redux';
@@ -25,7 +24,7 @@ function UpgradeForm() {
                 try {
                     const resCurrUser = await authApi.get(authEndpoints["currentUser"]);
                     if (resCurrUser.status === 200) {
-                        cookies.save("user", resCurrUser.data, {});
+                        Cookies.set("user", resCurrUser.data);
                         dispatch(login(resCurrUser.data));
                         toast.success("Cập nhật tài khoản thành công.");
                     }

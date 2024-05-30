@@ -1,18 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { signOut } from 'next-auth/react'
-import cookies from "react-cookies";
+import Cookies from "js-cookie";
 
 const currentUserSlice = createSlice({
     name: 'currentUser',
-    initialState: { currentUser: cookies.load("user") || null },
+    initialState: { currentUser: Cookies.get("user") || null },
     reducers: {
         login: (state, action) => {
-            cookies.save("user", action.payload, {});
+            Cookies.set("user", action.payload);
             state.currentUser = action.payload;
         },
         logout: (state) => {
             localStorage.removeItem("accessToken");
-            cookies.remove("user");
+            Cookies.remove("user");
             signOut({ redirect: false })
             state.currentUser = null;
         },

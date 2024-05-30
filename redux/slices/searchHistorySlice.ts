@@ -1,23 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
-
-const loadFromLocalStorage = () => {
-    try {
-        const serializedState = localStorage.getItem('searchHistory');
-        if (serializedState === null) return [];
-        return JSON.parse(serializedState);
-    } catch {
-        return [];
-    }
-};
-
-const saveToLocalStorage = (state: any) => {
-    try {
-        const serializedState = JSON.stringify(state);
-        localStorage.setItem('searchHistory', serializedState);
-    } catch {
-        console.error("Không lưu được lịch sử.");
-    }
-};
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type History = {
     assetSlug: string,
@@ -26,20 +7,18 @@ export type History = {
 
 const searchHistorySlice = createSlice({
     name: 'searchHistories',
-    initialState: loadFromLocalStorage() as History[],
+    initialState: [] as History[],
     reducers: {
-        addHistory: (state, action) => {
+        addHistory: (state, action: PayloadAction<History>) => {
             if (!state.find(history => history.assetSlug === action.payload.assetSlug)) {
                 state.push(action.payload);
-                saveToLocalStorage(state);
             }
         },
-        clearHistory: (state) => {
-            state = [];
+        clearHistory: () => {
+            return [];
         },
-        removeHistory: (state, action) => {
-            state = state.filter(history => history.assetSlug !== action.payload.assetSlug);
-            saveToLocalStorage(state);
+        removeHistory: (state, action: PayloadAction<History>) => {
+            return state.filter(history => history.assetSlug !== action.payload.assetSlug);
         }
     }
 });

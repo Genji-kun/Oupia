@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation"
 import { useEffect } from "react"
-import cookies from "react-cookies"
+import Cookies from "js-cookie"
 import React, { FC, PropsWithChildren } from 'react';
 
 type IWithAuthProps = PropsWithChildren<{
@@ -14,7 +14,7 @@ const WithAuth: FC<IWithAuthProps> = ({ children }) => {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (!cookies.load("user")) {
+    if (!Cookies.get("accessToken")) {
       router.push(pathname === "/sign-in" ? '/sign-in' : '/sign-up')
     } else if (pathname === "/sign-in" || pathname === "/sign-up") {
       router.push("/");

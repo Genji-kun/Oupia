@@ -10,7 +10,7 @@ import { useSession } from 'next-auth/react';
 import { Loader2 } from 'lucide-react';
 import { authApi, publicApi } from '@/configs/axiosInstance';
 import { authEndpoints } from '@/configs/axiosEndpoints';
-import cookies from "react-cookies";
+import Cookies from "js-cookie";
 import { useDispatch } from 'react-redux';
 import { login } from '@/redux/slices/currentUserSlice';
 import { useRouter } from 'next/navigation';
@@ -35,7 +35,7 @@ const Tabs = () => {
                     provider: provider
                 });
                 if (res.status === 200) {
-                    cookies.save("accessToken", res.data.accessToken, {});
+                    Cookies.set("accessToken", res.data.accessToken);
 
                     // Cập nhât Header Request
                     updateAuthApi();
@@ -43,7 +43,7 @@ const Tabs = () => {
                     try {
                         const resCurr = await authApi.get(authEndpoints["currentUser"]);
                         if (resCurr.status === 200) {
-                            cookies.save("user", resCurr.data, {});
+                            Cookies.set("user", resCurr.data);
                             dispatch(login(resCurr.data));
                             router.push("/");
                         }
@@ -66,7 +66,7 @@ const Tabs = () => {
 
     function updateAuthApi() {
         authApi.interceptors.request.use(function (config) {
-            config.headers.Authorization = `Bearer ${cookies.load("accessToken")}`;
+            config.headers.Authorization = `Bearer ${Cookies.get("accessToken")}`;
             return config;
         }, function (error) {
             return Promise.reject(error);
@@ -137,7 +137,7 @@ const Tabs = () => {
                                         exit={{ opacity: 0, x: 50 }}
                                         transition={{ duration: 0.5, ease: "easeInOut" }}
                                         className="flex flex-col justify-center gap-y-8 absolute w-full p-4 md:py-10 md:px-24 xl:py-16 xl:px-44 ">
-                                        <NewPasswordTab/>
+                                        <NewPasswordTab />
                                     </motion.div>
                                 );
                             default:

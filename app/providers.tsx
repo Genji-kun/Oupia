@@ -1,7 +1,8 @@
 "use client";
 
 import { ThemeProvider } from '@/components/providers/theme-provider';
-import { store } from '@/redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistor, store } from '@/redux/store';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { SessionProvider } from 'next-auth/react';
 import React, { useEffect } from 'react';
@@ -24,9 +25,11 @@ const Providers = ({ children, session }: { children: React.ReactNode, session: 
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
                 <QueryClientProvider client={queryClient}>
                     <Provider store={store}>
-                        <main>
-                            {children}
-                        </main>
+                        <PersistGate loading={null} persistor={persistor}>
+                            <main>
+                                {children}
+                            </main>
+                        </PersistGate>
                     </Provider >
                 </QueryClientProvider>
             </ThemeProvider>

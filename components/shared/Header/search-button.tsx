@@ -78,7 +78,7 @@ const SearchButton: React.FC = () => {
                     </DialogHeader>
                     <ScrollArea className="h-72 w-full">
                         <>
-                            {searchHistories.length > 0 &&
+                            {searchHistories && searchHistories.length > 0 &&
                                 <>
                                     <div className="text-sm">
                                         <h1 className="text-muted-foreground font-semibold px-5 pb-3">Tìm kiếm gần đây</h1>
