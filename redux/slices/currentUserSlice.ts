@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { signOut } from 'next-auth/react'
 import Cookies from "js-cookie";
 
 const currentUserSlice = createSlice({
@@ -7,13 +6,9 @@ const currentUserSlice = createSlice({
     initialState: { currentUser: Cookies.get("user") || null },
     reducers: {
         login: (state, action) => {
-            Cookies.set("user", action.payload);
             state.currentUser = action.payload;
         },
         logout: (state) => {
-            localStorage.removeItem("accessToken");
-            Cookies.remove("user");
-            signOut({ redirect: false })
             state.currentUser = null;
         },
     },

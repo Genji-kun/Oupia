@@ -17,17 +17,32 @@ import React, { PropsWithChildren } from 'react';
 import { ICurrentUser } from '@/lib/types/interfaces';
 import SearchButton from './search-button';
 import { UserRole } from '@/lib/types/enums';
+import Cookies from 'js-cookie';
+import { signOut } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 type IProps = PropsWithChildren<{
     user: ICurrentUser
 }>;
 
 const UserPopover: React.FC<IProps> = ({ user }) => {
+
     const { theme, setTheme } = useTheme();
+    const router = useRouter();
+
     const dispatch = useDispatch();
 
     const changeTheme = () => {
         setTheme(theme === 'dark' ? 'light' : 'dark');
+    }
+
+    const handleLogOut = () => {
+        Cookies.remove("accessToken");
+        Cookies.remove("user");
+        signOut({ redirect: false });
+        router.push("/").then(() => {
+            dispatch(logout());
+        })
     }
 
     return (
@@ -124,7 +139,7 @@ const UserPopover: React.FC<IProps> = ({ user }) => {
                         </div>
                     </div>
                     <Separator />
-                    <div onClick={() => dispatch(logout())} className="w-full flex items-center py-1 px-2 hover:bg-accent rounded text-sm">
+                    <div onClick={handleLogOut} className="w-full flex items-center py-1 px-2 hover:bg-accent rounded text-sm">
                         <LogOut className="mr-2 h-4 w-4" />
                         <span>Đăng xuất</span>
                     </div>

@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-    const currentUser = request.cookies.get('accessToken');
+    const currentUser = request.cookies.get('user');
 
     if (currentUser && (request.nextUrl.pathname === "/sign-up" || request.nextUrl.pathname === "/sign-in")) {
         return NextResponse.redirect(new URL('/', request.url));

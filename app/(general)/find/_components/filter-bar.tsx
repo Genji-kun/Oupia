@@ -12,7 +12,7 @@ import MaxPeopleSection from './max-people-section';
 
 const FilterBar = () => {
 
-    const { openMap, setOpenMap, assets, keyword, setKeyword, setMaxPeople } = useFindAssetContext();
+    const { openMap, setOpenMap, assets, keyword, setKeyword } = useFindAssetContext();
 
 
     return (

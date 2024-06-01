@@ -15,8 +15,6 @@ import { useLogin } from "@/hooks/mutation";
 
 const SignInForm = () => {
 
-    const [isSubmiting, setIsSubmitting] = useState(false);
-
     const loginForm = useForm<IUserLogin>({
         resolver: zodResolver(loginSchema),
         defaultValues: {
@@ -25,14 +23,11 @@ const SignInForm = () => {
         },
     })
 
-    const { mutateLogin } = useLogin();
+    const { mutateLogin, isPendingLogin } = useLogin();
 
     async function onSubmit(values: IUserLogin) {
-        setIsSubmitting(true);
-
         await mutateLogin(values).catch(() => {
             toast.error("Có lỗi xảy ra. Vui lòng thử lại sau.");
-            setIsSubmitting(false);
             return;
         });
     }
@@ -47,7 +42,7 @@ const SignInForm = () => {
                         <FormItem >
                             <FormLabel className="text-base font-semibold text-foreground">Tên nguời dùng</FormLabel>
                             <FormControl>
-                                <Input {...field} disabled={isSubmiting} className="text-base py-6 dark:bg-oupia-sub" />
+                                <Input {...field} disabled={isPendingLogin} className="text-base py-6 dark:bg-oupia-sub" />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -60,14 +55,14 @@ const SignInForm = () => {
                         <FormItem >
                             <FormLabel className="text-base font-semibold text-foreground">Mật khẩu</FormLabel>
                             <FormControl>
-                                <Input type="password" {...field} disabled={isSubmiting} className="text-base py-6 dark:bg-oupia-sub" togglePassword={true} disableToggle={isSubmiting} />
+                                <Input type="password" {...field} disabled={isPendingLogin} className="text-base py-6 dark:bg-oupia-sub" togglePassword={true} disableToggle={isPendingLogin} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
                     )}
                 />
                 <ForgetPasswordButton />
-                {isSubmiting ? <>
+                {isPendingLogin ? <>
                     <Button disabled type="submit" className=" mt-6 w-full xl:w-1/2 mx-auto styled-button border p-6 flex gap-3">
                         <span className="text-base">Đang xử lý</span>
                         <Loader2 size="22" className="animate-spin" />

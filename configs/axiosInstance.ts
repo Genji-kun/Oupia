@@ -1,7 +1,7 @@
 "use client";
 
 import axios from "axios";
-import cookies from "react-cookies";
+import Cookies from "js-cookie";
 
 const SERVER = process.env.NEXT_PUBLIC_SERVER_URL;
 const VN_PROVINCES = process.env.NEXT_PUBLIC_VIETNAM_PROVINCES_URL;
@@ -14,7 +14,7 @@ const publicApi = axios.create({
 const authApi = axios.create({
     baseURL: SERVER,
     headers: {
-        "Authorization": "Bearer " + cookies.load("accessToken")
+        "Authorization": "Bearer " + Cookies.get("accessToken")
     },
 });
 

@@ -3,15 +3,12 @@
 import { Input } from '@/components/ui/input';
 import { Slider } from '@/components/ui/slider';
 import { useFindAssetContext } from '@/contexts/find-asset-context';
-import { changeFilter } from '@/redux/slices/assetFilterSlice';
-import { RootState } from '@/redux/store';
 import { formatCurrency } from '@/utils/priceConvert';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 
 const MaxMinPrice = () => {
 
-    const {priceRate, setPriceRate} = useFindAssetContext();
+    const { priceRate, setPriceRate } = useFindAssetContext();
 
     const handleInputChange = (index: number, event: any) => {
         let value = parseInt(event.target.value, 10);

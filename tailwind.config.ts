@@ -10,15 +10,17 @@ module.exports = {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: "1.5rem",
       screens: {
         "2xl": "1600px",
       },
     },
     extend: {
+      fontSize: {
+        base: "1rem",
+      },
       container: {
         padding: "0rem",
-
       },
       colors: {
         border: "hsl(var(--border))",

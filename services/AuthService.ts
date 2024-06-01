@@ -14,8 +14,8 @@ class AuthService extends BaseService {
         return this.post(AUTH_ENDPOINTS.SIGN_IN, userLogin);
     };
 
-    currentUser = (accessToken: string) => {
-        return this.get(AUTH_ENDPOINTS.CURRENT_USER, accessToken);
+    currentUser = () => {
+        return this.get(AUTH_ENDPOINTS.CURRENT_USER);
     }
 
     getToken = () => {
