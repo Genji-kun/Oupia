@@ -2,7 +2,13 @@
 
 ## Yêu Cầu
 
-Đảm bảo đã cài đặt Node.js và npm trên máy tính.
+Đảm bảo đã cài đặt Node.js và yarn hoặc npm trên máy tính.
+
+Để cài đặt yarn, hãy viết lệnh sau: 
+
+```
+npm install yarn -g
+```
 
 ## Cài Đặt
 
@@ -17,18 +23,22 @@ git clone https://github.com/Genji-kun/Oupia.git
 2. Di chuyển vào thư mục dự án:
 
 ```bash
-cd Oupia/client 
+cd Oupia
 ```
 
-3. Cài đặt các gói phụ thuộc bằng npm:
+3. Cài đặt các gói phụ thuộc bằng yarn:
 
 ```bash
+yarn
+#or
 npm install
 ```
 
 4. Chạy dự án: 
 
 ```bash
+yarn dev
+#or
 npm run dev
 ```
 
