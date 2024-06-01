@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Map, Search, X } from 'lucide-react';
 import React, { useState } from 'react';
-import SearchResult from './search-result';
 import { Separator } from '@/components/ui/separator';
 
 const SearchBar = () => {

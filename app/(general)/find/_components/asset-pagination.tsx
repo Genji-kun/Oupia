@@ -3,18 +3,18 @@
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useFindAssetContext } from '@/contexts/find-asset-context';
-import { ChevronLeftIcon, ChevronRightIcon, ChevronsLeftIcon, ChevronsRightIcon } from 'lucide-react';
+import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 
 import React from 'react'
 
 function AssetPagination() {
 
-    const { pageSize, setPageSize, assets, isFetching, setCurrentPage, currentPage, totalPages } = useFindAssetContext();
+    const { pageSize, setPageSize, assetResults, isFetchingAssetResults, setCurrentPage, currentPage, totalPages } = useFindAssetContext();
 
     return (
         <>
             {
-                (!isFetching) && (assets && assets.length > 0 && <div className="w-full gap-x-4 gap-y-2 flex flex-wrap items-center justify-center">
+                (!isFetchingAssetResults) && (assetResults && assetResults.length > 0 && <div className="w-full gap-x-4 gap-y-2 flex flex-wrap items-center justify-center">
                     <div className="flex items-center space-x-2">
                         <Button
                             variant="outline"

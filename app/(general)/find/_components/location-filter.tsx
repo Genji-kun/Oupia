@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 import { useFindAssetContext } from '@/contexts/find-asset-context'
 import { vnProvincesApi } from '@/configs/axiosInstance'
 import { vnpEndpoints } from '@/configs/axiosEndpoints'
-import { Select, SelectContent, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
 
 const LocationFilter = () => {
