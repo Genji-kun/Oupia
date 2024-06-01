@@ -7,6 +7,7 @@ import { useState } from "react";
 
 
 // ---------- ASSET ------------
+
 export const useSearchAssets = (pageSize: number, currentPage: number, kw: string, price: [number, number], maxPeople: number) => {
     const [totalPages, setTotalPages] = useState(1);
 

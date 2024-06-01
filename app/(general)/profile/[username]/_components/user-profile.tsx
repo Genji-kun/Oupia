@@ -1,7 +1,6 @@
 "use client"
 
 import React from 'react';
-import UserTab from './user-tab';
 import UserHeader from './user-header';
 import { Separator } from '@/components/ui/separator';
 import { useProfileContext } from '@/contexts/profile-context';
@@ -14,7 +13,7 @@ const UserProfile = () => {
         <div className="container flex flex-col">
             <UserHeader />
             <Separator />
-            {userInfoData && <UserTab />}
+            {/* {userInfoData && <UserTab />} */}
         </div>
     );
 };

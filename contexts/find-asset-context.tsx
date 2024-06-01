@@ -2,7 +2,7 @@
 
 import { assetsEndpoints } from '@/configs/axiosEndpoints';
 import { publicApi } from '@/configs/axiosInstance';
-import { useSearchAssetsByPolygon } from '@/hooks/query';
+import { useSearchAssets, useSearchAssetsByPolygon } from '@/hooks/query';
 import { AssetResponse } from '@/lib/types/interfaces/Asset';
 import { useQuery } from '@tanstack/react-query';
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
@@ -37,8 +37,8 @@ interface IFindAssetContext {
     setDistricts: React.Dispatch<React.SetStateAction<District[]>>;
     selectedDist: District | undefined;
     setSelectedDist: React.Dispatch<React.SetStateAction<District | undefined>>;
-    assets: AssetResponse[];
-    isFetching: boolean;
+    assetResults: AssetResponse[];
+    isFetchingAssetResults: boolean;
     pageSize: number;
     setPageSize: React.Dispatch<React.SetStateAction<number>>;
     currentPage: number;
@@ -52,8 +52,6 @@ interface IFindAssetContext {
     assetsByPolygon: AssetResponse[];
     isFetchingPolygon: boolean;
     totalPages: number;
-    setTotalPages: React.Dispatch<React.SetStateAction<number>>;
-
     maxPeople: string;
     setMaxPeople: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -78,7 +76,6 @@ export const FindAssetProvider: React.FC<{ children: ReactNode }> = ({ children 
     // Paginations
     const [pageSize, setPageSize] = useState<number>(8);
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const [totalPages, setTotalPages] = useState<number>(1);
 
 
     // Filter
@@ -94,36 +91,10 @@ export const FindAssetProvider: React.FC<{ children: ReactNode }> = ({ children 
 
     const debouncePrice = useDebounce(priceRate, 1000);
 
-
-    const getAssetsData = async ({ queryKey }: any) => {
-        const [_key, { pageSize, currentPage, debounceKw, debouncePrice, maxPeople }] = queryKey;
-        try {
-            const res = await publicApi.get(assetsEndpoints["assets"], {
-                params: {
-                    keyword: debounceKw[0],
-                    size: pageSize,
-                    page: currentPage,
-                    minPrice: debouncePrice[0][0],
-                    maxPrice: debouncePrice[0][1],
-                    maxPeople: maxPeople
-                }
-            })
-            if (res.data.totalPages > 0)
-                setTotalPages(res.data.totalPages);
-            else
-                setTotalPages(1);
-            return res.data.content;
-        } catch (error) {
-            console.error(error);
-        }
-    }
+    const { assetResults, isFetchingAssetResults, totalPages } = useSearchAssets(pageSize, currentPage, debounceKw[0], [debouncePrice[0][0], debouncePrice[0][1]], Number(maxPeople));
 
     const { assetsByPolygon, isFetchingPolygon } = useSearchAssetsByPolygon(polyReq)
-    const { data: assets, isFetching } = useQuery({
-        queryKey: ["searchAsset", { pageSize, currentPage, debounceKw, debouncePrice, maxPeople }],
-        queryFn: getAssetsData,
-        refetchOnWindowFocus: false,
-    })
+
 
     useEffect(() => {
         if (!openMap) {
@@ -148,7 +119,7 @@ export const FindAssetProvider: React.FC<{ children: ReactNode }> = ({ children 
                 districts, setDistricts,
                 selectedDist, setSelectedDist,
 
-                assets, isFetching,
+                assetResults, isFetchingAssetResults,
 
                 pageSize, setPageSize,
                 currentPage, setCurrentPage,
@@ -159,7 +130,7 @@ export const FindAssetProvider: React.FC<{ children: ReactNode }> = ({ children 
                 assetsByPolygon, isFetchingPolygon,
 
                 maxPeople, setMaxPeople,
-                totalPages, setTotalPages
+                totalPages
             }}>
             {children}
         </FindAssetContext.Provider>

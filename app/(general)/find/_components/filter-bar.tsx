@@ -12,7 +12,7 @@ import MaxPeopleSection from './max-people-section';
 
 const FilterBar = () => {
 
-    const { openMap, setOpenMap, assets, keyword, setKeyword } = useFindAssetContext();
+    const { openMap, setOpenMap, assetResults, keyword, setKeyword } = useFindAssetContext();
 
 
     return (
@@ -52,7 +52,7 @@ const FilterBar = () => {
                             </>}
                     </div>
                 </div>
-                <span className="text-muted-foreground">{assets ? assets.length : "0"} kết quả</span>
+                <span className="text-muted-foreground">{assetResults ? assetResults.length : "0"} kết quả</span>
             </div>
             <Separator className="h-[2px]" />
             {openMap ?
