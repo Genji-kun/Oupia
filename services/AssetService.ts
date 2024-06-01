@@ -8,7 +8,7 @@ class AssetService extends BaseService {
     }
 
     searchAssets = (params: ISearchParams) => {
-        return this.get(ASSET_ENDPOINTS.GET_ASSET_LIST, params);
+        return this.get(ASSET_ENDPOINTS.GET_ASSET_LIST, undefined, params);
     }
 
     searchAssetsByPolygon = (polygon: string) => {

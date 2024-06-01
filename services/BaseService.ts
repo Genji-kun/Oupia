@@ -8,8 +8,11 @@ axios.interceptors.request.use(async (config) => {
 });
 
 class BaseService {
-    private async request(method: Method, url: string, data?: object | string, customHeaders?: object) {
-        const requestConfig = { headers: customHeaders, data };
+    private async request(method: Method, url: string, data?: object | string, options?: object) {
+        const requestConfig = {
+            ...options,
+            data,
+        };
         const requestUrl = `${SERVER_URL}${url}`;
         return axios.request({
             method,
@@ -19,8 +22,8 @@ class BaseService {
         });
     }
 
-    get(url: string, data?: object | string) {
-        return this.request('get', url, data);
+    get(url: string, data?: object | string, params?: object) {
+        return this.request('get', url, data, { params });
     }
 
     post(url: string, data?: object | string) {
