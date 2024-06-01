@@ -8,13 +8,12 @@ import geoJsonProv from "@/public/data/geoJson1.json";
 import geoJsonDist from "@/public/data/geoJson2.json";
 import { toast } from 'sonner';
 import Image from 'next/image';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import AssetItem from './asset-item';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
 const MapContainer = () => {
 
-    const { selectedProv, selectedDist, setSelectedDist, assets, setPolyReq, assetsByPolygon, isFetchingPolygon } = useFindAssetContext();
+    const { selectedProv, selectedDist, setSelectedDist, assetResults, setPolyReq, assetsByPolygon, isFetchingPolygon } = useFindAssetContext();
     const mapRef = useRef<any>(null);
 
     const [polygon, setPolygon] = React.useState<string>("");
@@ -130,15 +129,15 @@ const MapContainer = () => {
     }, [polygon])
 
     useEffect(() => {
-        if (assets.length > 0 && assets[0]) {
+        if (assetResults.length > 0 && assetResults[0]) {
             setViewport({
                 ...viewport,
-                longitude: assets[0].locationLong,
-                latitude: assets[0].locationLat,
+                longitude: assetResults[0].locationLong,
+                latitude: assetResults[0].locationLat,
                 zoom: 11,
             });
         }
-    }, [assets])
+    }, [assetResults])
 
     const onMapLoad = useCallback((event: any) => {
         mapRef.current = event.target;
@@ -164,8 +163,8 @@ const MapContainer = () => {
                     </Popover>
                 </Marker>
             ))
-        } else if (assets && assets.length > 0) {
-            return assets.map((asset, index) => (
+        } else if (assetResults && assetResults.length > 0) {
+            return assetResults.map((asset, index) => (
                 <Marker className="relative z-[1]" key={index} longitude={asset.locationLong} latitude={asset.locationLat}>
                     <Popover>
                         <PopoverTrigger asChild>
@@ -187,7 +186,7 @@ const MapContainer = () => {
         else {
             return null;
         }
-    }, [assets, assetsByPolygon]);
+    }, [assetResults, assetsByPolygon]);
 
 
     function normalizeName(name: string) {
