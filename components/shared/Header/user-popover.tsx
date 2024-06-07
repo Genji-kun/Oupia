@@ -19,7 +19,7 @@ import SearchButton from './search-button';
 import { UserRole } from '@/lib/types/enums';
 import Cookies from 'js-cookie';
 import { signOut } from 'next-auth/react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 type IProps = PropsWithChildren<{
     user: ICurrentUser
@@ -40,9 +40,9 @@ const UserPopover: React.FC<IProps> = ({ user }) => {
         Cookies.remove("accessToken");
         Cookies.remove("user");
         signOut({ redirect: false });
-        router.push("/").then(() => {
-            dispatch(logout());
-        })
+        router.push("/");
+        dispatch(logout());
+
     }
 
     return (
@@ -113,11 +113,6 @@ const UserPopover: React.FC<IProps> = ({ user }) => {
                                 <ChevronRight className="ml-auto h-4 w-4" />
                             </Link>
                         }
-                        <Link href="/settings" className="w-full flex items-center py-1 px-2 hover:bg-accent rounded text-sm">
-                            <Settings className="mr-2 h-4 w-4" />
-                            <span>Cài đặt</span>
-                            <ChevronRight className="ml-auto h-4 w-4" />
-                        </Link>
                         <Link href="/settings/password" className="w-full flex items-center py-1 px-2 hover:bg-accent rounded text-sm">
                             <Key className="mr-2 h-4 w-4" />
                             <span>Đổi mật khẩu</span>

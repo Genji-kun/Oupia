@@ -4,8 +4,7 @@ import SettingsRoutes from "./_components/settings-routes";
 import SettingsTitle from "./_components/settings-title";
 
 export const metadata: Metadata = {
-    title: 'Oupia | Cài đặt và tùy chỉnh',
-    description: '',
+    title: 'Cài đặt và tùy chỉnh',
 }
 
 export default function SettingsLayout({ children }: { children: React.ReactNode }) {

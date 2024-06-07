@@ -19,5 +19,7 @@ export const POST_ENDPOINTS = {
 }
 
 export const USER_ENDPOINTS = {
-    GET_INFO: (username: string) => `store/users/${username}/`
+    GET_INFO: (username: string) => `store/users/${username}/`,
+    UPGRADE_LANDLORD: `/store/users/upgrade-landlord/`
+
 }

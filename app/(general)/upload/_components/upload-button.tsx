@@ -1,50 +1,37 @@
 "use client"
 
 import { Button } from '@/components/ui/button'
-import { assetsEndpoints, postEndpoints } from '@/configs/axiosEndpoints';
+import { assetsEndpoints } from '@/configs/axiosEndpoints';
 import { authApi } from '@/configs/axiosInstance';
 import { PostReq, useUploadContext } from '@/contexts/upload-context'
+import { useUploadPost } from '@/hooks/mutation';
 import { Loader2 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
-import React, { useState } from 'react'
+import React from 'react'
 import { toast } from 'sonner';
 
 function UploadButton() {
 
     const { asset, setAsset, post, setPost, images, postForm } = useUploadContext();
-    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const pathname = usePathname();
 
-    const handleSubmitPost = async (form: PostReq) => {
-        setIsSubmitting(true);
-        const formData = new FormData();
+    const { mutateUploadPost, isPendingUploadPost } = useUploadPost();
 
-        console.log(post)
-        formData.append('post', new Blob([JSON.stringify(post)], { type: "application/json" }))
-        if (postForm.getValues("images").length > 0) {
-            postForm.getValues("images").forEach((file) => {
-                formData.append('images', file);
-            });
-        }
-        try {
-            const res = await authApi.post(postEndpoints["posts"], form);
-            if (res.status === 200) {
-                toast.success("Thêm bài viết thành công");
-                setPost({});
-                postForm.reset({});
-                setIsSubmitting(false);
+    const handleSubmitPost = async (form: PostReq) => {
+        const formData = new FormData();
+        formData.append('post', new Blob([JSON.stringify(form)], { type: "application/json" }))
+        const images = postForm.getValues("images");
+        if (images.length > 0) {
+            for (let i = 0; i < images.length; i++) {
+                formData.append('images', images[i]);
             }
-        } catch (error) {
-            console.error(error);
-            toast.error("Đã có lỗi xảy ra, vui lòng thử lại.");
-            setIsSubmitting(false);
         }
+        await mutateUploadPost(formData);
     }
 
 
     const handleSubmitAsset = async () => {
-        setIsSubmitting(true);
         if (asset.assetName) {
             const form = new FormData();
             form.append('asset', new Blob([JSON.stringify(asset)], { type: "application/json" }))
@@ -58,16 +45,13 @@ function UploadButton() {
                 if (res.status === 200) {
                     toast.success("Thêm căn hộ thành công");
                     setAsset({});
-                    setIsSubmitting(false);
                 }
             } catch (error) {
                 console.error(error);
                 toast.error("Đã có lỗi xảy ra, vui lòng thử lại.");
-                setIsSubmitting(false);
             }
         } else {
             toast.error("Không được bỏ trống nội dung bài viết và loại bài viết.");
-            setIsSubmitting(false);
         }
     }
 
@@ -80,9 +64,9 @@ function UploadButton() {
             <Button onClick={() => setPost({})} variant={"destructive"} className="w-fit p-6">
                 <span>Xóa thông tin</span>
             </Button>
-            <Button onClick={pathname === "/upload" ? handleSubmit : handleSubmitAsset} disabled={isSubmitting} className="styled-button w-fit p-6">
+            <Button onClick={pathname === "/upload" ? handleSubmit : handleSubmitAsset} disabled={isPendingUploadPost} className="styled-button w-fit p-6">
                 {
-                    isSubmitting ?
+                    isPendingUploadPost ?
                         <>
                             <Loader2 className="w-5 h-5 animate-spin" />
                             <span className="text-sm ml-1.5">Đang xử lý</span>

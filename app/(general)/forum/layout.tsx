@@ -4,7 +4,7 @@ import { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 
 export const metadata: Metadata = {
-    title: 'Diễn đàn trao đổi | Oupia',
+    title: 'Diễn đàn trao đổi',
     description: '',
 }
 

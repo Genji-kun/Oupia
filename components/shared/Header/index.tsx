@@ -5,30 +5,22 @@ import NavbarLogo from './navbar-logo';
 import NavbarRoutes from './navbar-routes';
 import { useSelector } from 'react-redux';
 import { cn } from "@/lib/utils";
-import UnAuthorizedHeader from './unauthorized-header';
+
 import Hydration from '../Hydration';
-import UserPopover from './user-popover';
 import NavbarMenu from './navbar-menu';
+import dynamic from 'next/dynamic';
+
+const UserPopover = dynamic(() => import('./user-popover'), {
+    ssr: false,
+});
+
+const UnAuthorizedHeader = dynamic(() => import('./unauthorized-header'), {
+    ssr: false,
+});
 
 const Header = () => {
 
     const { currentUser } = useSelector((state: any) => state.currentUserSlice);
-    // const [authToken, setAuthToken] = useState<any>();
-
-    // useEffect(() => {
-    //     if (currentUser) {
-    //         const getFbToken = async () => {
-    //             try {
-    //                 const res = await authApi.get(authEndpoints["getAuthToken"]);
-    //                 setAuthToken(res.data);
-    //             } catch (error) {
-    //                 console.error(error);
-    //             }
-    //         }
-    //         getFbToken();
-    //     }
-    // }, [currentUser])
-
 
     return (
         <Hydration>

@@ -2,6 +2,10 @@
 
 ## Yêu Cầu
 
+Phiên bản:
+- Node.js 20+
+- npm 10+ hoặc yarn 1.22+
+
 Đảm bảo đã cài đặt Node.js và yarn hoặc npm trên máy tính.
 
 Để cài đặt yarn, hãy viết lệnh sau: 

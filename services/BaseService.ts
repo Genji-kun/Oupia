@@ -34,6 +34,10 @@ class BaseService {
         return this.request('put', url, data);
     }
 
+    patch(url: string, data?: object | string) {
+        return this.request('patch', url, data);
+    }
+
     delete(url: string, data?: object | string) {
         return this.request('delete', url, data);
     }

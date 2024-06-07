@@ -11,8 +11,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
 import { useAuthTabContext } from '@/contexts/auth-tab-context';
 import { useSignUpContext } from '@/contexts/sign-up-context';
-import { publicApi } from '@/configs/axiosInstance';
-import { authEndpoints } from '@/configs/axiosEndpoints';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import { IRegisterAccountForm } from '@/lib/types/interfaces/Register';
