@@ -20,9 +20,20 @@ export const metadata: Metadata = {
   },
 }
 
-const RootLayout = (
-  { children, session }: { children: React.ReactNode, session?: any }
-) => {
+type LayoutProps = {
+  children?: React.ReactNode
+}
+
+type LayoutPropsExtended = {
+  children?: React.ReactNode
+  session?: any
+}
+
+const RootLayout = (props: LayoutProps | LayoutPropsExtended) => {
+
+  const { children, session } = {
+    ...props, session: undefined
+  }
 
   return (
     <html lang="en" suppressHydrationWarning>
