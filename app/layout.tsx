@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 }
 
 const RootLayout = (
-  { children, session }: { children: React.ReactNode, session: any }
+  { children, session }: { children: React.ReactNode, session?: any }
 ) => {
 
   return (
