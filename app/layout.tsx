@@ -20,14 +20,14 @@ export const metadata: Metadata = {
   },
 }
 
-function RootLayout(
-  { children }: { children: React.ReactNode }
-) {
+const RootLayout = (
+  { children, session }: { children: React.ReactNode, session: any }
+) => {
 
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${BeauSans.variable} bg-accent dark:bg-background`}>
-        <Providers>
+        <Providers session={session}>
           {children}
           <Toaster richColors />
         </Providers>
