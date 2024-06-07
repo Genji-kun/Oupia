@@ -8,7 +8,7 @@ import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { v4 as uuid } from 'uuid';
 
-const Providers = ({ children, session }: { children: React.ReactNode, session: any }) => {
+const Providers = ({ children }: { children: React.ReactNode }) => {
 
     const queryClient = new QueryClient()
 
@@ -20,17 +20,17 @@ const Providers = ({ children, session }: { children: React.ReactNode, session: 
     }, [])
 
     return (
-        <SessionProvider session={session}>
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-                <QueryClientProvider client={queryClient}>
-                    <Provider store={store}>
-                        <main>
-                            {children}
-                        </main>
-                    </Provider >
-                </QueryClientProvider>
-            </ThemeProvider>
-        </SessionProvider>
+        // <SessionProvider session={session}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+            <QueryClientProvider client={queryClient}>
+                <Provider store={store}>
+                    <main>
+                        {children}
+                    </main>
+                </Provider >
+            </QueryClientProvider>
+        </ThemeProvider>
+        // </SessionProvider>
     );
 };
 

@@ -20,11 +20,14 @@ export const metadata: Metadata = {
   },
 }
 
-const RootLayout: React.FC<{ children: React.ReactNode, session: any }> = ({ children, session }) => {
+function RootLayout(
+  { children }: { children: React.ReactNode }
+) {
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${BeauSans.variable} bg-accent dark:bg-background`}>
-        <Providers session={session}>
+        <Providers>
           {children}
           <Toaster richColors />
         </Providers>
