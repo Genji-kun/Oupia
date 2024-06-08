@@ -7,6 +7,8 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { Textarea } from '@/components/ui/textarea'
+import { reviewEndpoints } from '@/configs/axiosEndpoints'
+import { authApi } from '@/configs/axiosInstance'
 import { useAssetDetailContext } from '@/contexts/asset-detail-context'
 import { useAddReview } from '@/hooks/mutation'
 import { ReviewRequest } from '@/lib/types/interfaces/Review'
@@ -14,9 +16,10 @@ import { cn } from '@/lib/utils'
 import { convert } from '@/utils/convertAvatarAlt'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2, Star } from 'lucide-react'
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
+import { toast } from 'sonner'
 import { z } from "zod";
 
 
@@ -37,9 +40,10 @@ const reviewSchema = z.object({
 function AssetReviewForm() {
 
     const { currentUser } = useSelector((state: any) => state.currentUserSlice);
-    const { asset } = useAssetDetailContext();
+    const { asset, refetch } = useAssetDetailContext();
 
-    const { mutateAddReview, isPendingAddReview } = useAddReview();
+    // const { mutateAddReview, isPendingAddReview } = useAddReview();
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const reviewForm = useForm<ReviewRequest>({
         resolver: zodResolver(reviewSchema),
@@ -51,18 +55,22 @@ function AssetReviewForm() {
     })
 
 
-    const handleAddReview = async (reviewForm: ReviewRequest) => {
-        await mutateAddReview(reviewForm);
-        // try {
-        //     const res = await authApi.post(reviewEndpoints["addReview"], reviewForm);
-        //     if (res.status === 200) {
-        //         toast.success("Thêm đánh giá thành công.");
-        //         refetch();
-        //     }
-        // } catch (error) {
-        //     toast.error("Đã có lỗi xảy ra, vui lòng thử lại.");
-        //     console.error(error);
-        // }
+    const handleAddReview = async (form: ReviewRequest) => {
+        // await mutateAddReview(reviewForm);
+        setIsSubmitting(true)
+        try {
+            const res = await authApi.post(reviewEndpoints["addReview"], form);
+            if (res.status === 200) {
+                toast.success("Thêm đánh giá thành công.");
+                refetch();
+                reviewForm.reset();
+            }
+        } catch (error) {
+            toast.error("Đã có lỗi xảy ra, vui lòng thử lại.");
+            console.error(error);
+        } finally {
+            setIsSubmitting(false);
+        }
     }
 
     const handleSubmit = () => {
@@ -134,9 +142,9 @@ function AssetReviewForm() {
                         Hủy
                     </Button>
                 </DialogClose>
-                <Button disabled={isPendingAddReview} className="styled-button gap-2" onClick={handleSubmit}>
+                <Button disabled={isSubmitting} className="styled-button gap-2" onClick={handleSubmit}>
                     {
-                        isPendingAddReview ?
+                        isSubmitting ?
                             <>
                                 <span className="text-base">Đang xử lý</span>
                                 <Loader2 size="22" className="animate-spin" />

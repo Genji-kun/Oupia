@@ -1,9 +1,7 @@
 "use client"
 
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { Dialog, DialogTrigger, DialogContent } from '@/components/ui/dialog';
 import { useAssetDetailContext } from '@/contexts/asset-detail-context'
 import { numberToCurrency } from '@/utils/priceConvert';
 import { format } from 'date-fns';
@@ -37,7 +35,7 @@ function AssetInfoSection() {
                 </div>
                 <div className="flex gap-1 items-center">
                     <Star className="w-4 h-4 text-muted-foreground" />
-                    <h3>{asset.score ?? "Chưa có"}</h3>
+                    <h3>{asset.score ? parseFloat((Number(asset.score)).toFixed(2)) : "Chưa có"}</h3>
                 </div>
             </div>
             <div className="flex justify-between items-center mt-3">

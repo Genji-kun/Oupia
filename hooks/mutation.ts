@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import { userService } from "@/services/UserService";
 import { ReviewRequest } from "@/lib/types/interfaces/Review";
 import { reviewService } from "@/services/ReviewService";
+import { QUERY_KEY } from "@/lib/constants/QueryKeys";
 
 // ----------- AUTH -------------
 
@@ -114,7 +115,7 @@ export const useAddReview = () => {
         },
         onSuccess: () => {
             toast.success("Đăng đánh giá thành công");
-            queryClient.invalidateQueries({ queryKey: [] })
+            queryClient.invalidateQueries({ queryKey: [QUERY_KEY.GET_REVIEWS] })
         },
         onError: (error) => {
             toast.error("Đã có lỗi xảy ra vui lòng thử lại")
