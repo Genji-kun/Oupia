@@ -65,10 +65,15 @@ function AssetReviewForm() {
                 toast.success("Thêm đánh giá thành công.");
                 refetch();
                 reviewForm.reset();
-                const res = await assetMutate();
-                if (assetSuccess) {
-                    setAssetScore(asset.score)
-                }
+                setTimeout(
+                    async () => {
+                        const res = await assetMutate();
+                        if (assetSuccess) {
+                            setAssetScore(res.score)
+                        }
+                    }, 1000
+                )
+
             }
         } catch (error) {
             toast.error("Đã có lỗi xảy ra, vui lòng thử lại.");
