@@ -13,7 +13,7 @@ import AssetReviewForm from './asset-review-form';
 
 function AssetInfoSection() {
 
-    const { asset } = useAssetDetailContext();
+    const { asset, assetScore } = useAssetDetailContext();
     const { currentUser } = useSelector((state: any) => state.currentUserSlice);
 
     return (
@@ -35,7 +35,7 @@ function AssetInfoSection() {
                 </div>
                 <div className="flex gap-1 items-center">
                     <Star className="w-4 h-4 text-muted-foreground" />
-                    <h3>{asset.score ? parseFloat((Number(asset.score)).toFixed(2)) : "Chưa có"}</h3>
+                    <h3>{assetScore ? parseFloat((Number(assetScore)).toFixed(2)) : "Chưa có"}</h3>
                 </div>
             </div>
             <div className="flex justify-between items-center mt-3">

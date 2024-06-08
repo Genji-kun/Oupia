@@ -3,7 +3,7 @@
 import { IUserLogin } from "@/lib/types/interfaces";
 import { authService } from "@/services/AuthService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { login } from "@/redux/slices/currentUserSlice";
 import Cookies from "js-cookie";
@@ -13,6 +13,10 @@ import { userService } from "@/services/UserService";
 import { ReviewRequest } from "@/lib/types/interfaces/Review";
 import { reviewService } from "@/services/ReviewService";
 import { QUERY_KEY } from "@/lib/constants/QueryKeys";
+import { useAssetDetailContext } from "@/contexts/asset-detail-context";
+import { assetService } from "@/services/AssetService";
+import { publicApi } from "@/configs/axiosInstance";
+import { assetsEndpoints } from "@/configs/axiosEndpoints";
 
 // ----------- AUTH -------------
 
@@ -105,6 +109,29 @@ export const useLandlordUpgrade = () => {
     }
 }
 
+export const useAssetMutate = () => {
+    const { assetSlug } = useParams<{ assetSlug: string }>();
+
+    const { mutateAsync: assetMutate, isSuccess: assetSuccess } = useMutation({
+        mutationFn: async () => {
+            try {
+                const res = await publicApi.get(assetsEndpoints.getAssetBySlugName(assetSlug));
+                if (res.status === 200) {
+                    return res.data;
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        },
+    })
+
+    return {
+        assetMutate,
+        assetSuccess
+    }
+
+}
+
 
 export const useAddReview = () => {
     const queryClient = useQueryClient();
@@ -115,6 +142,7 @@ export const useAddReview = () => {
         },
         onSuccess: () => {
             toast.success("Đăng đánh giá thành công");
+
             queryClient.invalidateQueries({ queryKey: [QUERY_KEY.GET_REVIEWS] })
         },
         onError: (error) => {

@@ -10,7 +10,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { reviewEndpoints } from '@/configs/axiosEndpoints'
 import { authApi } from '@/configs/axiosInstance'
 import { useAssetDetailContext } from '@/contexts/asset-detail-context'
-import { useAddReview } from '@/hooks/mutation'
+import { useAddReview, useAssetMutate } from '@/hooks/mutation'
 import { ReviewRequest } from '@/lib/types/interfaces/Review'
 import { cn } from '@/lib/utils'
 import { convert } from '@/utils/convertAvatarAlt'
@@ -40,7 +40,8 @@ const reviewSchema = z.object({
 function AssetReviewForm() {
 
     const { currentUser } = useSelector((state: any) => state.currentUserSlice);
-    const { asset, refetch } = useAssetDetailContext();
+    const { asset, refetch, setAssetScore } = useAssetDetailContext();
+    const { assetMutate, assetSuccess } = useAssetMutate();
 
     // const { mutateAddReview, isPendingAddReview } = useAddReview();
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -64,6 +65,10 @@ function AssetReviewForm() {
                 toast.success("Thêm đánh giá thành công.");
                 refetch();
                 reviewForm.reset();
+                const res = await assetMutate();
+                if (assetSuccess) {
+                    setAssetScore(asset.score)
+                }
             }
         } catch (error) {
             toast.error("Đã có lỗi xảy ra, vui lòng thử lại.");

@@ -17,6 +17,8 @@ interface IAssetDetailContext {
     reviews: ReviewResponse[];
     isFetchingReviews: boolean;
     refetch: any;
+    setAssetScore: React.Dispatch<React.SetStateAction<number | null | undefined>>;
+    assetScore?: number | null;
 }
 
 const AssetDetailContext = createContext<IAssetDetailContext | undefined>(undefined);
@@ -28,6 +30,7 @@ export const AssetDetailProvider: React.FC<{ children: ReactNode }> = ({ childre
 
     const [isOpenSearch, setIsOpenSearch] = useState<boolean>(false);
     const [assetId, setAssetId] = useState<any>();
+    const [assetScore, setAssetScore] = useState<number | null | undefined>();
 
     const fetchAssetData = async (slug: any) => {
         try {
@@ -72,6 +75,7 @@ export const AssetDetailProvider: React.FC<{ children: ReactNode }> = ({ childre
         if (asset) {
             document.title = `${asset.assetName} | Oupia`;
             setAssetId(asset.id);
+            setAssetScore(asset.score);
         }
     }, [asset])
 
@@ -80,7 +84,7 @@ export const AssetDetailProvider: React.FC<{ children: ReactNode }> = ({ childre
     }, [isError])
 
     return (
-        <AssetDetailContext.Provider value={{ asset, isFetching, isOpenSearch, setIsOpenSearch, reviews, isFetchingReviews, refetch }}>
+        <AssetDetailContext.Provider value={{ asset, isFetching, isOpenSearch, setIsOpenSearch, reviews, isFetchingReviews, refetch, assetScore, setAssetScore }}>
             {children}
         </AssetDetailContext.Provider>
     );
