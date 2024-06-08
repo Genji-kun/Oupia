@@ -1,7 +1,7 @@
 "use client"
 
-import { assetsEndpoints, reviewEndpoints } from '@/configs/axiosEndpoints';
-import { authApi, publicApi } from '@/configs/axiosInstance';
+import { assetsEndpoints } from '@/configs/axiosEndpoints';
+import { publicApi } from '@/configs/axiosInstance';
 import { QUERY_KEY } from '@/lib/constants/QueryKeys';
 import { ReviewResponse } from '@/lib/types/interfaces/Review';
 import { reviewService } from '@/services/ReviewService';

@@ -142,7 +142,7 @@ const SearchButton: React.FC = () => {
                                 )
                             }
                         </>
-                    </ScrollArea>F
+                    </ScrollArea>
                 </DialogContent>
             </Dialog>
         </div >
