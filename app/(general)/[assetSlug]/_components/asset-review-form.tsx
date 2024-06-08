@@ -69,6 +69,7 @@ function AssetReviewForm() {
                     async () => {
                         const res = await assetMutate();
                         if (assetSuccess) {
+                            console.log(res)
                             setAssetScore(res.score)
                         }
                     }, 1000
