@@ -7,7 +7,7 @@ import { Label } from '@/components/ui/label';
 import { useAssetDetailContext } from '@/contexts/asset-detail-context'
 import { numberToCurrency } from '@/utils/priceConvert';
 import { format } from 'date-fns';
-import { Calendar, UsersRoundIcon } from 'lucide-react';
+import { Calendar, Star, UsersRoundIcon } from 'lucide-react';
 import React from 'react'
 import { BiArea } from 'react-icons/bi';
 import { useSelector } from 'react-redux';
@@ -34,6 +34,10 @@ function AssetInfoSection() {
                 <div className="flex gap-1 items-center">
                     <UsersRoundIcon className="w-4 h-4 text-muted-foreground" />
                     <h3> &#8804; {asset.maxPeople} người</h3>
+                </div>
+                <div className="flex gap-1 items-center">
+                    <Star className="w-4 h-4 text-muted-foreground" />
+                    <h3>{asset.score ?? "Chưa có"}</h3>
                 </div>
             </div>
             <div className="flex justify-between items-center mt-3">
