@@ -8,7 +8,7 @@ class ReviewService extends BaseService {
     }
 
     getReview = (params: { assetId: number }) => {
-        return this.get(REVIEW_ENDPOINTS.GET_REVIEWS);
+        return this.get(REVIEW_ENDPOINTS.GET_REVIEWS, undefined, params);
     }
 
     addReview = (req: ReviewRequest) => {
