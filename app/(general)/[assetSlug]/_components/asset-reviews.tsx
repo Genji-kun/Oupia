@@ -6,11 +6,7 @@ import ReviewItem from './review-item';
 
 function AssetReviews() {
 
-    const { asset, isFetchingReviews, reviews} = useAssetDetailContext();
-
-    if (isFetchingReviews || !asset) {
-        return <></>
-    }
+    const { reviews } = useAssetDetailContext();
 
     return (
         <>
