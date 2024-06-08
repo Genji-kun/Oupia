@@ -44,7 +44,7 @@ export const AssetDetailProvider: React.FC<{ children: ReactNode }> = ({ childre
         const [_key, { assetId }] = queryKey;
         try {
             const res = await reviewService.getReview({
-                assetId: assetId
+                assetId: assetId,
             });
             return res.data.content;
         } catch (error) {
@@ -64,6 +64,7 @@ export const AssetDetailProvider: React.FC<{ children: ReactNode }> = ({ childre
         queryKey: [QUERY_KEY.GET_REVIEWS, { assetId }],
         queryFn: getReviews,
         refetchOnWindowFocus: false,
+        enabled: !!assetId,
         staleTime: 0
     })
 
