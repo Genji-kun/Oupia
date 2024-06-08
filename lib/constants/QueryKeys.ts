@@ -10,5 +10,8 @@ export const QUERY_KEY = {
 
     // USER KEYS 
     GET_USER_INFO: "getUserInfo",
-    SEARCH_USER: "searchUsers"
+    SEARCH_USER: "searchUsers",
+
+    // REVIEWS 
+    GET_REVIEWS: "getReviews"
 }

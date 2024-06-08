@@ -21,5 +21,9 @@ export const POST_ENDPOINTS = {
 export const USER_ENDPOINTS = {
     GET_INFO: (username: string) => `store/users/${username}/`,
     UPGRADE_LANDLORD: `/store/users/upgrade-landlord/`
+}
 
+export const REVIEW_ENDPOINTS = {
+    GET_REVIEWS: `/store/reviews/`,
+    ADD_REVIEWS: `/store/reviews/`
 }

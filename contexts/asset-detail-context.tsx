@@ -2,7 +2,9 @@
 
 import { assetsEndpoints, reviewEndpoints } from '@/configs/axiosEndpoints';
 import { authApi, publicApi } from '@/configs/axiosInstance';
+import { QUERY_KEY } from '@/lib/constants/QueryKeys';
 import { ReviewResponse } from '@/lib/types/interfaces/Review';
+import { reviewService } from '@/services/ReviewService';
 import { useQuery } from '@tanstack/react-query';
 import { notFound, useParams } from 'next/navigation';
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
@@ -41,16 +43,13 @@ export const AssetDetailProvider: React.FC<{ children: ReactNode }> = ({ childre
     const getReviews = async ({ queryKey }: any) => {
         const [_key, { assetId }] = queryKey;
         try {
-            const res = await authApi.get(reviewEndpoints["getReviews"], {
-                params: {
-                    assetId: assetId,
-                }
-            })
+            const res = await reviewService.getReview({
+                assetId: assetId
+            });
             return res.data.content;
         } catch (error) {
             console.error(error);
         }
-
         return [];
     }
 
@@ -62,9 +61,10 @@ export const AssetDetailProvider: React.FC<{ children: ReactNode }> = ({ childre
     });
 
     const { data: reviews, isFetching: isFetchingReviews, refetch } = useQuery({
-        queryKey: ["getReviews", { assetId }],
+        queryKey: [QUERY_KEY.GET_REVIEWS, { assetId }],
         queryFn: getReviews,
         refetchOnWindowFocus: false,
+        staleTime: 0
     })
 
     useEffect(() => {

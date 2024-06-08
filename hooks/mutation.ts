@@ -2,7 +2,7 @@
 
 import { IUserLogin } from "@/lib/types/interfaces";
 import { authService } from "@/services/AuthService";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { login } from "@/redux/slices/currentUserSlice";
@@ -10,6 +10,8 @@ import Cookies from "js-cookie";
 import { postService } from "@/services/PostService";
 import { toast } from "sonner";
 import { userService } from "@/services/UserService";
+import { ReviewRequest } from "@/lib/types/interfaces/Review";
+import { reviewService } from "@/services/ReviewService";
 
 // ----------- AUTH -------------
 
@@ -99,5 +101,29 @@ export const useLandlordUpgrade = () => {
     return {
         mutateUploadPost: mutateAsync,
         isPendingUploadPost: isPending
+    }
+}
+
+
+export const useAddReview = () => {
+    const queryClient = useQueryClient();
+
+    const { mutateAsync, isPending } = useMutation({
+        mutationFn: async (req: ReviewRequest) => {
+            await reviewService.addReview(req);
+        },
+        onSuccess: () => {
+            toast.success("Đăng đánh giá thành công");
+            queryClient.invalidateQueries({ queryKey: [] })
+        },
+        onError: (error) => {
+            toast.error("Đã có lỗi xảy ra vui lòng thử lại")
+            console.error(error);
+        }
+    })
+
+    return {
+        mutateAddReview: mutateAsync,
+        isPendingAddReview: isPending
     }
 }

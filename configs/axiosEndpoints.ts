@@ -19,8 +19,8 @@ export const assetsEndpoints = {
 }
 
 export const reviewEndpoints = {
-    "getReviews" : `/store/reviews/`,
-    "addReview" : `/store/reviews/`,
+    "getReviews": `/store/reviews/`,
+    "addReview": `/store/reviews/`,
 }
 
 export const postEndpoints = {
@@ -31,7 +31,7 @@ export const postEndpoints = {
 }
 
 export const commentEndpoints = {
-    "comments" : `/store/comments/`,
+    "comments": `/store/comments/`,
     "addComment": `/store/comments/`,
 }
 
@@ -46,7 +46,6 @@ export const followEndpoints = {
     "checkFollow": `/store/follows/`,
     "getFollowersInfo": (id: number) => `/store/follows/${id}/followers/`,
     "getFollowings": (id: number) => `/store/follows/${id}/followings/`,
-
 }
 
 export const favouriteEndpoints = {
@@ -58,5 +57,5 @@ export const favouriteEndpoints = {
 
 export const searchEndpoints = {
     "users": `/search/users/`,
-    "amenities" : `/search/amenities/`
+    "amenities": `/search/amenities/`
 }
