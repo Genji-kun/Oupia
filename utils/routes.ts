@@ -14,6 +14,9 @@ export const navRoutes = [
         name: "Diễn đàn",
         href: "/forum"
     }, {
+        name: "Đánh giá",
+        href: "/vote"
+    }, {
         name: "Liên hệ",
         href: "/contact"
     }
@@ -21,22 +24,10 @@ export const navRoutes = [
 
 export const settingsRoutes = [
     {
-        name: "Tài khoản Chủ nhà trọ",
+        name: "Tài khoản chủ trọ",
         href: "/settings/landlord",
     },
     {
-        name: "Thông tin cá nhân",
-        href: "/settings/profile",
-    }, {
-        name: "Tài khoản",
-        href: "/settings/account",
-    }, {
-        name: "Thông báo",
-        href: "/settings/notifications",
-    }, {
-        name: "Mật khẩu",
-        href: "/settings/password",
-    }, {
         name: "Màn hình giao diện",
         href: "/settings/appearance",
     }
@@ -50,22 +41,6 @@ export const mobileSettingsRoutes: { name: string, href: string, icon: any }[] =
         icon: HiOutlineHomeModern
     },
     {
-        name: "Thông tin",
-        href: "/settings/profile",
-        icon: Contact2
-    }, {
-        name: "Tài khoản",
-        href: "/settings/account",
-        icon: UserRoundIcon
-    }, {
-        name: "Thông báo",
-        href: "/settings/notifications",
-        icon: TbBellRinging2
-    }, {
-        name: "Mật khẩu",
-        href: "/settings/password",
-        icon: KeyIcon
-    }, {
         name: "Màn hình",
         href: "/settings/appearance",
         icon: MdOutlineScreenshotMonitor

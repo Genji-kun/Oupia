@@ -25,8 +25,6 @@ type District = {
 }
 
 interface IFindAssetContext {
-    openSearch: boolean;
-    setOpenSearch: React.Dispatch<React.SetStateAction<boolean>>;
     openMap: boolean,
     setOpenMap: React.Dispatch<React.SetStateAction<boolean>>;
     provinces: Province[];
@@ -61,7 +59,6 @@ const FindAssetContext = createContext<IFindAssetContext | undefined>(undefined)
 export const FindAssetProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
     // Search Mode
-    const [openSearch, setOpenSearch] = useState<boolean>(true);
     const [openMap, setOpenMap] = useState<boolean>(false);
 
 
@@ -112,7 +109,6 @@ export const FindAssetProvider: React.FC<{ children: ReactNode }> = ({ children 
     return (
         <FindAssetContext.Provider value={
             {
-                openSearch, setOpenSearch,
                 openMap, setOpenMap,
                 provinces, setProvinces,
                 selectedProv, setSelectedProv,

@@ -1,7 +1,7 @@
 import { USER_ENDPOINTS } from "@/lib/constants/EndPoints";
-import BaseService from "./BaseService";
+import AppService from "./app.service";
 
-class UserService extends BaseService {
+class UserService extends AppService {
     constructor() {
         super();
     }

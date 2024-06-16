@@ -12,8 +12,8 @@ const AssetList = () => {
 
     if (isFetchingAssetResults) {
         return (
-            <>
-                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 mb-4">
+            <div className="mt-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 mb-8">
                     <AssetSkeleton />
                     <AssetSkeleton />
                     <AssetSkeleton />
@@ -24,7 +24,7 @@ const AssetList = () => {
                     <AssetSkeleton />
                 </div>
                 <Skeleton className=" w-1/2 mx-auto h-10 dark:bg-oupia-sub" />
-            </>
+            </div>
         );
     }
 

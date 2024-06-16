@@ -1,7 +1,7 @@
 import { QUERY_KEY } from "@/lib/constants/QueryKeys"
-import { assetService } from "@/services/AssetService";
-import { authService } from "@/services/AuthService"
-import { userService } from "@/services/UserService";
+import { assetService } from "@/services/asset.service";
+import { authService } from "@/services/auth.service"
+import { userService } from "@/services/user.service";
 import { useQuery } from "@tanstack/react-query"
 import { useState } from "react";
 

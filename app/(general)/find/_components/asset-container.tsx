@@ -2,38 +2,31 @@
 
 
 import React from 'react';
-import SearchBar from './search-bar';
-import { AnimatePresence, motion } from "framer-motion";
-import MapContainer from './map-container';
-import AssetList from './asset-list';
 import { useFindAssetContext } from '@/contexts/find-asset-context';
 import AssetPagination from './asset-pagination';
+import dynamic from 'next/dynamic';
 
+const MapContainer = dynamic(() => import('./map-container'), {
+    ssr: false
+});
+
+const AssetList = dynamic(() => import('./asset-list'), {
+    ssr: false
+});
 
 const AssetContainer = () => {
 
-    const { openSearch, openMap } = useFindAssetContext();
+    const { openMap } = useFindAssetContext();
 
     return (
         <div className="flex flex-col gap-4 w-full h-full">
             {openMap ?
                 <MapContainer />
                 :
-                <>
-                    <AnimatePresence>
-                        {openSearch && <motion.div
-                            initial={{ y: -10, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            exit={{ y: -10, opacity: 0 }}
-                            transition={{ duration: 0.1, ease: "easeInOut" }}>
-                            {/* <SearchBar /> */}
-                        </motion.div>}
-                    </AnimatePresence>
-                    <div className="px-4 w-full flex-grow space-y-2">
-                        <AssetList />
-                        <AssetPagination/>
-                    </div>
-                </>
+                <div className="px-4 w-full flex-grow space-y-2">
+                    <AssetList />
+                    <AssetPagination />
+                </div>
             }
         </div>
     );

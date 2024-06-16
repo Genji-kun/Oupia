@@ -1,8 +1,8 @@
 import { ISearchParams } from "@/lib/types/interfaces/Search";
-import BaseService from "./BaseService";
+import AppService from "./app.service";
 import { ASSET_ENDPOINTS } from "@/lib/constants/EndPoints";
 
-class AssetService extends BaseService {
+class AssetService extends AppService {
     constructor() {
         super();
     }

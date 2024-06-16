@@ -12,8 +12,13 @@ import MaxPeopleSection from './max-people-section';
 
 const FilterBar = () => {
 
-    const { openMap, setOpenMap, assetResults, keyword, setKeyword } = useFindAssetContext();
+    const { openMap, setOpenMap, assetResults, keyword, setKeyword, maxPeople, setMaxPeople, priceRate, setPriceRate } = useFindAssetContext();
 
+    const handleResetFilter = () => {
+        setKeyword("");
+        setMaxPeople("");
+        setPriceRate([0, 50000000]);
+    }
 
     return (
         <div className="flex flex-col gap-y-4 p-6 border-r border-border w-96 h-screen overflow-y-auto dark:bg-oupia-base">
@@ -69,6 +74,15 @@ const FilterBar = () => {
                     <MaxMinPrice />
                     <Separator className="h-[2px]" />
                     <MaxPeopleSection />
+
+                    {
+                        (keyword || maxPeople) && <div className="mt-4">
+                            <Button onClick={handleResetFilter} variant={"outline"} className="w-full bg-accent hover:bg-background dark:bg-background dark:hover:bg-oupia-sub">
+                                Xóa lọc
+                            </Button>
+                        </div>
+
+                    }
                 </>}
         </div >
     );

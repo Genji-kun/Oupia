@@ -1,5 +1,8 @@
-import Header from "@/components/shared/Header";
-import Footer from "@/components/ui/footer";
+import dynamic from "next/dynamic";
+
+const Header = dynamic(() => import("@/components/shared/Header"), {
+    ssr: false
+});
 
 const GeneralLayout = ({ children }: { children: React.ReactNode }) => {
     return (
@@ -8,7 +11,6 @@ const GeneralLayout = ({ children }: { children: React.ReactNode }) => {
             <main className="mt-[60px] lg:mt-[80px] min-h-[calc(100vh-80px)]">
                 {children}
             </main>
-            <Footer />
         </>
     )
 }

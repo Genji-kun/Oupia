@@ -44,9 +44,11 @@ function AssetInfoInputs() {
                 <div className="space-y-2">
                     <Label>Loại hình căn hộ</Label>
                     <Select defaultValue={asset.assetType && asset.assetType} onValueChange={value => handleAssetTypeChange(value)}>
-                        <SelectTrigger className={cn("dark:bg-oupia-sub", !asset.assetType && "text-muted-foreground")}>
-                            <SelectValue placeholder="Loại hình căn hộ của bạn thuộc loại nào?" />
-                        </SelectTrigger>
+                        <FormControl>
+                            <SelectTrigger className={cn("dark:bg-oupia-sub", !asset.assetType && "text-muted-foreground")}>
+                                <SelectValue placeholder="Loại hình căn hộ của bạn thuộc loại nào?" />
+                            </SelectTrigger>
+                        </FormControl>
                         <SelectContent>
                             <SelectItem value="BOARDING_HOUSE">Dãy trọ</SelectItem>
                             <SelectItem value="SHARED_HOUSING_SYSTEM">Hệ thống nhà chung</SelectItem>
@@ -92,7 +94,7 @@ function AssetInfoInputs() {
                             value={asset.area}
                             name="area"
                             onChange={(evt) => {
-                                    handleFormChange(evt.target.name, evt.target.value)
+                                handleFormChange(evt.target.name, evt.target.value)
                             }}
                         />
                         <span className="absolute right-2 top-1/2 -translate-y-1/2 px-2 border-l border-foreground">m²</span>

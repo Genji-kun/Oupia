@@ -1,8 +1,8 @@
-import { IUserLogin, IUserRegister } from "@/lib/types/interfaces";
-import BaseService from "./BaseService";
+import { IUserLogin } from "@/lib/types/interfaces";
+import AppService from "./app.service";
 import { AUTH_ENDPOINTS } from "@/lib/constants/EndPoints";
 
-class AuthService extends BaseService {
+class AuthService extends AppService {
     constructor() {
         super();
     }

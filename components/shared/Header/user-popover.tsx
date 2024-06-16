@@ -15,11 +15,15 @@ import { convert } from '@/utils/convertAvatarAlt';
 import { HiOutlineHomeModern } from 'react-icons/hi2';
 import React, { PropsWithChildren } from 'react';
 import { ICurrentUser } from '@/lib/types/interfaces';
-import SearchButton from './search-button';
 import { UserRole } from '@/lib/types/enums';
 import Cookies from 'js-cookie';
 import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
+
+const SearchButton = dynamic(() => import("./search-button"), {
+    ssr: false
+})
 
 type IProps = PropsWithChildren<{
     user: ICurrentUser

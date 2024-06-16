@@ -6,7 +6,11 @@ import { useTheme } from 'next-themes';
 import React from 'react'
 import { Button } from '../../ui/button';
 import Link from 'next/link';
-import SearchButton from './search-button';
+import dynamic from 'next/dynamic';
+
+const SearchButton = dynamic(() => import("./search-button"), {
+    ssr: false
+})
 
 const UnAuthorizedHeader: React.FC = () => {
 

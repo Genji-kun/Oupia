@@ -4,7 +4,7 @@ import { assetsEndpoints } from '@/configs/axiosEndpoints';
 import { publicApi } from '@/configs/axiosInstance';
 import { QUERY_KEY } from '@/lib/constants/QueryKeys';
 import { ReviewResponse } from '@/lib/types/interfaces/Review';
-import { reviewService } from '@/services/ReviewService';
+import { reviewService } from '@/services/review.service';
 import { useQuery } from '@tanstack/react-query';
 import { notFound, useParams } from 'next/navigation';
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';

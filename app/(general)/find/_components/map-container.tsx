@@ -129,11 +129,11 @@ const MapContainer = () => {
     }, [polygon])
 
     useEffect(() => {
-        if (assetResults.length > 0 && assetResults[0]) {
+        if (!!assetResults?.length) {
             setViewport({
                 ...viewport,
-                longitude: assetResults[0].locationLong,
-                latitude: assetResults[0].locationLat,
+                longitude: assetResults?.[0]?.locationLong,
+                latitude: assetResults?.[0]?.locationLat,
                 zoom: 11,
             });
         }

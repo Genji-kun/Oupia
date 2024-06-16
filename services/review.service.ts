@@ -1,8 +1,8 @@
 import { ReviewRequest } from "@/lib/types/interfaces/Review";
-import BaseService from "./BaseService";
+import AppService from "./app.service";
 import { REVIEW_ENDPOINTS } from "@/lib/constants/EndPoints";
 
-class ReviewService extends BaseService {
+class ReviewService extends AppService {
     constructor() {
         super();
     }

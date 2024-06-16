@@ -7,7 +7,7 @@ axios.interceptors.request.use(async (config) => {
     return config;
 });
 
-class BaseService {
+class AppService {
     private async request(method: Method, url: string, data?: object | string, options?: object) {
         const requestConfig = {
             ...options,
@@ -43,4 +43,4 @@ class BaseService {
     }
 }
 
-export default BaseService;
+export default AppService;

@@ -1,8 +1,8 @@
-import { Gender, UserRole } from "@/lib/types/enums";
+import { Gender, UserRole } from "@/lib/types/enums"
 
 export interface IUserLogin {
-    username: string;
-    password: string;
+    username: string,
+    password: string,
 }
 
 export interface IUserRegister {
@@ -12,19 +12,19 @@ export interface IUserRegister {
     gender?: Gender,
     dob?: Date,
     avatar?: File,
-    account?: IAcount,
+    account?: IAcount
 }
 
 export interface IAcount {
     username?: string,
     password?: string,
-    confirm?: string,
+    confirm?: string
 }
 
 export interface ICurrentUser {
-    id: number;
-    fullName: string;
-    avatar: string;
-    username: string;
-    role: UserRole;
+    id: number,
+    fullName: string,
+    avatar: string,
+    username: string,
+    role: UserRole
 }

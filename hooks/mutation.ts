@@ -1,20 +1,18 @@
 "use client"
 
 import { IUserLogin } from "@/lib/types/interfaces";
-import { authService } from "@/services/AuthService";
+import { authService } from "@/services/auth.service";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams, useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { login } from "@/redux/slices/currentUserSlice";
 import Cookies from "js-cookie";
-import { postService } from "@/services/PostService";
+import { postService } from "@/services/post.service";
 import { toast } from "sonner";
-import { userService } from "@/services/UserService";
+import { userService } from "@/services/user.service";
 import { ReviewRequest } from "@/lib/types/interfaces/Review";
-import { reviewService } from "@/services/ReviewService";
+import { reviewService } from "@/services/review.service";
 import { QUERY_KEY } from "@/lib/constants/QueryKeys";
-import { useAssetDetailContext } from "@/contexts/asset-detail-context";
-import { assetService } from "@/services/AssetService";
 import { publicApi } from "@/configs/axiosInstance";
 import { assetsEndpoints } from "@/configs/axiosEndpoints";
 
