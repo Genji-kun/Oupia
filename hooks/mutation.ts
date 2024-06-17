@@ -15,6 +15,7 @@ import { reviewService } from "@/services/review.service";
 import { QUERY_KEY } from "@/lib/constants/QueryKeys";
 import { publicApi } from "@/configs/axiosInstance";
 import { assetsEndpoints } from "@/configs/axiosEndpoints";
+import { certificationService } from "@/services/certification.service";
 
 // ----------- AUTH -------------
 
@@ -152,5 +153,26 @@ export const useAddReview = () => {
     return {
         mutateAddReview: mutateAsync,
         isPendingAddReview: isPending
+    }
+}
+
+// ----------- CERTIFICATIONS ------------
+
+export const useAcceptCertification = () => {
+    const router = useRouter();
+
+    const { mutateAsync, isPending } = useMutation({
+        mutationFn: async (token: string) => {
+            await certificationService.acceptCertification(token);
+        },
+        onSuccess: () => {
+            toast.success("Xác nhận chứng chỉ thành công, bây giờ bạn có thể đánh giá nhà trọ đã nhận qua email");
+            router.push("/");
+        }
+    });
+
+    return {
+        mutateAsync,
+        isPending
     }
 }

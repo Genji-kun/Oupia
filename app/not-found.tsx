@@ -1,11 +1,12 @@
 import { Button } from '@/components/ui/button'
 import { Metadata, NextPage } from 'next'
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
 import { IoHome } from 'react-icons/io5'
 
 export const metadata: Metadata = {
-    title: "Không tìm thấy trang | Oupia",
+    title: "Không tìm thấy trang",
     description: "Đường dẫn bạn truy cập không tồn tại, vui lòng về trang chủ."
 }
 
@@ -30,4 +31,4 @@ const NotFound: NextPage = () => {
     )
 }
 
-export default NotFound;
+export default dynamic(() => Promise.resolve(NotFound), { ssr: false })

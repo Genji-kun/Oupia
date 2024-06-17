@@ -27,3 +27,7 @@ export const REVIEW_ENDPOINTS = {
     GET_REVIEWS: `store/reviews/`,
     ADD_REVIEWS: `store/reviews/`
 }
+
+export const CERTIFICATION_ENDPOINTS = {
+    ACCEPT: `store/certifications/`
+}
