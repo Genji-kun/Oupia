@@ -4,6 +4,7 @@ import React from 'react';
 import UserHeader from './user-header';
 import { Separator } from '@/components/ui/separator';
 import { useProfileContext } from '@/contexts/profile-context';
+import UserTab from './user-tab';
 
 const UserProfile = () => {
 
@@ -13,7 +14,9 @@ const UserProfile = () => {
         <div className="container flex flex-col">
             <UserHeader />
             <Separator />
-            {/* {userInfoData && <UserTab />} */}
+            {
+                userInfoData && <UserTab />
+            }
         </div>
     );
 };
