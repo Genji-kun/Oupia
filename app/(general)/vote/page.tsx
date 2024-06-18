@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 const VotingPage = () => {
     return (
         <div className="container py-4">
-            <VoteList />
+            <VoteList />    
         </div>
     )
 }

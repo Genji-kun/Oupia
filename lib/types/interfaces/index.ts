@@ -28,3 +28,4 @@ export interface ICurrentUser {
     username: string,
     role: UserRole
 }
+

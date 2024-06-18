@@ -1,6 +1,7 @@
 import { QUERY_KEY } from "@/lib/constants/QueryKeys"
 import { assetService } from "@/services/asset.service";
 import { authService } from "@/services/auth.service"
+import { searchService } from "@/services/search.service";
 import { userService } from "@/services/user.service";
 import { useQuery } from "@tanstack/react-query"
 import { useState } from "react";
@@ -105,3 +106,23 @@ export const useAuthToken = () => {
 
 // ---------- REVIEW -------------
 
+
+//----------- AMENITY ------------
+
+export const useSearchAmenities = (keyword: string) => {
+    const { data, isFetching } = useQuery({
+        queryKey: [QUERY_KEY.SEARCH_AMENITIES, keyword],
+        queryFn: async ({ queryKey }) => {
+            const [_key, keyword] = queryKey;
+            const res = await searchService.searchAmenities(keyword);
+            return res.data.content;
+        },
+        refetchOnWindowFocus: false,
+        enabled: !!keyword
+    });
+
+    return {
+        amenities: data,
+        isFetching
+    }
+}

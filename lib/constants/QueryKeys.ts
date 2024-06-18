@@ -13,5 +13,7 @@ export const QUERY_KEY = {
     SEARCH_USER: "searchUsers",
 
     // REVIEWS 
-    GET_REVIEWS: "getReviews"
+    GET_REVIEWS: "getReviews",
+
+    SEARCH_AMENITIES: "searchAmenities"
 }

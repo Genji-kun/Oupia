@@ -31,3 +31,7 @@ export const REVIEW_ENDPOINTS = {
 export const CERTIFICATION_ENDPOINTS = {
     ACCEPT: `store/certifications/`
 }
+
+export const SEARCH_ENDPOINTS = {
+    AMENITY: `search/amenities/`
+}
