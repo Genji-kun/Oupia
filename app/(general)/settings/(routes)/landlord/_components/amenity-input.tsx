@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
@@ -40,25 +41,8 @@ function AmenityInput({ form }: { form: UseFormReturn<ISubmitLandlordForm, any, 
 
     return (
         <div className="relative space-y-2 w-full" ref={inputRef}>
-            {
-                selectedAmenities.length > 0 &&
-                <div className="flex flex-wrap gap-2">
-                    {
-                        selectedAmenities.map((amenity, index) => (
-                            <div key={index} className="flex items-center gap-1.5 bg-primary/20 text-primary border border-primary-500 rounded-lg h-fit px-3 py-1.5">
-                                <ThumbsUp className="w-4 h-4" />
-                                <span>{amenity.amenityName}</span>
-                                <Button
-                                    variant={"ghost"}
-                                    className="rounded-full w-fit h-fit p-1"
-                                    onClick={() => handleRemoveAmenity(amenity.amenityName)}>
-                                    <X className="w-4 h-4" />
-                                </Button>
-                            </div>
-                        ))
-                    }
-                </div>
-            }
+
+            <Label className="text-base">Các tiện ích</Label>
             <div className="relative">
                 <Input
                     value={query}
@@ -84,25 +68,46 @@ function AmenityInput({ form }: { form: UseFormReturn<ISubmitLandlordForm, any, 
                         </Tooltip>
                     </TooltipProvider>
                 }
+                {
+                    !!amenities?.length &&
+                    <ScrollArea className="absolute bg-background z-10 bottom-2 max-h-72 w-full rounded border border-t-0 rounded-t-none py-2">
+                        <div className="flex flex-col px-2">
+                            {amenities.map((amenity: { amenityName: string }, index: number) => (
+                                <React.Fragment key={index}>
+                                    <Button
+                                        variant="ghost"
+                                        className="justify-start"
+                                        type='button'
+                                        onClick={() => handleSelectTag(amenity.amenityName)}>
+                                        {amenity.amenityName}
+                                    </Button>
+                                    <Separator />
+                                </React.Fragment>
+                            ))}
+                        </div>
+                    </ScrollArea>
+                }
             </div>
             {
-                !!amenities?.length &&
-                <ScrollArea className="absolute z-10 bottom-2 max-h-72 w-full rounded border border-t-0 rounded-t-none py-2">
-                    <div className="flex flex-col px-2">
-                        {amenities.map((amenity: { amenityName: string }, index: number) => (
-                            <React.Fragment key={index}>
+                selectedAmenities.length > 0 &&
+                <div className="flex flex-wrap gap-2">
+                    {
+                        selectedAmenities.map((amenity, index) => (
+                            <div key={index} className="flex items-center gap-1.5 bg-primary/20 text-primary border border-primary-500 rounded-lg h-fit px-3 py-1.5">
+                                <ThumbsUp className="w-4 h-4" />
+                                <span>{amenity.amenityName}</span>
                                 <Button
-                                    variant="ghost"
-                                    className="justify-start"
-                                    onClick={() => handleSelectTag(amenity.amenityName)}>
-                                    {amenity.amenityName}
+                                    variant={"ghost"}
+                                    className="rounded-full w-fit h-fit p-1"
+                                    onClick={() => handleRemoveAmenity(amenity.amenityName)}>
+                                    <X className="w-4 h-4" />
                                 </Button>
-                                <Separator />
-                            </React.Fragment>
-                        ))}
-                    </div>
-                </ScrollArea>
+                            </div>
+                        ))
+                    }
+                </div>
             }
+
         </div>
     )
 }

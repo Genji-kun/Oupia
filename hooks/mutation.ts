@@ -84,8 +84,8 @@ export const useLandlordUpgrade = () => {
     const dispatch = useDispatch();
 
     const { mutateAsync, isPending } = useMutation({
-        mutationFn: async () => {
-            await userService.upgradeLandlord();
+        mutationFn: async (form: FormData) => {
+            await userService.upgradeLandlord(form);
         },
         onSuccess: async () => {
             try {
@@ -103,8 +103,8 @@ export const useLandlordUpgrade = () => {
     })
 
     return {
-        mutateUploadPost: mutateAsync,
-        isPendingUploadPost: isPending
+        mutateLandlordUpgrade: mutateAsync,
+        isPendingLandlordUpgrade: isPending
     }
 }
 

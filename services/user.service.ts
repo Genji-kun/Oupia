@@ -10,8 +10,8 @@ class UserService extends AppService {
         return this.get(USER_ENDPOINTS.GET_INFO(username));
     }
 
-    upgradeLandlord = () => {
-        return this.patch(USER_ENDPOINTS.UPGRADE_LANDLORD);
+    upgradeLandlord = (form: FormData) => {
+        return this.patch(USER_ENDPOINTS.UPGRADE_LANDLORD, form);
     }
 }
 

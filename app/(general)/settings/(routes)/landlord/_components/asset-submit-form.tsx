@@ -12,19 +12,48 @@ import LocationInput from './location-input'
 import { Button } from '@/components/ui/button'
 import AmenityInput from './amenity-input'
 import PhotoInputs from './photo-inputs'
+import { useLandlordUpgrade } from '@/hooks/mutation'
+import { Loader2 } from 'lucide-react'
 
 const AssetSubmitForm = () => {
+
+    const { isPendingLandlordUpgrade, mutateLandlordUpgrade } = useLandlordUpgrade();
 
     const submitLandlordForm = useForm<ISubmitLandlordForm>({
         resolver: zodResolver(submitLandlordFormSchema),
         defaultValues: {
             assetInfo: {
-                amenities: []
-            }
+                assetName: '',
+                assetDescription: '',
+                assetType: AssetType.BOARDING_HOUSE,
+                price: '',
+                area: '',
+                maxPeople: '',
+                amenities: [],
+                images: [],
+                businessLicense: undefined
+            },
+            note: ''
         }
-    })
+    });
+
 
     async function onSubmit(values: ISubmitLandlordForm) {
+        const formData = new FormData();
+        const { images, businessLicense, ...assetInfoReq } = values.assetInfo;
+        formData.append('request', new Blob([JSON.stringify({
+            assetInfo: assetInfoReq,
+            note: values.note
+        })], { type: "application/json" }));
+        values.assetInfo.images.forEach((file) => {
+            formData.append('images', file);
+        });
+        formData.append('businessLicense', values.assetInfo.businessLicense);
+        try {
+            await mutateLandlordUpgrade(formData);
+        } catch (error) {
+            console.error(error);
+        }
 
     }
 
@@ -130,7 +159,22 @@ const AssetSubmitForm = () => {
                 <LocationInput form={submitLandlordForm} />
                 <AmenityInput form={submitLandlordForm} />
                 <PhotoInputs form={submitLandlordForm} />
-
+                <FormField
+                    control={submitLandlordForm.control}
+                    name="assetInfo.businessLicense"
+                    render={() => (
+                        <FormItem>
+                            <FormLabel className="text-base">Giấy phép kinh doanh</FormLabel>
+                            <FormControl>
+                                <Input type="file" onChange={(evt) => {
+                                    if (evt.target.files && evt.target.files[0])
+                                        submitLandlordForm.setValue("assetInfo.businessLicense", evt.target.files[0]);
+                                }} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
                 <FormField
                     control={submitLandlordForm.control}
                     name="note"
@@ -145,7 +189,10 @@ const AssetSubmitForm = () => {
                     )}
                 />
                 <div className="flex justify-center">
-                    <Button type="submit" className="styled-button">Xác nhận thông tin</Button>
+                    <Button type="submit" className="styled-button" disabled={isPendingLandlordUpgrade}>
+                        Xác nhận thông tin
+                        {isPendingLandlordUpgrade && <Loader2 className="animate-spin w-4 h-4" />}
+                    </Button>
                 </div>
             </form>
         </Form>

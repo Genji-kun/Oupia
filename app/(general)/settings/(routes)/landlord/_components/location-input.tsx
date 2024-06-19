@@ -109,7 +109,7 @@ function LocationInput({ form }: { form: UseFormReturn<ISubmitLandlordForm, any,
                                 <div className="relative">
                                     <Input
                                         disabled={!!fullLocation}
-                                        value={fullLocation ?? query}
+                                        value={fullLocation ? fullLocation : query}
                                         onChange={(evt) => { setQuery(evt.target.value) }}
                                         placeholder='Nhập địa chỉ...'
                                         className="bg-accent dark:bg-oupia-base" />
