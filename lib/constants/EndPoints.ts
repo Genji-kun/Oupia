@@ -37,5 +37,7 @@ export const SEARCH_ENDPOINTS = {
 }
 
 export const VOTE_ENDPOINTS = {
-    GET_LANDLORD: `store/landlords/`
+    GET_LIST_LANDLORD: `store/landlords/`,
+    GET_ONE_LANDLORD: (id: string) => `store/landlords/${id}`,
+    CREATE_VOTE: `/store/votes/`
 }

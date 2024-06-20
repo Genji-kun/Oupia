@@ -16,6 +16,8 @@ import { QUERY_KEY } from "@/lib/constants/QueryKeys";
 import { publicApi } from "@/configs/axiosInstance";
 import { assetsEndpoints } from "@/configs/axiosEndpoints";
 import { certificationService } from "@/services/certification.service";
+import { IVoteRequest } from "@/lib/types/interfaces/Vote";
+import { voteService } from "@/services/vote.service";
 
 // ----------- AUTH -------------
 
@@ -174,5 +176,27 @@ export const useAcceptCertification = () => {
     return {
         mutateAsync,
         isPending
+    }
+}
+
+
+// ------------ VOTE ----------------------
+
+export const useCreateVote = () => {
+    const queryClient = useQueryClient();
+    const { mutateAsync, isPending } = useMutation({
+        mutationFn: async (req: IVoteRequest) => {
+            await voteService.createVote(req);
+            return req.targetId;
+        },
+        onSuccess: (data) => {
+            toast.success("Cảm ơn bạn đã đánh giá, bạn đưuọc cộng thêm 5 điểm tiếng tăm. Hãy tiếp tực phát huy nhé !!");
+            queryClient.invalidateQueries({ queryKey: [QUERY_KEY.GET_ONE_LANDLORD_INFO, data] })
+        }
+    })
+
+    return {
+        mutateCreateVote: mutateAsync,
+        isPendingCreateVote: isPending
     }
 }

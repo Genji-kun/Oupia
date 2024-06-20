@@ -18,5 +18,5 @@ export interface IVoteRequest {
     type: VoteType,
     vote: Vote,
     reason: string,
-    instanceId: number
+    targetId: number
 }

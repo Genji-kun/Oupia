@@ -14,6 +14,10 @@ export const QUERY_KEY = {
 
     // REVIEWS 
     GET_REVIEWS: "getReviews",
+    SEARCH_AMENITIES: "searchAmenities",
 
-    SEARCH_AMENITIES: "searchAmenities"
+    // LANDLORD INFO
+    GET_LIST_LANDLORD_INFO: "getListLandlordInfo",
+    GET_ONE_LANDLORD_INFO: "getOneLandlordInfo"
+
 }

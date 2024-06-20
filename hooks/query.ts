@@ -130,12 +130,32 @@ export const useSearchAmenities = (keyword: string) => {
 
 export const useGetLandlordInfo = () => {
     const { data, isFetching } = useQuery({
-        queryKey: [],
+        queryKey: [QUERY_KEY.GET_LIST_LANDLORD_INFO],
         queryFn: async () => {
-            const res = await voteService.getLandlordInfo(1);
+            const res = await voteService.getListLandlordInfoes(1);
             return res.data.content;
         },
         refetchOnWindowFocus: false,
+    });
+
+    return {
+        landlordsData: data,
+        isFetching
+    }
+}
+
+
+export const useGetOneLandlordInfo = (id: string) => {
+    const { data, isFetching } = useQuery({
+        queryKey: [QUERY_KEY.GET_ONE_LANDLORD_INFO, id],
+        queryFn: async ({ queryKey }) => {
+            const [_key, id] = queryKey;
+            const res = await voteService.getOneLandlordInfo(id);
+            console.log(res.data);
+            return res.data;
+        },
+        refetchOnWindowFocus: false,
+        enabled: !!id,
     });
 
     return {
