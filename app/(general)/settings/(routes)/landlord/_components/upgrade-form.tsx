@@ -19,7 +19,7 @@ function UpgradeForm() {
     return (
         <div className="flex flex-col gap-4">
             {
-                currentUser.role === UserRole.TENANT ? <>
+                currentUser.role && (currentUser.role === UserRole.TENANT ? <>
                     {
                         !isEditting &&
                         <>
@@ -44,7 +44,7 @@ function UpgradeForm() {
                     />
                     <h2 className='text-2xl text-center font-semibold text-muted-foreground'>Tài khoản của bạn đã là chủ nhà trọ</h2>
                 </>
-            }
+                )}
         </div>
     )
 }
