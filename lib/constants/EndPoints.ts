@@ -35,3 +35,7 @@ export const CERTIFICATION_ENDPOINTS = {
 export const SEARCH_ENDPOINTS = {
     AMENITY: `search/amenities/`
 }
+
+export const VOTE_ENDPOINTS = {
+    GET_LANDLORD: `store/landlords/`
+}

@@ -1,3 +1,4 @@
+import { AssetType } from "../enums"
 
 export interface User {
     fullName?: string,
@@ -49,4 +50,33 @@ export interface SearchUser {
     avatar: string,
     username: string,
     role: "ROLE_TENANT" | "ROLE_LANDLORD" | "ROLE_ADMIN"
+}
+
+
+export interface ILandlordInfo {
+    id: number,
+    assetName: string,
+    assetSlug: string,
+    assetDescription: string,
+    fullLocation: string,
+    locationLat: number,
+    locationLong: number,
+    isDeleted: boolean,
+    createdAt: Date,
+    updatedAt: Date,
+    assetType: AssetType,
+    landlordId: number,
+    price: number,
+    area: number,
+    maxPeople: number,
+    amenities: { id: number, amenityName: string }[],
+    images: { id: number, url: string }[],
+    note: string,
+    transactionHash: string | null,
+    businessLicense: string,
+    score: number,
+    landlordName: string,
+    landlordUsername: string,
+    landlordAvatar: string,
+    votes: any
 }

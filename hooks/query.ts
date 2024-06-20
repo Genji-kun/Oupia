@@ -3,6 +3,7 @@ import { assetService } from "@/services/asset.service";
 import { authService } from "@/services/auth.service"
 import { searchService } from "@/services/search.service";
 import { userService } from "@/services/user.service";
+import { voteService } from "@/services/vote.service";
 import { useQuery } from "@tanstack/react-query"
 import { useState } from "react";
 
@@ -123,6 +124,22 @@ export const useSearchAmenities = (keyword: string) => {
 
     return {
         amenities: data,
+        isFetching
+    }
+}
+
+export const useGetLandlordInfo = () => {
+    const { data, isFetching } = useQuery({
+        queryKey: [],
+        queryFn: async () => {
+            const res = await voteService.getLandlordInfo(1);
+            return res.data.content;
+        },
+        refetchOnWindowFocus: false,
+    });
+
+    return {
+        landlordsData: data,
         isFetching
     }
 }
