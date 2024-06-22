@@ -4,12 +4,15 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Separator } from '@/components/ui/separator';
 import { Textarea } from '@/components/ui/textarea';
 import { useCreateVote } from '@/hooks/mutation';
+import { RECAPTCHA_SITE_KEY } from '@/lib/constants/SettingSystem';
 import { Vote, VoteType } from '@/lib/types/enums';
 import { IVoteRequest } from '@/lib/types/interfaces/Vote';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader2 } from 'lucide-react';
 import React from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { useForm } from 'react-hook-form';
+import { IoMdThumbsDown, IoMdThumbsUp } from 'react-icons/io';
 import { z } from 'zod';
 
 const VoteDialog = ({ landlordInfoId, isOpen, setIsOpen, voteType }: { landlordInfoId: number, isOpen: boolean, setIsOpen: any, voteType: Vote }) => {
@@ -55,7 +58,11 @@ const VoteDialog = ({ landlordInfoId, isOpen, setIsOpen, voteType }: { landlordI
                     </DialogHeader>
                     <Separator />
                     <Form {...voteForm}>
-                        <form onSubmit={voteForm.handleSubmit(onSubmit)} className="grid gap-4 pb-2">
+                        <form onSubmit={voteForm.handleSubmit(onSubmit)} className="grid gap-4">
+                            <div className="flex items-center gap-2">
+                                <span className='text-sm'>Bạn đã {voteType === Vote.ACCEPT ? "đồng ý" : "từ chối"}</span>
+                                {voteType === Vote.ACCEPT ? <IoMdThumbsUp className="w-4 h-4 text-transparent fill-emerald-500" /> : <IoMdThumbsDown className="w-4 h-4 text-transparent fill-rose-500" />}
+                            </div>
                             <FormField
                                 control={voteForm.control}
                                 name="reason"
@@ -74,9 +81,9 @@ const VoteDialog = ({ landlordInfoId, isOpen, setIsOpen, voteType }: { landlordI
                                     </FormItem>
                                 )}
                             />
+                            <ReCAPTCHA className='mx-auto' sitekey={RECAPTCHA_SITE_KEY!} />
                         </form>
                     </Form>
-
                     <DialogFooter>
                         <div className='w-full justify-end flex gap-2'>
                             <Button disabled={isPendingCreateVote} variant="outline" onClick={() => { voteForm.clearErrors(); setIsOpen(false); }}>Hủy</Button>

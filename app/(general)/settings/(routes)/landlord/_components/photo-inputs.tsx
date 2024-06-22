@@ -85,17 +85,17 @@ const PhotoInputs = ({ form }: { form: UseFormReturn<ISubmitLandlordForm, any, u
                             <span className='flex items-center gap-1'>
                                 Thêm hoặc kéo thả tệp tin
                             </span>
-                            <FormControl>
-                                <Input
-                                    id='images-input'
-                                    type='file'
-                                    multiple
-                                    accept=".png,.jpg,.jpeg"
-                                    className='hidden'
-                                    onChange={handleChangePhoto}
-                                />
-                            </FormControl>
                         </label>
+                        <FormControl>
+                            <Input
+                                id='images-input'
+                                type='file'
+                                multiple
+                                accept=".png,.jpg,.jpeg"
+                                className='hidden'
+                                onChange={handleChangePhoto}
+                            />
+                        </FormControl>
                     </div>
 
                     <FormMessage />

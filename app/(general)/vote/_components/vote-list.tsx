@@ -4,15 +4,13 @@ import React, { useState } from 'react'
 import VoteItem from './vote-item';
 import { useGetLandlordInfo } from '@/hooks/query';
 import { Separator } from '@/components/ui/separator';
-import ReCAPTCHA from 'react-google-recaptcha';
-import { RECAPTCHA_SITE_KEY } from '@/lib/constants/SettingSystem';
-
-
+// import ReCAPTCHA from 'react-google-recaptcha';
+// import { RECAPTCHA_SITE_KEY } from '@/lib/constants/SettingSystem';
 
 const VoteList = () => {
 
     const { landlordsData, isFetching } = useGetLandlordInfo();
-    const [isVerified, setIsVerified] = useState<boolean>(false);
+    // const [isVerified, setIsVerified] = useState<boolean>(false);
 
 
     return (
@@ -21,16 +19,16 @@ const VoteList = () => {
                 {
                     !!landlordsData?.length && landlordsData?.map((info: any) => {
                         return <>
-                            <VoteItem key={info.id} data={info} isVerified={isVerified} />
+                            <VoteItem key={info.id} data={info} />
                             <Separator />
                         </>
                     })
                 }
             </div>
-            <div className='flex flex-col gap-2 items-center pt-11 h-[calc(100vh-80px)] sticky top-[60px]'>
+            {/* <div className='flex flex-col gap-2 items-center pt-11 h-[calc(100vh-80px)] sticky top-[60px]'>
                 <ReCAPTCHA sitekey={RECAPTCHA_SITE_KEY!} onChange={(token) => setIsVerified(!!token)} />
                 {!isVerified && <h2 className='w-1/2 text-center'>Hãy xác minh để đánh giá và xem thông tin</h2>}
-            </div>
+            </div> */}
         </div>
 
     )

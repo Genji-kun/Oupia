@@ -11,7 +11,7 @@ import AssetInfoSection from './asset-info-section';
 
 const AssetDetail = () => {
 
-    const { asset, isFetching } = useAssetDetailContext();
+    const { asset } = useAssetDetailContext();
 
     if (!asset) {
         return <></>

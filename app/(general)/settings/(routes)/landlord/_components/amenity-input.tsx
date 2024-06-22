@@ -47,7 +47,7 @@ function AmenityInput({ form }: { form: UseFormReturn<ISubmitLandlordForm, any, 
                 <Input
                     value={query}
                     onChange={(evt) => { setQuery(evt.target.value) }}
-                    placeholder='Điền nội dung tag đính kèm bài viết...' />
+                    placeholder='Điền nội dung của tiện ích...' />
 
                 {
                     query.trim().length > 6 &&
