@@ -79,4 +79,4 @@ function UploadButton() {
     )
 }
 
-export default UploadButton
+export default UploadButton;

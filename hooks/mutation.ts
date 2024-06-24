@@ -183,15 +183,14 @@ export const useAcceptCertification = () => {
 // ------------ VOTE ----------------------
 
 export const useCreateVote = () => {
-    const queryClient = useQueryClient();
     const { mutateAsync, isPending } = useMutation({
         mutationFn: async (req: IVoteRequest) => {
             await voteService.createVote(req);
-            return req.targetId;
+            const { data } = await voteService.getOneLandlordInfo(req.targetId.toString());
+            return data;
         },
         onSuccess: (data) => {
-            toast.success("Cảm ơn bạn đã đánh giá, bạn đưuọc cộng thêm 5 điểm tiếng tăm. Hãy tiếp tực phát huy nhé !!");
-            queryClient.invalidateQueries({ queryKey: [QUERY_KEY.GET_ONE_LANDLORD_INFO, data] })
+            toast.success("Cảm ơn bạn đã đánh giá thông tin. Hãy tiếp tục phát huy nhé !!");
         }
     })
 

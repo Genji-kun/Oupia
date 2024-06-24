@@ -15,7 +15,23 @@ import { useForm } from 'react-hook-form';
 import { IoMdThumbsDown, IoMdThumbsUp } from 'react-icons/io';
 import { z } from 'zod';
 
-const VoteDialog = ({ landlordInfoId, isOpen, setIsOpen, voteType }: { landlordInfoId: number, isOpen: boolean, setIsOpen: any, voteType: Vote }) => {
+const VoteDialog = (
+    {
+        landlordInfoId,
+        isOpen,
+        setIsOpen,
+        voteType,
+        setVoteItem,
+        setHasVoted
+    }: {
+        landlordInfoId: number,
+        isOpen: boolean,
+        setIsOpen: any,
+        voteType: Vote,
+        setVoteItem: any,
+        setHasVoted: any
+    }
+) => {
 
     const voteSchema = z.object({
         reason: z.string().min(20, {
@@ -40,7 +56,10 @@ const VoteDialog = ({ landlordInfoId, isOpen, setIsOpen, voteType }: { landlordI
             targetId: landlordInfoId,
         }
         try {
-            await mutateCreateVote(req);
+            const updateData = await mutateCreateVote(req);
+            setVoteItem(updateData);
+            setHasVoted(true);
+            setIsOpen(false);
         } catch (error) {
             console.error(error);
         }

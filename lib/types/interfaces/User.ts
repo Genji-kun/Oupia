@@ -1,4 +1,5 @@
 import { AssetType } from "../enums"
+import { IVote } from "./Vote"
 
 export interface User {
     fullName?: string,
@@ -78,5 +79,5 @@ export interface ILandlordInfo {
     landlordName: string,
     landlordUsername: string,
     landlordAvatar: string,
-    votes: any
+    votes: IVote[]
 }

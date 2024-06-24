@@ -143,23 +143,3 @@ export const useGetLandlordInfo = () => {
         isFetching
     }
 }
-
-
-export const useGetOneLandlordInfo = (id: string) => {
-    const { data, isFetching } = useQuery({
-        queryKey: [QUERY_KEY.GET_ONE_LANDLORD_INFO, id],
-        queryFn: async ({ queryKey }) => {
-            const [_key, id] = queryKey;
-            const res = await voteService.getOneLandlordInfo(id);
-            console.log(res.data);
-            return res.data;
-        },
-        refetchOnWindowFocus: false,
-        enabled: !!id,
-    });
-
-    return {
-        landlordsData: data,
-        isFetching
-    }
-}
