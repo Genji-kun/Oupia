@@ -120,7 +120,7 @@ const VoteItem = ({ data }: { data: ILandlordInfo }) => {
                             <DialogContent className="lg:w-1/2">
                                 <DialogHeader className='space-y-0'>
                                     <h3 className='font-semibold text-lg uppercase'>Danh sách đánh giá</h3>
-                                    <DialogDescription className='w-3/4 truncate'>Xem thông tin đánh giá của "{voteItem.assetName}"</DialogDescription>
+                                    <DialogDescription className='w-3/4 truncate'>Xem thông tin đánh giá của &quot;{voteItem.assetName}&quot;</DialogDescription>
                                 </DialogHeader>
                                 <Separator />
                                 <ScrollArea className='h-[50vh]'>
@@ -181,7 +181,7 @@ const VoteItem = ({ data }: { data: ILandlordInfo }) => {
                                 <DialogContent className="lg:w-1/2">
                                     <DialogHeader className='space-y-0'>
                                         <h3 className='font-semibold text-lg uppercase'>Thông tin nhà trọ</h3>
-                                        <DialogDescription className='w-3/4 truncate'>Xem thông tin chi tiết của "{voteItem.assetName}"</DialogDescription>
+                                        <DialogDescription className='w-3/4 truncate'>Xem thông tin chi tiết của &quot;{voteItem.assetName}&quot;</DialogDescription>
                                     </DialogHeader>
                                     <Separator />
                                     <ScrollArea className='h-[50vh]'>
