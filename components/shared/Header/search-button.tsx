@@ -63,7 +63,7 @@ const SearchButton: React.FC = () => {
                         </Button>
                     </div>
                 </DialogTrigger>
-                <DialogContent className=" p-0 top-[40%] h-fit">
+                <DialogContent className=" p-0 top-[40%] h-fit lg:max-w-xl">
                     <DialogHeader className="border-b border-border">
                         <div className="w-full grid grid-cols-12">
                             <div className="absolute top-4 left-4 flex items-center justify-center">

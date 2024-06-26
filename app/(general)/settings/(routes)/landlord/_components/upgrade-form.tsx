@@ -19,7 +19,7 @@ function UpgradeForm() {
     return (
         <div className="flex flex-col gap-4">
             {
-                currentUser.role === UserRole.TENANT ? <>
+                currentUser?.role === UserRole.TENANT ? <>
                     {
                         !isEditting &&
                         <>

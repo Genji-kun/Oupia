@@ -5,10 +5,11 @@ import { Textarea } from '@/components/ui/textarea';
 import { useCreateVote } from '@/hooks/mutation';
 import { RECAPTCHA_SITE_KEY } from '@/lib/constants/SettingSystem';
 import { Vote, VoteType } from '@/lib/types/enums';
+import { ILandlordInfo } from '@/lib/types/interfaces/User';
 import { IVoteRequest } from '@/lib/types/interfaces/Vote';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader2, X } from 'lucide-react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useForm } from 'react-hook-form';
 import { IoMdThumbsDown, IoMdThumbsUp } from 'react-icons/io';
@@ -17,18 +18,24 @@ import { z } from 'zod';
 const VoteDialog = (
     {
         landlordInfoId,
-        setHasVoted
+        setHasVoted,
+        setVoteItem
     }: {
         landlordInfoId: number,
-        setHasVoted: any
+        setHasVoted: React.Dispatch<React.SetStateAction<boolean>>,
+        setVoteItem: React.Dispatch<React.SetStateAction<ILandlordInfo>>
     }
 ) => {
 
     const [open, setOpen] = useState<boolean>(false);
     const [voteType, setVoteType] = useState<Vote>(Vote.UNKNOWN);
-
+    const [isVerified, setIsVerified] = useState<boolean>(false);
     const { isPendingCreateVote, mutateCreateVote } = useCreateVote();
 
+    useEffect(() => {
+        if (!open)
+            setIsVerified(false);
+    }, [open])
 
     const voteSchema = z.object({
         reason: z.string().min(20, {
@@ -57,7 +64,9 @@ const VoteDialog = (
         }
         try {
             const updateData = await mutateCreateVote(req);
+            setVoteItem(updateData);
             setHasVoted(true);
+            setOpen(false);
         } catch (error) {
             console.error(error);
         }
@@ -79,7 +88,7 @@ const VoteDialog = (
                         </Button>
                         <div>
                             <h3 className='text-xl uppercase font-semibold'>Đánh giá thông tin</h3>
-                            <p className='text-muted-foreground'>
+                            <p className='text-muted-foreground text-sm'>
                                 Xác nhận và đánh giá thông tin nhà trọ.
                             </p>
                         </div>
@@ -87,7 +96,7 @@ const VoteDialog = (
                         <Form {...voteForm}>
                             <form onSubmit={voteForm.handleSubmit(onSubmit)} className="grid gap-4">
                                 <div className="flex items-center gap-2">
-                                    <span className='text-sm'>Bạn đã {voteType === Vote.ACCEPT ? "đồng ý" : "từ chối"}</span>
+                                    <span>Bạn đã {voteType === Vote.ACCEPT ? "đồng ý" : "từ chối"}</span>
                                     {voteType === Vote.ACCEPT ? <IoMdThumbsUp className="w-4 h-4 text-transparent fill-emerald-500" /> : <IoMdThumbsDown className="w-4 h-4 text-transparent fill-rose-500" />}
                                 </div>
                                 <FormField
@@ -95,7 +104,7 @@ const VoteDialog = (
                                     name="reason"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>Lý do đánh giá</FormLabel>
+                                            <FormLabel className='text-base'>Lý do đánh giá</FormLabel>
                                             <FormControl>
                                                 <Textarea
                                                     placeholder="Hãy nêu lý do bạn chọn đánh giá này..."
@@ -108,13 +117,13 @@ const VoteDialog = (
                                         </FormItem>
                                     )}
                                 />
-                                <ReCAPTCHA className='mx-auto' sitekey={RECAPTCHA_SITE_KEY!} />
+                                <ReCAPTCHA className='mx-auto' sitekey={RECAPTCHA_SITE_KEY!} onChange={(token) => setIsVerified(!!token)} />
                             </form>
                         </Form>
                         <div>
                             <div className='w-full justify-end flex gap-2'>
                                 <Button disabled={isPendingCreateVote} variant="outline" onClick={() => { voteForm.clearErrors(); setOpen(false); }}>Hủy</Button>
-                                <Button disabled={isPendingCreateVote} type="submit" onClick={voteForm.handleSubmit(onSubmit)} className='styled-button'>
+                                <Button disabled={!isVerified || isPendingCreateVote} type="submit" onClick={voteForm.handleSubmit(onSubmit)} className='styled-button'>
                                     <span>Hoàn tất</span>
                                     {isPendingCreateVote && <Loader2 className="ml-3 h-4 w-4 animate-spin" />}
                                 </Button>
