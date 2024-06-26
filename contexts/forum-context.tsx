@@ -13,6 +13,7 @@ interface IForumContext {
     fetchNextPage: any;
     isFetchingNextPage: boolean;
     isLast: boolean;
+    isFetching: boolean
 }
 
 const ForumContext = createContext<IForumContext | undefined>(undefined);
@@ -37,7 +38,7 @@ export const ForumProvider: React.FC<{ children: ReactNode }> = ({ children }) =
         }
     };
 
-    const { data, status, hasNextPage, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
+    const { data, isFetching, hasNextPage, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
         {
             queryKey: ['posts'],
             queryFn: fetchPosts,
@@ -72,7 +73,8 @@ export const ForumProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 
             posts, setPosts,
             hasNextPage, fetchNextPage,
-            isFetchingNextPage, isLast
+            isFetchingNextPage, isLast,
+            isFetching
 
         }}>
             {children}

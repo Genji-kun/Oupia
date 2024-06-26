@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils'
 import { format } from 'date-fns'
 import { Vote } from '@/lib/types/enums'
 import Image from 'next/image'
-import { HelpCircleIcon, InfoIcon } from 'lucide-react'
+import { InfoIcon } from 'lucide-react'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTrigger } from '@/components/ui/dialog'
 import { Separator } from '@/components/ui/separator'
 import { ScrollArea } from '@/components/ui/scroll-area'
@@ -35,17 +35,10 @@ const VoteItem = ({ data }: { data: ILandlordInfo }) => {
     const [voteItem, setVoteItem] = useState(data);
     const [hasVoted, setHasVoted] = useState(false);
 
-    const [isOpen, setIsOpen] = useState(false);
     const [isVerified, setIsVerified] = useState(false);
     const [renderCaptcha, setRenderCaptcha] = useState(false);
 
-    const [voteType, setvoteType] = useState<Vote>(Vote.UNKNOWN);
     const [textExpanded, setTextExpanded] = useState(false);
-
-    const handleVote = (vote: Vote) => {
-        setIsOpen(true);
-        setvoteType(vote);
-    }
 
     return (
         <>
@@ -128,8 +121,8 @@ const VoteItem = ({ data }: { data: ILandlordInfo }) => {
                                         {
                                             !!voteItem.votes?.length && voteItem.votes.map((vote: IVote, index) => {
                                                 return (
-                                                    <div className='flex gap-4 items-start'>
-                                                        <Avatar key={index}>
+                                                    <div className='flex gap-4 items-start' key={index}>
+                                                        <Avatar>
                                                             <AvatarImage src={vote.avatar} alt={vote.voterFullName} />
                                                             <AvatarFallback className="text-xs">{convert(vote.voterFullName)}</AvatarFallback>
                                                         </Avatar>
@@ -158,18 +151,8 @@ const VoteItem = ({ data }: { data: ILandlordInfo }) => {
                         :
                         <div className='p-4 border rounded-lg flex justify-between items-center gap-10 bg-background shadow-md dark:bg-oupia-base'>
                             <div className="flex gap-2 items-center">
-                                <Button variant={"normal"} onClick={() => handleVote(Vote.ACCEPT)} className="flex items-center gap-1.5">
-                                    <IoMdThumbsUp className='text-transparent fill-emerald-500 w-4 h-4' /> <span>Đồng ý</span>
-                                </Button>
-                                <Button variant={"normal"} onClick={() => handleVote(Vote.DENIED)} className="flex items-center gap-1.5">
-                                    <IoMdThumbsDown className='text-transparent fill-rose-500 w-4 h-4' /> Từ chối
-                                </Button>
                                 <VoteDialog
                                     landlordInfoId={voteItem.landlordId}
-                                    isOpen={isOpen}
-                                    setIsOpen={setIsOpen}
-                                    voteType={voteType}
-                                    setVoteItem={setVoteItem}
                                     setHasVoted={setHasVoted} />
                             </div>
                             <Dialog onOpenChange={(open) => setRenderCaptcha(open)}>

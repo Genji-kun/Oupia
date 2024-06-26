@@ -44,3 +44,13 @@ export const mobileSettingsRoutes: { name: string, href: string, icon: any }[] =
         icon: MdOutlineScreenshotMonitor
     }
 ];
+
+export const voteRoutes = [
+    {
+        name: "Xác thực chủ nhà trọ",
+        href: "/vote"
+    }, {
+        name: "Xác thực đánh giá",
+        href: "/vote/review-info"
+    }
+]

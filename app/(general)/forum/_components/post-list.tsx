@@ -7,12 +7,13 @@ import PostLoading from './post-loading';
 import { PostResponse } from '@/lib/types/interfaces/Post';
 import { useInView } from "react-intersection-observer";
 import { useForumContext } from '@/contexts/forum-context';
+import { Skeleton } from '@/components/ui/skeleton';
 
 
 
 const PostList = () => {
 
-    const { fetchNextPage, hasNextPage, posts, isLast } = useForumContext();
+    const { fetchNextPage, hasNextPage, posts, isLast, isFetching } = useForumContext();
 
     const { ref, inView } = useInView();
 
@@ -35,6 +36,14 @@ const PostList = () => {
                             }
                         </React.Fragment>
                     })
+                }
+                {
+                    isFetching && <>
+                        <Skeleton className='bg-border dark:bg-oupia-sub w-full aspect-[25/9]' />
+                        <Skeleton className='bg-border dark:bg-oupia-sub w-full aspect-[25/9]' />
+                        <Skeleton className='bg-border dark:bg-oupia-sub w-full aspect-[25/9]' />
+                        <Skeleton className='bg-border dark:bg-oupia-sub w-full aspect-[25/9]' />
+                    </>
                 }
             </>
             {isLast && <p className="text-lg font-semibold py-4 text-center">Bạn đã xem hết nội dung bài viết</p>}

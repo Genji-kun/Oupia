@@ -3,10 +3,10 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
-import "./style.css";
+import "../../settings/_components/style.css";
 import { cn } from '@/lib/utils';
 
-const SettingsRouteItem = ({ route }: {
+const VoteSidebarItem = ({ route }: {
     route: {
         href: string,
         name: string,
@@ -22,4 +22,4 @@ const SettingsRouteItem = ({ route }: {
     );
 };
 
-export default SettingsRouteItem;
+export default VoteSidebarItem;
