@@ -11,6 +11,13 @@ class CertificationService extends AppService {
             certificationToken: certificationToken
         })
     }
+
+    getUserCertificationByAsset = (assetId: number) => {
+        return this.get(CERTIFICATION_ENDPOINTS.GET_BY_ASSET, undefined, {
+            assetId: assetId,
+            status: "ACCEPTED"
+        })
+    }
 }
 
 export const certificationService = new CertificationService();

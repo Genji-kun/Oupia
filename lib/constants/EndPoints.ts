@@ -29,7 +29,8 @@ export const REVIEW_ENDPOINTS = {
 }
 
 export const CERTIFICATION_ENDPOINTS = {
-    ACCEPT: `store/certifications/`
+    ACCEPT: `store/certifications/`,
+    GET_BY_ASSET: `store/certifications/`,
 }
 
 export const SEARCH_ENDPOINTS = {
@@ -40,4 +41,8 @@ export const VOTE_ENDPOINTS = {
     GET_LIST_LANDLORD: `store/landlords/`,
     GET_ONE_LANDLORD: (id: string) => `store/landlords/${id}/`,
     CREATE_VOTE: `store/votes/`
+}
+
+export const TENANT_ENDPOINTS = {
+    CREATE: `store/tenant-requests/`
 }

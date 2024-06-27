@@ -61,3 +61,11 @@ export const loginSchema = z.object({
         required_error: "Mật khẩu không được bỏ trống",
     })
 });
+
+export const tenantRequestSchema = z.object({
+    note: z.string({
+        required_error: "Vui lòng điền nội dung minh chứng."
+    }).min(20, {
+        message: "Nội dung minh chứng phải ít nhất 20 ký tự."
+    })
+})

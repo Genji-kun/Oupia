@@ -1,10 +1,12 @@
 import { QUERY_KEY } from "@/lib/constants/QueryKeys"
 import { assetService } from "@/services/asset.service";
 import { authService } from "@/services/auth.service"
+import { certificationService } from "@/services/certification.service";
 import { searchService } from "@/services/search.service";
 import { userService } from "@/services/user.service";
 import { voteService } from "@/services/vote.service";
 import { useQuery } from "@tanstack/react-query"
+import { query } from "firebase/firestore";
 import { useState } from "react";
 
 
@@ -141,5 +143,24 @@ export const useGetLandlordInfo = () => {
     return {
         landlordsData: data,
         isFetching
+    }
+}
+
+//----------- AMENITY ------------
+
+export const useUserCertification = (assetId: number) => {
+    const { data, isFetching } = useQuery({
+        queryKey: [QUERY_KEY.GET_USER_CERTIFICATION_BY_ASSET, assetId],
+        queryFn: async ({ queryKey }) => {
+            const [_key, assetId] = queryKey;
+            const res = await certificationService.getUserCertificationByAsset(Number(assetId));
+            return res.data.content;
+        },
+        enabled: !!assetId
+    });
+
+    return {
+        certificationData: data,
+        isFetchingCertification: isFetching
     }
 }

@@ -199,3 +199,18 @@ export const useCreateVote = () => {
         isPendingCreateVote: isPending
     }
 }
+
+export const useCreateVoteReq = () => {
+    const { mutateAsync, isPending } = useMutation({
+        mutationFn: async (form: FormData) => {
+            await userService.createVoteReq(form);
+        },
+        onSuccess: () => {
+            toast.success("Gửi yêu cầu thành công, thông tin của bạn sẽ được hiển thị trên trang xác thực đánh giá.")
+        }
+    })
+    return {
+        mutateCreateVoteReq: mutateAsync,
+        isPendingCreateVoteReq: isPending
+    }
+}

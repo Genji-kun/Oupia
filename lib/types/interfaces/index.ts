@@ -29,3 +29,7 @@ export interface ICurrentUser {
     role: UserRole
 }
 
+export interface ITenantRequest {
+    note: string,
+    images: File[]
+}

@@ -21,6 +21,7 @@ class VoteService extends AppService {
     createVote = (req: IVoteRequest) => {
         return this.post(VOTE_ENDPOINTS.CREATE_VOTE, req);
     }
+
 }
 
 export const voteService = new VoteService();

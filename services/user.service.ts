@@ -1,4 +1,4 @@
-import { USER_ENDPOINTS } from "@/lib/constants/EndPoints";
+import { TENANT_ENDPOINTS, USER_ENDPOINTS } from "@/lib/constants/EndPoints";
 import AppService from "./app.service";
 
 class UserService extends AppService {
@@ -12,6 +12,10 @@ class UserService extends AppService {
 
     upgradeLandlord = (form: FormData) => {
         return this.patch(USER_ENDPOINTS.UPGRADE_LANDLORD, form);
+    }
+
+    createVoteReq = (form: FormData) => {
+        return this.post(TENANT_ENDPOINTS.CREATE, form)
     }
 }
 

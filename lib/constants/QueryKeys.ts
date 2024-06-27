@@ -18,6 +18,10 @@ export const QUERY_KEY = {
 
     // LANDLORD INFO
     GET_LIST_LANDLORD_INFO: "getListLandlordInfo",
-    GET_ONE_LANDLORD_INFO: "getOneLandlordInfo"
+    GET_ONE_LANDLORD_INFO: "getOneLandlordInfo",
+
+    // CERTIFICATION
+    GET_USER_CERTIFICATION_BY_ASSET: "getUserCertificationByAsset"
+
 
 }
