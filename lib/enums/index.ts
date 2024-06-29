@@ -29,3 +29,8 @@ export enum AssetType {
     STUDIO_APARTMENT = "STUDIO_APARTMENT",
     ENTIRE_HOUSE = "ENTIRE_HOUSE"
 }
+
+export enum AuthProvider {
+    GOOGLE = "GOOGLE",
+    FACEBOOK = "FACEBOOK"
+}

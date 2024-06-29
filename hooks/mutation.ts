@@ -1,6 +1,6 @@
 "use client"
 
-import { IUserLogin } from "@/lib/interfaces";
+import { ILoginSocial, IUserLogin } from "@/lib/interfaces";
 import { authService } from "@/services/auth.service";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams, useRouter } from "next/navigation";
@@ -58,6 +58,27 @@ export const useLogin = () => {
     return {
         mutateLogin: mutateAsync,
         isPendingLogin: isPending
+    }
+}
+
+export const useLoginSocial = () => {
+    const dispatch = useDispatch();
+    const router = useRouter();
+
+    const { mutateAsync, isPending } = useMutation({
+        mutationFn: async (req: ILoginSocial) => {
+            const { data } = await authService.loginSocial(req);
+            Cookies.set("accessToken", data.accessToken);
+            const { data: currentUserInfo } = await authService.currentUser();
+            Cookies.set("user", JSON.stringify(currentUserInfo));
+            dispatch(login(currentUserInfo));
+            router.push("/");
+        },
+    })
+
+    return {
+        mutateLoginSocial: mutateAsync,
+        isPendingLoginSocial: isPending
     }
 }
 

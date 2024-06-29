@@ -1,6 +1,6 @@
 "use client";
 
-import { Bell, ChevronDown, ChevronRight, Key, LogOut, MessagesSquare, Moon, Settings, UserRoundSearchIcon } from 'lucide-react';
+import { Bell, ChevronDown, ChevronRight, LogOut, MessagesSquare, Moon, UserRoundSearchIcon } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '../../ui/button';
 import { Switch } from '../../ui/switch';
@@ -16,7 +16,6 @@ import { HiOutlineHomeModern } from 'react-icons/hi2';
 import React, { PropsWithChildren } from 'react';
 import { UserRole } from '@/lib/enums';
 import Cookies from 'js-cookie';
-import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import { ICurrentUser } from '@/lib/interfaces/response/User';
@@ -43,7 +42,6 @@ const UserPopover: React.FC<IProps> = ({ user }) => {
     const handleLogOut = () => {
         Cookies.remove("accessToken");
         Cookies.remove("user");
-        signOut({ redirect: false });
         router.push("/");
         dispatch(logout());
 

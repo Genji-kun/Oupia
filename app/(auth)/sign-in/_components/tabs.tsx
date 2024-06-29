@@ -1,77 +1,58 @@
 "use client"
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import SignInTab from './sign-in-tab';
 import ForgetPasswordTab from './forget-password-tab';
 import { useAuthTabContext } from '@/contexts/auth-tab-context';
 import { AnimatePresence, motion } from 'framer-motion';
 import ChangePasswordTab from './change-password-tab';
-import { useSession } from 'next-auth/react';
 import { Loader2 } from 'lucide-react';
-import { authApi, publicApi } from '@/configs/axiosInstance';
-import { authEndpoints } from '@/configs/axiosEndpoints';
-import Cookies from "js-cookie";
-import { useDispatch } from 'react-redux';
-import { login } from '@/redux/slices/currentUserSlice';
-import { useRouter } from 'next/navigation';
 import OtpTab from './otp-tab';
 import NewPasswordTab from './new-password-tab';
 
 const Tabs = () => {
 
-    const { tab, setIsLoading, isLoading } = useAuthTabContext();
+    const { tab, isLoading } = useAuthTabContext();
 
-    const router = useRouter();
-    const dispatch = useDispatch();
+    // useEffect(() => {
 
-    const { data: session } = useSession();
+    //     const loginSocial = async (accessToken: string, provider: string) => {
+    //         try {
+    //             const res = await publicApi.post(authEndpoints["loginSocial"], {
+    //                 accessToken: accessToken,
+    //                 provider: provider
+    //             });
+    //             if (res.status === 200) {
+    //                 Cookies.set("accessToken", res.data.accessToken);
 
-    useEffect(() => {
+    //                 // Cập nhât Header Request
+    //                 updateAuthApi();
 
-        const loginSocial = async (accessToken: string, provider: string) => {
-            try {
-                const res = await publicApi.post(authEndpoints["loginSocial"], {
-                    accessToken: accessToken,
-                    provider: provider
-                });
-                if (res.status === 200) {
-                    Cookies.set("accessToken", res.data.accessToken);
+    //                 try {
+    //                     const resCurr = await authApi.get(authEndpoints["currentUser"]);
+    //                     if (resCurr.status === 200) {
+    //                         Cookies.set("user", resCurr.data);
+    //                         dispatch(login(resCurr.data));
+    //                         router.push("/");
+    //                     }
+    //                 } catch (error) {
+    //                     console.error(error);
+    //                 } finally {
+    //                     setIsLoading(false);
+    //                 }
+    //             }
+    //         } catch (error: any) {
+    //             console.log(error);
+    //         }
+    //     }
 
-                    // Cập nhât Header Request
-                    updateAuthApi();
+    //     if (session) {
+    //         setIsLoading(true);
+    //         loginSocial(session.accessToken, "GOOGLE");
+    //     }
+    // }, [session, dispatch, router, setIsLoading])
 
-                    try {
-                        const resCurr = await authApi.get(authEndpoints["currentUser"]);
-                        if (resCurr.status === 200) {
-                            Cookies.set("user", resCurr.data);
-                            dispatch(login(resCurr.data));
-                            router.push("/");
-                        }
-                    } catch (error) {
-                        console.error(error);
-                    } finally {
-                        setIsLoading(false);
-                    }
-                }
-            } catch (error: any) {
-                console.log(error);
-            }
-        }
 
-        if (session) {
-            setIsLoading(true);
-            loginSocial(session.accessToken, "GOOGLE");
-        }
-    }, [session, dispatch, router, setIsLoading])
-
-    function updateAuthApi() {
-        authApi.interceptors.request.use(function (config) {
-            config.headers.Authorization = `Bearer ${Cookies.get("accessToken")}`;
-            return config;
-        }, function (error) {
-            return Promise.reject(error);
-        });
-    }
 
 
     return (
