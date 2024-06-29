@@ -1,4 +1,4 @@
-import { ISearchParams } from "@/lib/types/interfaces/Search";
+import { ISearchParams } from "@/lib/interfaces/Search";
 import AppService from "./app.service";
 import { ASSET_ENDPOINTS } from "@/lib/constants/EndPoints";
 

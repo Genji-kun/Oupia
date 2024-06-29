@@ -6,7 +6,7 @@ import { ZoomInIcon, ZoomOutIcon } from 'lucide-react';
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 
-const VoteImgeItem = ({ images }: { images: ImageItem[] }) => {
+const PostItemImage = ({ images }: { images: string[] }) => {
     const [selectedImageIndex, setSelectedIamgeIndex] = useState(0)
     const [open, setOpen] = useState(false)
     const [zoom, setZoom] = useState<number>(1)
@@ -32,39 +32,39 @@ const VoteImgeItem = ({ images }: { images: ImageItem[] }) => {
                             case 1:
                                 return (
                                     <div className='aspect-[25/9] w-full'>
-                                        <Image onClick={() => handleSelectImage(0)} src={images[0].url} alt="Blog Image" className='object-cover cursor-pointer' width={1000} height={1000} />
+                                        <Image onClick={() => handleSelectImage(0)} src={images[0]} alt="Post Image" className='object-cover cursor-pointer' width={1000} height={1000} />
                                     </div>
                                 )
                             case 2:
                                 return (
                                     <div className='aspect-[25/9] w-full grid grid-cols-2 gap-1.5'>
-                                        <Image onClick={() => handleSelectImage(0)} src={images[0].url} alt="Blog Image" className='object-cover aspect-square cursor-pointer' width={1000} height={1000} />
-                                        <Image onClick={() => handleSelectImage(1)} src={images[1].url} alt="Blog Image" className='object-cover aspect-square cursor-pointer' width={1000} height={1000} />
+                                        <Image onClick={() => handleSelectImage(0)} src={images[0]} alt="Post Image" className='object-cover aspect-square cursor-pointer' width={1000} height={1000} />
+                                        <Image onClick={() => handleSelectImage(1)} src={images[1]} alt="Post Image" className='object-cover aspect-square cursor-pointer' width={1000} height={1000} />
                                     </div>
                                 )
                             case 3:
                                 return (
                                     <div className='aspect-video w-full grid grid-cols-2 gap-1.5'>
-                                        <Image onClick={() => handleSelectImage(0)} src={images[0].url} alt="Blog Image" className='object-cover h-full' width={1000} height={1000} />
+                                        <Image onClick={() => handleSelectImage(0)} src={images[0]} alt="Post Image" className='object-cover h-full' width={1000} height={1000} />
                                         <div className="grid grid-rows-2 gap-1.5">
-                                            <Image onClick={() => handleSelectImage(1)} src={images[1].url} alt="Blog Image" className='object-cover aspect-3/2 cursor-pointer' width={1000} height={1000} />
-                                            <Image onClick={() => handleSelectImage(2)} src={images[2].url} alt="Blog Image" className='object-cover aspect-3/2 cursor-pointer' width={1000} height={1000} />
+                                            <Image onClick={() => handleSelectImage(1)} src={images[1]} alt="Post Image" className='object-cover aspect-3/2 cursor-pointer' width={1000} height={1000} />
+                                            <Image onClick={() => handleSelectImage(2)} src={images[2]} alt="Post Image" className='object-cover aspect-3/2 cursor-pointer' width={1000} height={1000} />
                                         </div>
                                     </div>
                                 )
                             default:
                                 return (
                                     <div className='aspect-[25/9] w-full grid grid-cols-2 gap-1.5'>
-                                        <Image onClick={() => handleSelectImage(0)} src={images[0].url} alt="Blog Image" className='object-cover aspect-video cursor-pointer' width={1000} height={1000} />
-                                        <Image onClick={() => handleSelectImage(1)} src={images[1].url} alt="Blog Image" className='object-cover aspect-video cursor-pointer' width={1000} height={1000} />
-                                        <Image onClick={() => handleSelectImage(2)} src={images[2].url} alt="Blog Image" className='object-cover aspect-video cursor-pointer' width={1000} height={1000} />
+                                        <Image onClick={() => handleSelectImage(0)} src={images[0]} alt="Post Image" className='object-cover aspect-video cursor-pointer' width={1000} height={1000} />
+                                        <Image onClick={() => handleSelectImage(1)} src={images[1]} alt="Post Image" className='object-cover aspect-video cursor-pointer' width={1000} height={1000} />
+                                        <Image onClick={() => handleSelectImage(2)} src={images[2]} alt="Post Image" className='object-cover aspect-video cursor-pointer' width={1000} height={1000} />
                                         <div className="relative cursor-pointer" onClick={() => handleSelectImage(3)}>
                                             {
                                                 images.length > 4 && <div className='absolute z-10 bg-black/20 dark:bg-black/50 inset-0 flex justify-center items-center'>
                                                     <span className='font-semibold text-4xl text-white'>+{images.length - 4}</span>
                                                 </div>
                                             }
-                                            <Image src={images[3].url} alt="Blog Image" className='object-cover aspect-video' width={1000} height={1000} />
+                                            <Image src={images[3]} alt="Post Image" className='object-cover aspect-video' width={1000} height={1000} />
                                         </div>
                                     </div>
                                 )
@@ -94,12 +94,12 @@ const VoteImgeItem = ({ images }: { images: ImageItem[] }) => {
                         </Button>
                     </div>
                     <div className='flex-auto flex justify-center items-center bg-border dark:bg-background rounded-lg overflow-hidden'>
-                        <Image src={images[selectedImageIndex].url} alt="Blog Image" className='object-cover w-fit h-[90%]' style={{ transform: `scale(${zoom})` }} width={1000} height={1000} />
+                        <Image src={images[selectedImageIndex]} alt="Post Image" className='object-cover w-fit h-[90%]' style={{ transform: `scale(${zoom})` }} width={1000} height={1000} />
                     </div>
                     <div className="flex gap-2 justify-center overflow-x-auto bg-border dark:bg-background p-2 rounded-lg">
                         {
                             images.map((item, index) => {
-                                return <Image onClick={() => handleSelectImage(index)} src={item.url} alt="Blog Image" className={cn('w-20 h-20 object-cover cursor-pointer hover:opacity-100 rounded-lg', index === selectedImageIndex ? 'border-2 border-primary' : 'opacity-50')} width={1000} height={1000} />
+                                return <Image onClick={() => handleSelectImage(index)} src={item} alt="Post Image" className={cn('w-20 h-20 object-cover cursor-pointer hover:opacity-100 rounded-lg', index === selectedImageIndex ? 'border-2 border-primary' : 'opacity-50')} width={1000} height={1000} />
                             })
                         }
                     </div>
@@ -109,4 +109,4 @@ const VoteImgeItem = ({ images }: { images: ImageItem[] }) => {
     )
 }
 
-export default VoteImgeItem;
+export default PostItemImage;

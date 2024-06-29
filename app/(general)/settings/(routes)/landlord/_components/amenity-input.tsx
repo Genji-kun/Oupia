@@ -8,7 +8,7 @@ import { Separator } from '@/components/ui/separator';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { useDebounce } from '@/hooks';
 import { useSearchAmenities } from '@/hooks/query';
-import { ISubmitLandlordForm } from '@/lib/types/interfaces/Asset';
+import { ISubmitLandlordForm } from '@/lib/interfaces/Asset';
 import { CornerDownLeft, ThumbsUp, X } from 'lucide-react';
 import React, { useRef, useState } from 'react';
 import { UseFormReturn } from 'react-hook-form';

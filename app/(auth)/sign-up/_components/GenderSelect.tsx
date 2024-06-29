@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import { Gender } from '@/lib/types/enums';
+import { Gender } from '@/lib/enums';
 import {
     Select,
     SelectTrigger,

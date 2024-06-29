@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState } from 'react';
-import { IUserRegister } from '@/lib/types/interfaces';
-import { IRegisterAccountForm } from '@/lib/types/interfaces/Register';
+import { IRegisterAccountForm } from '@/lib/interfaces/Register';
+import { IUserRegister } from '@/lib/interfaces/request/User';
 
 export type Tab = { label: ReactNode; id: string, link: string };
 

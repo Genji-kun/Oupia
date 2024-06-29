@@ -17,10 +17,10 @@ import { format } from "date-fns";
 import { vi } from "date-fns/locale";
 import { useSignUpContext } from "@/contexts/sign-up-context";
 import { registerInfoSchema } from "@/lib/schemas/UserSchema";
-import { IRegisterInfoForm } from "@/lib/types/interfaces/Register";
+import { IRegisterInfoForm } from "@/lib/interfaces/Register";
 import GenderSelect from "./GenderSelect";
-import { IUserRegister } from "@/lib/types/interfaces";
-import { Gender } from "@/lib/types/enums";
+import { Gender } from "@/lib/enums";
+import { IUserRegister } from "@/lib/interfaces/request/User";
 
 const InfoForm = () => {
     const { setTab } = useAuthTabContext();
@@ -41,7 +41,7 @@ const InfoForm = () => {
 
     function onSubmit(values: IRegisterInfoForm) {
         setIsSubmitting(true);
-        setUser((prev) => {
+        setUser((prev: any) => {
             return { ...prev, ...values, gender: values.gender.toString() as string } as IUserRegister;
         })
         setIsSubmitting(false);

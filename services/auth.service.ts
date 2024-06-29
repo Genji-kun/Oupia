@@ -1,4 +1,4 @@
-import { IUserLogin } from "@/lib/types/interfaces";
+import { IUserLogin } from "@/lib/interfaces";
 import AppService from "./app.service";
 import { AUTH_ENDPOINTS } from "@/lib/constants/EndPoints";
 

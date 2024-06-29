@@ -1,6 +1,6 @@
 "use client"
 
-import { SearchUser } from '@/lib/types/interfaces/User';
+import { SearchUser } from '@/lib/interfaces/User';
 import { usePathname } from 'next/navigation';
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 

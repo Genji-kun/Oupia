@@ -8,7 +8,7 @@ import {
     FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { ITenantRequest } from '@/lib/types/interfaces';
+import { ITenantRequest } from '@/lib/interfaces';
 import { cn } from '@/lib/utils';
 import { FilePlus2, X } from 'lucide-react';
 import React, { useState } from 'react';

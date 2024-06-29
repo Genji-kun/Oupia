@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { EmblaOptionsType } from 'embla-carousel'
-import { Image as image } from '@/lib/types/interfaces/Image';
+import { Image as image } from '@/lib/interfaces/Image';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { useAssetImageContext } from '@/contexts/view-asset-image';

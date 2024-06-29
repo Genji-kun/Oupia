@@ -2,7 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Separator } from '@/components/ui/separator';
-import { Follower, User } from '@/lib/types/interfaces/User';
+import { Follower, User } from '@/lib/interfaces/User';
 import { convert } from '@/utils/convertAvatarAlt';
 import { ChevronRight, MessagesSquare, MoreHorizontal, UserRound } from 'lucide-react';
 import Link from 'next/link';

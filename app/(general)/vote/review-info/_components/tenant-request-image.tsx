@@ -6,7 +6,7 @@ import { ZoomInIcon, ZoomOutIcon } from 'lucide-react';
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 
-const VoteImgeItem = ({ images }: { images: ImageItem[] }) => {
+const TenantRequestImage = ({ images }: { images: ImageItem[] }) => {
     const [selectedImageIndex, setSelectedIamgeIndex] = useState(0)
     const [open, setOpen] = useState(false)
     const [zoom, setZoom] = useState<number>(1)
@@ -47,8 +47,8 @@ const VoteImgeItem = ({ images }: { images: ImageItem[] }) => {
                                     <div className='aspect-video w-full grid grid-cols-2 gap-1.5'>
                                         <Image onClick={() => handleSelectImage(0)} src={images[0].url} alt="Blog Image" className='object-cover h-full' width={1000} height={1000} />
                                         <div className="grid grid-rows-2 gap-1.5">
-                                            <Image onClick={() => handleSelectImage(1)} src={images[1].url} alt="Blog Image" className='object-cover aspect-3/2 cursor-pointer' width={1000} height={1000} />
-                                            <Image onClick={() => handleSelectImage(2)} src={images[2].url} alt="Blog Image" className='object-cover aspect-3/2 cursor-pointer' width={1000} height={1000} />
+                                            <Image onClick={() => handleSelectImage(1)} src={images[1].url} alt="Blog Image" className='object-cover aspect-video cursor-pointer' width={1000} height={1000} />
+                                            <Image onClick={() => handleSelectImage(2)} src={images[2].url} alt="Blog Image" className='object-cover aspect-video cursor-pointer' width={1000} height={1000} />
                                         </div>
                                     </div>
                                 )
@@ -109,4 +109,4 @@ const VoteImgeItem = ({ images }: { images: ImageItem[] }) => {
     )
 }
 
-export default VoteImgeItem;
+export default TenantRequestImage;

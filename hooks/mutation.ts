@@ -1,6 +1,6 @@
 "use client"
 
-import { IUserLogin } from "@/lib/types/interfaces";
+import { IUserLogin } from "@/lib/interfaces";
 import { authService } from "@/services/auth.service";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams, useRouter } from "next/navigation";
@@ -10,14 +10,16 @@ import Cookies from "js-cookie";
 import { postService } from "@/services/post.service";
 import { toast } from "sonner";
 import { userService } from "@/services/user.service";
-import { ReviewRequest } from "@/lib/types/interfaces/Review";
+import { ReviewRequest } from "@/lib/interfaces/Review";
 import { reviewService } from "@/services/review.service";
 import { QUERY_KEY } from "@/lib/constants/QueryKeys";
 import { publicApi } from "@/configs/axiosInstance";
 import { assetsEndpoints } from "@/configs/axiosEndpoints";
 import { certificationService } from "@/services/certification.service";
-import { IVoteRequest } from "@/lib/types/interfaces/Vote";
+import { IVoteRequest } from "@/lib/interfaces/Vote";
 import { voteService } from "@/services/vote.service";
+import { Vote } from "lucide-react";
+import { VoteType } from "@/lib/enums";
 
 // ----------- AUTH -------------
 
@@ -186,10 +188,16 @@ export const useCreateVote = () => {
     const { mutateAsync, isPending } = useMutation({
         mutationFn: async (req: IVoteRequest) => {
             await voteService.createVote(req);
-            const { data } = await voteService.getOneLandlordInfo(req.targetId.toString());
-            return data;
+            if (req.type === VoteType.LANDLORD) {
+                const { data } = await voteService.getOneLandlordInfo(req.targetId.toString());
+                return data;
+            } else {
+                const { data } = await voteService.getOneTenantRequestInfo(req.targetId.toString());
+                return data;
+            }
+
         },
-        onSuccess: (data) => {
+        onSuccess: () => {
             toast.success("Cảm ơn bạn đã đánh giá thông tin. Hãy tiếp tục phát huy nhé !!");
         }
     })

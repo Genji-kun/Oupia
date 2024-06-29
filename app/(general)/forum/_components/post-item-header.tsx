@@ -6,7 +6,7 @@ import { Separator } from '@/components/ui/separator';
 import { Calendar, EditIcon, Info, Loader2, MessagesSquare, Search, UserRoundCheck, UsersRound, X, XSquare } from 'lucide-react';
 import Link from 'next/link';
 
-import { PostResponse } from '@/lib/types/interfaces/Post';
+import { PostResponse } from '@/lib/interfaces/Post';
 import React, { useEffect, useState } from 'react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog"
@@ -34,7 +34,7 @@ import { DialogClose } from '@radix-ui/react-dialog';
 import { usePostUpdateContext } from '@/contexts/post-update-context';
 import { toast } from 'sonner';
 import { Skeleton } from '@/components/ui/skeleton';
-import { UserInfo } from '@/lib/types/interfaces/User';
+import { UserInfo } from '@/lib/interfaces/User';
 
 
 const PostItemHeader = ({ post }: { post: PostResponse }) => {

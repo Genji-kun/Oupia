@@ -3,7 +3,7 @@
 import { assetsEndpoints } from '@/configs/axiosEndpoints';
 import { publicApi } from '@/configs/axiosInstance';
 import { useSearchAssets, useSearchAssetsByPolygon } from '@/hooks/query';
-import { AssetResponse } from '@/lib/types/interfaces/Asset';
+import { IAssetItem } from '@/lib/interfaces/response/Asset';
 import { useQuery } from '@tanstack/react-query';
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 import { useDebounce } from 'use-debounce';
@@ -35,7 +35,7 @@ interface IFindAssetContext {
     setDistricts: React.Dispatch<React.SetStateAction<District[]>>;
     selectedDist: District | undefined;
     setSelectedDist: React.Dispatch<React.SetStateAction<District | undefined>>;
-    assetResults: AssetResponse[];
+    assetResults: IAssetItem[];
     isFetchingAssetResults: boolean;
     pageSize: number;
     setPageSize: React.Dispatch<React.SetStateAction<number>>;
@@ -47,7 +47,7 @@ interface IFindAssetContext {
     setPriceRate: React.Dispatch<React.SetStateAction<number[]>>;
     polyReq: string;
     setPolyReq: React.Dispatch<React.SetStateAction<string>>;
-    assetsByPolygon: AssetResponse[];
+    assetsByPolygon: IAssetItem[];
     isFetchingPolygon: boolean;
     totalPages: number;
     maxPeople: string;

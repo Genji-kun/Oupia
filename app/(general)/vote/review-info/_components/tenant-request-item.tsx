@@ -1,62 +1,53 @@
+"use client"
+
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTrigger } from '@/components/ui/dialog';
+import { Progress } from '@/components/ui/progress';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Separator } from '@/components/ui/separator';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Vote } from '@/lib/enums';
+import { ITenantRequest } from '@/lib/interfaces/User';
+import { IVote } from '@/lib/interfaces/Vote';
+import { convert } from '@/utils/convertAvatarAlt';
+import { format } from 'date-fns';
 import React, { useState } from 'react'
-import { IoMdThumbsUp, IoMdThumbsDown } from "react-icons/io"
-import { ILandlordInfo } from '@/lib/interfaces/User'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { convert } from '@/utils/convertAvatarAlt'
-import { format } from 'date-fns'
-import { Vote } from '@/lib/enums'
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTrigger } from '@/components/ui/dialog'
-import { Separator } from '@/components/ui/separator'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import dynamic from 'next/dynamic'
-import { Progress } from '@/components/ui/progress'
-import { IVote } from '@/lib/interfaces/Vote'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import AssetInfoDialog from './asset-info-dialog'
-import { useSelector } from 'react-redux'
+import { IoMdThumbsDown, IoMdThumbsUp } from 'react-icons/io';
+import { useSelector } from 'react-redux';
+import TenantRequestImage from './tenant-request-image';
+import AssetInfoDialog from './asset-info-dialog';
+import VoteDialog from './vote-dialog';
 
-
-const VoteItemImage = dynamic(() => import('./vote-item-image'), {
-    ssr: false,
-})
-
-const VoteDialog = dynamic(() => import('./vote-dialog'), {
-    ssr: false,
-})
-
-const VoteItem = ({ data }: { data: ILandlordInfo }) => {
-
+const TenantRequestItem = ({ data }: { data: ITenantRequest }) => {
     const { currentUser } = useSelector((state: any) => state.currentUserSlice);
 
-    const [voteItem, setVoteItem] = useState(data);
+    const [voteItem, setVoteItem] = useState<ITenantRequest>(data);
     const [hasVoted, setHasVoted] = useState(false);
 
     return (
         <>
             <div className="flex items-center justify-between">
                 <h3 className="text-xl truncate text-primary uppercase font-semibold">{voteItem.assetName}</h3>
-                <div className="flex gap-1 items-center">
-                    <h5>Ngày đăng: <span className="text-muted-foreground">{format(voteItem.createdAt, "dd-MM-yyyy")}</span>
-                    </h5>
-                </div>
+                <h5>Ngày đăng: <span className="text-muted-foreground">{format(voteItem.createdAt, "dd-MM-yyyy")}</span></h5>
             </div>
             <div className='space-y-2'>
                 <div className='p-4 border rounded-lg flex flex-col gap-4 bg-background shadow-md dark:bg-oupia-base'>
-                    <div className="flex justify-between gap-4 items-center">
-                        <div className="flex gap-2 items-center">
+                    <div className="flex justify-between gap-2 items-center">
+                        <div className="flex gap-4 items-center">
                             <Avatar className="w-12 h-12">
-                                <AvatarImage src={voteItem.landlordAvatar} alt={voteItem.landlordName} />
-                                <AvatarFallback>{convert(voteItem.landlordName)}</AvatarFallback>
+                                <AvatarImage src={voteItem.avatar} alt={voteItem.fullName} />
+                                <AvatarFallback>{convert(voteItem.fullName)}</AvatarFallback>
                             </Avatar>
                             <div className='h=fit'>
-                                <h3 className='text-lg'>{voteItem.landlordName}</h3>
-                                <h5 className='text-muted-foreground text-sm'>Chủ trọ cần xác thực</h5>
+                                <h3 className='text-lg'>{voteItem.fullName}</h3>
+                                <h5 className='text-muted-foreground text-sm'>Đánh giá cần xác thực</h5>
                             </div>
                         </div>
                     </div>
+
                     <div className="space-y-4">
                         <p>{voteItem.note}</p>
-                        <VoteItemImage images={voteItem.images} />
+                        <TenantRequestImage images={voteItem.images} />
                     </div>
                 </div>
                 {
@@ -68,7 +59,7 @@ const VoteItem = ({ data }: { data: ILandlordInfo }) => {
                                         <TooltipTrigger asChild>
                                             <div className='cursor-pointer p-4 border rounded-lg flex justify-between items-center gap-10 bg-background shadow-md dark:bg-oupia-base hover:bg-border dark:hover:bg-oupia-sub/70'>
                                                 <div className='flex-auto space-y-2 flex flex-col'>
-                                                    <span className='text-sm text-muted-foreground'>Cần {100 - voteItem.score} trên 100 điểm để hoàn thành</span>
+                                                    <span className='text-sm text-muted-foreground'>Cần {100 - (voteItem.score ?? 0)} trên 100 điểm để hoàn thành</span>
                                                     <Progress value={voteItem.score} max={100} />
                                                 </div>
                                                 <div className='flex items-center gap-2'>
@@ -100,7 +91,7 @@ const VoteItem = ({ data }: { data: ILandlordInfo }) => {
                             <DialogContent className="lg:w-1/2">
                                 <DialogHeader className='space-y-0'>
                                     <h3 className='font-semibold text-xl uppercase'>Danh sách đánh giá</h3>
-                                    <DialogDescription className='w-3/4 truncate text-sm'>Xem thông tin đánh giá của &quot;{voteItem.assetName}&quot;</DialogDescription>
+                                    <DialogDescription className='w-3/4 truncate text-sm'>Xem thông tin đánh giá của {voteItem.fullName}</DialogDescription>
                                 </DialogHeader>
                                 <Separator />
                                 <ScrollArea className='h-[50vh]'>
@@ -138,7 +129,7 @@ const VoteItem = ({ data }: { data: ILandlordInfo }) => {
                         :
                         <div className='p-4 border rounded-lg flex justify-between items-center gap-10 bg-background shadow-md dark:bg-oupia-base'>
                             {
-                                currentUser?.id === data.landlordId ?
+                                currentUser?.id === data.userId ?
                                     <>
                                         <div className="flex gap-2 items-center flex-auto">
                                             <Avatar>
@@ -146,15 +137,15 @@ const VoteItem = ({ data }: { data: ILandlordInfo }) => {
                                                 <AvatarFallback>{convert(currentUser.fullName ?? "")}</AvatarFallback>
                                             </Avatar>
                                             <div className='flex flex-col h-fit flex-auto gap-1'>
-                                                <h5 className='text-muted-foreground text-sm'>Thông tin của bạn cần {100 - data.score} điểm để xác thực thành công.</h5>
-                                                <Progress value={data.score} max={100} />
+                                                <h5 className='text-muted-foreground text-sm'>Thông tin của bạn cần {100 - (data.score ?? 0)} điểm để xác thực thành công.</h5>
+                                                <Progress value={data.score ?? 0} max={100} />
                                             </div>
 
                                         </div>
                                     </> : <>
                                         <div className="flex gap-2 items-center flex-auto">
                                             <VoteDialog
-                                                landlordInfoId={voteItem.landlordId}
+                                                targetId={voteItem.id}
                                                 setHasVoted={setHasVoted}
                                                 setVoteItem={setVoteItem} />
                                         </div>
@@ -169,4 +160,4 @@ const VoteItem = ({ data }: { data: ILandlordInfo }) => {
     )
 }
 
-export default VoteItem
+export default TenantRequestItem

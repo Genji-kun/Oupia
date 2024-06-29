@@ -1,4 +1,4 @@
-import { Gender } from "@/lib/types/enums";
+import { Gender } from "@/lib/enums";
 
 export interface IRegisterInfoForm {
     fullName: string;

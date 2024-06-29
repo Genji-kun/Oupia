@@ -1,4 +1,4 @@
-import { Gender } from "@/lib/types/enums";
+import { Gender } from "@/lib/enums";
 import { z } from "zod";
 
 const passwordRegex = /^(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
@@ -67,5 +67,8 @@ export const tenantRequestSchema = z.object({
         required_error: "Vui lòng điền nội dung minh chứng."
     }).min(20, {
         message: "Nội dung minh chứng phải ít nhất 20 ký tự."
+    }),
+    startDate: z.date({
+        required_error: "Vui lòng chọn ngày bắt thuê nhà trọ."
     })
 })

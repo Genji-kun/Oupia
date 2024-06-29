@@ -1,22 +1,29 @@
 "use client"
 
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { RECAPTCHA_SITE_KEY } from '@/lib/constants/SettingSystem';
-import { ILandlordInfo } from '@/lib/interfaces/User';
+import { ITenantRequest } from '@/lib/interfaces/User';
 import { cn } from '@/lib/utils';
-import { InfoIcon, X } from 'lucide-react';
-import Image from 'next/image';
-import React, { useState } from 'react'
+import { DollarSignIcon, InfoIcon, Link, MapPinIcon, X } from 'lucide-react';
+import React, { useEffect, useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha';
+import AssetDetailInfoCard from './asset-detail-info-card';
+import { numberToCurrency } from '@/utils/priceConvert';
 
-const AssetInfoDialog = ({ data }: { data: ILandlordInfo }) => {
+
+const AssetInfoDialog = ({ data }: { data: ITenantRequest }) => {
 
     const [isVerified, setIsVerified] = useState(false);
     const [textExpanded, setTextExpanded] = useState(false);
     const [open, setOpen] = useState(false);
+
+    useEffect(() => {
+        if (!open) {
+            setIsVerified(false);
+        }
+    }, [open])
 
 
     return (
@@ -50,37 +57,26 @@ const AssetInfoDialog = ({ data }: { data: ILandlordInfo }) => {
                                     </p>
                                     <span className="cursor-pointer text-sm" onClick={() => setTextExpanded((prev) => !prev)}>{textExpanded ? "Ẩn bớt" : "Xem thêm"}</span>
                                 </div>
-                                <div className='space-y-2'>
-                                    <h5 className='text-lg'>Tiện ích nhà trọ</h5>
-                                    <div className="flex gap-2 flex-wrap">
-                                        {
-                                            data.amenities?.map((amenity, index: number) => {
-                                                return <React.Fragment key={index}>
-                                                    <Badge className="border text-white bg-primary py-1 px-4">
-                                                        <div className="flex items-center gap-2">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 lucide lucide-circle-check-big"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><path d="m9 11 3 3L22 4" /></svg>                                            <span className="text-base">
-                                                                {amenity.amenityName}
-                                                            </span>
-                                                        </div>
-                                                    </Badge>
-                                                </React.Fragment>
-                                            })
-                                        }
-                                    </div>
-                                </div>
+
                                 <div className='flex flex-col w-full'>
-                                    <h5 className='text-lg leading-0'>Giấy phép kinh doanh</h5>
+                                    <h5 className='text-lg leading-0'>Các thông tin khác</h5>
                                     <p className='text-sm text-muted-foreground'>Hãy xác nhận trước khi xem thông tin.</p>
                                     <ReCAPTCHA className='mx-auto mt-4'
                                         sitekey={RECAPTCHA_SITE_KEY ?? ""}
                                         onChange={(token) => setIsVerified(!!token)} />
 
                                     {
-                                        isVerified && <Image src={data.businessLicense}
-                                            alt="Bussiness License Image"
-                                            width={1000}
-                                            height={1000}
-                                            className="object-cover w-[95%] mx-auto my-10" />
+                                        isVerified && <>
+                                            <div className='grid grid-cols-2 gap-4 items-center mt-4'>
+                                                <AssetDetailInfoCard title='Giá thuê' icon={<DollarSignIcon className="w-5 h-5 text-primary" />} content={numberToCurrency(data.price)} />
+                                                <AssetDetailInfoCard title='Địa chỉ' icon={<MapPinIcon className="w-5 h-5 text-primary" />} content={data.fullLocation} />
+                                                {/* <AssetDetailInfoCard title='Ngày thuê trọ' icon={<Calendar className="w-5 h-5 text-primary" />} content={format(data.startDate,"")} /> */}
+
+                                                <div className='col-span-2'>
+                                                    <AssetDetailInfoCard title='Mã giao dịch' icon={<Link className="w-5 h-5 text-primary" />} link={data.transactionHash} />
+                                                </div>
+                                            </div>
+                                        </>
                                     }
                                 </div>
                             </div>

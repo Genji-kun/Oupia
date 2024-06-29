@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input'
 import { commentEndpoints } from '@/configs/axiosEndpoints';
 import { authApi } from '@/configs/axiosInstance';
 import { usePostFavouriteContext } from '@/contexts/post-favourite-context';
-import { CommentRequest } from '@/lib/types/interfaces/Comment';
+import { CommentRequest } from '@/lib/interfaces/Comment';
 import React, { useEffect, useState } from 'react'
 import { IoSend } from "react-icons/io5";
 import { useSelector } from 'react-redux';

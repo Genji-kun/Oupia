@@ -1,6 +1,6 @@
 "use client"
 
-import { SearchUser } from '@/lib/types/interfaces/User';
+import { SearchUser } from '@/lib/interfaces/User';
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 
 interface IMessageToUserContext {

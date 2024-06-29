@@ -1,6 +1,4 @@
-export interface Amenity {
-    amenityName: string,
-}
+
 
 export interface TagPrice {
     minPrice: number,

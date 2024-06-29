@@ -3,7 +3,7 @@
 import { assetsEndpoints } from '@/configs/axiosEndpoints';
 import { publicApi } from '@/configs/axiosInstance';
 import { QUERY_KEY } from '@/lib/constants/QueryKeys';
-import { ReviewResponse } from '@/lib/types/interfaces/Review';
+import { ReviewResponse } from '@/lib/interfaces/Review';
 import { reviewService } from '@/services/review.service';
 import { useQuery } from '@tanstack/react-query';
 import { notFound, useParams } from 'next/navigation';

@@ -1,7 +1,8 @@
 "use client"
 
-import { AssetResponse } from '@/lib/types/interfaces/Asset';
-import { Amenity, TagLocation, TagPrice } from '@/lib/types/interfaces/Tags';
+import { TagLocation, TagPrice } from '@/lib/interfaces/Tags';
+import { IAssetItem } from '@/lib/interfaces/response/Asset';
+import { Amenity } from '@/lib/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { usePathname } from 'next/navigation';
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
@@ -9,8 +10,6 @@ import { UseFormReturn, useForm } from 'react-hook-form';
 import * as z from "zod"
 
 interface IUploadContext {
-
-    // Post Context
 
     post: any;
     setPost: React.Dispatch<React.SetStateAction<any>>;
@@ -24,8 +23,8 @@ interface IUploadContext {
     setTagPrice: React.Dispatch<React.SetStateAction<TagPrice | undefined>>;
     tagLocation: TagLocation | undefined;
     setTagLocation: React.Dispatch<React.SetStateAction<TagLocation | undefined>>;
-    tagAsset: AssetResponse | undefined;
-    setTagAsset: React.Dispatch<React.SetStateAction<AssetResponse | undefined>>;
+    tagAsset: IAssetItem | undefined;
+    setTagAsset: React.Dispatch<React.SetStateAction<IAssetItem | undefined>>;
 
     // AssetContext 
     asset: any;
@@ -79,7 +78,7 @@ export const UploadProvider: React.FC<{ children: ReactNode }> = ({ children }) 
     const [amenities, setAmenities] = useState<Amenity[]>([]);
     const [tagPrice, setTagPrice] = useState<TagPrice | undefined>();
     const [tagLocation, setTagLocation] = useState<TagLocation | undefined>();
-    const [tagAsset, setTagAsset] = useState<AssetResponse | undefined>();
+    const [tagAsset, setTagAsset] = useState<IAssetItem | undefined>();
 
     const formPostSchema = z.object({
         postContent: z.string({

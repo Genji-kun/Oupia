@@ -14,12 +14,12 @@ import { logout } from '@/redux/slices/currentUserSlice';
 import { convert } from '@/utils/convertAvatarAlt';
 import { HiOutlineHomeModern } from 'react-icons/hi2';
 import React, { PropsWithChildren } from 'react';
-import { ICurrentUser } from '@/lib/types/interfaces';
-import { UserRole } from '@/lib/types/enums';
+import { UserRole } from '@/lib/enums';
 import Cookies from 'js-cookie';
 import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
+import { ICurrentUser } from '@/lib/interfaces/response/User';
 
 const SearchButton = dynamic(() => import("./search-button"), {
     ssr: false
@@ -117,11 +117,11 @@ const UserPopover: React.FC<IProps> = ({ user }) => {
                                 <ChevronRight className="ml-auto h-4 w-4" />
                             </Link>
                         }
-                        <Link href="/settings/password" className="w-full flex items-center py-1 px-2 hover:bg-accent rounded text-sm">
+                        {/* <Link href="/settings/password" className="w-full flex items-center py-1 px-2 hover:bg-accent rounded text-sm">
                             <Key className="mr-2 h-4 w-4" />
                             <span>Đổi mật khẩu</span>
                             <ChevronRight className="ml-auto h-4 w-4" />
-                        </Link>
+                        </Link> */}
                         <div className="w-full flex items-center py-1 px-2 hover:bg-accent rounded text-sm cursor-pointer" onClick={(e) => {
                             e.stopPropagation(); changeTheme();
                         }}>

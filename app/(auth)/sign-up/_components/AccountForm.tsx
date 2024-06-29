@@ -13,9 +13,9 @@ import { useAuthTabContext } from '@/contexts/auth-tab-context';
 import { useSignUpContext } from '@/contexts/sign-up-context';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
-import { IRegisterAccountForm } from '@/lib/types/interfaces/Register';
+import { IRegisterAccountForm } from '@/lib/interfaces/Register';
 import { registerAccountSchema } from '@/lib/schemas/UserSchema';
-import { IAcount } from '@/lib/types/interfaces';
+import { IAcount } from '@/lib/interfaces';
 import { useRegister } from '@/hooks/mutation';
 
 
@@ -57,7 +57,7 @@ const AccountForm = () => {
     }, [accountForm]);
 
     useEffect(() => {
-        setUser((current) => {
+        setUser((current: any) => {
             return { ...current, account: account };
         });
     }, [account, setUser]);

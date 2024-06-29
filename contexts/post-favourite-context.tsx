@@ -2,7 +2,7 @@
 
 import { commentEndpoints } from '@/configs/axiosEndpoints';
 import { authApi } from '@/configs/axiosInstance';
-import { CommentResponse } from '@/lib/types/interfaces/Comment';
+import { ICommentItem } from '@/lib/interfaces/response/Comment';
 import { useQuery } from '@tanstack/react-query';
 import React, { createContext, useState, useContext, ReactNode, useEffect, useRef } from 'react';
 
@@ -46,7 +46,7 @@ export const PostFavouriteProvider: React.FC<{ children: ReactNode }> = ({ child
         }
     }
 
-    const { data: comments, isFetching, refetch } = useQuery<CommentResponse[] | undefined>({
+    const { data: comments, isFetching, refetch } = useQuery<ICommentItem[] | undefined>({
         queryKey: ["getComments", { postId }],
         queryFn: getComments,
         refetchOnWindowFocus: false,

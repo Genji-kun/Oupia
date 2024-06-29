@@ -1,27 +1,7 @@
-import { AssetType } from "../enums";
-import { Image } from "./Image";
-import { Amenity } from "./Tags";
-import { User } from "./User";
+import { AssetType } from "@/lib/enums";
+import { Amenity } from "@/lib/types";
 
-export interface Asset {
-    name: string,
-    description: string,
-    slug: string,
-    location: string,
-    createAt?: Date,
-    isDeleted?: boolean,
-    user: User,
-    // assetType: AssetType,
-    imageList: Image[],
-    price?: number
-}
-
-// export interface AssetType {
-//     name: string
-// }
-
-
-export interface AssetResponse {
+export interface IAssetItem {
     id: number,
     assetName: string,
     assetSlug: string,
@@ -34,14 +14,14 @@ export interface AssetResponse {
     price: number,
     area: number,
     maxPeople: number,
-    amenities: { amenityName: string }[],
+    amenities: Amenity[],
     images: string[],
     isDeleted: boolean,
     createdAt: Date,
     updatedAt: Date
 }
 
-export interface AssetInfo {
+export interface IAssetInformation {
     assetName: string,
     assetDescription: string,
     assetType: AssetType,
@@ -55,9 +35,3 @@ export interface AssetInfo {
     images: File[],
     businessLicense: File
 }
-
-export interface ISubmitLandlordForm {
-    assetInfo: AssetInfo,
-    note: string,
-}
-

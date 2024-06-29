@@ -9,7 +9,7 @@ import { searchEndpoints } from '@/configs/axiosEndpoints';
 import { publicApi } from '@/configs/axiosInstance';
 import { useUploadContext } from '@/contexts/upload-context';
 import { useDebounce } from '@/hooks/useDebounce';
-import { Amenity } from '@/lib/types/interfaces/Tags';
+import { Amenity } from '@/lib/interfaces/Tags';
 import { CornerDownLeft, ThumbsUp, X } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react'
 

@@ -4,7 +4,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { followEndpoints } from '@/configs/axiosEndpoints';
 import { publicApi } from '@/configs/axiosInstance';
 import { useProfileContext } from '@/contexts/profile-context';
-import { Follower } from '@/lib/types/interfaces/User';
+import { Follower } from '@/lib/interfaces/User';
 import React, { useEffect, useState } from 'react'
 import FollowerSkeleton from './follower-skeleton';
 import FollowerItem from './follower-item';

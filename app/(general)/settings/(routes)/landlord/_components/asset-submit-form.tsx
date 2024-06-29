@@ -3,8 +3,7 @@ import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
 import { submitLandlordFormSchema } from '@/lib/schemas/LandlordSchema'
-import { AssetType } from '@/lib/types/enums'
-import { ISubmitLandlordForm } from '@/lib/types/interfaces/Asset'
+import { AssetType } from '@/lib/enums'
 import { zodResolver } from '@hookform/resolvers/zod'
 import React from 'react'
 import { useForm } from 'react-hook-form'
@@ -14,6 +13,7 @@ import AmenityInput from './amenity-input'
 import PhotoInputs from './photo-inputs'
 import { useLandlordUpgrade } from '@/hooks/mutation'
 import { Loader2 } from 'lucide-react'
+import { ISubmitLandlordForm } from '@/lib/interfaces/Form'
 
 const AssetSubmitForm = () => {
 
@@ -191,7 +191,7 @@ const AssetSubmitForm = () => {
                 <div className="flex justify-center">
                     <Button type="submit" className="styled-button" disabled={isPendingLandlordUpgrade}>
                         Xác nhận thông tin
-                        {isPendingLandlordUpgrade && <Loader2 className="animate-spin w-4 h-4" />}
+                        {isPendingLandlordUpgrade && <Loader2 className="animate-spin w-4 h-4 ml-2" />}
                     </Button>
                 </div>
             </form>

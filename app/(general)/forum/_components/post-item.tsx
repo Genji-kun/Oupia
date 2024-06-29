@@ -1,6 +1,6 @@
 "use client";
 
-import { PostResponse } from '@/lib/types/interfaces/Post';
+import { PostResponse } from '@/lib/interfaces/Post';
 
 import React from 'react';
 import PostItemHeader from './post-item-header';
@@ -15,6 +15,7 @@ import { cn } from '@/lib/utils';
 import { PostUpdateProvider } from '@/contexts/post-update-context';
 import { PostFavouriteProvider } from '@/contexts/post-favourite-context';
 import CommentList from './comment-list';
+import PostItemImage from './post-item-image';
 
 const PostItem = (
     { post, innerRef }: { post: PostResponse, innerRef?: any }
@@ -60,102 +61,7 @@ const PostItem = (
                 </div>
             }
             {post.images && post.images.length > 0 && (
-                <>
-                    {(() => {
-                        switch (post.images.length) {
-                            case 1:
-                                return <div className="w-full">
-                                    <Image src={post.images[0]}
-                                        alt="Post Image"
-                                        width={1000}
-                                        height={1000}
-                                        className="object-cover aspect-3/2" />
-                                </div>
-                            case 2:
-                                return <div className="w-full grid grid-cols-2 gap-1">
-                                    <Image src={post.images[0]}
-                                        alt="Post Image"
-                                        width={1000}
-                                        height={1000}
-                                        className="object-cover w-full h-full aspect-square" />
-                                    <Image src={post.images[1]}
-                                        alt="Post Image"
-                                        width={1000}
-                                        height={1000}
-                                        className="object-cover w-full h-full aspect-square" />
-                                </div>
-                            case 3:
-                                return <div className="w-full grid grid-rows-2 grid-cols-5 gap-1">
-                                    <Image src={post.images[0]}
-                                        alt="Post Image"
-                                        width={1000}
-                                        height={1000}
-                                        className="object-cover w-full h-full row-span-2 col-span-3" />
-                                    <Image src={post.images[1]}
-                                        alt="Post Image"
-                                        width={1000}
-                                        height={1000}
-                                        className="object-cover w-full h-full aspect-square col-span-2" />
-                                    <Image src={post.images[2]}
-                                        alt="Post Image"
-                                        width={1000}
-                                        height={1000}
-                                        className="object-cover w-full h-full aspect-square col-span-2" />
-                                </div>
-                            case 4:
-                                return <div className="w-full grid grid-rows-2 grid-cols-2 gap-1">
-                                    <Image src={post.images[0]}
-                                        alt="Post Image"
-                                        width={1000}
-                                        height={1000}
-                                        className="object-cover w-full h-full aspect-square" />
-                                    <Image src={post.images[1]}
-                                        alt="Post Image"
-                                        width={1000}
-                                        height={1000}
-                                        className="object-cover w-full h-full aspect-square" />
-                                    <Image src={post.images[2]}
-                                        alt="Post Image"
-                                        width={1000}
-                                        height={1000}
-                                        className="object-cover w-full h-full aspect-square" />
-                                    <Image src={post.images[3]}
-                                        alt="Post Image"
-                                        width={1000}
-                                        height={1000}
-                                        className="object-cover w-full h-full aspect-square" />
-                                </div>
-                            default:
-                                return <div className="w-full aspect-video grid grid-rows-2 grid-cols-2 gap-1">
-                                    <Image src={post.images[0]}
-                                        alt="Post Image"
-                                        width={1000}
-                                        height={1000}
-                                        className="object-cover w-full h-full aspect-square" />
-                                    <Image src={post.images[1]}
-                                        alt="Post Image"
-                                        width={1000}
-                                        height={1000}
-                                        className="object-cover w-full h-full aspect-square" />
-                                    <Image src={post.images[2]}
-                                        alt="Post Image"
-                                        width={1000}
-                                        height={1000}
-                                        className="object-cover w-full h-full aspect-square" />
-                                    <div className="relative w-full h-full aspect-square">
-                                        <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-10">
-                                            <h2 className="font-semibold text-4xl">+<span>{post.images.length - 3}</span></h2>
-                                        </div>
-                                        <Image src={post.images[3]}
-                                            alt="Post Image"
-                                            width={1000}
-                                            height={1000}
-                                            className="object-cover w-full h-full" />
-                                    </div>
-                                </div>
-                        }
-                    })()}
-                </>
+                <PostItemImage images={post.images} />
             )}
 
             {/* {post.ass && <div className='w-full flex items-center gap-4 border-y'>

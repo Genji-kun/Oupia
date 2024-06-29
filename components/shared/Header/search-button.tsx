@@ -11,9 +11,9 @@ import { publicApi } from '@/configs/axiosInstance';
 import { assetsEndpoints } from '@/configs/axiosEndpoints';
 import { useQuery } from '@tanstack/react-query';
 import { useDebounce } from 'use-debounce';
-import { AssetResponse } from '@/lib/types/interfaces/Asset';
 import { History, addHistory, removeHistory } from '@/redux/slices/searchHistorySlice';
 import { useRouter } from 'next/navigation';
+import { IAssetItem } from '@/lib/interfaces/response/Asset';
 
 const fetchAssets = async (searchQuery: string) => {
     try {
@@ -116,7 +116,7 @@ const SearchButton: React.FC = () => {
                                             <h1 className="text-muted-foreground font-semibold px-5 pb-3">Kết quả tìm kiếm</h1>
                                             <div className="flex flex-col w-full">
                                                 {
-                                                    results.map((asset: AssetResponse, index: number) => {
+                                                    results.map((asset: IAssetItem, index: number) => {
                                                         return <React.Fragment key={index}>
                                                             <div
                                                                 onClick={

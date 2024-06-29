@@ -20,6 +20,9 @@ export const QUERY_KEY = {
     GET_LIST_LANDLORD_INFO: "getListLandlordInfo",
     GET_ONE_LANDLORD_INFO: "getOneLandlordInfo",
 
+    // TENANT REQUEST
+    GET_TENANT_REQUEST: "getTenantRequest",
+
     // CERTIFICATION
     GET_USER_CERTIFICATION_BY_ASSET: "getUserCertificationByAsset"
 

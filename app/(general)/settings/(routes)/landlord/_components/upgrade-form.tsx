@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import { UserRole } from '@/lib/types/enums';
+import { UserRole } from '@/lib/enums';
 
 const AssetSubmitForm = dynamic(() => import("./asset-submit-form"), {
     ssr: false,

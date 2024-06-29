@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { AssetType } from "../types/enums";
+import { AssetType } from "../enums";
 
 const fileArraySchema = z.array(
     z.instanceof(File)

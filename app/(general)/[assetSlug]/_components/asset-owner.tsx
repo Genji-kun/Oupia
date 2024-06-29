@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
-import { User } from '@/lib/types/interfaces/User';
+import { User } from '@/lib/interfaces/User';
 import { MessagesSquare, UserRoundCheck } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';

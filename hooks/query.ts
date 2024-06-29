@@ -1,3 +1,5 @@
+"use client"
+
 import { QUERY_KEY } from "@/lib/constants/QueryKeys"
 import { assetService } from "@/services/asset.service";
 import { authService } from "@/services/auth.service"
@@ -5,8 +7,7 @@ import { certificationService } from "@/services/certification.service";
 import { searchService } from "@/services/search.service";
 import { userService } from "@/services/user.service";
 import { voteService } from "@/services/vote.service";
-import { useQuery } from "@tanstack/react-query"
-import { query } from "firebase/firestore";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query"
 import { useState } from "react";
 
 
@@ -146,7 +147,7 @@ export const useGetLandlordInfo = () => {
     }
 }
 
-//----------- AMENITY ------------
+//----------- CERTIFICATIONS ------------
 
 export const useUserCertification = (assetId: number) => {
     const { data, isFetching } = useQuery({
@@ -156,7 +157,8 @@ export const useUserCertification = (assetId: number) => {
             const res = await certificationService.getUserCertificationByAsset(Number(assetId));
             return res.data.content;
         },
-        enabled: !!assetId
+        enabled: !!assetId,
+        refetchOnWindowFocus: false
     });
 
     return {
@@ -164,3 +166,55 @@ export const useUserCertification = (assetId: number) => {
         isFetchingCertification: isFetching
     }
 }
+
+
+// ---------------  VOTE REQUEST -----------------
+
+export const useGetTenantRequestList = () => {
+    const { data, isFetching } = useQuery({
+        queryKey: [QUERY_KEY.GET_TENANT_REQUEST],
+        queryFn: async () => {
+            const res = await voteService.getListTenantRequests(1);
+            return res.data.content;
+        },
+        refetchOnWindowFocus: false,
+    });
+
+    return {
+        tenantReqData: data,
+        isFetching
+    }
+}
+
+
+// export const useGetTenantRequestList = () => {
+//     const {
+//         data,
+//         status,
+//         isFetching,
+//         isFetchingNextPage,
+//         hasNextPage,
+//         fetchNextPage,
+//     } = useInfiniteQuery({
+//         queryKey: [QUERY_KEY.GET_TENANT_REQUEST],
+//         queryFn: async ({ pageParam = 1 }) => {
+//             const res = await voteService.getListTenantRequests(pageParam);
+//             return res.data.content;
+//         },
+//         initialPageParam: 1,
+//         getNextPageParam: (lastPage) => {
+//             const nextPage = lastPage.meta.currentPage + 1
+//             return nextPage <= lastPage.meta.totalPages ? nextPage : undefined
+//         },
+//         refetchOnWindowFocus: false,
+//     })
+
+//     return {
+//         status,
+//         data,
+//         isFetching,
+//         isFetchingNextPage,
+//         hasNextPage,
+//         fetchNextPage,
+//     }
+// }

@@ -1,14 +1,13 @@
 import { Button } from '@/components/ui/button';
 import {
-    Form,
     FormControl,
     FormField,
     FormItem,
+    FormLabel,
     FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { ISubmitLandlordForm } from '@/lib/types/interfaces/Asset';
+import { ISubmitLandlordForm } from '@/lib/interfaces/Form';
 import { cn } from '@/lib/utils';
 import { FilePlus2, X } from 'lucide-react';
 import React, { useState } from 'react';
@@ -37,7 +36,7 @@ const PhotoInputs = ({ form }: { form: UseFormReturn<ISubmitLandlordForm, any, u
     };
 
     const handleRemoveFile = (index: number) => {
-        const updatedFiles = (form.getValues('assetInfo.images') || []).filter((_, i) => i !== index);
+        const updatedFiles = (form.getValues('assetInfo.images') || []).filter((_: File, i) => i !== index);
         form.setValue('assetInfo.images', updatedFiles);
     };
 
@@ -48,22 +47,7 @@ const PhotoInputs = ({ form }: { form: UseFormReturn<ISubmitLandlordForm, any, u
             name='assetInfo.images'
             render={() => (
                 <FormItem className='space-y-2'>
-                    <div className='space-y-2'>
-                        {form.getValues('assetInfo.images')?.length > 0 && <h4 className="font-bold text-lg uppercase">Ảnh nhà trọ</h4>}
-                        {form.getValues('assetInfo.images')?.map((file, index) => (
-                            <div key={index} className='flex items-center gap-2'>
-                                <span className='flex-auto truncate text-muted-foreground'>{file.name}</span>
-                                <Button
-                                    type='button'
-                                    variant={'destructive'}
-                                    className='px-2 py-1 w-fit h-fit'
-                                    onClick={() => handleRemoveFile(index)}
-                                >
-                                    <X className='h-3 w-3' />
-                                </Button>
-                            </div>
-                        ))}
-                    </div>
+                    <FormLabel>Ảnh nhà trọ</FormLabel>
                     <div
                         onDragOver={(event) => {
                             event.preventDefault();
@@ -97,7 +81,21 @@ const PhotoInputs = ({ form }: { form: UseFormReturn<ISubmitLandlordForm, any, u
                             />
                         </FormControl>
                     </div>
-
+                    <div className='space-y-2'>
+                        {form.getValues('assetInfo.images')?.map((file, index) => (
+                            <div key={index} className='flex items-center gap-2'>
+                                <span className='flex-auto truncate text-muted-foreground'>{file.name}</span>
+                                <Button
+                                    type='button'
+                                    variant={'destructive'}
+                                    className='px-2 py-1 w-fit h-fit'
+                                    onClick={() => handleRemoveFile(index)}
+                                >
+                                    <X className='h-3 w-3' />
+                                </Button>
+                            </div>
+                        ))}
+                    </div>
                     <FormMessage />
                 </FormItem>
             )}

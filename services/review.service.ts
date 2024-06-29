@@ -1,4 +1,4 @@
-import { ReviewRequest } from "@/lib/types/interfaces/Review";
+import { ReviewRequest } from "@/lib/interfaces/Review";
 import AppService from "./app.service";
 import { REVIEW_ENDPOINTS } from "@/lib/constants/EndPoints";
 

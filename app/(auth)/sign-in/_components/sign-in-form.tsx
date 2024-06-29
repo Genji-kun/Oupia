@@ -10,7 +10,7 @@ import { useState } from "react"
 import ForgetPasswordButton from "./forget-password-button"
 import { toast } from "sonner";
 import { loginSchema } from "@/lib/schemas/UserSchema";
-import { IUserLogin } from "@/lib/types/interfaces";
+import { IUserLogin } from "@/lib/interfaces";
 import { useLogin } from "@/hooks/mutation";
 
 const SignInForm = () => {

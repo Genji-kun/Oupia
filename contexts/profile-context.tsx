@@ -1,7 +1,7 @@
 "use client"
 
 import { useUserInfo } from '@/hooks/query';
-import { UserInfo } from '@/lib/types/interfaces/User';
+import { UserInfo } from '@/lib/interfaces/User';
 import { useParams } from 'next/navigation';
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 

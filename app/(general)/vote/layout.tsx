@@ -6,7 +6,7 @@ const VoteSidebar = dynamic(() => import('./_components/vote-sidebar'), {
 });
 
 
-export default function VoteLayout({ children }: { children: React.ReactNode }) {
+const VoteLayout = ({ children }: { children: React.ReactNode }) => {
 
     return (
         <div className="container px-2 py-4 flex flex-col lg:grid lg:grid-cols-4 gap-4">
@@ -16,3 +16,5 @@ export default function VoteLayout({ children }: { children: React.ReactNode }) 
         </div>
     )
 }
+
+export default dynamic(() => Promise.resolve(VoteLayout), { ssr: false })

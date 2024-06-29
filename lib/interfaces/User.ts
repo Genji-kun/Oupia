@@ -1,4 +1,5 @@
 import { AssetType } from "../enums"
+import { Amenity, Image } from "../types"
 import { IVote } from "./Vote"
 
 export interface User {
@@ -70,8 +71,8 @@ export interface ILandlordInfo {
     price: number,
     area: number,
     maxPeople: number,
-    amenities: { id: number, amenityName: string }[],
-    images: { id: number, url: string }[],
+    amenities: Amenity[],
+    images: Image[],
     note: string,
     transactionHash: string | null,
     businessLicense: string,
@@ -80,4 +81,28 @@ export interface ILandlordInfo {
     landlordUsername: string,
     landlordAvatar: string,
     votes: IVote[]
+}
+
+export interface ITenantRequest {
+    assetDescription: string,
+    assetId: number,
+    assetName: string,
+    assetSlug: string,
+    assetType: AssetType,
+    avatar: string,
+    createdAt: Date,
+    fullLocation: string,
+    fullName: string,
+    id: number,
+    images: Image[],
+    locationLat: number,
+    locationLong: number,
+    note: string,
+    price: number,
+    score: number | null,
+    transactionHash: string,
+    updatedAt: Date,
+    userId: number,
+    username: string,
+    votes: any[]
 }

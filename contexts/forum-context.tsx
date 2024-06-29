@@ -2,7 +2,7 @@
 
 import { postEndpoints } from '@/configs/axiosEndpoints';
 import { publicApi } from '@/configs/axiosInstance';
-import { PostResponse } from '@/lib/types/interfaces/Post';
+import { PostResponse } from '@/lib/interfaces/Post';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 

@@ -5,7 +5,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useCreateVote } from '@/hooks/mutation';
 import { RECAPTCHA_SITE_KEY } from '@/lib/constants/SettingSystem';
 import { Vote, VoteType } from '@/lib/enums';
-import { ILandlordInfo } from '@/lib/interfaces/User';
+import { ITenantRequest } from '@/lib/interfaces/User';
 import { IVoteRequest } from '@/lib/interfaces/Vote';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader2, X } from 'lucide-react';
@@ -17,13 +17,13 @@ import { z } from 'zod';
 
 const VoteDialog = (
     {
-        landlordInfoId,
+        targetId,
         setHasVoted,
         setVoteItem
     }: {
-        landlordInfoId: number,
+        targetId: number,
         setHasVoted: React.Dispatch<React.SetStateAction<boolean>>,
-        setVoteItem: React.Dispatch<React.SetStateAction<ILandlordInfo>>
+        setVoteItem: React.Dispatch<React.SetStateAction<ITenantRequest>>
     }
 ) => {
 
@@ -57,10 +57,10 @@ const VoteDialog = (
 
     const onSubmit = async (values: { reason: string }) => {
         const req: IVoteRequest = {
-            type: VoteType.LANDLORD,
+            type: VoteType.TENANT,
             vote: voteType,
             reason: values.reason,
-            targetId: landlordInfoId,
+            targetId: targetId,
         }
         try {
             const updateData = await mutateCreateVote(req);
@@ -82,14 +82,14 @@ const VoteDialog = (
             </Button>
             {
                 open && <div onClick={() => setOpen(false)} className="fixed inset-0 z-50 bg-black/70 dark:bg-accent/70 flex justify-center items-center">
-                    <div onClick={(evt) => evt.stopPropagation()} className="w-full md:w-1/2 xl:w-1/3 transition-all bg-background px-8 py-6 rounded-lg flex flex-col gap-4 relative">
+                    <div onClick={(evt) => evt.stopPropagation()} className="w-full lg:w-1/2 xl:w-1/3 transition-all bg-background px-8 py-6 rounded-lg flex flex-col gap-4 relative">
                         <Button onClick={() => setOpen(false)} variant={"ghost"} className='p-1 w-fit h-fit absolute top-4 right-4'>
                             <X className="w-4 h-4 top-2 right-2" />
                         </Button>
                         <div>
                             <h3 className='text-xl uppercase font-semibold'>Đánh giá thông tin</h3>
                             <p className='text-muted-foreground text-sm'>
-                                Xác nhận và đánh giá thông tin nhà trọ.
+                                Xác nhận thông tin đánh giá về nhà trọ.
                             </p>
                         </div>
                         <Separator />

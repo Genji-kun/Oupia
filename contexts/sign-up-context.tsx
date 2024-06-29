@@ -1,6 +1,6 @@
 "use client"
 
-import { IUserRegister } from '@/lib/types/interfaces';
+import { IUserRegister } from '@/lib/interfaces/request/User';
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 
 interface ISignUpContext {

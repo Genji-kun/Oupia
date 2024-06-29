@@ -1,13 +1,13 @@
 "use client"
 
-import { PostResponse } from '@/lib/types/interfaces/Post'
+import { PostResponse } from '@/lib/interfaces/Post'
 import React, { useEffect, useRef, useState } from 'react'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Amenity, TagLocation, TagPrice } from '@/lib/types/interfaces/Tags';
+import { Amenity, TagLocation, TagPrice } from '@/lib/interfaces/Tags';
 import { CircleDollarSignIcon, CornerDownLeft, MapPin, ThumbsUp, X } from 'lucide-react';
 import { formatCurrency } from '@/utils/priceConvert';
 import { ScrollArea } from '@/components/ui/scroll-area';
