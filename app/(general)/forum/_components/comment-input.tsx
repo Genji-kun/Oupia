@@ -5,7 +5,6 @@ import { Input } from '@/components/ui/input'
 import { commentEndpoints } from '@/configs/axiosEndpoints';
 import { authApi } from '@/configs/axiosInstance';
 import { usePostFavouriteContext } from '@/contexts/post-favourite-context';
-import { CommentRequest } from '@/lib/interfaces/Comment';
 import React, { useEffect, useState } from 'react'
 import { IoSend } from "react-icons/io5";
 import { useSelector } from 'react-redux';
@@ -19,7 +18,7 @@ function CommentInput({ postId }: { postId: number }) {
     const [text, setText] = useState<string>("");
     const [isHidden, setIsHidden] = useState<boolean>(true);
     const [submit, setSubmit] = useState<boolean>(false);
-    const [commentReq, setCommentReq] = useState<CommentRequest | undefined>();
+    const [commentReq, setCommentReq] = useState<any>();
 
     useEffect(() => {
         if (text) {
@@ -41,9 +40,7 @@ function CommentInput({ postId }: { postId: number }) {
         return () => {
             document.removeEventListener("keydown", handleKeyDown);
         }
-    }, [text, submit])
-
-
+    }, [text, submit, postId, sendComment])
 
     const handleKeyDown = (evt: KeyboardEvent) => {
         if (evt.key === "Enter") {
@@ -52,7 +49,7 @@ function CommentInput({ postId }: { postId: number }) {
     }
 
 
-    const sendComment = async () => {
+    async function sendComment() {
         if (commentReq) {
             try {
                 const res = await authApi.post(commentEndpoints["addComment"], commentReq);

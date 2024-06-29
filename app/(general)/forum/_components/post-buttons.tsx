@@ -44,7 +44,7 @@ const PostButtons = ({ post }: { post: PostResponse }) => {
         if (currentUser && post) {
             fetchIsFavourite();
         }
-    }, [currentUser, post])
+    }, [currentUser, post, setIsLoading])
 
 
     useEffect(() => {

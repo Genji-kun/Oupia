@@ -9,9 +9,10 @@ import { ICommentItem } from '@/lib/interfaces/response/Comment';
 function CommentList({ postId }: { postId: number }) {
 
     const { comments, setPostId, isFetching } = usePostFavouriteContext();
+
     useEffect(() => {
         setPostId(postId);
-    }, [])
+    }, [setPostId, setPostId])
 
     if (isFetching) {
         return <></>

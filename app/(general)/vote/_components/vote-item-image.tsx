@@ -99,7 +99,7 @@ const VoteImgeItem = ({ images }: { images: ImageItem[] }) => {
                     <div className="flex gap-2 justify-center overflow-x-auto bg-border dark:bg-background p-2 rounded-lg">
                         {
                             images.map((item, index) => {
-                                return <Image onClick={() => handleSelectImage(index)} src={item.url} alt="Blog Image" className={cn('w-20 h-20 object-cover cursor-pointer hover:opacity-100 rounded-lg', index === selectedImageIndex ? 'border-2 border-primary' : 'opacity-50')} width={1000} height={1000} />
+                                return <Image key={index} onClick={() => handleSelectImage(index)} src={item.url} alt="Blog Image" className={cn('w-20 h-20 object-cover cursor-pointer hover:opacity-100 rounded-lg', index === selectedImageIndex ? 'border-2 border-primary' : 'opacity-50')} width={1000} height={1000} />
                             })
                         }
                     </div>

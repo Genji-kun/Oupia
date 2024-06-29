@@ -15,10 +15,10 @@ const LocationFilter = () => {
         if (provinces.length === 0) {
             handleGetProvs();
         }
-    }, []);
+    }, [provinces, handleGetProvs]);
 
     // Fetch Province Data
-    const handleGetProvs = async () => {
+    async function handleGetProvs () {
         try {
             const res = await vnProvincesApi.get(vnpEndpoints["provinces"], {
                 params: {

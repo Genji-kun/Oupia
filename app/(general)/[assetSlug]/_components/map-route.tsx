@@ -64,11 +64,11 @@ const MapRoute = () => {
             goToLocation(asset.locationLong, asset.locationLat);
             setDestination(asset.locationLat + "," + asset.locationLong)
         }
-    }, [asset])
+    }, [asset, goToLocation])
 
     useEffect(() => {
         setShowResults(results.length > 0 && steps.length === 0);
-    }, [results])
+    }, [results, steps])
 
     useEffect(() => {
         const getTrip = async () => {
@@ -110,7 +110,7 @@ const MapRoute = () => {
             addRouteToMap();
         }
 
-    }, [direction]);
+    }, [direction, destination, origin, setIsOpenSearch, viewport]);
 
     useEffect(() => {
         !query && setShowResults(false);
@@ -173,7 +173,7 @@ const MapRoute = () => {
     }
 
 
-    const goToLocation = (longitude: number, latitude: number) => {
+    function goToLocation(longitude: number, latitude: number) {
         setViewport({
             ...viewport,
             longitude: longitude,

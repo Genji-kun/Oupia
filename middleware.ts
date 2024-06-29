@@ -8,7 +8,7 @@ export function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL('/', request.url));
     }
 
-    if (!currentUser && (request.nextUrl.pathname.startsWith('/upload') || request.nextUrl.pathname.startsWith('/messages') || request.nextUrl.pathname.startsWith('/settings'))) {
+    if (!currentUser && (request.nextUrl.pathname.startsWith('/upload') || request.nextUrl.pathname.startsWith('/messages') || request.nextUrl.pathname.startsWith('/settings') || request.nextUrl.pathname.startsWith('/vote'))) {
         return NextResponse.redirect(new URL('/sign-in', request.url));
     }
 
@@ -16,5 +16,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ['/upload/:path*', '/messages/:path*', '/settings/:path*', '/vote', '/vote/:path*', '/sign-in', "/sign-up"],
+    matcher: ['/upload/:path*', '/messages/:path*', '/settings/:path*', '/vote/:path*', '/sign-in', "/sign-up"],
 }

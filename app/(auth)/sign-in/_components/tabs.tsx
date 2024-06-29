@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import SignInTab from './sign-in-tab';
 import ForgetPasswordTab from './forget-password-tab';
 import { useAuthTabContext } from '@/contexts/auth-tab-context';
@@ -62,7 +62,7 @@ const Tabs = () => {
             setIsLoading(true);
             loginSocial(session.accessToken, "GOOGLE");
         }
-    }, [session])
+    }, [session, dispatch, router, setIsLoading])
 
     function updateAuthApi() {
         authApi.interceptors.request.use(function (config) {

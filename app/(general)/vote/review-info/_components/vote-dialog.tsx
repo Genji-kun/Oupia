@@ -89,7 +89,7 @@ const VoteDialog = (
                         <div>
                             <h3 className='text-xl uppercase font-semibold'>Đánh giá thông tin</h3>
                             <p className='text-muted-foreground text-sm'>
-                                Xác nhận thông tin đánh giá về nhà trọ.
+                                Xác nhận thông tin, nội dung của đánh giá nhà trọ.
                             </p>
                         </div>
                         <Separator />

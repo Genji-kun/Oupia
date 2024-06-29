@@ -43,7 +43,7 @@ const AssetInfoDialog = ({ data }: { data: ITenantRequest }) => {
                             <p className='w-3/4 truncate text-muted-foreground'>Xem thông tin chi tiết của &quot;{data.assetName}&quot;</p>
                         </div>
                         <Separator />
-                        <ScrollArea className='h-[75vh]'>
+                        <ScrollArea className='h-[50vh]'>
                             <div className='flex flex-col gap-6'>
                                 <div className='space-y-3'>
                                     <h5 className='text-lg'>Mô tả, giới thiệu nhà trọ</h5>
