@@ -4,7 +4,6 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 import Image from 'next/image'
-import { Image as image } from '@/lib/interfaces/Image'
 import "./style.css";
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
