@@ -12,7 +12,8 @@ const AssetReviewForm = dynamic(() => import('./asset-review-form'), {
 });
 
 const TenantReviewDialog = dynamic(() => import('./tenant-review-dialog'), {
-    ssr: false
+    ssr: false,
+    loading: () => <Skeleton className='w-32 h-8 bg-border dark:bg-oupia-sub mx-auto' />
 });
 
 

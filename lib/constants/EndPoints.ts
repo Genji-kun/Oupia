@@ -20,7 +20,9 @@ export const POST_ENDPOINTS = {
 
 export const USER_ENDPOINTS = {
     GET_INFO: (username: string) => `store/users/${username}/`,
-    UPGRADE_LANDLORD: `store/users/upgrade-landlord/`
+    GET_INFO_BY_ID: (id: number) => `store/users/detail/${id}/`,
+    UPGRADE_LANDLORD: `store/users/upgrade-landlord/`,
+    VERIFY: `store/users/verify/`
 }
 
 export const REVIEW_ENDPOINTS = {

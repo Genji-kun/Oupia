@@ -28,7 +28,6 @@ const MapRoute = () => {
     const [steps, setSteps] = useState<any>([]);
     const [direction, setDirection] = useState<any>(null);
     const [geoJSON, setGeoJSON] = useState<any>(null);
-    // const []
 
     const [viewport, setViewport] = useState<any>({
         width: "100%",
@@ -64,11 +63,11 @@ const MapRoute = () => {
             goToLocation(asset.locationLong, asset.locationLat);
             setDestination(asset.locationLat + "," + asset.locationLong)
         }
-    }, [asset, goToLocation])
+    }, [asset])
 
     useEffect(() => {
         setShowResults(results.length > 0 && steps.length === 0);
-    }, [results, steps])
+    }, [results])
 
     useEffect(() => {
         const getTrip = async () => {
@@ -110,7 +109,7 @@ const MapRoute = () => {
             addRouteToMap();
         }
 
-    }, [direction, destination, origin, setIsOpenSearch, viewport]);
+    }, [direction]);
 
     useEffect(() => {
         !query && setShowResults(false);
@@ -173,7 +172,7 @@ const MapRoute = () => {
     }
 
 
-    function goToLocation(longitude: number, latitude: number) {
+    const goToLocation = (longitude: number, latitude: number) => {
         setViewport({
             ...viewport,
             longitude: longitude,

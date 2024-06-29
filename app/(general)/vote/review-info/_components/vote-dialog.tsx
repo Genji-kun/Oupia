@@ -87,7 +87,7 @@ const VoteDialog = (
                             <X className="w-4 h-4 top-2 right-2" />
                         </Button>
                         <div>
-                            <h3 className='text-xl uppercase font-semibold'>Đánh giá thông tin</h3>
+                            <h3 className='text-xl uppercase font-semibold'>Gửi xác thực</h3>
                             <p className='text-muted-foreground text-sm'>
                                 Xác nhận thông tin, nội dung của đánh giá nhà trọ.
                             </p>

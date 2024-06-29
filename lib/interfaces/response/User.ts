@@ -5,5 +5,9 @@ export interface ICurrentUser {
     fullName: string,
     avatar: string,
     username: string,
-    role: UserRole
+    role: UserRole,
+    createdAt: Date,
+    provider: string[],
+    reputationScore: number,
+    isConfirm: boolean
 }

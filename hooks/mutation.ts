@@ -18,7 +18,6 @@ import { assetsEndpoints } from "@/configs/axiosEndpoints";
 import { certificationService } from "@/services/certification.service";
 import { IVoteRequest } from "@/lib/interfaces/Vote";
 import { voteService } from "@/services/vote.service";
-import { Vote } from "lucide-react";
 import { VoteType } from "@/lib/enums";
 
 // ----------- AUTH -------------
@@ -48,7 +47,21 @@ export const useLogin = () => {
         mutationFn: async (form: IUserLogin) => {
             const { data } = await authService.login(form);
             Cookies.set("accessToken", data.accessToken);
-            const { data: currentUserInfo } = await authService.currentUser();
+            const { data: currentUser } = await authService.currentUser();
+            const { data: info } = await userService.getUserInfo(currentUser.username);
+
+            const currentUserInfo = {
+                id: currentUser.id,
+                fullName: currentUser.fullName,
+                username: currentUser.username,
+                createdAt: info.createdAt,
+                role: currentUser.role,
+                avatar: currentUser.avatar,
+                provider: info.oauthProviders,
+                reputationScore: info.reputationScore,
+                isConfirm: info.isConfirm,
+            }
+
             Cookies.set("user", JSON.stringify(currentUserInfo));
             dispatch(login(currentUserInfo));
             router.push("/");
@@ -69,7 +82,20 @@ export const useLoginSocial = () => {
         mutationFn: async (req: ILoginSocial) => {
             const { data } = await authService.loginSocial(req);
             Cookies.set("accessToken", data.accessToken);
-            const { data: currentUserInfo } = await authService.currentUser();
+            const { data: currentUser } = await authService.currentUser();
+            const { data: info } = await userService.getUserInfo(currentUser.username);
+
+            const currentUserInfo = {
+                id: currentUser.id,
+                fullName: currentUser.fullName,
+                username: currentUser.username,
+                createdAt: info.createdAt,
+                role: currentUser.role,
+                avatar: currentUser.avatar,
+                provider: info.oauthProviders,
+                reputationScore: info.reputationScore,
+                isConfirm: info.isConfirm,
+            }
             Cookies.set("user", JSON.stringify(currentUserInfo));
             dispatch(login(currentUserInfo));
             router.push("/");
@@ -114,7 +140,20 @@ export const useLandlordUpgrade = () => {
         },
         onSuccess: async () => {
             try {
-                const { data: currentUserInfo } = await authService.currentUser();
+                const { data: currentUser } = await authService.currentUser();
+                const { data: info } = await userService.getUserInfo(currentUser.username);
+
+                const currentUserInfo = {
+                    id: currentUser.id,
+                    fullName: currentUser.fullName,
+                    username: currentUser.username,
+                    createdAt: info.createdAt,
+                    role: currentUser.role,
+                    avatar: currentUser.avatar,
+                    provider: info.oauthProviders,
+                    reputationScore: info.reputationScore,
+                    isConfirm: info.isConfirm,
+                }
                 Cookies.set("user", JSON.stringify(currentUserInfo));
                 dispatch(login(currentUserInfo));
                 toast.success("Cập nhật thông tin thành công");
@@ -241,5 +280,39 @@ export const useCreateVoteReq = () => {
     return {
         mutateCreateVoteReq: mutateAsync,
         isPendingCreateVoteReq: isPending
+    }
+}
+
+// ------------ VERIFY --------------------
+
+export const useVerifySocial = () => {
+    const dispatch = useDispatch();
+
+    const { mutateAsync, isPending } = useMutation({
+        mutationFn: async (req: ILoginSocial) => {
+            const { data: info } = await userService.verify(req);
+
+            const currentUserInfo = {
+                id: info.id,
+                fullName: info.fullName,
+                username: info.username,
+                createdAt: info.createdAt,
+                role: info.role,
+                avatar: info.avatar,
+                provider: info.oauthProviders,
+                reputationScore: info.reputationScore,
+                isConfirm: info.isConfirm,
+            }
+            Cookies.set("user", JSON.stringify(currentUserInfo));
+            dispatch(login(currentUserInfo));
+        },
+        onSuccess: () => {
+            toast.success("Xác thực thông tin thành công.")
+        }
+    })
+
+    return {
+        mutateVerify: mutateAsync,
+        isPendingVerify: isPending
     }
 }

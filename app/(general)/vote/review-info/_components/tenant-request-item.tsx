@@ -59,8 +59,20 @@ const TenantRequestItem = ({ data }: { data: ITenantRequest }) => {
                                         <TooltipTrigger asChild>
                                             <div className='cursor-pointer p-4 border rounded-lg flex justify-between items-center gap-10 bg-background shadow-md dark:bg-oupia-base hover:bg-border dark:hover:bg-oupia-sub/70'>
                                                 <div className='flex-auto space-y-2 flex flex-col'>
-                                                    <span className='text-sm text-muted-foreground'>Cần {100 - (voteItem.score ?? 0)} trên 100 điểm để hoàn thành</span>
-                                                    <Progress value={voteItem.score} max={100} />
+                                                    {
+                                                        data.score && (
+                                                            data.score >= 100 ?
+                                                                <>
+                                                                    <span className='text-sm text-muted-foreground'>Thông tin đã đủ điểm xác thực.</span>
+                                                                    <Progress value={100} max={100} />
+                                                                </>
+                                                                :
+                                                                <>
+                                                                    <span className='text-sm text-muted-foreground'>Cần thêm {100 - data.score} để hoàn thành xác thực.</span>
+                                                                    <Progress value={data.score} max={100} />
+                                                                </>
+                                                        )
+                                                    }
                                                 </div>
                                                 <div className='flex items-center gap-2'>
                                                     <div className='flex -space-x-2 rtl:space-x-reverse items-center'>
@@ -90,8 +102,8 @@ const TenantRequestItem = ({ data }: { data: ITenantRequest }) => {
                             </TooltipProvider>
                             <DialogContent className="lg:w-1/2">
                                 <DialogHeader className='space-y-0'>
-                                    <h3 className='font-semibold text-xl uppercase'>Danh sách đánh giá</h3>
-                                    <DialogDescription className='w-3/4 truncate text-sm'>Xem thông tin đánh giá của {voteItem.fullName}</DialogDescription>
+                                    <h3 className='font-semibold text-xl uppercase'>Danh sách xác thực</h3>
+                                    <DialogDescription className='w-3/4 truncate text-sm'>Xem thông tin người dùng xác thực của {voteItem.fullName}</DialogDescription>
                                 </DialogHeader>
                                 <Separator />
                                 <ScrollArea className='h-[50vh]'>

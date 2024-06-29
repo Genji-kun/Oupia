@@ -7,7 +7,7 @@ import { certificationService } from "@/services/certification.service";
 import { searchService } from "@/services/search.service";
 import { userService } from "@/services/user.service";
 import { voteService } from "@/services/vote.service";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query"
+import { useQuery } from "@tanstack/react-query"
 import { useState } from "react";
 
 
@@ -64,6 +64,7 @@ export const useSearchAssetsByPolygon = (polygon: string) => {
     }
 }
 
+
 // ---------- USER -------------
 
 export const useUserInfo = (username: string) => {
@@ -85,6 +86,27 @@ export const useUserInfo = (username: string) => {
         isFetchingUserInfo: isFetching
     }
 }
+
+export const useGetUserById = (userId: number) => {
+
+    const { data, isFetching } = useQuery({
+        queryKey: [QUERY_KEY.GET_USER_INFO, userId],
+        queryFn: async ({ queryKey }) => {
+            const [_key, username] = queryKey;
+            if (!username) return;
+            const res = await userService.getUserInfoById(userId);
+            return res.data;
+        },
+        enabled: !!userId,
+        refetchOnWindowFocus: false,
+    })
+
+    return {
+        userInfoData: data,
+        isFetchingUserInfo: isFetching
+    }
+}
+
 
 // -------- AUTH TOKEN ---------
 

@@ -8,6 +8,16 @@ import NavbarRoutes from './navbar-routes';
 import NavbarMenu from './navbar-menu';
 import UserPopover from './user-popover';
 import UnAuthorizedHeader from './unauthorized-header';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { MdOutlinePostAdd } from 'react-icons/md';
+import { Bell, MessagesSquare } from 'lucide-react';
+import dynamic from 'next/dynamic';
+
+const SearchButton = dynamic(() => import("./search-button"), {
+    ssr: false
+})
+
 
 const Header = () => {
 
@@ -21,7 +31,30 @@ const Header = () => {
                     <NavbarRoutes />
                 </div>
                 <NavbarMenu />
-                {currentUser ? <UserPopover user={currentUser} /> : <UnAuthorizedHeader />}
+                <div className="flex items-center gap-x-1">
+                    {
+                        currentUser ? <>
+                            <SearchButton />
+                            <div className="hidden lg:flex items-center gap-x-1">
+                                <Link href="/upload" className="ml-1">
+                                    <Button className="space-x-2 styled-button py-0 px-4">
+                                        <span className="text-sm">Đăng bài</span>
+                                        <MdOutlinePostAdd className="w-5 h-5" />
+                                    </Button>
+                                </Link>
+                            </div>
+                            <Link href="/messages" className="ml-1">
+                                <Button variant="ghost" className="p-2.5 hover:bg-border/70 hover:shadow dark:hover:bg-accent dark:hover:shadow-black">
+                                    <MessagesSquare size={20} />
+                                </Button>
+                            </Link>
+                            <Button variant="ghost" className="p-2.5 hover:bg-border/70 hover:shadow dark:hover:bg-accent dark:hover:shadow-black">
+                                <Bell size={20}></Bell>
+                            </Button>
+                            <UserPopover user={currentUser} />
+                        </> : <UnAuthorizedHeader />
+                    }
+                </div>
             </nav>
         </header>
     );

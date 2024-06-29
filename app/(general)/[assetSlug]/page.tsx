@@ -2,9 +2,25 @@
 
 import React from 'react';
 import { AssetDetailProvider } from '@/contexts/asset-detail-context';
-import AssetDetail from './_components/asset-detail';
-import AssetImageSection from './_components/asset-image-section';
-import AssetReviews from './_components/asset-reviews';
+import dynamic from 'next/dynamic';
+import { Skeleton } from '@/components/ui/skeleton';
+
+const AssetImageSection = dynamic(() => import('./_components/asset-image-section'), {
+    ssr: false
+});
+
+const AssetOwner = dynamic(() => import('./_components/asset-owner'), {
+    ssr: false,
+    loading: () => <Skeleton className='w-full aspect-[25/9] bg-border dark:bg-oupia-sub' />
+});
+
+const AssetReviews = dynamic(() => import('./_components/asset-reviews'), {
+    ssr: false
+});
+
+const AssetDetail = dynamic(() => import('./_components/asset-detail'), {
+    ssr: false
+});
 
 const AssetDetailPage = () => {
 
@@ -19,7 +35,7 @@ const AssetDetailPage = () => {
                         </div>
                         <div className="hidden xl:flex flex-col ">
                             <div className="sticky h-[calc(100vh - 80px) top-[calc(80px + 1.5rem)]] flex flex-col gap-4">
-                                {/* <AssetOwner user={asset.user} /> */}
+                                <AssetOwner />
                                 <AssetReviews />
                             </div>
                         </div>

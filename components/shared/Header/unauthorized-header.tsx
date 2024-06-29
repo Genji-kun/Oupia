@@ -17,7 +17,7 @@ const UnAuthorizedHeader: React.FC = () => {
     const { theme, setTheme } = useTheme();
 
     return (
-        <div className="flex gap-x-2">
+        <>
             {theme === LIGHT_MODE ?
                 <Button variant={"ghost"} onClick={() => { setTheme(DARK_MODE) }} className="p-2.5 dark:hover:bg-oupia-base">
                     <Sun size={20} />
@@ -31,7 +31,7 @@ const UnAuthorizedHeader: React.FC = () => {
             <Link href="/sign-in">
                 <Button className="styled-button">Đăng nhập</Button>
             </Link>
-        </div>
+        </>
     )
 }
 

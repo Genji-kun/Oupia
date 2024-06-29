@@ -17,6 +17,10 @@ class AssetService extends AppService {
         });
     }
 
+    getAssetBySlugName = (slugName: string) => {
+        return this.get(ASSET_ENDPOINTS.GET_ASSET_BY_SLUG(slugName));
+    }
+
     createAsset = (form: FormData) => {
         return this.post(ASSET_ENDPOINTS.CREATE, form);
     }
