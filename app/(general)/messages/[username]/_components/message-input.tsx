@@ -189,20 +189,6 @@ const MessageInput: React.FC = () => {
                                         onChange={handleFileChange}
                                     />
                                 </label>
-                                {
-                                    currentUser && currentUser.role === "ROLE_LANDLORD" && <div className="flex gap-x-2 items-center text-sm hover:bg-accent p-2 cursor-pointer rounded">
-                                        <HiOutlineHomeModern className="w-4 h-4" />
-                                        <span>Thông tin căn hộ</span>
-                                    </div>
-                                }
-                                <div className="flex gap-x-2 items-center text-sm hover:bg-accent p-2 cursor-pointer rounded">
-                                    <StickyNote className="w-4 h-4" />
-                                    <span>Bài viết</span>
-                                </div>
-                                <div className="flex gap-x-2 items-center text-sm hover:bg-accent p-2 cursor-pointer rounded">
-                                    <Link className="w-4 h-4" />
-                                    <span>Đường dẫn</span>
-                                </div>
                             </PopoverContent>
                         </Popover>
                         <div className="relative w-full">

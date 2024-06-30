@@ -1,10 +1,8 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { useMessageContext } from '@/contexts/message-context';
 import { cn } from '@/lib/utils';
-import { convert } from '@/utils/convertAvatarAlt';
 import Image from 'next/image';
 import React, { useState } from 'react'
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
