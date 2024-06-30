@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { useDebounce } from '@/hooks/useDebounce';
-import { ISubmitLandlordForm } from '@/lib/interfaces/Asset';
+import { ISubmitLandlordForm } from '@/lib/interfaces/Form';
 import axios from 'axios';
 import { X } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react'
