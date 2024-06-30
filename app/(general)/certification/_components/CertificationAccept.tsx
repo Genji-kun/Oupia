@@ -19,7 +19,7 @@ const CertificationAccept = () => {
         } else {
             handleAccept(params.get("token")!);
         }
-    }, [params, handleAccept]);
+    }, [params]);
 
     async function handleAccept(token: string) {
         try {
