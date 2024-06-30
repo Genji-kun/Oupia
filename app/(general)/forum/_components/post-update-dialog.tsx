@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import { Textarea } from '@/components/ui/textarea';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Amenity, TagLocation, TagPrice } from '@/lib/interfaces/Tags';
+import { TagLocation, TagPrice } from '@/lib/interfaces/Tags';
 import { CircleDollarSignIcon, CornerDownLeft, MapPin, ThumbsUp, X } from 'lucide-react';
 import { formatCurrency } from '@/utils/priceConvert';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -16,6 +16,7 @@ import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { useDebounce } from '@/hooks/useDebounce';
 import { usePostUpdateContext } from '@/contexts/post-update-context';
+import { Amenity } from '@/lib/types';
 
 
 function PostUpdateDialog({ post }: { post: PostResponse }) {
