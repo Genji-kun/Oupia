@@ -21,10 +21,10 @@ const GoogleVerifySection = ({ user }: { user: ICurrentUser }) => {
                     accessToken: res["access_token"], provider: AuthProvider.GOOGLE
                 }))
             } catch (error: any) {
-                if (error.response.data.code === 3304 && error.response.status === 400) {
+                if ((Number(error.response.data.code) === 3304) && error.response.status === 400) {
                     toast.error("Tài khoản này đã được đăng ký trong hệ thống, không thể xác thực.")
-                }
-                toast.error("Máy chủ chưa khởi động, vui lòng thử lại.")
+                } else
+                    toast.error("Máy chủ chưa khởi động, vui lòng thử lại.")
             }
         },
         onError: () => toast.error("Xác thực thông tin thất bại, vui lòng thử lại.")
