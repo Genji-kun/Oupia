@@ -7,10 +7,11 @@ import { Separator } from '@/components/ui/separator';
 import { RECAPTCHA_SITE_KEY } from '@/lib/constants/SettingSystem';
 import { ILandlordInfo } from '@/lib/interfaces/User';
 import { cn } from '@/lib/utils';
-import { InfoIcon, X } from 'lucide-react';
+import { InfoIcon, Link, X } from 'lucide-react';
 import Image from 'next/image';
 import React, { useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha';
+import AssetDetailInfoCard from '../review-info/_components/asset-detail-info-card';
 
 const AssetInfoDialog = ({ data }: { data: ILandlordInfo }) => {
 
@@ -69,18 +70,25 @@ const AssetInfoDialog = ({ data }: { data: ILandlordInfo }) => {
                                     </div>
                                 </div>
                                 <div className='flex flex-col w-full'>
-                                    <h5 className='text-lg leading-0'>Giấy phép kinh doanh</h5>
+                                    <h5 className='text-lg leading-0'>Mã giao dịch và giấy phép kinh doanh</h5>
                                     <p className='text-sm text-muted-foreground'>Hãy xác nhận trước khi xem thông tin.</p>
                                     <ReCAPTCHA className='mx-auto mt-4'
                                         sitekey={RECAPTCHA_SITE_KEY ?? ""}
                                         onChange={(token) => setIsVerified(!!token)} />
 
                                     {
-                                        isVerified && <Image src={data.businessLicense}
-                                            alt="Bussiness License Image"
-                                            width={1000}
-                                            height={1000}
-                                            className="object-cover w-[95%] mx-auto my-10" />
+                                        isVerified &&
+                                        <>
+                                            <div className='mt-4 space-y-4'>
+                                                <AssetDetailInfoCard title='Mã giao dịch' icon={<Link className="w-5 h-5 text-primary" />} link={data.transactionHash ?? ""} />
+                                                <Image src={data.businessLicense}
+                                                    alt="Bussiness License Image"
+                                                    width={1000}
+                                                    height={1000}
+                                                    className="object-cover w-[95%] mx-auto" />
+                                            </div>
+
+                                        </>
                                     }
                                 </div>
                             </div>

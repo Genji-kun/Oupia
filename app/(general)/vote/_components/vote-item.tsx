@@ -29,6 +29,7 @@ const VoteItem = ({ data }: { data: ILandlordInfo }) => {
     const { currentUser } = useSelector((state: any) => state.currentUserSlice);
 
     const [voteItem, setVoteItem] = useState(data);
+    console.log(voteItem);
     const [hasVoted, setHasVoted] = useState(false);
 
     return (

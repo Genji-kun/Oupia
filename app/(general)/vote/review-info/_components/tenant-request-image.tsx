@@ -31,9 +31,7 @@ const TenantRequestImage = ({ images }: { images: ImageItem[] }) => {
                         switch (images.length) {
                             case 1:
                                 return (
-                                    <div className='aspect-[25/9] w-full'>
-                                        <Image onClick={() => handleSelectImage(0)} src={images[0].url} alt="Blog Image" className='object-cover cursor-pointer' width={1000} height={1000} />
-                                    </div>
+                                    <Image onClick={() => handleSelectImage(0)} src={images[0].url} alt="Blog Image" className='object-cover aspect-video cursor-pointer' width={1000} height={1000} />
                                 )
                             case 2:
                                 return (
