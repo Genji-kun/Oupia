@@ -1,5 +1,5 @@
-import { IUserRegister } from '@/lib/interfaces';
 import { IRegisterAccountForm } from '@/lib/interfaces/Register';
+import { IUserRegister } from '@/lib/interfaces/request/User';
 import { useState } from 'react';
 
 export const useUserForm = (initialUser: IRegisterAccountForm) => {
