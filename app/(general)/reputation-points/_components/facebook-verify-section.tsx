@@ -31,7 +31,7 @@ const FacebookVerifySection = ({ user }: { user: ICurrentUser }) => {
                 <SiFacebook size="24" className="fill-[#4267B2] w-10 h-10" />
                 <div className='h-fit'>
                     <h3 className='text-muted-foreground'>Xác thực thông tin bằng tài khoản <span className='text-foreground font-semibold'>Facebook</span></h3>
-                    <h5 className='text-sm'>+5 điểm.</h5>
+                    <h5 className='text-sm'>+10 điểm.</h5>
                 </div>
             </div>
             {
