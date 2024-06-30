@@ -38,7 +38,7 @@ const RootLayout = (props: LayoutProps | LayoutPropsExtended) => {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${BeauSans.variable} bg-accent dark:bg-background`}>
-        <Providers session={session}>
+        <Providers>
           {children}
           <Toaster richColors />
         </Providers>
