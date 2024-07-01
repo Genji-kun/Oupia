@@ -68,7 +68,7 @@ const TenantRequestItem = ({ data }: { data: ITenantRequest }) => {
                                                                 </>
                                                                 :
                                                                 <>
-                                                                    <span className='text-sm text-muted-foreground'>Cần thêm {100 - data.score} để hoàn thành xác thực.</span>
+                                                                    <span className='text-sm text-muted-foreground'>Cần thêm {data.score} để hoàn thành xác thực.</span>
                                                                     <Progress value={data.score} max={100} />
                                                                 </>
                                                         )

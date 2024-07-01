@@ -69,7 +69,6 @@ const AssetInfoDialog = ({ data }: { data: ITenantRequest }) => {
                                             <div className='grid grid-cols-2 gap-4 items-center mt-4'>
                                                 <AssetDetailInfoCard title='Giá thuê' icon={<DollarSignIcon className="w-5 h-5 text-primary" />} content={numberToCurrency(data.price)} />
                                                 <AssetDetailInfoCard title='Địa chỉ' icon={<MapPinIcon className="w-5 h-5 text-primary" />} content={data.fullLocation} />
-                                                {/* <AssetDetailInfoCard title='Ngày thuê trọ' icon={<Calendar className="w-5 h-5 text-primary" />} content={format(data.startDate,"")} /> */}
                                                 <div className='col-span-2'>
                                                     <AssetDetailInfoCard title='Mã giao dịch' icon={<Link className="w-5 h-5 text-primary" />} link={data.transactionHash} />
                                                 </div>
