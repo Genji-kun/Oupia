@@ -1,10 +1,7 @@
 "use client"
 
-import { assetsEndpoints } from '@/configs/axiosEndpoints';
-import { publicApi } from '@/configs/axiosInstance';
 import { useSearchAssets, useSearchAssetsByPolygon } from '@/hooks/query';
 import { IAssetItem } from '@/lib/interfaces/response/Asset';
-import { useQuery } from '@tanstack/react-query';
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 import { useDebounce } from 'use-debounce';
 

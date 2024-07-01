@@ -6,9 +6,10 @@ export const QUERY_KEY = {
     // ASSET KEYS
     GET_ASSETS: "getAssets",
     GET_ASSET_BY_SLUG: "getAssetBySlug",
-
     GET_ASSETS_BY_POLYGON: "getAssetsByPolygon",
 
+    // POST KEYS 
+    GET_POSTS_LIST: "getPostList",
 
     // USER KEYS 
     GET_USER_INFO: "getUserInfo",

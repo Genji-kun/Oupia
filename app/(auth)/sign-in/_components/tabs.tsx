@@ -14,47 +14,6 @@ const Tabs = () => {
 
     const { tab, isLoading } = useAuthTabContext();
 
-    // useEffect(() => {
-
-    //     const loginSocial = async (accessToken: string, provider: string) => {
-    //         try {
-    //             const res = await publicApi.post(authEndpoints["loginSocial"], {
-    //                 accessToken: accessToken,
-    //                 provider: provider
-    //             });
-    //             if (res.status === 200) {
-    //                 Cookies.set("accessToken", res.data.accessToken);
-
-    //                 // Cập nhât Header Request
-    //                 updateAuthApi();
-
-    //                 try {
-    //                     const resCurr = await authApi.get(authEndpoints["currentUser"]);
-    //                     if (resCurr.status === 200) {
-    //                         Cookies.set("user", resCurr.data);
-    //                         dispatch(login(resCurr.data));
-    //                         router.push("/");
-    //                     }
-    //                 } catch (error) {
-    //                     console.error(error);
-    //                 } finally {
-    //                     setIsLoading(false);
-    //                 }
-    //             }
-    //         } catch (error: any) {
-    //             console.log(error);
-    //         }
-    //     }
-
-    //     if (session) {
-    //         setIsLoading(true);
-    //         loginSocial(session.accessToken, "GOOGLE");
-    //     }
-    // }, [session, dispatch, router, setIsLoading])
-
-
-
-
     return (
         <>
             <div className="w-full h-full flex justify-center items-center relative">

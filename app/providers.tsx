@@ -10,7 +10,7 @@ import { Provider } from 'react-redux';
 import { v4 as uuid } from 'uuid';
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
-
+    
     const queryClient = new QueryClient()
 
     useEffect(() => {

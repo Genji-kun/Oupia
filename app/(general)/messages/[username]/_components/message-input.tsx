@@ -11,8 +11,7 @@ import Picker from "@emoji-mart/react";
 import data from "@emoji-mart/data";
 
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { ImageIcon, Link, Smile, StickyNote, X } from 'lucide-react';
-import { HiOutlineHomeModern } from "react-icons/hi2";
+import { ImageIcon, Smile, X } from 'lucide-react';
 import { BiSolidMessageSquareAdd } from "react-icons/bi";
 import { useTheme } from 'next-themes';
 

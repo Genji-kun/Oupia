@@ -3,8 +3,8 @@
 import PostItem from '@/app/(general)/forum/_components/post-item';
 import PostLoading from '@/app/(general)/forum/_components/post-loading';
 import { postEndpoints } from '@/configs/axiosEndpoints';
-import { publicApi } from '@/configs/axiosInstance';
 import { useProfileContext } from '@/contexts/profile-context';
+import { api } from '@/lib/api';
 import { PostResponse } from '@/lib/interfaces/Post';
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
@@ -15,7 +15,7 @@ function UserPostList() {
 
     const fetchPosts = async ({ queryKey }: any) => {
         const [_key, { userInfoData }] = queryKey;
-        const res = await publicApi.get(postEndpoints["postList"], {
+        const res = await api.get(postEndpoints["postList"], {
             params: {
                 userId: userInfoData?.id,
                 size: 8

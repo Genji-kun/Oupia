@@ -1,30 +1,35 @@
+import { api } from "@/lib/api";
 import { TENANT_ENDPOINTS, USER_ENDPOINTS } from "@/lib/constants/EndPoints";
-import AppService from "./app.service";
 import { ILoginSocial } from "@/lib/interfaces";
 
-class UserService extends AppService {
-    constructor() {
-        super();
-    }
+class UserService {
 
     getUserInfo = (username: string) => {
-        return this.get(USER_ENDPOINTS.GET_INFO(username));
+        return api.get(USER_ENDPOINTS.GET_INFO(username));
     }
 
     getUserInfoById = (id: number) => {
-        return this.get(USER_ENDPOINTS.GET_INFO_BY_ID(id));
+        return api.get(USER_ENDPOINTS.GET_INFO_BY_ID(id));
     }
 
     upgradeLandlord = (form: FormData) => {
-        return this.patch(USER_ENDPOINTS.UPGRADE_LANDLORD, form);
+        return api.patch(USER_ENDPOINTS.UPGRADE_LANDLORD, form, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
     }
 
     createVoteReq = (form: FormData) => {
-        return this.post(TENANT_ENDPOINTS.CREATE, form)
+        return api.post(TENANT_ENDPOINTS.CREATE, form, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
     }
 
     verify = (req: ILoginSocial) => {
-        return this.post(USER_ENDPOINTS.VERIFY, req);
+        return api.post(USER_ENDPOINTS.VERIFY, req);
     }
 }
 

@@ -3,13 +3,13 @@
 import AssetSkeleton from '@/app/(general)/find/_components/asset-skeleton';
 import { Skeleton } from '@/components/ui/skeleton';
 import { assetsEndpoints } from '@/configs/axiosEndpoints';
-import { publicApi } from '@/configs/axiosInstance';
 import { useProfileContext } from '@/contexts/profile-context';
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react'
 import AssetItem from './asset-item';
 import { Button } from '@/components/ui/button';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
+import { api } from '@/lib/api';
 
 function AssetList() {
 
@@ -21,7 +21,7 @@ function AssetList() {
     const getAssetsData = async ({ queryKey }: any) => {
         const [_key, { userInfoData }] = queryKey;
         try {
-            const res = await publicApi.get(assetsEndpoints["assets"], {
+            const res = await api.get(assetsEndpoints["assets"], {
                 params: {
                     size: 4,
                     page: currentPage,

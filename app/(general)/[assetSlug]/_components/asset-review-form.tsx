@@ -8,9 +8,9 @@ import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { Textarea } from '@/components/ui/textarea'
 import { reviewEndpoints } from '@/configs/axiosEndpoints'
-import { authApi } from '@/configs/axiosInstance'
 import { useAssetDetailContext } from '@/contexts/asset-detail-context'
-import { useAddReview, useAssetMutate } from '@/hooks/mutation'
+import { useAssetMutate } from '@/hooks/mutation'
+import { api } from '@/lib/api'
 import { ReviewRequest } from '@/lib/interfaces/Review'
 import { cn } from '@/lib/utils'
 import { convert } from '@/utils/convertAvatarAlt'
@@ -60,7 +60,7 @@ function AssetReviewForm() {
         // await mutateAddReview(reviewForm);
         setIsSubmitting(true)
         try {
-            const res = await authApi.post(reviewEndpoints["addReview"], form);
+            const res = await api.post(reviewEndpoints["addReview"], form);
             if (res.status === 200) {
                 toast.success("Thêm đánh giá thành công.");
                 refetch();

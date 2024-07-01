@@ -1,7 +1,7 @@
 "use client"
 
 import { commentEndpoints } from '@/configs/axiosEndpoints';
-import { authApi } from '@/configs/axiosInstance';
+import { api } from '@/lib/api';
 import { ICommentItem } from '@/lib/interfaces/response/Comment';
 import { useQuery } from '@tanstack/react-query';
 import React, { createContext, useState, useContext, ReactNode, useEffect, useRef } from 'react';
@@ -34,7 +34,7 @@ export const PostFavouriteProvider: React.FC<{ children: ReactNode }> = ({ child
     const getComments = async ({ queryKey }: any) => {
         const [_key, { postId }] = queryKey;
         try {
-            const res = await authApi.get(commentEndpoints["comments"], {
+            const res = await api.get(commentEndpoints["comments"], {
                 params: {
                     postId: postId,
                     size: 3

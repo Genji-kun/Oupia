@@ -3,9 +3,9 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { searchEndpoints } from '@/configs/axiosEndpoints';
-import { publicApi } from '@/configs/axiosInstance';
 import { useMessageSearchContext } from '@/contexts/message-search-context';
 import { useDebounce } from '@/hooks/useDebounce';
+import { api } from '@/lib/api';
 import { ArrowLeft, Search } from 'lucide-react';
 import React, { useEffect, useRef } from 'react';
 
@@ -18,7 +18,7 @@ const UserFilterBar = () => {
     const fetchUserData = useDebounce(async (searchQuery: string) => {
         if (searchQuery) {
             try {
-                const res = await publicApi.get(searchEndpoints["users"], {
+                const res = await api.get(searchEndpoints["users"], {
                     params: {
                         keyword: searchQuery,
                         size: 6

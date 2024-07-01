@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { favouriteEndpoints } from '@/configs/axiosEndpoints';
-import { authApi } from '@/configs/axiosInstance';
+import { api } from '@/lib/api';
 import { usePostFavouriteContext } from '@/contexts/post-favourite-context';
 import { PostResponse } from '@/lib/interfaces/Post';
 import { isUndefined } from 'lodash-es';
@@ -28,7 +28,7 @@ const PostButtons = ({ post }: { post: PostResponse }) => {
     useEffect(() => {
         const fetchIsFavourite = async () => {
             try {
-                const res = await authApi.get(favouriteEndpoints["checkFavourite"], {
+                const res = await api.get(favouriteEndpoints["checkFavourite"], {
                     params: {
                         postId: post.id,
                     }
@@ -50,7 +50,7 @@ const PostButtons = ({ post }: { post: PostResponse }) => {
     useEffect(() => {
         const addFavour = async () => {
             try {
-                await authApi.post(favouriteEndpoints["saveFavour"], {}, {
+                await api.post(favouriteEndpoints["saveFavour"], {}, {
                     params: {
                         postId: post.id
                     }
@@ -64,7 +64,7 @@ const PostButtons = ({ post }: { post: PostResponse }) => {
 
         const removeFavour = async () => {
             try {
-                await authApi.delete(favouriteEndpoints["unFavourite"], {
+                await api.delete(favouriteEndpoints["unFavourite"], {
                     params: {
                         postId: post.id
                     }

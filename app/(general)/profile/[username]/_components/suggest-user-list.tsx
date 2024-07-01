@@ -5,17 +5,17 @@ import { Separator } from '@/components/ui/separator';
 import React from 'react';
 import SuggestUserItem from './suggest-user-item';
 import { useProfileContext } from '@/contexts/profile-context';
-import { publicApi } from '@/configs/axiosInstance';
 import { followEndpoints } from '@/configs/axiosEndpoints';
 import { useQuery } from '@tanstack/react-query';
 import UserSkeleton from './user-skeleton';
+import { api } from '@/lib/api';
 
 const SuggestUserList = () => {
     const { userInfoData } = useProfileContext();
 
     const fetchPosts = async () => {
         const url = followEndpoints.getFollowings(Number(userInfoData?.id));
-        const res = await publicApi.get(url, {
+        const res = await api.get(url, {
             params: {
                 size: 4
             }

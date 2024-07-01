@@ -1,7 +1,8 @@
 "use client"
 
 import { postEndpoints } from '@/configs/axiosEndpoints';
-import { publicApi } from '@/configs/axiosInstance';
+import { api } from '@/lib/api';
+import { QUERY_KEY } from '@/lib/constants/QueryKeys';
 import { PostResponse } from '@/lib/interfaces/Post';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
@@ -25,7 +26,7 @@ export const ForumProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     const [currentPage, setCurrentPage] = useState<number>(1);
 
     const fetchPosts = async ({ pageParam }: { pageParam: number }) => {
-        const res = await publicApi.get(postEndpoints["postList"], {
+        const res = await api.get(postEndpoints["postList"], {
             params: {
                 page: pageParam,
             }
@@ -40,7 +41,7 @@ export const ForumProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 
     const { data, isFetching, hasNextPage, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
         {
-            queryKey: ['posts'],
+            queryKey: [QUERY_KEY.GET_POSTS_LIST],
             queryFn: fetchPosts,
             initialPageParam: 1,
             getNextPageParam: () => {

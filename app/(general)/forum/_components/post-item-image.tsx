@@ -1,6 +1,5 @@
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent } from '@/components/ui/dialog'
-import { Image as ImageItem } from '@/lib/types';
 import { cn } from '@/lib/utils'
 import { ZoomInIcon, ZoomOutIcon } from 'lucide-react';
 import Image from 'next/image'
@@ -32,7 +31,7 @@ const PostItemImage = ({ images }: { images: string[] }) => {
                             case 1:
                                 return (
                                     <div className='aspect-[25/9] w-full'>
-                                        <Image onClick={() => handleSelectImage(0)} src={images[0]} alt="Post Image" className='object-cover cursor-pointer' width={1000} height={1000} />
+                                        <Image onClick={() => handleSelectImage(0)} src={images[0]} alt="Post Image" className='object-cover aspect-video cursor-pointer' width={1000} height={1000} />
                                     </div>
                                 )
                             case 2:

@@ -2,8 +2,8 @@
 
 import { Separator } from '@/components/ui/separator';
 import { favouriteEndpoints } from '@/configs/axiosEndpoints';
-import { publicApi } from '@/configs/axiosInstance';
 import { usePostFavouriteContext } from '@/contexts/post-favourite-context';
+import { api } from '@/lib/api';
 import { PostResponse } from '@/lib/interfaces/Post';
 import { cn } from '@/lib/utils';
 import React, { useEffect, useState } from 'react';
@@ -21,7 +21,7 @@ const PostStatus = ({ post }: { post: PostResponse }) => {
 
     const fetchFavourCount = async () => {
         try {
-            const res = await publicApi.get(favouriteEndpoints.favourCount(post.id));
+            const res = await api.get(favouriteEndpoints.favourCount(post.id));
             if (res.status === 200) {
                 setTotalFavourites(res.data.totalElements);
             }

@@ -76,7 +76,7 @@ const FilterBar = () => {
                     <MaxPeopleSection />
 
                     {
-                        (keyword || maxPeople) && <div className="mt-4">
+                        (keyword || maxPeople || priceRate[0] != 0 || priceRate[1] != 50000000) && <div className="mt-4">
                             <Button onClick={handleResetFilter} variant={"outline"} className="w-full bg-accent hover:bg-background dark:bg-background dark:hover:bg-oupia-sub">
                                 Xóa lọc
                             </Button>

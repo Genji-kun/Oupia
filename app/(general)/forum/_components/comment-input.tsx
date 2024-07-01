@@ -3,8 +3,8 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input'
 import { commentEndpoints } from '@/configs/axiosEndpoints';
-import { authApi } from '@/configs/axiosInstance';
 import { usePostFavouriteContext } from '@/contexts/post-favourite-context';
+import { api } from '@/lib/api';
 import React, { useEffect, useState } from 'react'
 import { IoSend } from "react-icons/io5";
 import { useSelector } from 'react-redux';
@@ -52,7 +52,7 @@ function CommentInput({ postId }: { postId: number }) {
     async function sendComment() {
         if (commentReq) {
             try {
-                const res = await authApi.post(commentEndpoints["addComment"], commentReq);
+                const res = await api.post(commentEndpoints["addComment"], commentReq);
                 if (res.status === 200) {
                     setText("");
                     refetch();

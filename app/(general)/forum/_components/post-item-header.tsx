@@ -18,7 +18,6 @@ import { vi } from 'date-fns/locale'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { useSelector } from 'react-redux';
 import { postEndpoints, userEndpoints } from '@/configs/axiosEndpoints';
-import { authApi, publicApi } from '@/configs/axiosInstance';
 import { useForumContext } from '@/contexts/forum-context';
 import {
     Dialog,
@@ -35,6 +34,7 @@ import { usePostUpdateContext } from '@/contexts/post-update-context';
 import { toast } from 'sonner';
 import { Skeleton } from '@/components/ui/skeleton';
 import { UserInfo } from '@/lib/interfaces/User';
+import { api } from '@/lib/api';
 
 
 const PostItemHeader = ({ post }: { post: PostResponse }) => {
@@ -61,7 +61,7 @@ const PostItemHeader = ({ post }: { post: PostResponse }) => {
         const fetchUserInfoData = async (username: string) => {
             try {
                 const url = userEndpoints.getUserByUsername(username);
-                const res = await publicApi.get(url);
+                const res = await api.get(url);
                 if (res.status === 200) {
                     setUserInfo(res.data);
                 }
@@ -83,7 +83,7 @@ const PostItemHeader = ({ post }: { post: PostResponse }) => {
             form.append('post', new Blob([JSON.stringify(updatePost)], { type: "application/json" }))
             try {
                 const url = postEndpoints.updatePost(post.id);
-                const res = await authApi.put(url, form);
+                const res = await api.put(url, form);
                 if (res.status === 200) {
                     toast("Cập nhật bài viết thành công.")
                 }
@@ -98,7 +98,7 @@ const PostItemHeader = ({ post }: { post: PostResponse }) => {
     const deletePost = async (id: number) => {
         try {
             const url = postEndpoints.deletePost(id);
-            const res = await authApi.delete(url);
+            const res = await api.delete(url);
             if (res.status === 200) {
                 setPosts(posts.filter((post: PostResponse) => post.id !== id))
                 toast.success("Xóa bài viết thành công.")

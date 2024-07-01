@@ -1,7 +1,7 @@
 "use client"
 
 import { assetsEndpoints } from '@/configs/axiosEndpoints';
-import { publicApi } from '@/configs/axiosInstance';
+import { api } from '@/lib/api';
 import { QUERY_KEY } from '@/lib/constants/QueryKeys';
 import { ReviewResponse } from '@/lib/interfaces/Review';
 import { reviewService } from '@/services/review.service';
@@ -34,7 +34,7 @@ export const AssetDetailProvider: React.FC<{ children: ReactNode }> = ({ childre
 
     const fetchAssetData = async (slug: any) => {
         try {
-            const res = await publicApi.get(assetsEndpoints.getAssetBySlugName(slug));
+            const res = await api.get(assetsEndpoints.getAssetBySlugName(slug));
             if (res.status === 200) {
                 return res.data;
             }

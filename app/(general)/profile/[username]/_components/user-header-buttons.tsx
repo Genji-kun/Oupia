@@ -1,7 +1,7 @@
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button'
 import { followEndpoints } from '@/configs/axiosEndpoints';
-import { authApi } from '@/configs/axiosInstance';
+import { api } from '@/lib/api';
 import { useProfileContext } from '@/contexts/profile-context';
 import { isUndefined } from 'lodash-es';
 import { Edit3Icon, Loader2, MessagesSquareIcon, UserRoundCheckIcon } from 'lucide-react'
@@ -26,7 +26,7 @@ function UserHeaderButtons() {
 
     const fetchIsFollowing = async () => {
         try {
-            const res = await authApi.get(followEndpoints["checkFollow"], {
+            const res = await api.get(followEndpoints["checkFollow"], {
                 params: {
                     followerId: currentUser.id,
                     followingId: userInfoData?.id
@@ -42,7 +42,7 @@ function UserHeaderButtons() {
         if (currentUser && userInfoData) {
             setIsLoading(true);
             try {
-                const res = await authApi.post(followEndpoints["followUser"], {}, {
+                const res = await api.post(followEndpoints["followUser"], {}, {
                     params: {
                         followingId: Number(userInfoData?.id),
                     }
@@ -66,7 +66,7 @@ function UserHeaderButtons() {
         if (currentUser && userInfoData) {
             setIsLoading(true);
             try {
-                const res = await authApi.delete(followEndpoints["unFollow"], {
+                const res = await api.delete(followEndpoints["unFollow"], {
                     params: {
                         followingId: Number(userInfoData?.id),
                     }

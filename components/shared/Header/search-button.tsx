@@ -7,17 +7,17 @@ import { Dialog, DialogContent, DialogHeader, DialogTrigger } from '../../ui/dia
 import { ScrollArea } from '../../ui/scroll-area';
 import { useDispatch, useSelector } from 'react-redux';
 import { Separator } from '../../ui/separator';
-import { publicApi } from '@/configs/axiosInstance';
 import { assetsEndpoints } from '@/configs/axiosEndpoints';
 import { useQuery } from '@tanstack/react-query';
 import { useDebounce } from 'use-debounce';
 import { History, addHistory, removeHistory } from '@/redux/slices/searchHistorySlice';
 import { useRouter } from 'next/navigation';
 import { IAssetItem } from '@/lib/interfaces/response/Asset';
+import { api } from '@/lib/api';
 
 const fetchAssets = async (searchQuery: string) => {
     try {
-        const res = await publicApi.get(assetsEndpoints["assets"], {
+        const res = await api.get(assetsEndpoints["assets"], {
             params: {
                 keyword: searchQuery,
             }

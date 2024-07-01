@@ -5,8 +5,8 @@ import React from 'react'
 
 function PostUtilitiesBox() {
     return (
-        <div className="flex flex-col justify-center items-center gap-4 mx-10">
-            <h1 className="text-xl font-semibold">Thêm thông tin bài viết</h1>
+        <div className="flex flex-col justify-center items-center gap-8 mx-10 mt-2">
+            <h1 className="text-xl font-semibold uppercase">Thêm thông tin bài viết</h1>
             <div className="w-full gap-2 grid grid-cols-2 px-8 justify-center">
                 <div className="util-button dark:bg-oupia-base">
                     <Type className="h-8 w-8" />

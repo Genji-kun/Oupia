@@ -5,7 +5,7 @@ import UserFilterBar from './user-filter-bar';
 
 import UserItem from './user-item';
 import { useSelector } from 'react-redux';
-import { authApi } from '@/configs/axiosInstance';
+import { api } from '@/lib/api';
 import { authEndpoints } from '@/configs/axiosEndpoints';
 import { signInWithCustomToken } from 'firebase/auth';
 import { collection, onSnapshot, orderBy, query, where } from 'firebase/firestore';

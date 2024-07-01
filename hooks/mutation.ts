@@ -13,12 +13,12 @@ import { userService } from "@/services/user.service";
 import { ReviewRequest } from "@/lib/interfaces/Review";
 import { reviewService } from "@/services/review.service";
 import { QUERY_KEY } from "@/lib/constants/QueryKeys";
-import { publicApi } from "@/configs/axiosInstance";
 import { assetsEndpoints } from "@/configs/axiosEndpoints";
 import { certificationService } from "@/services/certification.service";
 import { IVoteRequest } from "@/lib/interfaces/Vote";
 import { voteService } from "@/services/vote.service";
 import { VoteType } from "@/lib/enums";
+import { api } from "@/lib/api";
 
 // ----------- AUTH -------------
 
@@ -178,7 +178,7 @@ export const useAssetMutate = () => {
     const { mutateAsync: assetMutate, isSuccess: assetSuccess } = useMutation({
         mutationFn: async () => {
             try {
-                const res = await publicApi.get(assetsEndpoints.getAssetBySlugName(assetSlug));
+                const res = await api.get(assetsEndpoints.getAssetBySlugName(assetSlug));
                 if (res.status === 200) {
                     return res.data;
                 }

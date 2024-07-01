@@ -5,17 +5,14 @@ import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { assetsEndpoints } from '@/configs/axiosEndpoints';
-import { authApi, publicApi } from '@/configs/axiosInstance';
 import { useUploadContext } from '@/contexts/upload-context';
 import { useDebounce } from '@/hooks/useDebounce';
-import { useQuery } from '@tanstack/react-query';
+import { api } from '@/lib/api';
 import { isUndefined } from 'lodash-es';
-import { Loader2, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux';
-
-
 
 function AssetTagInput() {
 
@@ -29,13 +26,13 @@ function AssetTagInput() {
     const inputRef = useRef<HTMLDivElement>(null);
 
     const fetchAssets = useDebounce(async (searchQuery: string) => {
-        const res = searchQuery ? await publicApi.get(assetsEndpoints["assets"], {
+        const res = searchQuery ? await api.get(assetsEndpoints["assets"], {
             params: {
                 keyword: searchQuery,
                 userId: currentUser.id,
                 size: 8
             }
-        }) : await publicApi.get(assetsEndpoints["assets"], {
+        }) : await api.get(assetsEndpoints["assets"], {
             params: {
                 userId: currentUser.id,
                 size: 8
@@ -66,7 +63,7 @@ function AssetTagInput() {
     }
 
     useEffect(() => {
-        if(!tagAsset)
+        if (!tagAsset)
             setShowResult(assets.length > 0);
     }, [assets])
 

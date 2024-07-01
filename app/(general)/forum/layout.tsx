@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react';
-import UserViewer from './_components/user-viewer';
 import { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 
@@ -17,9 +16,6 @@ const ForumLayout = ({ children }: { children: ReactNode }) => {
                     {children}
                 </div>
                 <div className=" col-span-2 invisible"></div>
-                <div className="h-screen bg-background col-span-2 hidden xl:block fixed right-0">
-                    <UserViewer />
-                </div>
             </div>
         </div>
     );

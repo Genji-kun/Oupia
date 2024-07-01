@@ -6,9 +6,9 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { searchEndpoints } from '@/configs/axiosEndpoints';
-import { publicApi } from '@/configs/axiosInstance';
 import { useUploadContext } from '@/contexts/upload-context';
 import { useDebounce } from '@/hooks/useDebounce';
+import { api } from '@/lib/api';
 import { Amenity } from '@/lib/types';
 import { CornerDownLeft, ThumbsUp, X } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react'
@@ -29,7 +29,7 @@ function AmenityInput() {
     const fetchData = useDebounce(async (searchQuery: string) => {
         if (searchQuery) {
             try {
-                const res = await publicApi.get(searchEndpoints["amenities"], {
+                const res = await api.get(searchEndpoints["amenities"], {
                     params: {
                         keyword: searchQuery,
                         size: 8

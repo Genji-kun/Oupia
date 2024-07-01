@@ -1,13 +1,14 @@
 import { POST_ENDPOINTS } from "@/lib/constants/EndPoints";
-import AppService from "./app.service";
+import { api } from "@/lib/api";
 
-class PostService extends AppService {
-    constructor() {
-        super();
-    }
+class PostService {
 
     upload = (form: FormData) => {
-        return this.post(POST_ENDPOINTS.CREATE, form);
+        return api.post(POST_ENDPOINTS.CREATE, form, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
     }
 
 }

@@ -8,5 +8,5 @@ export const RECAPTCHA_SECRET_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SECRET_KEY
 
 export const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ?? "";
 
-
+export const VN_PROVINCES = process.env.NEXT_PUBLIC_VIETNAM_PROVINCES_URL ?? "";
 export const HOLE_SKY_SCANNER_BASE_URL = process.env.NEXT_PUBLIC_HOLESKY_SCANNER_URL;

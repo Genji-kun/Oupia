@@ -1,14 +1,13 @@
+import { api } from "@/lib/api";
 import { SEARCH_ENDPOINTS } from "@/lib/constants/EndPoints";
-import AppService from "./app.service";
 
-class SearchService extends AppService {
-    constructor() {
-        super();
-    }
+class SearchService {
 
     searchAmenities = (keyword: string) => {
-        return this.get(SEARCH_ENDPOINTS.AMENITY, undefined, {
-            keyword: keyword
+        return api.get(SEARCH_ENDPOINTS.AMENITY, {
+            params: {
+                keyword: keyword
+            }
         });
     }
 }

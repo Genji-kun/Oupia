@@ -1,18 +1,17 @@
 import { ReviewRequest } from "@/lib/interfaces/Review";
-import AppService from "./app.service";
 import { REVIEW_ENDPOINTS } from "@/lib/constants/EndPoints";
+import { api } from "@/lib/api";
 
-class ReviewService extends AppService {
-    constructor() {
-        super();
-    }
+class ReviewService {
 
     getReview = (params: { assetId: number }) => {
-        return this.get(REVIEW_ENDPOINTS.GET_REVIEWS, undefined, params);
+        return api.get(REVIEW_ENDPOINTS.GET_REVIEWS, {
+            params: params
+        });
     }
 
     addReview = (req: ReviewRequest) => {
-        return this.post(REVIEW_ENDPOINTS.ADD_REVIEWS, req);
+        return api.post(REVIEW_ENDPOINTS.ADD_REVIEWS, req);
     }
 }
 
