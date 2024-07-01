@@ -14,7 +14,7 @@ const UserReputationInfo = ({ user }: { user: ICurrentUser }) => {
             </Avatar>
             <div className='h-fit'>
                 <h3 className='text-muted-foreground'>Điểm của <span className='font-semibold text-foreground'>{user.fullName}</span></h3>
-                <h3 className='text-muted-foreground'><span className={cn('font-semibold', user.reputationScore > 0 ? "text-emerald-500" : "text-rose-500")}>{user.reputationScore}</span> điểm tiếng tăm.</h3>
+                <h3 className='text-muted-foreground'><span className={cn('font-semibold', user.reputationScore > 0 ? "text-emerald-500" : "text-rose-500")}>{user.reputationScore ?? 0}</span> điểm tiếng tăm.</h3>
             </div>
         </div>
     )

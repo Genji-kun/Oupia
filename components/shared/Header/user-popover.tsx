@@ -96,7 +96,7 @@ const UserPopover: React.FC<IProps> = ({ user }) => {
                     }
                     <Link href="/reputation-points" className="w-full flex items-center py-1 px-2 hover:bg-accent rounded text-sm">
                         <PiHandHeart className="mr-2 h-4 w-4" />
-                        <h5>Điểm tiếng tăm:  <span className={cn('font-semibold', user.reputationScore > 0 ? "text-emerald-500" : "text-rose-500")}>{user.reputationScore}</span></h5>
+                        <h5>Điểm tiếng tăm:  <span className={cn('font-semibold', user.reputationScore > 0 ? "text-emerald-500" : "text-rose-500")}>{user.reputationScore ?? 0}</span></h5>
                         <ChevronRight className="ml-auto h-4 w-4" />
                     </Link>
                     <div className="w-full flex items-center py-1 px-2 hover:bg-accent rounded text-sm cursor-pointer" onClick={(e) => {
