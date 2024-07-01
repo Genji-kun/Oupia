@@ -153,8 +153,7 @@ const MapContainer = () => {
                                 <Image width={500}
                                     height={500}
                                     src={asset.images[0]}
-                                    className="object-cover rounded-full"
-                                    style={{ width: viewport.zoom, height: viewport.zoom }}
+                                    className="object-cover rounded-full w-16 h-16"
                                     alt="Asset Image" />
                             </div>
                         </PopoverTrigger>
