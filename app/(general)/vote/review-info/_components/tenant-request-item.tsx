@@ -60,16 +60,16 @@ const TenantRequestItem = ({ data }: { data: ITenantRequest }) => {
                                             <div className='cursor-pointer p-4 border rounded-lg flex justify-between items-center gap-10 bg-background shadow-md dark:bg-oupia-base hover:bg-border dark:hover:bg-oupia-sub/70'>
                                                 <div className='flex-auto space-y-2 flex flex-col'>
                                                     {
-                                                        data.score && (
-                                                            data.score >= 100 ?
+                                                        voteItem.score && (
+                                                            voteItem.score >= 100 ?
                                                                 <>
                                                                     <span className='text-sm text-muted-foreground'>Thông tin đã đủ điểm xác thực.</span>
                                                                     <Progress value={100} max={100} />
                                                                 </>
                                                                 :
                                                                 <>
-                                                                    <span className='text-sm text-muted-foreground'>Cần thêm {data.score} để hoàn thành xác thực.</span>
-                                                                    <Progress value={data.score} max={100} />
+                                                                    <span className='text-sm text-muted-foreground'>Điểm đánh giá hiện tại là {voteItem.score}, cần {100 - voteItem.score ?? 0} điểm để hoàn thành xác thực.</span>
+                                                                    <Progress value={voteItem.score} max={100} />
                                                                 </>
                                                         )
                                                     }

@@ -29,7 +29,6 @@ const VoteItem = ({ data }: { data: ILandlordInfo }) => {
     const { currentUser } = useSelector((state: any) => state.currentUserSlice);
 
     const [voteItem, setVoteItem] = useState(data);
-    console.log(voteItem);
     const [hasVoted, setHasVoted] = useState(false);
 
     return (
@@ -77,7 +76,7 @@ const VoteItem = ({ data }: { data: ILandlordInfo }) => {
                                                             </>
                                                             :
                                                             <>
-                                                                <span className='text-sm text-muted-foreground'>Cần thêm {100 - data.score} để hoàn thành xác thực.</span>
+                                                                <span className='text-sm text-muted-foreground'>Điểm đánh giá hiện tại là {voteItem.score}, cần {100 - voteItem.score} điểm để hoàn thành xác thực.</span>
                                                                 <Progress value={voteItem.score} max={100} />
                                                             </>
                                                     }
