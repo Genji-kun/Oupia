@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { Separator } from '@/components/ui/separator';
-import { Calendar, EditIcon, Info, Loader2, MessagesSquare, Search, UserRoundCheck, UsersRound, X, XSquare } from 'lucide-react';
+import { Calendar, EditIcon, Info, Loader2, Map, MapPin, MessagesSquare, Search, UserRoundCheck, UsersRound, X, XSquare } from 'lucide-react';
 import Link from 'next/link';
 
 import { PostResponse } from '@/lib/interfaces/Post';
@@ -254,6 +254,18 @@ const PostItemHeader = ({ post }: { post: PostResponse }) => {
             </div>
             <div className="ml-auto flex gap-1">
                 <TooltipProvider>
+                    {post.fullLocation && <>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Button variant={"ghost"} className="p-2 rounded-full w-fit h-fit">
+                                    <Map size="16" />
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <p>{post.fullLocation}</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </>}
                     {(() => {
                         switch (post.postType) {
                             case "POST_FIND":

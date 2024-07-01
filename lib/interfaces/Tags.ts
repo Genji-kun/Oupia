@@ -8,6 +8,6 @@ export interface TagPrice {
 
 export interface TagLocation {
     fullLocation: string,
-    latitude: number,
-    longtitude: number
+    locationLat: number,
+    locationLong: number
 }

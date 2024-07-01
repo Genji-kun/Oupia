@@ -11,12 +11,11 @@ function UploadButton() {
 
     const { postForm, amenities, tagLocation, tagAsset, tagPrice } = useUploadContext();
 
-
     const { mutateUploadPost, isPendingUploadPost } = useUploadPost();
 
     const handleSubmitPost = async (form: PostReq) => {
         let req: any = {
-            postType: form.postContent,
+            postType: form.postType,
             postContent: form.postContent,
         }
         if (form.postType !== "POST_COMMON") {
@@ -56,9 +55,9 @@ function UploadButton() {
                 <span>Xóa thông tin</span>
             </Button>
             <Button onClick={() => postForm.handleSubmit(handleSubmitPost)()} disabled={isPendingUploadPost} className="styled-button w-fit p-6">
-                <span className="text-sm">
+                <span className="text-sm flex gap-2 items-center">
                     {isPendingUploadPost ? "Đang xử lý" : "Hoàn tất bài đăng"}
-                    {isPendingUploadPost && <Loader2 className="w-5 h-5 ml-2 animate-spin" />}
+                    {isPendingUploadPost && <Loader2 className="w-5 h-5 animate-spin" />}
                 </span>
             </Button>
         </div>

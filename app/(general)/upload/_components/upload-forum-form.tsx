@@ -164,7 +164,8 @@ function UploadForumForm() {
                                     <Image width={500} height={500} className="rounded-lg object-cover w-32 aspect-square" src={URL.createObjectURL(image)} alt={image.name} />
                                 </div>
                             ))}
-                        </div>)
+                        </div>
+                    )
                 }
             </form>
         </Form >

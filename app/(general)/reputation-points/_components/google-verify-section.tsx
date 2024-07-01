@@ -40,23 +40,30 @@ const GoogleVerifySection = ({ user }: { user: ICurrentUser }) => {
                     <h5 className='text-sm'>+10 điểm.</h5>
                 </div>
             </div>
-            {
-                user.provider && user.provider.findIndex(item => item === "GOOGLE") > -1 ?
-                    <div className='flex gap-1.5 items-center text-emerald-500'>
-                        <Check className="w-5 h-5" />
-                        <span className='font-semibold'>Đã hoàn thành</span>
-                    </div>
-                    :
-                    <Button onClick={() => login()} disabled={isPendingVerify} className='styled-button pr-2'>
-                        <span>Xác thực</span>
+            <>
+                {
+                    user.provider && <>
                         {
-                            isPendingVerify ?
-                                <Loader2 className='w-5 h-5 ml-2 animate-spin' />
+                            user.provider && user.provider.findIndex(item => item === "GOOGLE") > -1 ?
+                                <div className='flex gap-1.5 items-center text-emerald-500'>
+                                    <Check className="w-5 h-5" />
+                                    <span className='font-semibold'>Đã hoàn thành</span>
+                                </div>
                                 :
-                                <ChevronRight className='w-5 h-5 ml-2' />
+                                <Button onClick={() => login()} disabled={isPendingVerify} className='styled-button pr-2'>
+                                    <span>Xác thực</span>
+                                    {
+                                        isPendingVerify ?
+                                            <Loader2 className='w-5 h-5 ml-2 animate-spin' />
+                                            :
+                                            <ChevronRight className='w-5 h-5 ml-2' />
+                                    }
+                                </Button>
                         }
-                    </Button>
-            }
+                    </>
+                }
+            </>
+
         </div>
     )
 }

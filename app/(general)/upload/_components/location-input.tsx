@@ -39,8 +39,8 @@ function LocationInput() {
         if (data) {
             setTagLocation({
                 fullLocation: data.result.formatted_address,
-                latitude: data.result.geometry.location.lat,
-                longtitude: data.result.geometry.location.lng,
+                locationLat: data.result.geometry.location.lat,
+                locationLong: data.result.geometry.location.lng,
             });
         }
 
