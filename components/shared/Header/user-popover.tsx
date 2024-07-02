@@ -87,8 +87,13 @@ const UserPopover: React.FC<IProps> = ({ user }) => {
                 </div>
                 <Separator />
                 <div>
+
                     {
-                        user.role === UserRole.TENANT && <Link href="/settings/landlord" className="w-full flex items-center py-1 px-2 hover:bg-accent rounded text-sm">
+                        user.role === UserRole.TENANT ? <Link href="/settings/landlord" className="w-full flex items-center py-1 px-2 hover:bg-accent rounded text-sm">
+                            <HiOutlineHomeModern className="mr-2 h-4 w-4" />
+                            <span>Tài khoản chủ nhà trọ</span>
+                            <ChevronRight className="ml-auto h-4 w-4" />
+                        </Link> : <Link href="https://oupia-landlord.vercel.app/" className="w-full flex items-center py-1 px-2 hover:bg-accent rounded text-sm">
                             <HiOutlineHomeModern className="mr-2 h-4 w-4" />
                             <span>Tài khoản chủ nhà trọ</span>
                             <ChevronRight className="ml-auto h-4 w-4" />
