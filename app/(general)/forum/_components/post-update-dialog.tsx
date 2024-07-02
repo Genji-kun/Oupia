@@ -36,8 +36,8 @@ function PostUpdateDialog({ post }: { post: PostResponse }) {
         if (post.fullLocation && post.locationLat && post.locationLong) {
             setTagLocation({
                 fullLocation: post.fullLocation,
-                latitude: post.locationLat,
-                longtitude: post.locationLong
+                locationLat: post.locationLat,
+                locationLong: post.locationLong
             });
         }
         if (post.tagPrice) {
